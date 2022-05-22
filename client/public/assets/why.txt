@@ -1,0 +1,2 @@
+En esta carpeta vamos a poner imagenes que queramos importar desde la App,
+de esta manera la vamos a poder referenciarlas con '/assets/imagen.png'

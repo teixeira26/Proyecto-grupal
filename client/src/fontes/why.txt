@@ -1,0 +1,2 @@
+este archivo sirve para que guardemos fontes personalizadas en formato otf
+o ttf en el caso de que sea necesario
