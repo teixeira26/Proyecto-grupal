@@ -7,40 +7,50 @@ module.exports = (sequelize) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate:{
+        isAlpha: true,
+      }
     },
     lastName:{
-      type: DataTypes.STRING,  
+      type: DataTypes.STRING, 
+      allowNull: false,
+      validate:{
+        isAlpha: true,
+      }
     },
     email:{
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
     profilePicture:{
-      type:DataTypes.STRING,
+      type:DataTypes.ARRAY(DataTypes.STRING),
     },
     address:{
-      type: DataTypes.STRING,
+      type: DataTypes.JSON(DataTypes.STRING),
     },
     service:{
-      type:DataTypes.STRING
+      type:DataTypes.ENUM('Paseo', 'Hospedaje')
     },
     description:{
       type:DataTypes.TEXT,
     },
     price:{
-      type: DataTypes.STRING
+    type: DataTypes.INTEGER
     },
     typeOfHousing:{
-      type: DataTypes.STRING
+      type: DataTypes.ENUM('Casa', 'Departamento', 'Quinta')
     },
     housingPhotos:{
-      type: DataTypes.STRING
-    },
-    schedule:{
-      type: DataTypes.STRING
+      type: DataTypes.ARRAY(DataTypes.STRING)
     },
     dogsPerWalk:{
-      type: DataTypes.STRING
+      type: DataTypes.INTEGER
     },
+    isActive:{
+      type:DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
     
   })
 };

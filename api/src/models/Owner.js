@@ -3,44 +3,35 @@ const { DataTypes } = require('sequelize');
 // Luego le injectamos la conexion a sequelize.
 module.exports = (sequelize) => {
   // defino el modelo
-  sequelize.define('owner', {
+  sequelize.define('Owner', {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate:{
+        isAlpha: true,
+      }
     },
     lastName:{
-      type: DataTypes.STRING,  
+      type: DataTypes.STRING, 
+      allowNull: false,
+      validate:{
+        isAlpha: true,
+      }
     },
     email:{
       type: DataTypes.STRING,
+      allowNull: false,
+      unique: true
     },
     profilePicture:{
-      type:DataTypes.STRING,
+      type:DataTypes.ARRAY(DataTypes.STRING),
     },
     address:{
-      type: DataTypes.STRING,
+      type: DataTypes.JSON(DataTypes.STRING),
     },
-    service:{
-      type:DataTypes.STRING
-    },
-    description:{
-      type:DataTypes.TEXT,
-    },
-    price:{
-      type: DataTypes.STRING
-    },
-    typeOfHousing:{
-      type: DataTypes.STRING
-    },
-    housingPhotos:{
-      type: DataTypes.STRING
-    },
-    schedule:{
-      type: DataTypes.STRING
-    },
-    dogsPerWalk:{
-      type: DataTypes.STRING
-    },
-    
+    isActive:{
+      type:DataTypes.BOOLEAN,
+      defaultValue: true,
+    }
   })
 };
