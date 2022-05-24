@@ -1,0 +1,64 @@
+const { Router } = require ('express');
+const { Owner, Pet } = require('../db')
+
+
+const router = Router()
+
+router.get('/', async(req, res, next) =>{
+
+    try{
+
+        let allPets = await Pet.findAll({
+
+            order: [['name', 'ASC']]
+        })
+
+        allPets.length ?
+        res.status(200).send(allPets) :
+        res.status(400).send('No hay mascotas cargados')
+
+    }catch(err){
+        next(err)
+    }
+})
+
+
+router.post('/', async(req, res, next) =>{
+
+    const {name, type, race, size, photos, description, ownerName} = req.body
+
+    let auxName = name[0].toUpperCase() + name.slice(1).toLowerCase()
+
+    try{
+        let newPet = await Pet.create({
+            
+                name: auxName,
+                type,
+                race,
+                size,
+                profilePicture: photos,
+                description
+            })
+
+            console.log(newPet)
+
+        let found = await Owner.findOne({
+            where:{
+                name: ownerName
+            }
+        })
+
+            console.log('nombre', found)
+
+        await found.addPet(newPet)
+            // await newPet.addOwner(1)
+
+        res.status(201).send('Usuario creado con éxito')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+module.exports = router;
