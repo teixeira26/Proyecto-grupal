@@ -23,3 +23,4 @@ disponibles en el pi agregué trés carpetas:
 En cada una de estas trés carpetas agregué una breve descripción del porque fueron agregadas y un pequeño exemplo de que tipo de código podríamos poner en las mismas.
 
 El contenido de `client` fue creado usando Create React App, agregué las carpetas necesarias para utilizar redux y además, la carpeta assets en /client/public y la carpeta fontes en /src. Cada una de estas carpetas posee un archivo Why.txt que explica porque alas mismas fueron agregadas.
+duhuidfhidfh
