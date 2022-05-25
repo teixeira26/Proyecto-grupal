@@ -70,4 +70,44 @@ router.post('/', async(req, res, next) =>{
     }
 })
 
+
+router.put('/:id', async (req, res, next) =>{
+    const id = req.params.id
+    const provider = req.body
+
+    try{
+        await Provider.update(provider,{
+            where:{
+                id: id
+            }
+        })
+    
+        return res.json('Usuario modificado')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+
+router.delete('/:id', async (req, res, next) =>{
+    const id = req.params.id
+
+    try{
+        await Provider.update({isActive: false},{
+            where:{
+                id: id
+            }
+        })
+    
+        return res.json('Usuario desvinculado')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+
 module.exports = router;

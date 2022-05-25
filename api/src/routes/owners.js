@@ -46,4 +46,44 @@ router.post('/', async(req, res, next) =>{
 
 })
 
+
+router.put('/:id', async (req, res, next) =>{
+    const id = req.params.id
+    const owner = req.body
+
+    try{
+        await Owner.update(owner,{
+            where:{
+                id: id
+            }
+        })
+    
+        return res.json('Usuario modificado')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+
+router.delete('/:id', async (req, res, next) =>{
+    const id = req.params.id
+
+    try{
+        await Owner.update({isActive: false},{
+            where:{
+                id: id
+            }
+        })
+    
+        return res.json('Usuario desvinculado')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+
 module.exports = router;
