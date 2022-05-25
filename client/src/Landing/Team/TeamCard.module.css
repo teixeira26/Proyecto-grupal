@@ -1,0 +1,56 @@
+.card{
+    overflow: hidden;
+    background-color: rgb(194, 194, 194);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.cardImg{
+    height: 25rem;
+    width: 100%;
+    object-fit: cover;
+    background-color: #d9d9d9;
+}
+
+.cardBody{
+    display: flex;
+    flex-direction: column;
+}
+
+.cardBottom{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 1.5rem;
+}
+
+.cardLocation{
+    margin: 1rem 0;
+}
+
+.cardSocial{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.cardSocial__Item{
+    margin: 0.5rem 0rem;
+    background-color: rgb(31, 30, 30);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+
+
+

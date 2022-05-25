@@ -1,0 +1,11 @@
+.teamTitle{
+    font-size: 4.8rem;
+    margin-bottom: 8rem;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 40rem));
+    gap: 2rem;
+    justify-content: space-between;
+}

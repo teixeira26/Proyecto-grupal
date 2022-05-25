@@ -1,8 +1,16 @@
 import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Landing from "./Landing/Landing";
 
 function App() {
   return (
-    <h1>Pets APP</h1>
+    <BrowserRouter>
+      <div>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 
