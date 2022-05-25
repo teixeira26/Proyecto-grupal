@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../NavBar/NavBar.module.css";
+import styles from "./NavBar.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
