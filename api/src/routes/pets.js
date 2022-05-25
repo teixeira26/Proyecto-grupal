@@ -61,4 +61,45 @@ router.post('/', async(req, res, next) =>{
 
 })
 
+
+router.put('/:id', async (req, res, next) =>{
+    const id = req.params.id
+    const pet = req.body
+
+    try{
+        await Pet.update(pet,{
+            where:{
+                id: id
+            }
+        })
+    
+        return res.json('Mascota modificada')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+
+router.delete('/:id', async (req, res, next) =>{
+    const id = req.params.id
+
+    try{
+        await Pet.update({isActive: false},{
+            where:{
+                id: id
+            }
+        })
+    
+        return res.json('Mascota desvinculado')
+
+    }catch(err){
+        next(err)
+    }
+
+})
+
+
+
 module.exports = router;
