@@ -1,0 +1,11 @@
+button{
+    width: auto;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+button:not(:last-child){
+    margin-right: 1rem;
+}

@@ -1,0 +1,23 @@
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contents{
+    display: flex;
+    align-items: center;
+}
+
+.navList{
+    display: flex;
+    align-items: center;
+}
+
+.navItem{
+    margin: 0 1rem;
+}
+
+.navLink{
+    padding: 0 2rem;
+}
