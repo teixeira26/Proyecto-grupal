@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { filterByProvider } from "../actions";
+
 
 export default function FilterByProvider() {
     //const dispatch = useDispatch();

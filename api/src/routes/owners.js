@@ -30,13 +30,15 @@ router.post('/', async(req, res, next) =>{
     let auxLastName = lastName[0].toUpperCase() + lastName.slice(1).toLowerCase()
 
     try{
-        await Owner.create({
-                name: auxName,
-                lastName: auxLastName,
-                email,
-                profilePicture,
-                address,
-            })
+        await Owner.findOrCreate({
+                where: {email: email},
+                defaults:{
+                    name: auxName,
+                    lastName: auxLastName,
+                    email,
+                    profilePicture,
+                    address,
+                }})
 
         res.status(201).send('Usuario creado con éxito')
 

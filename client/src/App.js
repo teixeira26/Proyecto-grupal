@@ -5,6 +5,7 @@ import Landing from "./Components/Landing/Landing";
 import Home from './Components/Home';
 import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
+import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
           <Route path='/home' element={<Home />} />
           <Route path='/agregarUsuario' element={<AddOwner />} />
           <Route path='/agregarMascota' element={<AddPet />} />
+          <Route path='/quesosflaco' element={<Quesos />} />
 
 
         </Routes>
