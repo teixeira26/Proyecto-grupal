@@ -6,7 +6,8 @@ import {
     FILTER_BY_OWNER,
     GET_PROVIDERS,
     GET_NAME_PROVIDER,
-    FILTER_BY_PROVINDER
+    GET_SERVICE_PROVIDERS,    
+    FILTER_BY_SERVICE_PROVIDER
 } from './types';
 
 export function getOwner() {
@@ -14,6 +15,16 @@ export function getOwner() {
         var json = await axios.get('http://localhost:3001/owners');
         return dispatch({
             type: GET_OWNERS,
+            payload: json.data
+        })
+    }
+};
+
+export function getProviders() {
+    return async function (dispatch) {
+        var json = await axios.get('http://localhost:3001/providers')
+        return dispatch({
+            type: GET_PROVIDERS,
             payload: json.data
         })
     }
@@ -31,7 +42,35 @@ export function getNameOwner(name) {
             console.log(error);
         }
     }
-}
+};
+
+export function getNameProvider(name) {
+    return async function (dispatch) {
+        try {
+            var json = await axios.get(`http://localhost:3001/providers?name=${name}`);
+            return dispatch({
+                type: GET_NAME_PROVIDER,
+                payload: json.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
+
+export function getServiceProviders(service) {
+    return async function (dispatch) {
+        try {
+            var json = await axios.get(`http://localhost:3001/providers?service=${service}`);
+            return dispatch({
+                type: GET_SERVICE_PROVIDERS,
+                payload: json.data
+            })
+        } catch (error) {
+            console.log(error);
+        }
+    }
+};
 
 export function filterByOwner(payload) {
     console.log(payload, "estoy en actions de filter by owner");
@@ -41,6 +80,10 @@ export function filterByOwner(payload) {
     }
 };
 
-export function filterByProvider() {
-
+export function filterByServiceProviders(payload) {
+    console.log(payload, "estoy en actions de filter by owner");
+    return {
+        type: FILTER_BY_SERVICE_PROVIDER,
+        payload
+    }
 };

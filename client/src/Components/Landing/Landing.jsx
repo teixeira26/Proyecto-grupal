@@ -26,7 +26,7 @@ useEffect(()=>{
 const buscarUser = async()=>{
   try {
   let dbOwner = await axios.get('http://localhost:3001/owners');//[{},{},{}]
-  let userInfo = dbOwner.data.find(x=>x.email === user.email)
+  'let userInfo = dbOwner.data.find(x=>x.email === user.email)'
   if(typeof userInfo === 'object') {
     setNombre(user.name);
   }
