@@ -5,6 +5,7 @@
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/user-event": "^13.5.0",
+    "@uploadcare/react-widget": "^2.1.1",
     "axios": "^0.26.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.2",
