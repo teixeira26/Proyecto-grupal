@@ -1,13 +1,21 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { filterByProvider } from "../actions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getProviders, filterByProvider } from "../actions/ownProvActions";
 
 export default function FilterByProvider() {
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
+    // Traemos el estdo de redux con los providers
+    const providers = useSelector(state => state.copyProviders);
+    const providersArr = providers?.map(p => p.name);
+
+    useEffect(() => {
+        dispatch(getProviders())
+    }, [dispatch]);
 
     function handleFilterByProvider(e) {
         e.preventDefault();
-        //dispatch(filterByProvider(e.target.value));
+        dispatch(filterByProvider(e.target.value));
     };
 
     return (
@@ -17,13 +25,11 @@ export default function FilterByProvider() {
 
             <select onChange={(e) => handleFilterByProvider(e)}>
                 <option value="All">Todos</option>
-                <option value="Mafalda">Mafalda</option>
-                <option value="Tito">Tito</option>
-                <option value="Batman">Batman</option>
-                <option value="Cassandra">Cassandra</option>
-                <option value="Jorge">Jorge</option>
-                <option value="Marcos">Marcos</option>
-                <option value="Matías">Matías</option>
+                {providersArr?.map(p => (
+                    <option value={p} key={p}>
+                        {p.charAt(0).toUpperCase() + p.slice(1).toLowerCase()}
+                    </option>
+                ))}
             </select>
 
         </div>

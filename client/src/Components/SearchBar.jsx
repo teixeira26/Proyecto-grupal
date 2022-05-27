@@ -1,29 +1,29 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getNameOwner } from '../actions';
+import { getServiceProviders } from '../actions/ownProvActions';
 
 export default function SearchBar() {
     const dispatch = useDispatch();
-    const [name, setName] = useState();
+    const [service, setService] = useState();
 
     function handleInputChange(e) {
         e.preventDefault();
-        setName(e.target.value);
+        setService(e.target.value);
             }
 
     function handleSubmit(e) {
         e.preventDefault();
-        dispatch(getNameOwner(name));
-        setName(''); // Limpiamos el cuadro de búsqueda.
+        dispatch(getServiceProviders(service));
+        setService(''); // Limpiamos el cuadro de búsqueda.
     }
 
     return (
         <div>
             <input
                 type='text'
-                value={name}  
-                placeholder='Buscar Propietario...'
+                value={service}  
+                placeholder='Buscar Servicio...'
                 onChange={(e) => handleInputChange(e)}
             />
             <button
