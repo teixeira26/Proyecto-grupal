@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
+import NavBarRegistered from "../NavBar/NavBarRegistered";
 import Hero from "./Hero/Hero";
 import styles from "../Landing/Landing.module.css";
 import WhatWeOffer from "./WhatWeOffer/WhatWeOffer";
@@ -24,10 +25,10 @@ useEffect(()=>{
 const buscarUser = async()=>{
   try {
   let dbOwner = await axios.get('http://localhost:3001/owners');//[{},{},{}]
+  console.log(dbOwner)
   let userInfo = dbOwner.data.find(x=>x.email === user.email)
-  console.log(userInfo)
   if(typeof userInfo === 'object') {
-
+    navigate('/home')
     setNombre(user.name);
   }
   else{
@@ -36,16 +37,20 @@ const buscarUser = async()=>{
 
   // console.log("soy el usuario \0/", userInfo);
   } catch (error) {
-    console.log(error)
+    navigate('/quesosflaco')
   }
   
 }
   return (
     <div>
 
-      <div className={styles.navBar}>
+      {!isAuthenticated&&<div className={styles.navBar}>
         <NavBar />
-      </div>
+      </div>}
+
+      {isAuthenticated&&<div className={styles.navBar}>
+        <NavBarRegistered />
+      </div>}
 
       <div className={styles.hero}>
         <Hero />

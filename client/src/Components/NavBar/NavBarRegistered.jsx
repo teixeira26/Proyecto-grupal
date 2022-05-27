@@ -19,7 +19,7 @@ function NavBar() {
           <ul className={styles.navList}>
             <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
-                Link1
+                Linksdijdsihsdh
               </a>
             </li>
             <li className={styles.navItem}>
@@ -33,7 +33,7 @@ function NavBar() {
               </a>
             </li>
           </ul>
-
+          <img src={isAuthenticated&&user.picture}></img>
           <div className={styles.buttons}>
           {!isAuthenticated&&<Login></Login>}
       {isAuthenticated&&<Logout></Logout>}
