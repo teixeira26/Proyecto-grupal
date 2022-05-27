@@ -9,7 +9,7 @@ import {
     GET_SERVICE_PROVIDERS,  
     FILTER_BY_PROVIDER,  
     FILTER_BY_SERVICE_PROVIDER
-} from './ownProvActionTypes';
+} from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
     return async function (dispatch) {

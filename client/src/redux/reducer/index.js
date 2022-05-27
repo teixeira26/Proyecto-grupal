@@ -7,7 +7,8 @@ import {
     GET_SERVICE_PROVIDERS,
     FILTER_BY_SERVICE_PROVIDER,
     FILTER_BY_PROVIDER
-} from '../actions/ownProvActionTypes';
+} from '../actions-type/ownProvActionTypes';
+import { GET_PRODUCTS } from '../actions-type/petshopActionsTypes';
 
 // Definir constante con un objeto de estados iniciales.
 const initialState = {
@@ -15,7 +16,9 @@ const initialState = {
     copyOwners: [],
     providers: [],
     copyProviders: [],
-    services: []
+    services: [],
+    products: [],
+    filteredProducts: []
 };
 
 // Definimos la función reducer
@@ -78,6 +81,13 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 services: state.providers.filter(p => action.payload)
+            }
+
+        case GET_PRODUCTS:
+            return {
+                ...state,
+                products: action.payload,
+                filteredProducts: action.payload
             }
 
         default:
