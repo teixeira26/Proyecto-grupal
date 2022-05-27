@@ -10,9 +10,10 @@
     gap: 32px;
 }
 
-.contents img {
-    width: 8%;
-    height: 8%;
+
+.profilePicture {
+    width: 50px;
+    height: 50px ;
     border-color: yellowgreen;
     border-style: solid;
     border-radius: 50%;

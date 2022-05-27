@@ -10,36 +10,46 @@ import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx"
 import { useAuth0 } from "@auth0/auth0-react";
+import InfoProvider from "./Components/Forms/infoProvider";
+import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
 
 
 function App() {
-  const {isAuthenticated} = useAuth0();
-
+  const {isAuthenticated, isLoading} = useAuth0();
+  
   return (
     <BrowserRouter>      
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path='/home' element={<Home />} />
-          <Route path='/shop' element={<Shop />} />
+          <Route path='/home' element={
+            isAuthenticated&&!isLoading?<Home/>:<Loading/>
+          } />
+          <Route path='/shop' element={
+          isAuthenticated&&!isLoading?<Shop />:<Loading/>
+          } />
           <Route path='/filterstructure' element={
-           isAuthenticated?<FilterStructure />:<NotRegistered />
+           isAuthenticated&&!isLoading?<FilterStructure />:<Loading/>
           } />
           <Route path='/agregarUsuario' element={
-           isAuthenticated?<AddOwner />:<NotRegistered />
+           isAuthenticated&&!isLoading?<AddOwner />:<Loading/>
           } />
           <Route path='/agregarMascota' element={
-           isAuthenticated?<AddPet />:<NotRegistered />
+           isAuthenticated&&!isLoading?<AddPet />:<Loading/>
           } />
           <Route path='/quesosflaco' element={
-          isAuthenticated?<Quesos />:<NotRegistered />
+          isAuthenticated&&!isLoading?<Quesos />:<Loading/>
           } />
           <Route path='/profile' element={
-            isAuthenticated?<Profile />:<NotRegistered />
+            isAuthenticated&&!isLoading?<Profile />:<Loading/>
           } 
           />
-
+          <Route path='/infoProvider' element={
+            isAuthenticated&&!isLoading?<InfoProvider />:<Loading/>
+          } 
+          />
+          <Route path="/notRegistered" element={<NotRegistered></NotRegistered>}></Route>
 
         </Routes>
       </div>
