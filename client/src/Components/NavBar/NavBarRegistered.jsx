@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./NavBar.module.css";
+import styles from "./NavBarRegistered.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
@@ -13,7 +13,7 @@ function NavBar() {
     
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <span>LOGO</span>
+        <span>Hola, {user.name}</span>
 
         <section className={styles.contents}>
           <ul className={styles.navList}>
@@ -24,16 +24,16 @@ function NavBar() {
             </li>
             <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
-                Que ofrecemos
+                Petshop
               </a>
             </li>
             <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
-                Equipo
+                Contacto
               </a>
             </li>
           </ul>
-
+          <img src={isAuthenticated&&user.picture}></img>
           <div className={styles.buttons}>
           {!isAuthenticated&&<Login></Login>}
       {isAuthenticated&&<Logout></Logout>}

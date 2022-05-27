@@ -1,0 +1,32 @@
+.nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.contents{
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.contents img {
+    width: 8%;
+    height: 8%;
+    border-color: yellowgreen;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+.navList{
+    display: flex;
+    align-items: center;
+}
+
+.navItem{
+    margin: 0 1rem;
+}
+
+.navLink{
+    padding: 0 2rem;
+}
