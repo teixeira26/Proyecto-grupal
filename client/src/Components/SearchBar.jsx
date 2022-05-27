@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getServiceProviders } from '../actions/ownProvActions';
+import { getServiceProviders } from '../redux/actions/ownProvActions';
 
 export default function SearchBar() {
     const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOwners, filterByOwner } from "../actions/ownProvActions";
+import { getOwners, filterByOwner } from "../redux/actions/ownProvActions";
 
 export default function FilterByOwner() {
     const dispatch = useDispatch();
