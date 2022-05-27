@@ -27,7 +27,7 @@ router.post('/', async(req, res, next) =>{
 
     const {name, type, race, size, photos, description, ownerName} = req.body
 
-    let auxName = name[0].toUpperCase() + name.slice(1).toLowerCase()
+    let auxName = name.toLowerCase()
 
     try{
         let newPet = await Pet.create({
