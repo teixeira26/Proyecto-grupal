@@ -4,13 +4,18 @@ import {
     FILTER_BY_OWNER,
     GET_PROVIDERS,
     GET_NAME_PROVIDER,
+    GET_SERVICE_PROVIDERS,
+    FILTER_BY_SERVICE_PROVIDER,
     FILTER_BY_PROVIDER
-} from '../actions/types';
+} from '../actions/ownProvActionTypes';
 
 // Definir constante con un objeto de estados iniciales.
 const initialState = {
     owners: [],
-    copyOwners: []
+    copyOwners: [],
+    providers: [],
+    copyProviders: [],
+    services: []
 };
 
 // Definimos la función reducer
@@ -26,10 +31,29 @@ function rootReducer(state = initialState, action) {
                 copyOwners: action.payload
             }
 
+        case GET_PROVIDERS:
+            return {
+                ...state,
+                providers: action.payload,
+                copyProviders: action.payload
+            }
+
         case GET_NAME_OWNER:
             return {
                 ...state,
                 copyOwners: action.payload,
+            }
+
+        case GET_NAME_PROVIDER:
+            return {
+                ...state,
+                copyProviders: action.payload
+            }
+
+        case GET_SERVICE_PROVIDERS:
+            return {
+                ...state,
+                services: action.payload
             }
 
         case FILTER_BY_OWNER:
@@ -37,15 +61,24 @@ function rootReducer(state = initialState, action) {
             console.log("REDUCER state.owners", state.owners);
             return {
                 ...state,
-                copyOwners: state.owners.filter(el =>
-                    el.owners.map(el => el.name).includes(action.payload)
-                )
+                copyOwners: state.owners.filter(o => action.payload)
             }
 
-        //case FILTER_BY_PROVIDER:
-        //    return {
-        //
-        //    }
+        case FILTER_BY_PROVIDER:
+            console.log("REDUCER FILTER_BY_PROVIDER", action.payload);
+            console.log("REDUCER state.providers", state.providers);
+            return {
+                ...state,
+                copyProviders: state.providers.filter(p => action.payload)
+            }
+
+        case FILTER_BY_SERVICE_PROVIDER:
+            console.log("REDUCER FILTER_BY_SERVICE_PROVIDER", action.payload);
+            console.log("REDUCER state.providers", state.providers);
+            return {
+                ...state,
+                services: state.providers.filter(p => action.payload)
+            }
 
         default:
             return state;

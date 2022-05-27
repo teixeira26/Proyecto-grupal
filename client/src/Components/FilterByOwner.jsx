@@ -1,13 +1,21 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { filterByOwner } from "../actions";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getOwners, filterByOwner } from "../actions/ownProvActions";
 
 export default function FilterByOwner() {
-    //const dispatch = useDispatch();
+    const dispatch = useDispatch();
+
+    // Traemos el estdo de redux con los owners
+    const owners = useSelector(state => state.copyOwners);
+    const ownersArr = owners?.map(o => o.name);
+
+    useEffect(() => {
+        dispatch(getOwners())
+    }, [dispatch]);
 
     function handleFilterByOwner(e) {
         e.preventDefault();
-        //dispatch(filterByOwner(e.target.value));
+        dispatch(filterByOwner(e.target.value));
     };
 
     return (
@@ -17,13 +25,11 @@ export default function FilterByOwner() {
 
             <select onChange={(e) => handleFilterByOwner(e)}>
                 <option value="All">Todos</option>
-                <option value="Franco">Franco</option>
-                <option value="Alan">Alan</option>
-                <option value="Sabrina">Sabrina</option>
-                <option value="Mica">Mica</option>
-                <option value="Matheus">Matheus</option>
-                <option value="Sebastian">Sebastian</option>
-                <option value="Leo">Leo</option>
+                {ownersArr?.map(a => (
+                    <option value={a} key={a}>
+                        {a.charAt(0).toUpperCase() + a.slice(1).toLowerCase()}
+                    </option>
+                ))}
             </select>
 
         </div>

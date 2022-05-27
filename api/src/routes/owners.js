@@ -1,5 +1,5 @@
 const { Router } = require ('express');
-const { Owner, Pet } = require('../db')
+const { Owner, Pet, Product, Sold } = require('../db')
 
 const router = Router()
 
@@ -26,17 +26,19 @@ router.post('/', async(req, res, next) =>{
 
     const {name, lastName, email, profilePicture, address} = req.body
 
-    let auxName = name[0].toUpperCase() + name.slice(1).toLowerCase()
-    let auxLastName = lastName[0].toUpperCase() + lastName.slice(1).toLowerCase()
+    let auxName = name.toLowerCase()
+    let auxLastName = lastName.toLowerCase()
 
     try{
-        await Owner.create({
-                name: auxName,
-                lastName: auxLastName,
-                email,
-                profilePicture,
-                address,
-            })
+        await Owner.findOrCreate({
+                where: {email: email},
+                defaults:{
+                    name: auxName,
+                    lastName: auxLastName,
+                    email,
+                    profilePicture,
+                    address,
+                }})
 
         res.status(201).send('Usuario creado con éxito')
 
@@ -85,5 +87,40 @@ router.delete('/:id', async (req, res, next) =>{
 
 })
 
+
+router.post('/checkout', async(req, res, next) =>{
+
+    const {email, id, quantity} = req.body
+
+    try{
+
+        // let 
+        await Sold.create({
+            quantity,
+            ownerEmail: email,
+            productId: id,
+        })
+
+        // let foundOwner = await Owner.findOne({
+        //     where:{
+        //         email: email
+        //     }
+        // })
+
+        // let foundProduct = await Product.findOne({
+        //     where:{
+        //         id: id
+        //     }
+        // })
+
+        // await foundProduct.addSold(newSold)
+
+        res.status(201).send('Producto vendido con éxito')
+
+    }catch(err){
+        next(err)
+    }
+
+})
 
 module.exports = router;
