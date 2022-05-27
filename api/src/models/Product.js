@@ -13,13 +13,13 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     weight:{
-        type: DataTypes.ENUM('1kg', '5kg', '7,5kg', '10kg', '20kg')
+        type: DataTypes.INTEGER,
     },
     price: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
-    quantity: {
+    stock: {
         type: DataTypes.INTEGER,
         allowNull: false,
     },
@@ -38,7 +38,7 @@ module.exports = (sequelize) => {
         type: DataTypes.ENUM('pro plan', 'pedigree', 'vital can', 'eukanuba'),
         allowNull: false,
     },
-    sold:{
+    isActive:{
         type: DataTypes.BOOLEAN,
         defaultValue: true,
     }
