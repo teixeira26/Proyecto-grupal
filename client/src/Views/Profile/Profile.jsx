@@ -21,7 +21,7 @@ export default function Profile() {
                 <h4>Correo electronico: email</h4>
                 <h4>Direccion: adress</h4>
                 <div>
-                    <button>Editar mis datos</button>
+                    <button>Editar datos</button>
                 </div>
             </section>
             
