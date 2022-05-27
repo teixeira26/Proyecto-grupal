@@ -67,6 +67,8 @@ Provider.hasMany(Review);
 Review.belongsTo(Provider);
 
 
+
+
 Owner.belongsToMany(Product, {
   through: Sold
 })
@@ -87,7 +89,6 @@ Product.belongsToMany(Provider, {
 
 
 
-// Sold.hasMany(Owner);
 
 
 
