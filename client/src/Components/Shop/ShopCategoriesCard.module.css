@@ -1,0 +1,30 @@
+.card{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+    background-color: rgb(230, 230, 230);
+    position: relative;
+}
+
+.card:hover{
+    transform: scale(1.01);
+}
+
+.cardImg{
+    height: 25rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cardTitle{
+    width: 100%;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+    position: absolute;
+    bottom: 2px;
+}
