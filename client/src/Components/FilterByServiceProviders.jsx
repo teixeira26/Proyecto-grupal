@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProviders, filterByServiceProviders } from "../actions";
+import { getProviders, filterByServiceProviders } from "../actions/ownProvActions";
 
 export default function FilterByServiceProviders() {
     const dispatch = useDispatch();

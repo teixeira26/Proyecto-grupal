@@ -6,11 +6,12 @@ import {
     FILTER_BY_OWNER,
     GET_PROVIDERS,
     GET_NAME_PROVIDER,
-    GET_SERVICE_PROVIDERS,    
+    GET_SERVICE_PROVIDERS,  
+    FILTER_BY_PROVIDER,  
     FILTER_BY_SERVICE_PROVIDER
-} from './types';
+} from './ownProvActionTypes';
 
-export function getOwner() {
+export function getOwners() {
     return async function (dispatch) {
         var json = await axios.get('http://localhost:3001/owners');
         return dispatch({
@@ -76,6 +77,14 @@ export function filterByOwner(payload) {
     console.log(payload, "estoy en actions de filter by owner");
     return {
         type: FILTER_BY_OWNER,
+        payload
+    }
+};
+
+export function filterByProvider(payload) {
+    console.log(payload, "estoy en actions de filter by provider");
+    return {
+        type: FILTER_BY_PROVIDER,
         payload
     }
 };

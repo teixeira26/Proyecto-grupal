@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getOwner, filterByOwner } from "../actions";
+import { getOwners, filterByOwner } from "../actions/ownProvActions";
 
 export default function FilterByOwner() {
     const dispatch = useDispatch();
@@ -10,7 +10,7 @@ export default function FilterByOwner() {
     const ownersArr = owners?.map(o => o.name);
 
     useEffect(() => {
-        dispatch(getOwner())
+        dispatch(getOwners())
     }, [dispatch]);
 
     function handleFilterByOwner(e) {
