@@ -5,8 +5,6 @@ import styles from "../Landing/Landing.module.css";
 import WhatWeOffer from "./WhatWeOffer/WhatWeOffer";
 import Team from "./Team/Team";
 import Footer from "./Footer/Footer";
-import Login from "../Auth0/Login"
-import Logout from "../Auth0/Logout"
 import {useAuth0, User} from "@auth0/auth0-react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -27,7 +25,9 @@ const buscarUser = async()=>{
   try {
   let dbOwner = await axios.get('http://localhost:3001/owners');//[{},{},{}]
   let userInfo = dbOwner.data.find(x=>x.email === user.email)
+  console.log(userInfo)
   if(typeof userInfo === 'object') {
+
     setNombre(user.name);
   }
   else{
@@ -42,12 +42,7 @@ const buscarUser = async()=>{
 }
   return (
     <div>
-      
-      {!isAuthenticated&&<Login></Login>}
-      {isAuthenticated&&<Logout></Logout>}
-      {isAuthenticated&&<img src={user.picture}></img>}
-      {isAuthenticated&&console.log(user)}
-      <div><h1>{nombre}</h1></div>
+
       <div className={styles.navBar}>
         <NavBar />
       </div>

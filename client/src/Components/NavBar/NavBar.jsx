@@ -3,9 +3,14 @@ import styles from "./NavBar.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
+import {useAuth0} from '@auth0/auth0-react'
+import Login from "../Auth0/Login"
+import Logout from "../Auth0/Logout"
 
 function NavBar() {
+  const {user, isAuthenticated} = useAuth0();
   return (
+    
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
         <span>LOGO</span>
@@ -30,8 +35,9 @@ function NavBar() {
           </ul>
 
           <div className={styles.buttons}>
-            <button className={Button.button}>Registrarse</button>
-            <button>Iniciar Sesion</button>
+          {!isAuthenticated&&<Login></Login>}
+      {isAuthenticated&&<Logout></Logout>}
+      {isAuthenticated&&<img src={user.picture}></img>}
           </div>
         </section>
       </nav>
