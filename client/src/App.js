@@ -7,7 +7,7 @@ import FilterStructure from './Components/FilterStructure';
 import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
-
+import Profile from "./Views/Profile/Profile.jsx"
 
 function App() {
   return (
@@ -20,8 +20,7 @@ function App() {
           <Route path='/agregarUsuario' element={<AddOwner />} />
           <Route path='/agregarMascota' element={<AddPet />} />
           <Route path='/quesosflaco' element={<Quesos />} />
-
-
+          <Route path="/user" element={<Profile/>}/>
         </Routes>
       </div>
     </BrowserRouter>
