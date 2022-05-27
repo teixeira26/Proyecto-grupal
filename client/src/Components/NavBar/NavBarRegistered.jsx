@@ -6,6 +6,7 @@ import OutContainer from "../GlobalCss/OutContainer.module.css";
 import {useAuth0} from '@auth0/auth0-react'
 import Login from "../Auth0/Login"
 import Logout from "../Auth0/Logout"
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
   const {user, isAuthenticated} = useAuth0();
@@ -33,7 +34,7 @@ function NavBar() {
               </a>
             </li>
           </ul>
-          <img src={isAuthenticated&&user.picture}></img>
+          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture}></img></NavLink>
           <div className={styles.buttons}>
           {!isAuthenticated&&<Login></Login>}
       {isAuthenticated&&<Logout></Logout>}
