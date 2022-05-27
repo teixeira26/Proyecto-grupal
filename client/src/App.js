@@ -9,6 +9,7 @@ import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx"
+import Food from "./Components/Shop/Food";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path='/home' element={<Home />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/food' element={<Food />} />
           <Route path='/checkout' element={<Checkout/>}/>
           <Route path='/agregarUsuario' element={<AddOwner />} />
           <Route path='/agregarMascota' element={<AddPet />} />

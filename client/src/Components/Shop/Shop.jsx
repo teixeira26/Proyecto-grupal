@@ -5,6 +5,7 @@ import ShopCategoriesCard from "./ShopCategoriesCard";
 import styles from "../Shop/Shop.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css"
 import ProductCard from "./ProductCard";
+import { Link } from "react-router-dom";
 
 
 const Shop = () => {
@@ -14,7 +15,9 @@ const Shop = () => {
       <section className={inContainer.container}>
         <h1 className={styles.shopTitle}>Pet Shop</h1>
         <div className={styles.categoriesWrapper}>
-          <ShopCategoriesCard/>
+          <Link to='/food'>
+            <ShopCategoriesCard/>
+          </Link>
           <ShopCategoriesCard/>
           <ShopCategoriesCard/>
         </div> 
