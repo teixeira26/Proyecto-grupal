@@ -1,0 +1,13 @@
+.cardWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 40rem));
+  gap: 4rem;
+  justify-content: space-around;
+  margin: 10rem 0;
+}
+
+.homeTitle{
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+}
