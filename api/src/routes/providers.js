@@ -43,8 +43,8 @@ router.post('/', async(req, res, next) =>{
 
     const {name, lastName, email, profilePicture, address, service, description, price, typeOfHousing, housingPhotos, schedule, dogsPerWalk} = req.body
 
-    let auxName = name[0].toUpperCase() + name.slice(1).toLowerCase()
-    let auxLastName = lastName[0].toUpperCase() + lastName.slice(1).toLowerCase()
+    let auxName = name.toLowerCase()
+    let auxLastName = lastName.toLowerCase()
 
     try{
         await Provider.create({
