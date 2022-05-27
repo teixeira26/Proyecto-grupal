@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 
 export default function AddOwner(){
@@ -29,7 +30,13 @@ export default function AddOwner(){
     try{
     await axios.post('http://localhost:3001/owners', owner)
 
-        alert('Perfil creado con éxito')
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Perfil creado con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      });
 
         setOwner({
             name: '',
@@ -38,7 +45,12 @@ export default function AddOwner(){
         })
         navigate('/agregarMascota')
     }catch(err){
-        alert(err.response.data)
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data,
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
     }
 }
 

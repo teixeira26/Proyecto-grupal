@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import { Widget } from "@uploadcare/react-widget";
-
+import Swal from 'sweetalert2';
 
 export default function AddPet(){
 
@@ -44,7 +44,13 @@ export default function AddPet(){
     try{
     await axios.post('http://localhost:3001/pets', pet)
 
-        alert('Perfil creado con éxito')
+    Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Perfil creado con éxito',
+        showConfirmButton: false,
+        timer: 1500
+      });
 
         setPet({
             name: '',
@@ -58,7 +64,12 @@ export default function AddPet(){
        
 
     }catch(err){
-        alert(err.response.data)
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data,
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
     }
 }
 

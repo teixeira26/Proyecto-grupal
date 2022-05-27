@@ -1,6 +1,6 @@
 import React from "react";
 import FilterByOwner from "./FilterByOwner";
-import FilterByProvider from "./FilterByProvider";
+import FilterByServiceProviders from "./FilterByServiceProviders";
 import SearchBar from "./SearchBar";
 
 export default function Home() {
@@ -15,7 +15,7 @@ export default function Home() {
             </div>
 
             <div>
-                <FilterByProvider />
+                <FilterByServiceProviders />
             </div>
         </div>
     )
