@@ -9,8 +9,10 @@ import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx"
+import Food from "./Components/Shop/Food";
 import { useAuth0 } from "@auth0/auth0-react";
 import NotRegistered from "./Components/Auth0/notRegistered";
+
 
 
 function App() {
@@ -23,6 +25,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path='/home' element={<Home />} />
           <Route path='/shop' element={<Shop />} />
+          <Route path='/food' element={<Food />} />
           <Route path='/filterstructure' element={
            isAuthenticated?<FilterStructure />:<NotRegistered />
           } />
