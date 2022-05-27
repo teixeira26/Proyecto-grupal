@@ -1,0 +1,26 @@
+.card{
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: transform 200ms ease-in;
+}
+
+.card:hover{
+    transform: scale(1.01);
+}
+
+.cardImg{
+    height: 40rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.cardTitle{
+    width: 100%;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    text-transform: uppercase;
+}
