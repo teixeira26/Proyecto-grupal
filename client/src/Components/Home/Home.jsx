@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Home/Home.module.css";
-import NavBar from "../NavBar/NavBar";
+import NavBarRegistered from "../NavBar/NavBarRegistered";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import HomeCard from "./HomeCard";
 import Footer from "../Landing/Footer/Footer";
@@ -14,12 +14,11 @@ const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   return (
     <div>
-      {!isAuthenticated && <Login></Login>}
-      {isAuthenticated && <Logout></Logout>}
-      {isAuthenticated && <img src={user.picture}></img>}
       {isAuthenticated && console.log(user)}
 
-      <NavBar />
+
+        <NavBarRegistered />
+
 
       <div className={inContainer.container}>
         <h1 className={styles.homeTitle}>Lorem ipsum dolor sit.</h1>

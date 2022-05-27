@@ -5,7 +5,7 @@ export const Login = ()=>{
     const {loginWithRedirect}= useAuth0();
 
     return (
-    <button onClick={loginWithRedirect}>Login</button>
+    <button onClick={loginWithRedirect}>Ingresar</button>
     )
 }
 

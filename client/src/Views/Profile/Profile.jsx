@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../Components/NavBar/NavBar";
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Profile() {
+    const [userData, setUser] = useState({});
+    const{user, isAuthenticated} = useAuth0();
+    useEffect(()=>{
+        if (isAuthenticated){
+            setUser({
+                nombre:user.name,
+                picture:user.picture,
+            })
+        }
+    },[user])
     return (
         <main>
             <NavBar />
             <div className={styleContainer.container}>
             <section className={style.infoProfile}>
-                <img src="" alt="profilePicture" />
+                <img src={userData.picture} alt="profilePicture" />
                 <article>
-                    <h1>Nombre completo: name + lastName</h1>
+                    <h1>{userData.nombre}</h1>
                     <h2>Localidad</h2>
                 </article>
             </section>
