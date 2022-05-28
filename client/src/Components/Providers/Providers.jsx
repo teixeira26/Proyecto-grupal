@@ -11,11 +11,31 @@ import Footer from "../Landing/Footer/Footer"
 export default function Providers(){
     const dispatch = useDispatch()
 
+    const [order, setOrder] = useState('ASC')
+    const [filter, setFilter] = useState('')
+
+
     useEffect(()=>{
-        dispatch(getProviders())
-    },[dispatch])
+        dispatch(getProviders(filter, order))
+    },[dispatch, filter, order])
   
     const providers = useSelector(state => state.providers);
+    
+
+    function handleFilter(e){
+        console.log(e.target.value)
+        setFilter(e.target.value)
+    }
+
+    function handleOrder(e){
+        setOrder(e.target.value)
+    }
+
+    function handleRemove(e){
+        e.preventDefault()
+        setFilter('')
+    }
+
 
     return (
     <div>
@@ -23,6 +43,27 @@ export default function Providers(){
     <NavBar />
       <section className={inContainer.container}>
             <h1 className={styles.shopTitle}>Listado de proveedores</h1>
+
+            <h5>Filtrar por Servicio</h5>
+
+        <select onChange={(e)=>handleFilter(e)}>
+            <option hidden={true}>Servicio</option>
+            <option value="">Todos</option>
+            <option value="Hospedaje">Hospedaje</option>
+            <option value="Paseo">Paseo</option>
+        </select>
+
+        <h5>Ordenar por Precio</h5>
+        <select onChange={handleOrder}>
+            <option hidden={true}>Precio</option>
+            <option value="ASC">Ascendente</option>
+            <option value="DESC">Descendente</option>
+        </select>
+
+        <br/>
+
+        <button onClick={handleRemove}>Remover filtros</button>
+
 
             <div className={styles.product}>
             {!providers.length? 'LOADING' :
