@@ -1,35 +1,28 @@
-.categoriesWrapper {
+.shopFlex{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 8rem 0;
+}
+
+.shopGrid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 28rem));
   gap: 8rem;
-  justify-content: center;
-  margin: 4rem 0;
-}
-
-.homeTitle {
-  display: flex;
-  justify-content: center;
-  margin-top: 6rem;
-}
-
-.shopTitle {
-  display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
-  margin: 8rem 0 0;
+  margin-left: 5rem;
 }
 
-.product {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
-  gap: 8rem;
-  justify-content: center;
-  margin: 10rem 0;
+.shopFilters{
+  grid-column: 1 / 2;
+  grid-row: 1 / 30;
 }
 
-.seeAll {
+.shopTitle{
+  width: 100%;
   display: flex;
-  align-items: center;
   justify-content: center;
-  cursor: pointer;
+  margin-top: 8rem;
 }

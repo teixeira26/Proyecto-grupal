@@ -1,0 +1,35 @@
+.categoriesWrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
+    gap: 8rem;
+    justify-content: center;
+    margin: 4rem 0;
+  }
+  
+  .homeTitle {
+    display: flex;
+    justify-content: center;
+    margin-top: 6rem;
+  }
+  
+  .shopTitle {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin: 8rem 0 0;
+  }
+  
+  .product {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
+    gap: 8rem;
+    justify-content: center;
+    margin: 10rem 0;
+  }
+  
+  .seeAll {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }

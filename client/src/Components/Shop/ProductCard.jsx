@@ -10,8 +10,8 @@ const ProductCard = ({profilePicture, name, price}) => {
         <div className={styles.cardInfo}>
           <h2 className={styles.cardTitle}>{name}</h2>
           <div className={styles.cardBottom}>
-            <p className={styles.price}>{price}</p>
-            <button className={styles.addButton}>Agregar</button>
+            <p className={styles.price}>${price}</p>
+            {/* <button className={styles.addButton}>Agregar al carrito</button> */}
           </div>
         </div>
       </div>
