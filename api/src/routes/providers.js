@@ -81,7 +81,8 @@ router.post('/', async(req, res, next) =>{
 
 router.put('/:id', async (req, res, next) =>{
     const id = req.params.id
-    const provider = req.body
+    const provider = req.body;
+    console.log(provider)
 
     try{
         await Provider.update(provider,{

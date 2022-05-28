@@ -24,10 +24,10 @@ module.exports = (sequelize) => {
       unique: true
     },
     profilePicture:{
-      type:DataTypes.ARRAY(DataTypes.STRING),
+      type:DataTypes.STRING,
     },
-    address:{
-      type: DataTypes.JSON(DataTypes.STRING),
+    adress:{
+      type: DataTypes.JSONB(),
     },
     service:{
       type:DataTypes.ENUM('Paseo', 'Hospedaje')
