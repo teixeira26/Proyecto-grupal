@@ -1,50 +1,55 @@
-.card{
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    cursor: pointer;
-    background-color: rgb(216, 214, 214);
-    position: relative;
+.card {
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  position: relative;
 }
 
-.cardImg{
-    height: 32rem;
-    width: 100%;
-    object-fit: contain;
-    background-color: gray;
+
+.cardImg {
+  height: 32rem;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  background-color: gray;
 }
 
-.addFav{
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    right: 0;
-    margin: 1rem;
+.addFav {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 0;
+  margin: 1rem;
 }
 
-.cardBottom{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.cardBottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
 }
 
-.cardTitle{
-    width: 100%;
-    margin-top: 1.5rem;
-    display: flex;
-    justify-content: flex-start;
-    margin: 0.5rem 0;
-    text-transform: uppercase; 
+.cardTitle {
+  border-top: 1px solid gray;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin: 1rem 0;
+  padding: 1rem 0 0;
+  text-transform: uppercase;
 }
 
-.addButton:hover{
-    color: red;
+.addButton {
+  margin-top: 1rem;
 }
 
-.cardInfo{
-    bottom: 0px;
-    background-color: white;
-    width: 100%;
+.addButton:hover {
+  color: red;
 }
 
+.cardInfo {
+  bottom: 0px;
+  background-color: white;
+  width: 100%;
+}
