@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../../Components/NavBar/NavBar";
+import NavBarRegistered from "../../Components/NavBar/NavBarRegistered";
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -17,7 +17,7 @@ export default function Profile() {
     },[user])
     return (
         <main>
-            <NavBar />
+            <NavBarRegistered />
             <div className={styleContainer.container}>
             <section className={style.infoProfile}>
                 <img src={userData.picture} alt="profilePicture" />

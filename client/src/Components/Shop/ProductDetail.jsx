@@ -1,5 +1,5 @@
 import React from "react";
-import NavBar from "../NavBar/NavBar";
+import NavBarShop from "../NavBar/NavBarShop";
 import Footer from "../Landing/Footer/Footer";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from "../Shop/ProductDetail.module.css";
@@ -7,7 +7,7 @@ import styles from "../Shop/ProductDetail.module.css";
 const ProductDetail = () => {
   return (
     <div className={styles.container}>
-      <NavBar />
+      <NavBarShop />
 
       <div className={inContainer.container}>
         <span>Atras</span>
@@ -26,6 +26,7 @@ const ProductDetail = () => {
             <p className={styles.detailPrice}>$4500</p>
 
             <p className={styles.detailQuantity}>Seleccionar Cantidad</p>
+            <p className={styles.stock}>Stock disponible 5</p>
             <div className={styles.productQuantity}>
               <button className={styles.button}>-</button>
               <div className={styles.count}>1</div>

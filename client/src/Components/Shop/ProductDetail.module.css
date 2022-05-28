@@ -37,12 +37,16 @@
 }
 
 .detailQuantity{
-    margin-bottom: 1rem;
     color: gray;
 }
 .productQuantity{
     display: flex;
     align-items: center;
+}
+
+.stock{
+    color: red;
+    margin-bottom: 1rem;
 }
 
 .button{
@@ -68,9 +72,17 @@
     margin-top: 2rem;
     border-radius: 5px;
     background-color: rgb(82, 185, 82);
+    width: 50%;
 }
 
 .addButtonCart{
+    width: 50%;
     margin-top: 2rem;
     border-radius: 5px;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

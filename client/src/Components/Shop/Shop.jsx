@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NavBar from "../NavBar/NavBar";
+import NavBarShop from "../NavBar/NavBarShop";
 import Footer from "../Landing/Footer/Footer";
 import ShopFilters from "./ShopFilters";
 import styles from "../Shop/Shop.module.css";
@@ -20,7 +20,7 @@ const Shop = () => {
   console.log(products);
   return (
     <div className={styles.container}>
-      <NavBar />
+      <NavBarShop/>
 
       <div className={inContainer.container}>
         <span>Atras</span>
