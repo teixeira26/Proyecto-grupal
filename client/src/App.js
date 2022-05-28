@@ -30,15 +30,9 @@ function App() {
           <Route path='/shop' element={
           isAuthenticated&&!isLoading?<Shop />:<Loading/>
           } />
-<<<<<<< HEAD
-=======
           <Route path='/shop/:id' element={
           isAuthenticated&&!isLoading?<ProductDetail />:<Loading/>
           } />
-          <Route path='/filterstructure' element={
-           isAuthenticated&&!isLoading?<FilterStructure />:<Loading/>
-          } />
->>>>>>> c52eadd4adfd2d63047934e5d0ea4b3c863197b9
           <Route path='/agregarUsuario' element={
            isAuthenticated&&!isLoading?<AddOwner />:<Loading/>
           } />
