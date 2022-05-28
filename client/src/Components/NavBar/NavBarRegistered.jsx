@@ -3,17 +3,16 @@ import styles from "./NavBarRegistered.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
-import {useAuth0} from '@auth0/auth0-react'
-import Login from "../Auth0/Login"
-import Logout from "../Auth0/Logout"
+import { useAuth0 } from "@auth0/auth0-react";
+import Login from "../Auth0/Login";
+import Logout from "../Auth0/Logout";
 
 function NavBar() {
-  const {user, isAuthenticated} = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return (
-    
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <span>Hola, {user.name}</span>
+        <span>LOGO</span>
 
         <section className={styles.contents}>
           <ul className={styles.navList}>
@@ -33,10 +32,10 @@ function NavBar() {
               </a>
             </li>
           </ul>
-          <img src={isAuthenticated&&user.picture}></img>
+          <img src={isAuthenticated && user.picture}></img>
           <div className={styles.buttons}>
-          {!isAuthenticated&&<Login></Login>}
-      {isAuthenticated&&<Logout></Logout>}
+            {!isAuthenticated && <Login></Login>}
+            {isAuthenticated && <Logout></Logout>}
           </div>
         </section>
       </nav>
