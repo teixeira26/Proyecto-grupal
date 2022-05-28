@@ -1,0 +1,44 @@
+.container {
+  width: 15vw;
+  height: 100%;
+}
+
+.select {
+  width: 100%;
+  height: 3rem;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.selects {
+  display: flex;
+  flex-direction: column;
+}
+
+.selects:not(:first-child) {
+  margin: 5rem 0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+}
+
+.checkTitle {
+  margin-left: 1rem;
+}
+
+.search {
+  width: 100%;
+  height: 3rem;
+  padding: 1rem;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+.filterTitle {
+  color: gray;
+  text-transform: uppercase;
+}

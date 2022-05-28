@@ -1,11 +1,11 @@
 import React from "react";
-import styles from "./NavBarRegistered.module.css";
+import styles from "./NavBarShop.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
-import {useAuth0} from '@auth0/auth0-react'
-import Login from "../Auth0/Login"
-import Logout from "../Auth0/Logout"
+import { useAuth0 } from "@auth0/auth0-react";
+import Login from "../Auth0/Login";
+import Logout from "../Auth0/Logout";
 import { NavLink } from "react-router-dom";
 
 function NavBar() {
@@ -24,16 +24,21 @@ function NavBar() {
             </li>
             <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
-                Petshop
-              </a>
-            </li>
-            <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
                 Contacto
               </a>
             </li>
           </ul>
-          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture}></img></NavLink>
+          <div className={styles.icons}>
+            <ion-icon name="bag-handle-outline"></ion-icon>
+            <ion-icon name="heart-outline"></ion-icon>
+          </div>
+
+          <NavLink to="/profile" className={styles.profile}>
+            <img
+              className={styles.profilePicture}
+              src={isAuthenticated && user.picture}
+            ></img>
+          </NavLink>
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
             {isAuthenticated && <Logout></Logout>}
