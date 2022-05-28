@@ -13,48 +13,51 @@ import InfoProvider from "./Components/Forms/infoProvider";
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
+import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
 
 
 function App() {
-  const {isAuthenticated, isLoading} = useAuth0();
-  
+  const { isAuthenticated, isLoading } = useAuth0();
+
   return (
-    <BrowserRouter>      
+    <BrowserRouter>
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing />} />
           <Route path='/home' element={
-            isAuthenticated&&!isLoading?<Home/>:<Loading/>
+            isAuthenticated && !isLoading ? <Home /> : <Loading />
           } />
           <Route path='/shop' element={
-          isAuthenticated&&!isLoading?<Shop />:<Loading/>
+            isAuthenticated && !isLoading ? <Shop /> : <Loading />
           } />
           <Route path='/shop/:id' element={
-          isAuthenticated&&!isLoading?<ProductDetail />:<Loading/>
+            isAuthenticated && !isLoading ? <ProductDetail /> : <Loading />
           } />
           <Route path='/agregarUsuario' element={
-           isAuthenticated&&!isLoading?<AddOwner />:<Loading/>
+            isAuthenticated && !isLoading ? <AddOwner /> : <Loading />
           } />
           <Route path='/agregarMascota' element={
-           isAuthenticated&&!isLoading?<AddPet />:<Loading/>
+            isAuthenticated && !isLoading ? <AddPet /> : <Loading />
           } />
           <Route path='/quesosflaco' element={
-          isAuthenticated&&!isLoading?<Quesos />:<Loading/>
+            isAuthenticated && !isLoading ? <Quesos /> : <Loading />
           } />
           <Route path='/profile' element={
-            isAuthenticated&&!isLoading?<Profile />:<Loading/>
-          } 
+            isAuthenticated && !isLoading ? <Profile /> : <Loading />
+          }
           />
           <Route path='/infoProvider' element={
-            isAuthenticated&&!isLoading?<InfoProvider />:<Loading/>
-          } 
+            isAuthenticated && !isLoading ? <InfoProvider /> : <Loading />
+          }
           />
           <Route path='/providers' element={
-            isAuthenticated&&!isLoading?<Providers />:<Loading/>
-          }/>
+            isAuthenticated && !isLoading ? <Providers /> : <Loading />
+          } />
 
           <Route path="/notRegistered" element={<NotRegistered></NotRegistered>}></Route>
+
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
 
         </Routes>
       </div>
