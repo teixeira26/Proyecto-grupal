@@ -5,15 +5,11 @@ import {
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
     GET_PROVIDERS,
-    GET_NAME_PROVIDER,
-    GET_SERVICE_PROVIDERS,  
-    FILTER_BY_PROVIDER,  
-    FILTER_BY_SERVICE_PROVIDER
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
     return async function (dispatch) {
-        var json = await axios.get('http://localhost:3001/owners');
+        var json = await axios.get(`http://localhost:3001/owners`);
         return dispatch({
             type: GET_OWNERS,
             payload: json.data
@@ -21,9 +17,9 @@ export function getOwners() {
     }
 };
 
-export function getProviders() {
+export function getProviders(filter, order) {
     return async function (dispatch) {
-        var json = await axios.get('http://localhost:3001/providers')
+        var json = await axios.get(`http://localhost:3001/providers?filter=${filter}&order=${order}`)
         return dispatch({
             type: GET_PROVIDERS,
             payload: json.data
@@ -45,54 +41,11 @@ export function getNameOwner(name) {
     }
 };
 
-export function getNameProvider(name) {
-    return async function (dispatch) {
-        try {
-            var json = await axios.get(`http://localhost:3001/providers?name=${name}`);
-            return dispatch({
-                type: GET_NAME_PROVIDER,
-                payload: json.data
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-};
-
-export function getServiceProviders(service) {
-    return async function (dispatch) {
-        try {
-            var json = await axios.get(`http://localhost:3001/providers?service=${service}`);
-            return dispatch({
-                type: GET_SERVICE_PROVIDERS,
-                payload: json.data
-            })
-        } catch (error) {
-            console.log(error);
-        }
-    }
-};
 
 export function filterByOwner(payload) {
-    console.log(payload, "estoy en actions de filter by owner");
     return {
         type: FILTER_BY_OWNER,
         payload
     }
 };
 
-export function filterByProvider(payload) {
-    console.log(payload, "estoy en actions de filter by provider");
-    return {
-        type: FILTER_BY_PROVIDER,
-        payload
-    }
-};
-
-export function filterByServiceProviders(payload) {
-    console.log(payload, "estoy en actions de filter by owner");
-    return {
-        type: FILTER_BY_SERVICE_PROVIDER,
-        payload
-    }
-};

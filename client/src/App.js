@@ -4,7 +4,6 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Landing from "./Components/Landing/Landing";
 import Home from './Components/Home/Home';
 import Shop from './Components/Shop/Shop';
-import FilterStructure from './Components/FilterStructure';
 import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
@@ -29,9 +28,6 @@ function App() {
           } />
           <Route path='/shop' element={
           isAuthenticated&&!isLoading?<Shop />:<Loading/>
-          } />
-          <Route path='/filterstructure' element={
-           isAuthenticated&&!isLoading?<FilterStructure />:<Loading/>
           } />
           <Route path='/agregarUsuario' element={
            isAuthenticated&&!isLoading?<AddOwner />:<Loading/>
