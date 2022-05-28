@@ -13,6 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import InfoProvider from "./Components/Forms/infoProvider";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
+import Providers from "./Components/Providers/Providers";
 
 
 function App() {
@@ -49,6 +50,10 @@ function App() {
             isAuthenticated&&!isLoading?<InfoProvider />:<Loading/>
           } 
           />
+          <Route path='/providers' element={
+            isAuthenticated&&!isLoading?<Providers />:<Loading/>
+          }/>
+
           <Route path="/notRegistered" element={<NotRegistered></NotRegistered>}></Route>
 
         </Routes>
