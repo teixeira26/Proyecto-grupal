@@ -13,6 +13,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import InfoProvider from "./Components/Forms/infoProvider";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
+import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 
 
 function App() {
@@ -50,6 +51,8 @@ function App() {
           } 
           />
           <Route path="/notRegistered" element={<NotRegistered></NotRegistered>}></Route>
+
+          <Route path="/shoppingcart" element={<ShoppingCart />} />
 
         </Routes>
       </div>

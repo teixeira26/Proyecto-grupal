@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProviders, filterByServiceProviders } from "../redux/actions/ownProvActions";
+import { getProviders, getServiceProviders, filterByServiceProviders } from "../redux/actions/ownProvActions";
 
 export default function FilterByServiceProviders() {
     const dispatch = useDispatch();
@@ -10,7 +10,8 @@ export default function FilterByServiceProviders() {
     const providersArr = providers?.map(p => p.service);
 
     useEffect(() => {
-        dispatch(getProviders())
+        dispatch(getProviders());
+        dispatch(getServiceProviders());
     }, [dispatch]);
 
     function handleFilterByServiceProviders(e) {
