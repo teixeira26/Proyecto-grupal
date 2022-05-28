@@ -47,7 +47,14 @@ router.post('/', async(req, res, next) =>{
     let auxLastName = lastName.toLowerCase()
 
     try{
-        await Provider.create({
+        await Provider.findOrCreate({
+            where: {email: email},
+            defaults:{
+                name: auxName,
+                lastName: auxLastName,
+                email,
+                profilePicture,
+                address,
                 name: auxName,
                 lastName: auxLastName,
                 email,
@@ -61,7 +68,8 @@ router.post('/', async(req, res, next) =>{
                 housingPhotos,
                 schedule,
                 dogsPerWalk
-            })
+            }
+        })
 
         res.status(201).send('Usuario creado con éxito')
 
