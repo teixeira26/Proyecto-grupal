@@ -11,6 +11,7 @@ import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx"
 import { useAuth0 } from "@auth0/auth0-react";
 import InfoProvider from "./Components/Forms/infoProvider";
+import ProductDetail from "./Components/Shop/ProductDetail";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
 import Providers from "./Components/Providers/Providers";
@@ -29,6 +30,9 @@ function App() {
           } />
           <Route path='/shop' element={
           isAuthenticated&&!isLoading?<Shop />:<Loading/>
+          } />
+          <Route path='/shop/:id' element={
+          isAuthenticated&&!isLoading?<ProductDetail />:<Loading/>
           } />
           <Route path='/filterstructure' element={
            isAuthenticated&&!isLoading?<FilterStructure />:<Loading/>
