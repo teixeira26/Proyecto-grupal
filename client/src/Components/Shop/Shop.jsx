@@ -7,9 +7,10 @@ import inContainer from "../GlobalCss/InContainer.module.css";
 import ProductCard from "./ProductCard";
 import { getProducts } from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
+import ShopSearchbar from "./ShopSearchbar";
 
 const Shop = () => {
-  const products = useSelector((state) => state.products);
+  const products = useSelector((state) => state.filteredProducts);
 
   let dispatch = useDispatch();
 
@@ -29,7 +30,12 @@ const Shop = () => {
 
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
+          
+            <ShopSearchbar />
+            <br />
             <ShopFilters />
+
+
           </div>
           <section className={styles.shopGrid}>
             {!products.length
