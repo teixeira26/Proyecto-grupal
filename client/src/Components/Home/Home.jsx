@@ -3,7 +3,7 @@ import styles from "../Home/Home.module.css";
 import NavBarRegistered from "../NavBar/NavBarRegistered";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import HomeCard from "./HomeCard";
-import Footer from "../Landing/Footer/Footer";
+import Footer from "../Footer/Footer";
 
 import Login from "../Auth0/Login";
 import Logout from "../Auth0/Logout";
@@ -13,7 +13,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   const { user, isAuthenticated, isLoading } = useAuth0();
   return (
-    <div>
+    <div className={styles.body}>
       {isAuthenticated && console.log(user)}
 
 
@@ -33,7 +33,10 @@ const Home = () => {
         </div>
       </div>
 
-      <Footer />
+      <div className={styles.stickyFooter}>
+        <Footer />
+      </div>
+      
     </div>
   );
 };

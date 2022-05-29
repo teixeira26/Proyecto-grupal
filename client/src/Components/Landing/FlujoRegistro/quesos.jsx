@@ -22,7 +22,7 @@ export const Quesos = ()=>{
             lastName: user.family_name,
           }
           await axios.post('http://localhost:3001/providers', provider)
-          navigate('/infoProvider2')
+          navigate('/infoProvider')
     }
     return(
         <div>

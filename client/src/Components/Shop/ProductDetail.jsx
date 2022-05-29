@@ -1,6 +1,6 @@
 import React from "react";
 import NavBarShop from "../NavBar/NavBarShop";
-import Footer from "../Landing/Footer/Footer";
+import Footer from "../Footer/Footer";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from "../Shop/ProductDetail.module.css";
 

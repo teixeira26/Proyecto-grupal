@@ -5,7 +5,7 @@ import Hero from "./Hero/Hero";
 import styles from "../Landing/Landing.module.css";
 import WhatWeOffer from "./WhatWeOffer/WhatWeOffer";
 import Team from "./Team/Team";
-import Footer from "./Footer/Footer";
+import Footer from "../Footer/Footer";
 import {useAuth0, User} from "@auth0/auth0-react"
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +15,7 @@ function Landing() {
   const [nombre, setNombre] = useState();
   const{user,isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate();
+  
   
 useEffect(()=>{
   if(isAuthenticated){

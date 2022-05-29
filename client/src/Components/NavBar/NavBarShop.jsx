@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-      <NavLink to='/home'>HOME/LOGO</NavLink>
+      <NavLink to='/home'>iPet</NavLink>
         {/* <span>LOGO</span> */}
 
         <section className={styles.contents}>
