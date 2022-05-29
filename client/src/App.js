@@ -33,10 +33,10 @@ function App() {
           <Route path='/shop/:id' element={
             isAuthenticated && !isLoading ? <ProductDetail /> : <Loading />
           } />
-          <Route path='/agregarUsuario' element={
+          <Route path='/agregarusuario' element={
             isAuthenticated && !isLoading ? <AddOwner /> : <Loading />
           } />
-          <Route path='/agregarMascota' element={
+          <Route path='/agregarmascota' element={
             isAuthenticated && !isLoading ? <AddPet /> : <Loading />
           } />
           <Route path='/quesosflaco' element={

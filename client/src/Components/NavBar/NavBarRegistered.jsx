@@ -13,25 +13,25 @@ function NavBar() {
   return (
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <span>LOGO</span>
+        <NavLink to='/home'>HOME/LOGO</NavLink>
+        {/* <span>LOGO</span> */}
 
         <section className={styles.contents}>
           <ul className={styles.navList}>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
                 Acerca de nosotros
               </a>
-            </li>
+            </li> */}
             <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
-                Petshop
-              </a>
+              <NavLink to='/shop' className={styles.navLink}>Petshop</NavLink>
+              {/* <a href="#" className={styles.navLink}>Petshop</a> */}
             </li>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
                 Contacto
               </a>
-            </li>
+            </li> */}
           </ul>
           <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture}></img></NavLink>
           <div className={styles.buttons}>

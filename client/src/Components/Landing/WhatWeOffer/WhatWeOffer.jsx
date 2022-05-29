@@ -2,11 +2,11 @@ import React from "react";
 import InContainer from "../../GlobalCss/InContainer.module.css";
 import styles from "../WhatWeOffer/WhatWeOffer.module.css";
 
-const WhatWeOffer = () => {
+const WhatWeOffer = (props) => {
   return (
     <div className={InContainer.container}>
       <h2 className={styles.wwoTitle}>
-        Lorem ipsum dolor sit amet <br /> consectetur adipisicing elit.
+        En nuestro sitio podrás encontrar <br/> lo mejor para tus mascotas
       </h2>
 
       <section className={styles.wwoFlex}>
@@ -16,9 +16,7 @@ const WhatWeOffer = () => {
           </div>
 
           <p className={styles.wwoText}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-            deserunt explicabo maiores voluptate harum quaerat eum reiciendis
-            amet nam eligendi!
+            Consigue paseadores calificados y de confianza. Tendrás la posibilidad de buscarlos cerca de tu casa de una forma sencilla y rápida.
           </p>
         </div>
 
@@ -28,9 +26,7 @@ const WhatWeOffer = () => {
           </div>
 
           <p className={styles.wwoText}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-            deserunt explicabo maiores voluptate harum quaerat eum reiciendis
-            amet nam eligendi!
+            Si no tienes con quien dejar a tu mascota, te damos la seguridad de que nuestros hosts la cuidarán muy bien en sus hogares.
           </p>
         </div>
 
@@ -40,9 +36,7 @@ const WhatWeOffer = () => {
           </div>
 
           <p className={styles.wwoText}>
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quisquam
-            deserunt explicabo maiores voluptate harum quaerat eum reiciendis
-            amet nam eligendi!
+            ¿Necesitas hacer algunas compras? En nuestro petshop conseguirás de todo: alimentos, accesorios y cuidados para la salud.
           </p>
         </div>
       </section>
