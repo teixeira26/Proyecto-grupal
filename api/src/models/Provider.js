@@ -21,16 +21,20 @@ module.exports = (sequelize) => {
     email:{
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      primaryKey: true
     },
     profilePicture:{
-      type:DataTypes.ARRAY(DataTypes.STRING),
+      type:DataTypes.STRING,
     },
-    address:{
-      type: DataTypes.JSON(DataTypes.STRING),
+    city:{
+      type: DataTypes.STRING,
+    },
+    state:{
+      type: DataTypes.STRING,
     },
     service:{
-      type:DataTypes.ENUM('Paseo', 'Hospedaje')
+      type:DataTypes.ENUM('paseo', 'hospedaje')
     },
     description:{
       type:DataTypes.TEXT,
@@ -39,7 +43,7 @@ module.exports = (sequelize) => {
     type: DataTypes.INTEGER
     },
     typeOfHousing:{
-      type: DataTypes.ENUM('Casa', 'Departamento', 'Quinta')
+      type: DataTypes.ENUM('casa', 'departamento', 'quinta')
     },
     housingPhotos:{
       type: DataTypes.ARRAY(DataTypes.STRING)

@@ -67,7 +67,6 @@ router.post('/', async(req, res, next) =>{
                 lastName: auxLastName,
                 email,
                 profilePicture,
-                address,
                 service,
                 description,
                 price,
@@ -87,14 +86,15 @@ router.post('/', async(req, res, next) =>{
 })
 
 
-router.put('/:id', async (req, res, next) =>{
-    const id = req.params.id
-    const provider = req.body
+router.put('/:email', async (req, res, next) =>{
+    const email = req.params.email
+    const provider = req.body;
+    console.log(provider)
 
     try{
         await Provider.update(provider,{
             where:{
-                id: id
+                email: email
             }
         })
     
