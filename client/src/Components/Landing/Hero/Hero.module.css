@@ -40,4 +40,5 @@
     align-items: center;
     justify-content: center;
     border-radius: 15px;
+    background-size: contain;
 }

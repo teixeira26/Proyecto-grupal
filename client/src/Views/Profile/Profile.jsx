@@ -3,6 +3,7 @@ import NavBarRegistered from "../../Components/NavBar/NavBarRegistered";
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { NavLink } from 'react-router-dom';
 
 export default function Profile() {
     const [userData, setUser] = useState({});
@@ -55,6 +56,10 @@ export default function Profile() {
                             <p>Sobre Mascota 2: description</p>
                         </div>
                     </div>
+                    <NavLink to='/agregarmascota'>
+                        <button>Agregar mascota</button>
+                    </NavLink>
+                    
                 </article>
             </section>
             </div>

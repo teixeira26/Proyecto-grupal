@@ -4,6 +4,7 @@ import ProductItem from './ProductItem';
 import CartItem from './CartItem';
 import { TYPES } from '../../redux/actions/shoppingActions';
 import '../../index.css';
+import NavBarShop from '../NavBar/NavBarShop';
 
 const ShoppingCart = () => {
     const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
@@ -32,6 +33,7 @@ const ShoppingCart = () => {
 
     return (
         <div>
+            <NavBarShop/>
             <h2>Carrito de Compras</h2>
 
             <h3>Productos</h3>
