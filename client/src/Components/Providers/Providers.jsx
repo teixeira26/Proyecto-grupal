@@ -49,14 +49,14 @@ export default function Providers(){
         <select onChange={(e)=>handleFilter(e)}>
             <option hidden={true}>Servicio</option>
             <option value="">Todos</option>
-            <option value="Hospedaje">Hospedaje</option>
-            <option value="Paseo">Paseo</option>
+            <option value="hospedaje">Hospedaje</option>
+            <option value="paseo">Paseo</option>
         </select>
 
         <h5>Ordenar por Precio</h5>
         <select onChange={handleOrder}>
             <option hidden={true}>Precio</option>
-            <option value="ASC">Ascendente</option>
+            <option value="ASC">Ascendente</option>s
             <option value="DESC">Descendente</option>
         </select>
 

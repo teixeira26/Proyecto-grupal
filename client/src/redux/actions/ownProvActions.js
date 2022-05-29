@@ -19,7 +19,7 @@ export function getOwners() {
 
 export function getProviders(filter, order) {
     return async function (dispatch) {
-        var json = await axios.get(`http://localhost:3001/providers?filter=${filter}&order=${order}`)
+        var json = await axios.get(`http://localhost:3001/providers?filter=${filter || ''}&order=${order || 'ASC'}`)
         return dispatch({
             type: GET_PROVIDERS,
             payload: json.data
@@ -49,3 +49,11 @@ export function filterByOwner(payload) {
     }
 };
 
+export function putProvider(id, modification){
+    return async function (){
+        try{
+            await axios.put(`http://localhost:3001/providers/${id}`, modification)
+    }catch(error){
+        console.log(error)
+    }
+}}
