@@ -5,6 +5,7 @@
     justify-content: space-between;
     cursor: pointer;
     transition: transform 200ms ease-in;
+    border-radius: 15px;
 }
 
 .card:hover{
@@ -12,9 +13,10 @@
 }
 
 .cardImg{
-    height: 40rem;
+    height: 35rem;
     width: 100%;
     object-fit: cover;
+    border-radius: 15px;
 }
 
 .cardTitle{
@@ -23,4 +25,5 @@
     display: flex;
     justify-content: center;
     text-transform: uppercase;
+    color: black;
 }

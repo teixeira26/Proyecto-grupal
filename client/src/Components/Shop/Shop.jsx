@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import NavBarShop from "../NavBar/NavBarShop";
-import Footer from "../Landing/Footer/Footer";
+import Footer from "../Footer/Footer";
 import ShopFilters from "./ShopFilters";
 import styles from "../Shop/Shop.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";

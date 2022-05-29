@@ -5,7 +5,7 @@ import { getProviders } from "../../redux/actions/ownProvActions"
 import styles from "../Providers/Providers.module.css"
 import inContainer from "../GlobalCss/InContainer.module.css"
 import NavBar from "../NavBar/NavBar"
-import Footer from "../Landing/Footer/Footer"
+import Footer from "../Footer/Footer"
 
 
 export default function Providers(){

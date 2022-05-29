@@ -6,10 +6,12 @@
 
 html{
     font-size: 62.5%;
+    height: 100%;
 }
 
 body{
     font-size: 1.8rem;
+    min-height: 100%;
 }
 
 ul{

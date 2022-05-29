@@ -1,12 +1,14 @@
 .wwoTitle{
-    font-size: 4.8rem;
+    font-size: clamp(4rem, 2.8vw, 6vw);
+    display: flex;
+    justify-content: center;
 }
 
 .wwoFlex{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
-    gap: 4rem;
-    justify-content: space-around;
+    grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
+    gap: 2rem;
+    justify-content: space-evenly;
     margin-top: 10rem;
 }
 
@@ -22,18 +24,18 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 300px;
 }
 
 .wwoImg{
-    background-color: #d9d9d9;
-    height: 150px;
-    width: 150px;
-    border-radius: 15px;
+    width: 500px;
+    height: 200px;
     display: flex;
     justify-content: center;
     align-items: center;
+    object-fit: contain;
 }
 
 .wwoText{
-    text-align: justify;
+    text-align: center;
 }
