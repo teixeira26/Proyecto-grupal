@@ -17,18 +17,18 @@ function NavBar() {
 
         <section className={styles.contents}>
           <ul className={styles.navList}>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
                 Acerca de nosotros
               </a>
-            </li>
+            </li> */}
             <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
+              <a href="#wwo" className={styles.navLink}>
                 Que ofrecemos
               </a>
             </li>
             <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
+              <a href="#team" className={styles.navLink}>
                 Equipo
               </a>
             </li>

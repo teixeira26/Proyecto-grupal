@@ -13,7 +13,7 @@ export const Quesos = ()=>{
             lastName: user.family_name,
           }
           await axios.post('http://localhost:3001/owners', owner)
-          navigate('/agregarMascota')
+          navigate('/home')
     }
     const providerRegister = async()=>{
         let provider = {

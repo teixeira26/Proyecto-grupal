@@ -3,13 +3,12 @@ import global from "../../GlobalCss/Global.module.css";
 import InContainer from "../../GlobalCss/InContainer.module.css";
 import styles from "../Hero/Hero.module.css";
 
-const Hero = () => {
+const Hero = (props) => {
   return (
     <div className={InContainer.container}>
       <section className={styles.flexHero}>
         <div className={styles.leftHero}>
-          <h1 className={styles.textHero}>Lorem ipsum dolor <br /> sit amet  consectetur <br />adipisicing elit. Sint.</h1>
-
+          <h1 className={styles.textHero}>¡Te damos la bienvenida a Pettin!</h1>
           <div className={styles.previewItems}>
             <span className={styles.recuadro}>Recuadro</span>
             <span className={styles.recuadro}>Recuadro2</span>
@@ -17,7 +16,8 @@ const Hero = () => {
         </div>
 
         <div className={styles.rightHero}>
-          <span className={styles.imgHero}>Imagen</span>
+          <img src="/assets/img/pets-landing-cover.jpg" alt="" className={styles.imgHero}/>
+          {/* <span className={styles.imgHero}>Imagen</span> */}
         </div>
       </section>
     </div>

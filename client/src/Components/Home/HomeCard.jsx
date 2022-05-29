@@ -1,12 +1,12 @@
 import React from "react";
 import styles from "../Home/HomeCard.module.css";
 
-const HomeCard = () => {
+const HomeCard = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.card}>
-        <img src="" alt="" className={styles.cardImg} />
-        <h2 className={styles.cardTitle}>Lorem</h2>
+        <img src={props.img} alt="" className={styles.cardImg} />
+        <h2 className={styles.cardTitle}>{props.name}</h2>
       </div>
     </div>
   );
