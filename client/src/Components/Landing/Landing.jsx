@@ -42,7 +42,7 @@ const buscarUser = async()=>{
   
 }
   return (
-    <div>
+    <div id="landing">
 
       {!isAuthenticated&&<div className={styles.navBar}>
         <NavBar />
@@ -53,14 +53,14 @@ const buscarUser = async()=>{
       </div>}
 
       <div className={styles.hero}>
-        <Hero />
+        <Hero img='/assets/img/pets-landing-cover.jpg' />
       </div>
 
-      <div className={styles.whatWeOffer}>
+      <div id='wwo' className={styles.whatWeOffer}>
         <WhatWeOffer />
       </div>
 
-      <div className={styles.team}>
+      <div id='team' className={styles.team}>
         <Team />
       </div>
 

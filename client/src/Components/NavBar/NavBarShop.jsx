@@ -13,23 +13,24 @@ function NavBar() {
   return (
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <span>LOGO</span>
+      <NavLink to='/home'>HOME/LOGO</NavLink>
+        {/* <span>LOGO</span> */}
 
         <section className={styles.contents}>
           <ul className={styles.navList}>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
                 Acerca de nosotros
               </a>
-            </li>
-            <li className={styles.navItem}>
+            </li> */}
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
                 Contacto
               </a>
-            </li>
+            </li> */}
           </ul>
           <div className={styles.icons}>
-            <ion-icon name="bag-handle-outline"></ion-icon>
+            <NavLink to='/shoppingcart'><ion-icon name="bag-handle-outline"></ion-icon></NavLink>
             <ion-icon name="heart-outline"></ion-icon>
           </div>
 

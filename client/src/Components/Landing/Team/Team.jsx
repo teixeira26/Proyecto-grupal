@@ -6,17 +6,15 @@ import TeamCard from './TeamCard'
 const Team = () => {
   return (
     <div className={InContainer.container}>
-        <h2 className={styles.teamTitle}>Lorem, ipsum.</h2>
+        <h2 className={styles.teamTitle}>Nosotros somos Pettin</h2>
 
         <div className={styles.wrapper}>
-            <TeamCard/>
-            <TeamCard/>
-            <TeamCard/>
-            <TeamCard/>
-            <TeamCard/>
-            <TeamCard/>
-            <TeamCard/>
-            <TeamCard/>
+            <TeamCard name='Sabri' location='Villa Ballester, Buenos Aires'/>
+            <TeamCard name='Leo' location='La Plata, Buenos Aires'/>
+            <TeamCard name='Mathe' location='La Matanza, Buenos Aires'/>
+            <TeamCard name='Alan' location='La Plata, Buenos Aires'/>
+            <TeamCard name='Frano' location='Baradero, Buenos Aires'/>
+            <TeamCard name='La tortuguita' location='Hogwarts'/>
         </div>
     </div>  
   )

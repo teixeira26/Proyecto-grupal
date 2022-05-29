@@ -21,13 +21,14 @@ const Home = () => {
 
 
       <div className={inContainer.container}>
-        <h1 className={styles.homeTitle}>Lorem ipsum dolor sit.</h1>
+        <h1 className={styles.homeTitle}>¿Qué estás buscando?</h1>
 
         <div className={styles.cardWrapper}>
-          <HomeCard />
-          <HomeCard />
+          <Link to='/providers'>
+          <HomeCard name='Paseos y hospedaje' img='assets/img/pets-paseos-hospedaje.jpg'/>
+          </Link>
           <Link to="/shop">
-            <HomeCard />
+            <HomeCard name='Comprar productos' img='assets/img/pets-comprar-productos.jpg'/>
           </Link>
         </div>
       </div>
