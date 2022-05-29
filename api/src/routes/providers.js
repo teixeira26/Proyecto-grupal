@@ -6,25 +6,33 @@ const router = Router()
 
 router.get('/', async(req, res, next) =>{
 
-    const {name} = req.query
+    const {name, filter, order} = req.query
 
     let allProviders;
 
     try{
 
         if(name){
-            allProviders = await allProviders.findAll({
+            allProviders = await Provider.findAll({
                 where: {
                     name:{
-                        [Op.iLike]: '%' + name + '%' //   
+                        [Op.iLike]: '%' + name + '%'
                     }
                 },
                 order:[["name", 'ASC']]
             })
 
+        }else if(filter){
+            allProviders = await Provider.findAll({
+                where: {
+                    service: filter
+                },
+                order:[["price", order]]
+            })
+
         }else{
             allProviders = await Provider.findAll({
-            order:[["name", 'ASC']]
+            order:[["name", order]]
             })
         }
 
@@ -47,12 +55,18 @@ router.post('/', async(req, res, next) =>{
     let auxLastName = lastName.toLowerCase()
 
     try{
-        await Provider.create({
+        await Provider.findOrCreate({
+            where: {email: email},
+            defaults:{
                 name: auxName,
                 lastName: auxLastName,
                 email,
                 profilePicture,
                 address,
+                name: auxName,
+                lastName: auxLastName,
+                email,
+                profilePicture,
                 service,
                 description,
                 price,
@@ -61,7 +75,8 @@ router.post('/', async(req, res, next) =>{
                 housingPhotos,
                 schedule,
                 dogsPerWalk
-            })
+            }
+        })
 
         res.status(201).send('Usuario creado con éxito')
 
@@ -71,14 +86,15 @@ router.post('/', async(req, res, next) =>{
 })
 
 
-router.put('/:id', async (req, res, next) =>{
-    const id = req.params.id
-    const provider = req.body
+router.put('/:email', async (req, res, next) =>{
+    const email = req.params.email
+    const provider = req.body;
+    console.log(provider)
 
     try{
         await Provider.update(provider,{
             where:{
-                id: id
+                email: email
             }
         })
     

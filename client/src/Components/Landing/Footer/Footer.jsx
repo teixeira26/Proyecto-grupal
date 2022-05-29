@@ -29,7 +29,7 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerRight}>
-            <span>GO TOP</span>
+            <a href="#landing">GO TOP</a>
         </div>
       </div>
 

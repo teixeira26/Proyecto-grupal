@@ -1,42 +1,42 @@
 import React from "react";
-import styles from "./NavBar.module.css";
+import styles from "./NavBarRegistered.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 import {useAuth0} from '@auth0/auth0-react'
 import Login from "../Auth0/Login"
 import Logout from "../Auth0/Logout"
+import { NavLink } from "react-router-dom";
 
 function NavBar() {
-  const {user, isAuthenticated} = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return (
-    
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <span>LOGO</span>
+        <NavLink to='/home'>HOME/LOGO</NavLink>
+        {/* <span>LOGO</span> */}
 
         <section className={styles.contents}>
           <ul className={styles.navList}>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
-                Linksdijdsihsdh
+                Acerca de nosotros
               </a>
-            </li>
+            </li> */}
             <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
-                Link2
-              </a>
+              <NavLink to='/shop' className={styles.navLink}>Petshop</NavLink>
+              {/* <a href="#" className={styles.navLink}>Petshop</a> */}
             </li>
-            <li className={styles.navItem}>
+            {/* <li className={styles.navItem}>
               <a href="#" className={styles.navLink}>
-                Link3
+                Contacto
               </a>
-            </li>
+            </li> */}
           </ul>
-          <img src={isAuthenticated&&user.picture}></img>
+          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture}></img></NavLink>
           <div className={styles.buttons}>
-          {!isAuthenticated&&<Login></Login>}
-      {isAuthenticated&&<Logout></Logout>}
+            {!isAuthenticated && <Login></Login>}
+            {isAuthenticated && <Logout></Logout>}
           </div>
         </section>
       </nav>

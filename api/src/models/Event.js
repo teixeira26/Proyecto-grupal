@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
       allowNull: false,
     },
     eventType:{
-        type:DataTypes.ENUM('Paseo', 'Hospedaje'),
+        type:DataTypes.ENUM('paseo', 'hospedaje'),
         allowNull: false,
     }    
   })

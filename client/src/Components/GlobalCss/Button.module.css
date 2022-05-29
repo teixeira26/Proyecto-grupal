@@ -6,6 +6,3 @@ button{
     border-radius: 15px;
 }
 
-button:not(:last-child){
-    margin-right: 1rem;
-}
