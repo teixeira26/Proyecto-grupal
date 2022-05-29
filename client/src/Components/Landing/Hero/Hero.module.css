@@ -10,35 +10,25 @@
 }
 
 .textHero{
-    font-size: 7rem;
+    font-size: clamp(4rem, 4.5vw, 10vw);
 }
 
+.paragraph{
+    font-size: clamp(1rem, 4.5vw, 1.3vw);
+}
+
+/* Button se parte de nuestra comunidad */
 .previewItems{
-    margin-top: 5rem;
+    margin-top: 1.5rem;
     display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 
-/* Reemplazar */
-.recuadro{
-    background-color: #d9d9d9;
-    width: 15rem;
-    height: 15rem;
-    border-radius: 15px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-right: 6rem;
-}
-
 .imgHero{
-    background-color: #d9d9d9;
-    width: 500px;
-    height: 300px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    border-radius: 15px;
+    justify-content: flex-end;
     background-size: contain;
+    width: 460px;
 }

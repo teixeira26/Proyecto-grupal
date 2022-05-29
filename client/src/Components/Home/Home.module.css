@@ -1,13 +1,18 @@
 .cardWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 40rem));
-  gap: 4rem;
-  justify-content: space-around;
-  margin: 10rem 0;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 35rem));
+  gap: 8rem;
+  justify-content: center;
+  margin: 6rem 0;
 }
 
-.homeTitle{
-    display: flex;
-    justify-content: center;
-    margin-top: 6rem;
+.homeTitle {
+  display: flex;
+  justify-content: center;
+  margin-top: 10rem;
+  text-transform: uppercase;
+}
+
+.stickyFooter{
+  margin-top: auto;
 }
