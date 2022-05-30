@@ -86,15 +86,14 @@ router.post('/', async(req, res, next) =>{
 })
 
 
-router.put('/:email', async (req, res, next) =>{
-    const email = req.params.email
+router.put('/', async (req, res, next) =>{
     const provider = req.body;
     console.log(provider)
 
     try{
         await Provider.update(provider,{
             where:{
-                email: email
+                email: provider.email
             }
         })
     
