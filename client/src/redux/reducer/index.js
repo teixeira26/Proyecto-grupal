@@ -5,7 +5,8 @@ import {
     GET_PROVIDERS, 
 } from '../actions-type/ownProvActionTypes';
 import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL } from '../actions-type/petshopActionsTypes';
-
+import { TYPES } from '../actions/shoppingActions';
+import axios from "axios";
 // Definir constante con un objeto de estados iniciales.
 const initialState = {
     owners: [],
@@ -13,7 +14,8 @@ const initialState = {
     providers: [],
     copyProviders: [],
     products: [],
-    filteredProducts: []
+    filteredProducts: [],
+    cart: []
 };
 
 // Definimos la función reducer
@@ -21,6 +23,42 @@ function rootReducer(state = initialState, action) {
 
     switch (action.type) {
 
+        case TYPES.ADD_TO_CART: {
+            console.log('entré al reducer')
+            // Buscamos id (pasado por payload) en el arreglo de productos y guardamos el producto que coincida con el id.
+            
+                const product = state.products.find( product => product.id === action.payload);
+                console.log(product)
+                return{
+                        ...state,
+                        cart:[...state.cart, product]
+                    }
+                
+           
+            // let newItem = state.products.find(
+            //     product => product.id === action.payload);
+            // console.log(newItem);
+
+            // // De la propiedad cart del stado encontrar el item que estamos pasando si se cumple la condición.
+            // // Con itemInCart validamos que no se repitn en el render un mismo producto.
+            // let itemInCart = state.cart.find(item => item.id === newItem.id);
+
+            // return itemInCart ?
+            //     {
+            //         ...state,
+            //         cart: state.cart.map(item =>
+            //             item.id === newItem.id ?
+            //                 {
+            //                     ...item,
+            //                     quantity: item.quantity + 1
+            //                 } :
+            //                 item)
+            //     } :
+            //     {
+            //         ...state,
+            //         cart: [...state.cart, { ...newItem, quantity: 1 }]
+            //     }
+        }
         case GET_OWNERS:
             return {
                 ...state,

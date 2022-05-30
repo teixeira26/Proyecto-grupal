@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom'
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
-
+  const algo = useSelector(state=>state)
   let dispatch = useDispatch();
 
   useEffect(() => {
