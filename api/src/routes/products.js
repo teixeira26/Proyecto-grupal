@@ -31,20 +31,40 @@ router.get('/', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-    
-
 })
 
+router.get('/:id', async (req, res, next) =>{
+    const {id} = req.params
+    let productById
+    try{ 
+        productById = await Product.findByPk(id)
+       
+        res.send(productById)
+        }
+    catch(error){
+        next(error)
+    }
+})
 
-
-
+    router.get('/:id', async (req, res, next) =>{
+        const {id} = req.params
+        let productById
+        try{ 
+            productById = await Product.findByPk(id)
+           
+            res.send(productById)
+            }
+        catch(error){
+            next(error)
+        }
+    })
 
 
 
 
 router.post('/', async(req, res, next) =>{
 
-    const {name, category, weight, price, stock, photos, profilePicture, targetAnimal, tradeMark } = req.body
+    const {name, category, weight, price, stock, photos, profilePicture, targetAnimal, tradeMark, description } = req.body
 
     try{
         await Product.findOrCreate({
@@ -57,7 +77,8 @@ router.post('/', async(req, res, next) =>{
                     photos,
                     profilePicture,
                     targetAnimal,
-                    tradeMark
+                    tradeMark,
+                    description,
                 }})
 
         res.status(201).send('Producto agregado con éxito')

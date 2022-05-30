@@ -1,8 +1,10 @@
 import React from "react";
 import styles from "../Shop/ProductCard.module.css";
+import { Link } from "react-router-dom";
 
-const ProductCard = ({profilePicture, name, price}) => {
+const ProductCard = ({id, profilePicture, name, price}) => {
   return (
+    <Link to={`/shop/${id}`}>
     <div className={styles.container}>
       <div className={styles.card}>
         <img src={profilePicture} alt="" className={styles.cardImg} />
@@ -16,6 +18,7 @@ const ProductCard = ({profilePicture, name, price}) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
