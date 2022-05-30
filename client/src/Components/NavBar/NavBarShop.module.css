@@ -4,6 +4,13 @@
     justify-content: space-between;
 }
 
+.logoLink{
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-transform: unset;
+    color: #52b788;
+}
+
 .contents{
     display: flex;
     align-items: center;
@@ -14,7 +21,7 @@
 .profilePicture {
     width: 50px;
     height: 50px ;
-    border-color: yellowgreen;
+    border-color: #52b788;
     border-style: solid;
     border-radius: 50%;
 }
@@ -35,10 +42,12 @@
 ion-icon{
     font-size: 2rem;
     margin: 0 1.5rem;
+    color: #52b788;
 }
 
 .icons{
     display: flex;
     align-items: center;
+    color: #52b788;
 }
 
