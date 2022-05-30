@@ -46,6 +46,7 @@ const ProductDetail = () => {
                   price={p.price}
                   category={p.category}
                   stock={p.stock}
+                  description={p.description}
                 />
               );
             })}

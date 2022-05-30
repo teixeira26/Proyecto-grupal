@@ -64,7 +64,7 @@ router.get('/:id', async (req, res, next) =>{
 
 router.post('/', async(req, res, next) =>{
 
-    const {name, category, weight, price, stock, photos, profilePicture, targetAnimal, tradeMark } = req.body
+    const {name, category, weight, price, stock, photos, profilePicture, targetAnimal, tradeMark, description } = req.body
 
     try{
         await Product.findOrCreate({
@@ -77,7 +77,8 @@ router.post('/', async(req, res, next) =>{
                     photos,
                     profilePicture,
                     targetAnimal,
-                    tradeMark
+                    tradeMark,
+                    description,
                 }})
 
         res.status(201).send('Producto agregado con éxito')
