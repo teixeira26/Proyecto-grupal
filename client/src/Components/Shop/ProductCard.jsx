@@ -1,7 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../Shop/ProductCard.module.css";
+import { TYPES } from '../../redux/actions/shoppingActions';
 
-const ProductCard = ({profilePicture, name, price}) => {
+const ProductCard = ({profilePicture, name, price, id}) => {
+  const dispatch = useDispatch()
   return (
     <div className={styles.container}>
       <div className={styles.card}>
@@ -11,7 +14,11 @@ const ProductCard = ({profilePicture, name, price}) => {
           <h2 className={styles.cardTitle}>{name}</h2>
           <div className={styles.cardBottom}>
             <p className={styles.price}>${price}</p>
-            {/* <button className={styles.addButton}>Agregar al carrito</button> */}
+            <button className={styles.addButton} onClick={()=>{
+              dispatch({
+              type:TYPES.ADD_TO_CART,
+              payload:id,
+            })}}>Agregar al carrito</button>
           </div>
         </div>
       </div>

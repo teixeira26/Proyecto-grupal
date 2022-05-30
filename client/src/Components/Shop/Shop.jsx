@@ -11,7 +11,7 @@ import ShopFilters from "./ShopFilters";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
-
+  const algo = useSelector(state=>state)
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -40,14 +40,15 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-                    <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
+                    // <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
+                        id = {p.id}
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
                       />
-                    </a>
+                    // </a>
                   );
                 })}
           </section>
