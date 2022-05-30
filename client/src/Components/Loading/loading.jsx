@@ -3,8 +3,6 @@ import React, { useEffect } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import styles from './loading.module.css'
 
-import styles from './loading.module.css'
-
 export const Loading = () => {
   const { isAuthenticated, isLoading } = useAuth0();
   const navigate = useNavigate();

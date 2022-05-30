@@ -115,6 +115,13 @@ function rootReducer(state = initialState, action) {
                                             state.products.filter(p => action.payload === p.targetAnimal) : 
                                             state.products
                     }
+
+            case 'ID_PRODUCT':
+                return{
+                    ...state,
+                    filteredProducts: [action.payload]
+
+                }
     
             
     

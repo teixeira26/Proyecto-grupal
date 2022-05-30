@@ -7,19 +7,27 @@ import ProductDetailCard from "./ProductDetailCard";
 
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getById } from "../../redux/actions/ownProvActions";
 
 const ProductDetail = () => {
-  const [productID, setProductID] = useState(null);
 
   let { id } = useParams();
 
-  useEffect(() => {
-    axios.get(`http://localhost:3001/products/${id}`).then((res) => {
-      setProductID(res.data);
-    });
-  }, [id]);
+  let dispatch = useDispatch()
 
-  console.log(productID);
+  const product = useSelector(state => state.filteredProducts)
+
+  useEffect( () => {
+    dispatch(getById(id))
+
+  // return () =>{
+  //   setProductID(null) //cleanup si trabajan con redux
+  // }
+  }, [dispatch]);
+
+  console.log('product', product);
+
   return (
     <div className={styles.container}>
       <NavBarShop />
@@ -27,15 +35,17 @@ const ProductDetail = () => {
       <div className={inContainer.container}>
         <span>Atras</span>
 
-        {!productID.length
+        {!product.length
           ? "LOADING"
-          : productID.map((p) => {
+          : product.map((p) => {
               return (
                 <ProductDetailCard
                   key={p.id}
                   profilePicture={p.profilePicture}
                   name={p.name}
                   price={p.price}
+                  category={p.category}
+                  stock={p.stock}
                 />
               );
             })}
