@@ -1,4 +1,5 @@
 import React from "react";
+import LoginLanding from '../../Auth0/LoginLanding'
 import global from "../../GlobalCss/Global.module.css";
 import InContainer from "../../GlobalCss/InContainer.module.css";
 import styles from "../Hero/Hero.module.css";
@@ -11,9 +12,7 @@ const Hero = (props) => {
           <h1 className={styles.textHero}>¡Te damos la <br /> bienvenida a iPet!</h1>
           <p className={styles.paragraph}>Donde podrás encontrar todo para tus mascotas en un solo sitio. <br /> ¿Qué estás esperando para ingresar?</p>
           <div className={styles.previewItems}>
-            <button className={styles.button}>
-              ¡Se parte de nuestra comunidad!
-            </button>
+            <LoginLanding/ >
           </div>
         </div>
 

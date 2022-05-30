@@ -1,35 +1,40 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
 
 body {
-    background-color: #ffffff;
-    margin: 0;
-    
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'Nunito', sans-serif;
-  }
+  background-color: #ffffff;
+  margin: 0;
 
-  h1,h2,h3,h4,h5,h6,a{
-    font-family: 'Nunito', sans-serif;
-    text-transform: uppercase;
-  }
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: "Nunito", sans-serif;
+}
 
-  p{
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+a {
+  font-family: "Nunito", sans-serif;
+  text-transform: uppercase;
+}
 
-  }
-  
+ion-icon{
+  margin: 0;
+}
 
 .box {
-    padding: 1rem;
-    margin: 1rem;
-    box-shadow: 0 0 1rem #00000025 inset;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 1rem #00000025 inset;
 }
 
 .grid-responsive {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
