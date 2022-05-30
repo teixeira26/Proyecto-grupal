@@ -2,9 +2,9 @@ import {
     GET_OWNERS,
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
-    GET_PROVIDERS,
+    GET_PROVIDERS, 
 } from '../actions-type/ownProvActionTypes';
-import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS } from '../actions-type/petshopActionsTypes';
+import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL } from '../actions-type/petshopActionsTypes';
 
 // Definir constante con un objeto de estados iniciales.
 const initialState = {
@@ -79,7 +79,44 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 filteredProducts: array
             }
+
+
+            case SORT_PRICE:
+                let sortProduct = [...state.filteredProducts]
+               if(action.payload === 'ASC') {
+                sortProduct.sort((a, b) => {
+                        if(a.price > b.price) return 1
+                        if(a.price < b.price) return -1
+                        return 0
+                    }) }
+            if(action.payload === 'DESC'){
+                sortProduct.sort((a, b) => {
+                        if(a.price > b.price) return -1
+                        if(a.price < b.price) return 1
+                        return 0
+                    })}
+                return{
+                    ...state,
+                    filteredProducts: sortProduct
+                    }
     
+            case FILTER_CATEGORY:
+                return{
+                    ...state,
+                    filteredProducts: action.payload !== 'all'? 
+                                        state.products.filter(p => action.payload === p.category) : 
+                                        state.products
+                }
+
+                case FILTER_TARGET_ANIMAL:
+                    return{
+                        ...state,
+                        filteredProducts: action.payload !== 'all'? 
+                                            state.products.filter(p => action.payload === p.targetAnimal) : 
+                                            state.products
+                    }
+    
+            
     
         default:
             return state;
