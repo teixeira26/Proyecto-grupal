@@ -11,10 +11,12 @@ import { useParams } from "react-router-dom";
 const ProductDetail = () => {
   const [productID, setProductID] = useState(null);
 
-  let { id } = useParams();
-
+  const{ id } = useParams();
+  const fetchProductDetail = () => {
+    const response = await axios.get(`http://localhost:3001/products/${id}`)
+  }
   useEffect(() => {
-    axios.get(`http://localhost:3001/products/${id}`).then((res) => {
+    axios.get().then((res) => {
       setProductID(res.data);
     });
   }, [id]);

@@ -43,7 +43,7 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-                    <Link to={`/products(${p.id}`} key={p.id}>
+                    <Link to={`/products/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
                         profilePicture={p.profilePicture}
