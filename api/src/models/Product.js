@@ -31,7 +31,7 @@ module.exports = (sequelize) => {
         allowNull: false,
     },
     targetAnimal:{
-        type: DataTypes.ENUM('Perro', 'Gato', 'Tortuga', 'Conejo', 'Pez', 'Hamster', 'Pajaro', 'Otro'),
+        type: DataTypes.ENUM('perro', 'gato', 'tortuga', 'conejo', 'pez', 'hamster', 'pajaro', 'otro'),
         allowNull: false,
     },
     tradeMark:{

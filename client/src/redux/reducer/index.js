@@ -4,7 +4,7 @@ import {
     FILTER_BY_OWNER,
     GET_PROVIDERS,
 } from '../actions-type/ownProvActionTypes';
-import { GET_PRODUCTS } from '../actions-type/petshopActionsTypes';
+import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS } from '../actions-type/petshopActionsTypes';
 
 // Definir constante con un objeto de estados iniciales.
 const initialState = {
@@ -57,7 +57,30 @@ function rootReducer(state = initialState, action) {
                 products: action.payload,
                 filteredProducts: action.payload
             }
+        
+        case SEARCHBAR_PRODUCTS:
+            return {
+                ...state,
+                filteredProducts: action.payload
+            }
 
+        case FILTER_BY_PET:
+            var array = [];
+            for (var i = 0; i < state.products.length; i++) {
+                var igual=false;
+                    for (var j = 0; j < action.payload.length & !igual; j++) {
+                        if(state.products[i]['targetAnimal'] === action.payload[j]) 
+                        igual=true;
+                        }
+                        if(igual)array.push(state.products[i]);
+                        }
+                 console.log('reducer', array)       
+            return {
+                ...state,
+                filteredProducts: array
+            }
+    
+    
         default:
             return state;
     }

@@ -1,15 +1,38 @@
 const { Router } = require ('express');
 const { Product } = require('../db')
+const { Op } = require('sequelize');
 
 const router = Router()
 
 router.get('/', async(req, res, next) =>{
+    const {name, filter, order} = req.query
+
+    let allProducts;
 
     try{
+        if(name){
+            allProducts = await Product.findAll({
+                where: {
+                    name:{
+                        [Op.iLike]: '%' + name + '%'
+                    }
+                },
+            })
 
-        let allProducts = await Product.findAll({
-            order: [['name', 'ASC']]
-        })
+        }else if(filter){
+            allProducts = await Product.findAll({
+                where:{
+                    category: filter
+                },
+                order: [['price', order]]
+
+            })
+
+        }else{
+
+         allProducts = await Product.findAll({
+            order: [['name', 'ASC'], ['price', order]]
+        })}
 
         allProducts.length ?
         res.status(200).send(allProducts) :
