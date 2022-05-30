@@ -1,152 +1,137 @@
-import axios from 'axios';
-import { useState } from 'react';
+import React, { useState } from "react";
+import { Container, Form, Button } from "semantic-ui-react";
+import { Field, Formik, useFormik } from "formik";
+import * as yup from "yup";
+import "semantic-ui-css/semantic.min.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useAuth0 } from "@auth0/auth0-react";
+import { postPet } from "../../redux/actions/ownProvActions";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import { Widget } from "@uploadcare/react-widget";
-import Swal from 'sweetalert2';
-
-export default function AddPet(){
-
-    const [pet, setPet] = useState({
-        name: '',
-        type: '',
-        race: '',
-        size: '',
-        photos: []
-    })
-
-    
-    function handleStatePet(e){
-
-        setPet({
-            ...pet,
-            [e.target.name]: e.target.value
-        })
-
-    }
-
-
-        function handlePicturePet(e){
-
-            
-        setPet({
-            ...pet,
-            photos: [...pet.photos, e.originalUrl]
-        })
-
-    }
 
 
 
+export default function InfoProvider() {
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
+  const navigate = useNavigate()
+
+  const [infoProvider, setInfoProvider] = useState({
+    ownerEmail: user.email,
+  });
+//   console.log("infoProvider", infoProvider.email);
+
+  
+  const formik = useFormik({
+    initialValues: {
+      ownerEmail:user.email,
+      name: '',
+      type: '',
+      race: '',
+      size: '',
+      description:'',
+      ownerName: '',
+      photos: [],
+    },
+    validationSchema:yup.object({
+      name:yup.string().required(),
+      race:yup.string().required(),
+      size:yup.string().required(),
+      type:yup.string().required(),
+
+      description:yup.string().required(),
+    }),
+
+    onSubmit: (formData) => {
+      console.log(formData);
+      dispatch(postPet(formData.userEmail, formData));
+      navigate('/profile')
+    },
+  });
 
 
 
-    async function onSubmit(e){
-    e.preventDefault();
-    try{
-    await axios.post('http://localhost:3001/pets', pet)
+  const categoriesOptions = [
+    {key:"Grande", value:"Grande", text:"Grande"},{key:"Mediano", value:"Mediano", text:"Mediano"},{key:"Chico", value:"Chico", text:"Chico"}
+  ]
 
-    Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Perfil creado con éxito',
-        showConfirmButton: false,
-        timer: 1500
-      });
+  const categoriesOptionstype = [
+    {key:"Perro", value:"Perro", text:"Perro"},{key:"Gato", value:"Gato", text:"Gato"},{key:"Conejo", value:"Conejo", text:"Conejo"},{key:"Tortuga", value:"Tortuga", text:"Tortuga"}
+  ]
 
-        setPet({
-            name: '',
-            type: '',
-            race: '',
-            size: '',
-            ownerName: '',
-            photos: [],
-            })
+  return (
+    <Container>
+      <h2>Agregá un Pet</h2>
 
-       
+      <Form onSubmit={formik.handleSubmit}>
+        <Form.Input
+          type="text"
+          placeholder="Nombre"
+          name="name"
+          onChange={formik.handleChange}
+          error={formik.errors.name}
+        ></Form.Input>
 
-    }catch(err){
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: err.response.data,
-            footer: '<a href="">Why do I have this issue?</a>'
-          })
-    }
-}
+        <Form.Input
+          type="text"
+          placeholder="Raza"
+          name="race"
+          onChange={formik.handleChange}
+          error={formik.errors.race}
+        ></Form.Input>
 
-    return(
-        <div>
-            <h3>Agregá a tu mascota</h3>
-
-            <form onSubmit={onSubmit}>
-
-                <div>
-                    <label>DUEÑO</label>
-                    <input name='ownerName'
-                           onChange={handleStatePet}
-                           value={pet.ownerName}/>
-                </div>
-
-                <div>
-                    <label>NOMBRE MASCOTA</label>
-                    <input name='name'
-                           onChange={handleStatePet}
-                           value={pet.name}/>
-                </div>
-
-                <div>
-                    <label>TIPO DE MASCOTA</label>
-                    <select name='type'
-                           onChange={handleStatePet}
-                           value={pet.type}>
-                        
-                        <option hidden={true}>Seleccioná</option>
-                        <option>Perro</option>
-                        <option>Gato</option>
-                        <option>Conejo</option>
-                        <option>Pez</option>
-
-                    </select>
-
-                </div>
+        <Form.Input
+          type="text"
+          placeholder="Description"
+          name="description"
+          onChange={formik.handleChange}
+          error={formik.errors.race}
+        ></Form.Input>
 
 
-                <div>
-                <label>RAZA</label>
-                    <input name='race'
-                           onChange={handleStatePet}
-                           value={pet.race}/>
-                    
-                </div>
-
-                <div>
-                <label>TAMAÑO</label>
-                <label><input type='radio'
-                       name='size'
-                       value='Chico'
-                       onChange={handleStatePet}></input>Chico</label>
-                <label><input type='radio'
-                       name='size'
-                       value='Mediano'
-                       onChange={handleStatePet}></input>Mediano</label>
-                <label><input type='radio'
-                       name='size'
-                       value='Grande'
-                       onChange={handleStatePet}></input>Grande</label>
-                </div>
+        <Form.Dropdown
+        placeholder="Tamaño"
+        options={categoriesOptions}
+        onChange={(e)=>{
+          e.target.value = e.target.textContent
+          e.target.name = "size"
+          // console.log(e.target)
+          console.log(e.target.value)
+          formik.handleChange(e)
+        }}
+        selection={true}
+        error={formik.errors.size}
+        ></Form.Dropdown>
 
 
-                <Widget 
-                    publicKey='269841dc43864e62c49d' 
-                    id='file'
-                    onChange={handlePicturePet}
-                    perrito="profilePicture"
+      <Form.Dropdown
+        placeholder="Tipo"
+        options={categoriesOptionstype}
+        onChange={(e)=>{
+          e.target.value = e.target.textContent
+          e.target.name = "type"
+          // console.log(e.target)
+          // console.log(e.target.value)
+          formik.handleChange(e)
+        }}
+        selection={true}
+        error={formik.errors.type}
+        ></Form.Dropdown>
 
-                    />
 
-
-            <button type='submit'> Agregar mascota </button>
-
-            </form>
-        </div>
-    )
+      <Widget 
+      publicKey='269841dc43864e62c49d' 
+      id='file'
+      name="photos"
+      onChange={(e)=>{
+        formik.values.photos.push(e.originalUrl)
+        console.log(formik)
+      }}
+      perrito="profilePicture"
+      />
+      <Button type="submit">Enviar</Button>
+      </Form>
+    </Container>
+  );
 }
