@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
 
-import {Link} from 'react-router-dom'
+import{ Link} from 'react-router-dom'
 
 
 const Shop = () => {
@@ -43,7 +43,7 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-                    <Link to={`/products/${p.id}`} key={p.id}>
+                    <Link to={`/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
                         profilePicture={p.profilePicture}
