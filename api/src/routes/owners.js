@@ -49,14 +49,14 @@ router.post('/', async(req, res, next) =>{
 })
 
 
-router.put('/:id', async (req, res, next) =>{
-    const id = req.params.id
+router.put('/:email', async (req, res, next) =>{
+    const id = req.params.email
     const owner = req.body
 
     try{
         await Owner.update(owner,{
             where:{
-                id: id
+                email: id
             }
         })
     

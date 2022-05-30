@@ -25,7 +25,7 @@ router.get('/', async(req, res, next) =>{
 
 router.post('/', async(req, res, next) =>{
 
-    const {name, type, race, size, photos, description, ownerName} = req.body
+    const {name, type, race, size, photos, description, ownerEmail} = req.body
 
     let auxName = name.toLowerCase()
 
@@ -44,12 +44,13 @@ router.post('/', async(req, res, next) =>{
 
         let found = await Owner.findOne({
             where:{
-                name: ownerName
+                email: ownerEmail
             }
         })
 
             console.log('nombre', found)
-
+            console.log('nombre', ownerEmail)
+            
         await found.addPet(newPet)
             // await newPet.addOwner(1)
 
