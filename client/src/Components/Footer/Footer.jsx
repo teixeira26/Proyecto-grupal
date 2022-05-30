@@ -44,8 +44,14 @@ const Footer = () => {
 
       <div className={styles.footerBottom}>
         <p className={styles.copyright}>Copyright iPet @2022</p>
-        <ion-icon name="logo-github" className={styles.social}></ion-icon>
-        <ion-icon name="logo-instagram" className={styles.social}></ion-icon>
+        <div className={styles.social}>
+          <ion-icon name="logo-github"></ion-icon>
+        </div>
+
+        <div className={styles.social}>
+          <ion-icon name="logo-instagram" className={styles.social}></ion-icon>
+        </div>
+        
       </div>
     </div>
   );

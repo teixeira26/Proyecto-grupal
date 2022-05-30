@@ -25,10 +25,10 @@ const Home = () => {
 
         <div className={styles.cardWrapper}>
           <Link to='/providers'>
-          <HomeCard name='Paseos y hospedaje' img='assets/img/pets-paseos-hospedaje.jpg'/>
+          <HomeCard name='Paseos y hospedaje' img='assets/img/paseador.png'/>
           </Link>
           <Link to="/shop">
-            <HomeCard name='Comprar productos' img='assets/img/pets-comprar-productos.jpg'/>
+            <HomeCard name='Comprar productos' img='assets/img/shop.png'/>
           </Link>
         </div>
       </div>

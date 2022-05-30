@@ -48,11 +48,12 @@
 
 .copyright{
     margin-right: 32vw;
+    margin-bottom: 0;
 }
 
-.social{
-    background-color: black;
-    width: 30px;
-    height: 30px; 
+.social:not(:last-child){
+    margin: 1rem;
 }
+
+
 
