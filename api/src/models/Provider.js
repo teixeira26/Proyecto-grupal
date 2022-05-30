@@ -27,11 +27,8 @@ module.exports = (sequelize) => {
     profilePicture:{
       type:DataTypes.STRING,
     },
-    city:{
-      type: DataTypes.STRING,
-    },
-    state:{
-      type: DataTypes.STRING,
+    adress:{
+      type:DataTypes.JSONB,
     },
     service:{
       type:DataTypes.ENUM('paseo', 'hospedaje')
