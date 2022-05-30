@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./ProductDetailCard.module.css";
 
-const ProductDetailCard = ({profilePicture, description, name, price,category, stock}) => {
+const ProductDetailCard = ({profilePicture, name, price,category, stock, description}) => {
   return (
     <div>
       <div className={styles.detailFlex}>

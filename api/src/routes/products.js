@@ -64,7 +64,11 @@ router.get('/:id', async (req, res, next) =>{
 
 router.post('/', async(req, res, next) =>{
 
+<<<<<<< HEAD
     const {name, category, weight, price, stock, photos, profilePicture, description, targetAnimal, tradeMark,  } = req.body
+=======
+    const {name, category, weight, price, stock, photos, profilePicture, targetAnimal, tradeMark, description } = req.body
+>>>>>>> 6e1d3422913ef2a99efeef9a1f055b866cd1a12b
 
     try{
         await Product.findOrCreate({
@@ -79,7 +83,11 @@ router.post('/', async(req, res, next) =>{
                     description,
                     targetAnimal,
                     tradeMark,
+<<<<<<< HEAD
                     
+=======
+                    description,
+>>>>>>> 6e1d3422913ef2a99efeef9a1f055b866cd1a12b
                 }})
 
         res.status(201).send('Producto agregado con éxito')
