@@ -43,14 +43,13 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-                    <Link to={`/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
+                        id={p.id}
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
                       />
-                    </Link>
                   );
                 })}
           </section>
