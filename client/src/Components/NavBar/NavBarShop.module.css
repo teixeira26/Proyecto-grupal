@@ -37,7 +37,9 @@
 
 .navLink{
     padding: 0 2rem;
+    font-weight: 600;
 }
+
 
 ion-icon{
     font-size: 2rem;
