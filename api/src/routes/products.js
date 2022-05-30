@@ -31,11 +31,20 @@ router.get('/', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-    
-
 })
 
-
+router.get('/:id', async (req, res, next) =>{
+    const {id} = req.params
+    let productById
+    try{ 
+        productById = await Product.findByPk(id)
+       
+        res.send(productById)
+        }
+    catch(error){
+        next(error)
+    }
+})
 
     router.get('/:id', async (req, res, next) =>{
         const {id} = req.params

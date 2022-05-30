@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+.loading{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+=======
 .container{
     width: 100vw;
     height: 100vh;
@@ -5,3 +14,4 @@
     justify-content: center;
     align-items: center;
 }
+>>>>>>> 6cfa8e30c9b4e56fa8dfbb05f71d3c437d6d5fa7

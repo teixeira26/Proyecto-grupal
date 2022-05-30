@@ -9,6 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
 
+import {Link} from 'react-router-dom'
+
+
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
 
@@ -40,14 +43,14 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-                    <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
+                    <Link to={`/products(${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
                       />
-                    </a>
+                    </Link>
                   );
                 })}
           </section>
