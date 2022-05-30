@@ -9,7 +9,11 @@
     font-size: 2.2rem;
     font-weight: bold;
     text-transform: unset;
-    color: #52b788;
+    color: black;
+}
+
+.logoLink:hover{
+    color: black;
 }
 
 .contents{
@@ -39,5 +43,5 @@
 .navLink{
     padding: 0 2rem;
     color: black;
-    font-weight: bold;
+    font-weight: 600;
 }

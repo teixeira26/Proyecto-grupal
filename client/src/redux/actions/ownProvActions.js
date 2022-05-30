@@ -79,3 +79,15 @@ export function putOwnerInfo(email, modification){
     }
 }}
 
+export function getById(id){
+    return function(dispatch){
+        axios.get(`http://localhost:3001/products/${id}`)
+        .then(response => {
+            dispatch({
+                type: 'ID_PRODUCT',
+                payload: response.data
+            })
+        })
+    }
+}
+

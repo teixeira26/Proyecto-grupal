@@ -2,10 +2,13 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "../Shop/ProductCard.module.css";
 import { TYPES } from '../../redux/actions/shoppingActions';
+import { Link } from "react-router-dom";
 
 const ProductCard = ({profilePicture, name, price, id}) => {
   const dispatch = useDispatch()
+
   return (
+    <Link to={`/shop/${id}`}>
     <div className={styles.container}>
       <div className={styles.card}>
         <img src={profilePicture} alt="" className={styles.cardImg} />
@@ -23,6 +26,7 @@ const ProductCard = ({profilePicture, name, price, id}) => {
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 

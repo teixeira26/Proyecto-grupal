@@ -30,6 +30,10 @@ module.exports = (sequelize) => {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    description:{
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
     targetAnimal:{
         type: DataTypes.ENUM('perro', 'gato', 'tortuga', 'conejo', 'pez', 'hamster', 'pajaro', 'otro'),
         allowNull: false,
