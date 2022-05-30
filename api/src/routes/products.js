@@ -4,44 +4,41 @@ const { Op } = require('sequelize');
 
 const router = Router()
 
-router.get('/', async(req, res, next) =>{
-    const {name, filter, order} = req.query
+router.get('/', async (req, res, next) =>{
+    const{name} = req.query
 
     let allProducts;
 
     try{
         if(name){
             allProducts = await Product.findAll({
-                where: {
+                where:{
                     name:{
                         [Op.iLike]: '%' + name + '%'
                     }
-                },
+                }
             })
-
-        }else if(filter){
-            allProducts = await Product.findAll({
-                where:{
-                    category: filter
-                },
-                order: [['price', order]]
-
-            })
-
         }else{
+            allProducts = await Product.findAll({
 
-         allProducts = await Product.findAll({
-            order: [['name', 'ASC'], ['price', order]]
-        })}
-
-        allProducts.length ?
+            })
+        }
+        allProducts?
         res.status(200).send(allProducts) :
         res.status(400).send('No hay productos cargados')
+
 
     }catch(err){
         next(err)
     }
+    
+
 })
+
+
+
+
+
 
 
 
