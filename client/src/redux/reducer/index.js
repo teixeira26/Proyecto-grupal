@@ -4,7 +4,10 @@ import {
     FILTER_BY_OWNER,
     GET_PROVIDERS, 
 } from '../actions-type/ownProvActionTypes';
-import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL } from '../actions-type/petshopActionsTypes';
+import {
+    CHARGE_CART
+} from '../actions-type/petshopActionsTypes'
+import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS, SORT_PRICE, FILTER_CATEGORY,CLEAR_CART, FILTER_TARGET_ANIMAL, REMOVE_FROM_CART } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 import axios from "axios";
 // Definir constante con un objeto de estados iniciales.
@@ -15,7 +18,8 @@ const initialState = {
     copyProviders: [],
     products: [],
     filteredProducts: [],
-    cart: []
+    cart: [],
+    productDetail:[],
 };
 
 // Definimos la función reducer
@@ -26,38 +30,62 @@ function rootReducer(state = initialState, action) {
         case TYPES.ADD_TO_CART: {
             console.log('entré al reducer')
             // Buscamos id (pasado por payload) en el arreglo de productos y guardamos el producto que coincida con el id.
-            
-                const product = state.products.find( product => product.id === action.payload);
-                console.log(product)
+                console.log(state.cart)
+                let product = state.products.find( product => product.id === action.payload);
+                if(state.cart.find(x=>x.id === action.payload)){
+                    product = state.cart.find(x=>x.id === action.payload);
+                    product.quantity = product.quantity + action.quantity;
+                    console.log(product)
+                    var cart = state.cart.filter(x=>x.id!==action.payload)
+                    cart = [...cart, product]
+                    localStorage.setItem(action.email, JSON.stringify(cart))
+                return{
+                        ...state,
+                        cart:cart
+                    }
+                }
+                else{
+                    product.quantity = action.quantity
+                    console.log(product)
+                    console.log("isjdjsdisdj:",state.owners)
+                    var cart = [...state.cart, product]
+                    localStorage.setItem(action.email, JSON.stringify(cart))
                 return{
                         ...state,
                         cart:[...state.cart, product]
                     }
+                }
+
                 
-           
-            // let newItem = state.products.find(
-            //     product => product.id === action.payload);
-            // console.log(newItem);
+                
+                
+        }
+        case REMOVE_FROM_CART:
+            console.log(action.payload);
+            const newCart = state.cart.filter(x=>x.id !== action.payload)
+            localStorage.removeItem(action.email)
+            localStorage.setItem(action.email,JSON.stringify(newCart))
+            return{
+                ...state,
+                cart: newCart
+            }
+            
+            
 
-            // // De la propiedad cart del stado encontrar el item que estamos pasando si se cumple la condición.
-            // // Con itemInCart validamos que no se repitn en el render un mismo producto.
-            // let itemInCart = state.cart.find(item => item.id === newItem.id);
-
-            // return itemInCart ?
-            //     {
-            //         ...state,
-            //         cart: state.cart.map(item =>
-            //             item.id === newItem.id ?
-            //                 {
-            //                     ...item,
-            //                     quantity: item.quantity + 1
-            //                 } :
-            //                 item)
-            //     } :
-            //     {
-            //         ...state,
-            //         cart: [...state.cart, { ...newItem, quantity: 1 }]
-            //     }
+        case CHARGE_CART:
+            console.log("entré al reducer", action.email)
+            if(localStorage.getItem(action.email)){
+            let dataUser = JSON.parse(localStorage.getItem(action.email))
+            
+            return {
+                ...state,
+                cart: dataUser,
+            }}
+        case CLEAR_CART:
+            localStorage.removeItem(action.email)
+        return {
+            ...state,
+            cart: []
         }
         case GET_OWNERS:
             return {
@@ -157,7 +185,7 @@ function rootReducer(state = initialState, action) {
             case 'ID_PRODUCT':
                 return{
                     ...state,
-                    filteredProducts: [action.payload]
+                    productDetail: [action.payload]
 
                 }
     
