@@ -17,11 +17,11 @@ const ProductCard = ({profilePicture, name, price, id}) => {
           <h2 className={styles.cardTitle}>{name}</h2>
           <div className={styles.cardBottom}>
             <p className={styles.price}>${price}</p>
-            <button className={styles.addButton} onClick={()=>{
+            {/* <button className={styles.addButton} onClick={()=>{
               dispatch({
               type:TYPES.ADD_TO_CART,
               payload:id,
-            })}}>Agregar al carrito</button>
+            })}}>Agregar al carrito</button> */}
           </div>
         </div>
       </div>

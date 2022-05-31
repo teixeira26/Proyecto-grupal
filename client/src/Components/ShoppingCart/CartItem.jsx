@@ -1,18 +1,28 @@
-const cartItem = ({name, image}) => {
-    // let { id, name, price, pic, quantity } = data;
+import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch, useSelector } from "react-redux";
+import { removeFromCart } from "../../redux/actions/petshopActions";
 
+const CartItem = ({name, image, price, quantity, id}) => {
+const {user} = useAuth0()
+const dispatch = useDispatch()
+// const cart = useSelector(state=>state.cart)   
+
+const delFromCart = (id)=>{
+    // const elementToDel = cart.find(x=>x.id === id)
+    dispatch(removeFromCart(id, user.email))
+  
+}
     return (
         <div style={{borderBottom: "thin solid gray"}}>
             
             <img src={image} alt="Pet App" width="150" height="200"/>
             <h4>{name}</h4>
-            {/* <h5>${price}.00 x {quantity} = {price * quantity}.00</h5> */}
-            {/* <button onClick={() => delFromCart(id)}>Eliminar Uno</button>
-            <br />
-            <button onClick={() => delFromCart(id, true)}>Eliminar Todos</button>
-            <br/><br/> */}
+            <h5>precio x 1un. ${price}.00</h5>
+            <h5>total: x {quantity}un. ${price*quantity}.00</h5>
+            <button onClick={() => delFromCart(id)}>X</button>
+           
         </div>
     )
 };
 
-export default cartItem;
+export default CartItem;

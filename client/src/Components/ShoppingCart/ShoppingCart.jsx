@@ -1,62 +1,58 @@
-import { useReducer } from 'react';
-import { shoppingInitialState, shoppingReducer } from '../../redux/reducer/shoppingReducer';
-import ProductItem from './ProductItem';
+import { useEffect, useReducer, useState } from 'react';
 import CartItem from './CartItem';
-import { TYPES } from '../../redux/actions/shoppingActions';
 import '../../index.css';
 import NavBarShop from '../NavBar/NavBarShop';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getProducts, chargeCart, clearAllCart} from "../../redux/actions/petshopActions";
+import { useAuth0 } from '@auth0/auth0-react';
+import { NavLink } from 'react-router-dom';
 
 const ShoppingCart = () => {
+    const dispatch = useDispatch()
+    const {user} = useAuth0()
     const cart = useSelector(state=> state.cart);
-
-
-    // const addToCart = (id) => {
-    //     console.log(id);
-    //     dispatch({
-    //         type: TYPES.ADD_TO_CART,
-    //         payload: id
-    //     });
-    // };
-
-    // const delFromCart = (id, all = false) => {
-    //     console.log(id, all);
-    //     if (all) {
-    //         dispatch({type: TYPES.REMOVE_ALL_FROM_CART, payload: id});
-    //     } else {
-    //         dispatch({type: TYPES.REMOVE_ONE_FROM_CART, payload: id});
-    //     }
-    // };
-
-    // const clearCart = () => {
-    //     dispatch({ type: TYPES.CLEAR_CART })
-    // };
+    const [total, setTotal] = useState(0)
+    useEffect(() => {
+        if(user){
+        dispatch(chargeCart(user.email))
+        }
+      }, [user]);
+      useEffect(() => {
+          if(cart && cart.length){
+            cart.forEach(x=>{
+                setTotal(
+                    total+(x.price*x.quantity)
+                )
+            })
+            
+        }
+      }, [cart]);
+      
+    const clearCart = ()=>{
+        dispatch(clearAllCart(user.email))
+    }
 
     return (
         <div>
             <NavBarShop/>
             <h2>Carrito de Compras</h2>
 
-            {/* <h3>Productos</h3>
-            <article className="box grid-responsive">
-                {products.map(product => (
-                    <ProductItem
-                        key={product.id}
-                        data={product}
-                        addToCart={addToCart} />
-                ))}
-            </article> */}
+            <NavLink to="/shop"><p>Volver al shop</p></NavLink>
 
+            <h3>Productos</h3>
             <article className="box">
-                <h3>Carrito</h3>
-                <button>Limpiar Carrito</button>
-
-                {
-                    cart.map((item, index) => (   //onClick={clearCart}
-                        <CartItem key={index} name={item.name} image={item.profilePicture}/>//delFromCart={delFromCart}
-                    ))
-                }
+                <button onClick={clearCart}>Limpiar Carrito</button> 
             </article>
+            <article className="box grid-responsive">
+            {
+                    cart &&cart.length>0?cart.map((item, index) => (   //onClick={clearCart}
+                        <CartItem key={index} name={item.name} image={item.profilePicture} price={item.price} quantity={item.quantity} id={item.id}/>//delFromCart={delFromCart}
+                    )):<h1>No hay ningún producto en el carrito</h1>
+                }
+                <h3>total: {total}</h3>
+            </article>
+
+            
         </div>
     )
 };
