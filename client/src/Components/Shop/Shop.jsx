@@ -9,12 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
 
-import{ Link} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
-
+  const algo = useSelector(state=>state)
   let dispatch = useDispatch();
 
   useEffect(() => {

@@ -13,7 +13,9 @@ function NavBar() {
   return (
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-      <NavLink to='/home' className={styles.logoLink}>iPet</NavLink>
+        <NavLink to="/home" className={styles.logoLink}>
+          iPet
+        </NavLink>
         {/* <span>LOGO</span> */}
 
         <section className={styles.contents}>
@@ -30,8 +32,15 @@ function NavBar() {
             </li> */}
           </ul>
           <div className={styles.icons}>
-            <NavLink to='/shoppingcart'><ion-icon name="bag-handle-outline"></ion-icon></NavLink>
-            <ion-icon name="heart-outline"></ion-icon>
+            <div className={styles.iconCart}>
+              <NavLink to="/shoppingcart">
+                <ion-icon name="bag-handle-outline"></ion-icon>
+              </NavLink>
+            </div>
+
+            <div className={styles.iconFav}>
+              <ion-icon name="heart-outline"></ion-icon>
+            </div>
           </div>
 
           <NavLink to="/profile" className={styles.profile}>
