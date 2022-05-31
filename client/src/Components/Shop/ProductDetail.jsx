@@ -40,6 +40,7 @@ const ProductDetail = () => {
               return (
                 <ProductDetailCard
                   key={p.id}
+                  id = {p.id}
                   profilePicture={p.profilePicture}
                   name={p.name}
                   price={p.price}
