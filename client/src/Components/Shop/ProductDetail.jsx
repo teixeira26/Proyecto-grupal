@@ -3,7 +3,9 @@ import NavBarShop from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from "../Shop/ProductDetail.module.css";
-import ProductDetailCard from './ProductDetailCard'
+import ProductDetailCard from "./ProductDetailCard";
+import { NavLink } from "react-router-dom";
+
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,7 +17,7 @@ const ProductDetail = () => {
 
   let dispatch = useDispatch()
 
-  const product = useSelector(state => state.filteredProducts)
+  const product = useSelector(state => state.productDetail)
 
   useEffect( () => {
     dispatch(getById(id))
@@ -32,7 +34,7 @@ const ProductDetail = () => {
       <NavBarShop />
 
       <div className={inContainer.container}>
-        <span>Atras</span>
+        <NavLink to="/shop"><p>Atras</p></NavLink>
 
         {!product.length
           ? "LOADING"
