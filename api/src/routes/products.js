@@ -76,6 +76,7 @@ router.post('/', async(req, res, next) =>{
                     stock,
                     photos,
                     profilePicture,
+                    description,
                     targetAnimal,
                     tradeMark,
                     description,
@@ -106,7 +107,6 @@ router.put('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
 
 

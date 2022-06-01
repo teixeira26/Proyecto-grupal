@@ -51,11 +51,12 @@ function App() {
             isAuthenticated && !isLoading ? <InfoProvider /> : <Loading />
           }
           />
-          <Route path='/providers' element={
-            isAuthenticated && !isLoading ? <Providers /> : <Loading />
-          } />
           <Route path='/infoOwner' element={
             isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
+          }
+          />
+          <Route path='/providers' element={
+            isAuthenticated && !isLoading ? <Providers /> : <Loading />
           } />
 
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>

@@ -59,8 +59,9 @@ const Shop = () => {
           </section>
         </div>
 
-      <Footer />
+      
     </div>
+    <Footer />
     </div>
   );
 };

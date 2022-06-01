@@ -9,8 +9,8 @@
 .shopGrid{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(20rem, 26rem));
-  gap: 4rem;
-  justify-content: space-between;
+  gap: 2.5rem;
+  justify-content:flex-start;
   width: 100%;
   margin-left: 5rem;
 }
