@@ -62,7 +62,6 @@ function App() {
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
 
           <Route path="/shoppingcart" element={<ShoppingCart />} />
-
         </Routes>
       </div>
     </BrowserRouter>

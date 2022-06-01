@@ -26,6 +26,9 @@ const ProductCard = ({ profilePicture, name, price, id }) => {
               type:TYPES.ADD_TO_CART,
               payload:id,
             })}}>Agregar al carrito</button> */}
+            <div className={styles.choContainer}>
+
+            </div>
             </div>
           </div>
         </div>
