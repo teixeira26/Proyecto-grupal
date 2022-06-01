@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL} from "../actions-type/petshopActionsTypes";
+import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT} from "../actions-type/petshopActionsTypes";
 
 // export function getProducts (filter, order){
 //     return async function (dispatch){
@@ -58,5 +58,17 @@ export function filterTargetAnimal(payload){
     return {
         type: FILTER_TARGET_ANIMAL,
         payload,
+    }
+}
+
+export function getById(id){
+    return function(dispatch){
+        axios.get(`http://localhost:3001/products/${id}`)
+        .then(response => {
+            dispatch({
+                type: ID_PRODUCT,
+                payload: response.data
+            })
+        })
     }
 }

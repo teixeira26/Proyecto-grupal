@@ -2,12 +2,22 @@ import {
     GET_OWNERS,
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
-    GET_PROVIDERS, 
+    GET_PROVIDERS,
+    ID_PROVIDER
 } from '../actions-type/ownProvActionTypes';
-import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL } from '../actions-type/petshopActionsTypes';
-import { TYPES } from '../actions/shoppingActions';
-import axios from "axios";
-// Definir constante con un objeto de estados iniciales.
+import {
+    FILTER_BY_PET,
+    GET_PRODUCTS,
+    SEARCHBAR_PRODUCTS,
+    SORT_PRICE,
+    FILTER_CATEGORY,
+    FILTER_TARGET_ANIMAL,
+    ID_PRODUCT
+} from '../actions-type/petshopActionsTypes';
+import {
+    TYPES
+} from '../actions/shoppingActions';
+
 const initialState = {
     owners: [],
     copyOwners: [],
@@ -18,7 +28,6 @@ const initialState = {
     cart: []
 };
 
-// Definimos la función reducer
 function rootReducer(state = initialState, action) {
 
     switch (action.type) {
@@ -154,14 +163,18 @@ function rootReducer(state = initialState, action) {
                                             state.products
                     }
 
-            case 'ID_PRODUCT':
+            case ID_PRODUCT:
                 return{
                     ...state,
                     filteredProducts: [action.payload]
 
                 }
     
-            
+            case ID_PROVIDER:
+                return{
+                    ...state,
+                    providers: [action.payload]
+                }
     
         default:
             return state;

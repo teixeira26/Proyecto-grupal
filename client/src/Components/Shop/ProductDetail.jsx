@@ -8,7 +8,7 @@ import ProductDetailCard from "./ProductDetailCard";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getById } from "../../redux/actions/ownProvActions";
+import { getById } from "../../redux/actions/petshopActions";
 
 const ProductDetail = () => {
 

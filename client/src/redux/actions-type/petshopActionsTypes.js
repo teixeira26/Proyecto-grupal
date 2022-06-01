@@ -4,3 +4,4 @@ export const FILTER_BY_PET = 'FILTER_BY_PET'
 export const SORT_PRICE = 'SORT_PRICE'
 export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 export const FILTER_TARGET_ANIMAL = 'FILTER_TARGET_ANIMAL'
+export const ID_PRODUCT = 'ID_PRODUCT';
