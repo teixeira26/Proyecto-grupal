@@ -19,6 +19,7 @@ const ShoppingCart = () => {
             dispatch(chargeCart(user.email))
         }
     }, [user]);
+
     useEffect(() => {
         var suma = 0;
         if (cart && cart.length) {
@@ -26,14 +27,13 @@ const ShoppingCart = () => {
                 suma += (x.price * x.quantity);
                 console.log('TOTAL', total);
             })
-            setTotal(suma)
-
-
+            setTotal(suma);
         }
     }, [cart]);
 
     const clearCart = () => {
-        dispatch(clearAllCart(user.email))
+        dispatch(clearAllCart(user.email));
+        setTotal(0);
     }
 
     return (
