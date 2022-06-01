@@ -5,3 +5,6 @@ export const SORT_PRICE = 'SORT_PRICE'
 export const FILTER_CATEGORY = 'FILTER_CATEGORY'
 export const FILTER_TARGET_ANIMAL = 'FILTER_TARGET_ANIMAL'
 export const ID_PRODUCT = 'ID_PRODUCT';
+export const CHARGE_CART = 'CHARGE_CART';
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART"
+export const CLEAR_CART = "CLEAR_CART"

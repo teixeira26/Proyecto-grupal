@@ -1,15 +1,6 @@
 import axios from "axios";
-import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT} from "../actions-type/petshopActionsTypes";
+import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT, REMOVE_FROM_CART, CHARGE_CART, CLEAR_CART} from "../actions-type/petshopActionsTypes";
 
-// export function getProducts (filter, order){
-//     return async function (dispatch){
-//         let response = await axios.get(`http://localhost:3001/products?filter=${filter || ''}&order=${order || 'ASC'}`);
-//         return dispatch({
-//             type: GET_PRODUCTS,
-//             payload: response.data
-//         })
-//     }
-// }
 
 export function getProducts (){
     return async function (dispatch){
@@ -36,6 +27,14 @@ export function filterByPet (payload){
     return {
         type: FILTER_BY_PET,
         payload,
+    }
+}
+
+export function chargeCart (email){
+    console.log("se ejecuta la función charge cart")
+    return {
+        type: CHARGE_CART,
+        email,
     }
 }
 
@@ -70,5 +69,20 @@ export function getById(id){
                 payload: response.data
             })
         })
+    }
+}
+
+export function removeFromCart(payload, email){
+    return {
+        type: REMOVE_FROM_CART,
+        payload,
+        email
+    }
+}
+
+export function clearAllCart(email){
+    return {
+        type: CLEAR_CART,
+        email
     }
 }

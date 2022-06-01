@@ -24,7 +24,7 @@ export default function InfoProvider() {
   const formik = useFormik({
     initialValues: {
       email:user.email,
-      adress:{},  
+      address:{},  
       city: "",
       state: "",
       road:"",
@@ -39,7 +39,7 @@ export default function InfoProvider() {
     onSubmit: (formData) => {
       formData = {
           email:formData.email,
-          adress:{
+          address:{
               city:formData.city,
               state:formData.state,
               road:formData.road
