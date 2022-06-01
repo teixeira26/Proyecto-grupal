@@ -147,7 +147,7 @@ function rootReducer(state = initialState, action) {
                         }
                         if(igual)array.push(state.products[i]);
                         }
-                 console.log('reducer', array)       
+                console.log('reducer', array)       
             return {
                 ...state,
                 filteredProducts: array
@@ -156,7 +156,7 @@ function rootReducer(state = initialState, action) {
 
             case SORT_PRICE:
                 let sortProduct = [...state.filteredProducts]
-               if(action.payload === 'ASC') {
+                if(action.payload === 'ASC') {
                 sortProduct.sort((a, b) => {
                         if(a.price > b.price) return 1
                         if(a.price < b.price) return -1
