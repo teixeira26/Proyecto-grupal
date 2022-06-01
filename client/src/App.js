@@ -16,6 +16,7 @@ import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
+import FormPrueba from "./Components/Shop/MercadoPago/FormPrueba";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -62,6 +63,8 @@ function App() {
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
 
           <Route path="/shoppingcart" element={<ShoppingCart />} />
+
+
 
         </Routes>
       </div>
