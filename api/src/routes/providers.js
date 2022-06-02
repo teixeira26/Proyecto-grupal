@@ -62,7 +62,7 @@ router.post('/', async(req, res, next) =>{
                 lastName: auxLastName,
                 email,
                 profilePicture,
-                address,
+                adress:address,
                 name: auxName,
                 lastName: auxLastName,
                 email,
