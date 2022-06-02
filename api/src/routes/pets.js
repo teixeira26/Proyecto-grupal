@@ -1,8 +1,7 @@
 const { Router } = require ('express');
-const { Owner, Pet } = require('../db')
+const { Owner, Pet } = require('../db');
 
-
-const router = Router()
+const router = Router();
 
 router.get('/', async(req, res, next) =>{
 
@@ -21,7 +20,6 @@ router.get('/', async(req, res, next) =>{
         next(err)
     }
 })
-
 
 router.post('/', async(req, res, next) =>{
 
@@ -59,9 +57,7 @@ router.post('/', async(req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
-
 
 router.put('/:id', async (req, res, next) =>{
     const id = req.params.id
@@ -79,9 +75,7 @@ router.put('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
-
 
 router.delete('/:id', async (req, res, next) =>{
     const id = req.params.id
@@ -98,9 +92,6 @@ router.delete('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
-
-
 
 module.exports = router;
