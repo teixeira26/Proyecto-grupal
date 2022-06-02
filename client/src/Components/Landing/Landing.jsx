@@ -33,12 +33,12 @@ const buscarUser = async()=>{
     setNombre(user.name);
   }
   else{
-    navigate('/quesosflaco')
+    navigate('/tipo-usuario');
   }
 
   // console.log("soy el usuario \0/", userInfo);
   } catch (error) {
-    navigate('/quesosflaco')
+    navigate('/tipo-usuario');
   }
   
 }

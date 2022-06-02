@@ -23,6 +23,10 @@ module.exports = (sequelize) => {
     address:{
       type: DataTypes.JSON(DataTypes.STRING),
     },
+    favorites:{
+      type: DataTypes.ARRAY(DataTypes.INTEGER),
+      defaultValue:[]
+    },
     isActive:{
       type:DataTypes.BOOLEAN,
       defaultValue: true,
