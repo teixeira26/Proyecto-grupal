@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useSyncExternalStore } from "react";
 import NavBarShop from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import styles from "../Shop/Shop.module.css";
@@ -8,21 +8,27 @@ import { getProducts, chargeCart} from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
-import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
 
-
-
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
-  const {user} = useAuth0()
-  const algo = useSelector(state=>state)
+  const {user} = useAuth0();
+  const [favorites, setFavorites] = useState([])
+
+
   let dispatch = useDispatch();
 
   useEffect(() => {
+    axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
+    console.log(x.data)
+    setFavorites(x.data)
+  })
     dispatch(getProducts());
     dispatch(chargeCart(user.email))
+
   }, [dispatch]);
 
 
@@ -47,20 +53,29 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
+
+                    // <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
                         id={p.id}
+                        setFavorites={setFavorites}
+                        favorites={favorites}
+                        isFavorite={favorites&&favorites.includes(p.id)}
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
                       />
+
+                    // </a>
+
                   );
                 })}
           </section>
         </div>
 
-      <Footer />
+      
     </div>
+    <Footer />
     </div>
   );
 };

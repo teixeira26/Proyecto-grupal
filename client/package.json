@@ -20,6 +20,7 @@
     "redux-thunk": "^2.4.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.1.2",
+    "socket.io-client": "^4.5.1",
     "sweetalert2": "^11.4.17",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.11"
