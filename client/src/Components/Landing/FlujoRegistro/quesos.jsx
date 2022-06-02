@@ -25,11 +25,16 @@ export const Quesos = ()=>{
           navigate('/infoProvider')
     }
     return(
+        <div style={{
+            display:"flex",
+            justifyContent:"center",
+            alignItems:"center",
+        }}>
         <div>
-            <h1>QUE SOS ??</h1>
+            <h1>Que tipo de cuenta te gustaria crear ?</h1>
         <button onClick={ownerRegister}>owner</button>
         <button onClick={providerRegister}>provider</button>
         </div>
-
+        </div>
     )
 }

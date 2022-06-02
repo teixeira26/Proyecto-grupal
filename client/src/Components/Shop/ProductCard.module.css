@@ -9,7 +9,7 @@
 
 
 .cardImg {
-  height: 32rem;
+  height: 30rem;
   width: 100%;
   object-fit: cover;
   object-position: center;
@@ -35,9 +35,17 @@
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  margin: 1rem 0;
+  margin: 1rem 0 0;
   padding: 1rem 0 0;
   text-transform: uppercase;
+  color: black;
+  font-weight: 700;
+}
+
+.price{
+  color: gray;
+  font-size: 1.5rem;
+  font-weight: 500;
 }
 
 .addButton {

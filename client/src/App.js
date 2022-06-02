@@ -10,6 +10,7 @@ import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx"
 import { useAuth0 } from "@auth0/auth0-react";
 import InfoProvider from "./Components/Forms/infoProvider";
+import InfoOwner from "./Components/Forms/infoOwner";
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
@@ -55,11 +56,16 @@ function App() {
           <Route path='/providers' element={
             isAuthenticated && !isLoading ? <Providers /> : <Loading />
           } />
+
           <Route path='/chat' element={
             isAuthenticated && !isLoading ? <Chat/> : <Loading />
           } />
           <Route path='/favorites' element={
             isAuthenticated && !isLoading ? <Favorites/> : <Loading />
+
+          <Route path='/infoOwner' element={
+            isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
+
           } />
 
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>

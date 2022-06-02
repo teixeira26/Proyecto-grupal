@@ -1,10 +1,15 @@
 import { useAuth0, User } from "@auth0/auth0-react";
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "../Shop/ProductCard.module.css";
+import { TYPES } from '../../redux/actions/shoppingActions';
+import { Link } from "react-router-dom";
+
 import axios from "axios";
 
 const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites, favorites}) => {
   const {user} = useAuth0();
+  const dispatch = useDispatch()
   const addFavorite = async()=>{
     if(!isFavorite){
       const AllOwners = await axios.get("http://localhost:3001/owners")
@@ -34,7 +39,9 @@ const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites,
     }
     
   }
+
   return (
+    <Link to={`/shop/${id}`}>
     <div className={styles.container}>
       <div className={styles.card}>
         <img src={profilePicture} alt="" className={styles.cardImg} />
@@ -43,11 +50,16 @@ const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites,
           <h2 className={styles.cardTitle}>{name}</h2>
           <div className={styles.cardBottom}>
             <p className={styles.price}>${price}</p>
-            {/* <button className={styles.addButton}>Agregar al carrito</button> */}
+            {/* <button className={styles.addButton} onClick={()=>{
+              dispatch({
+              type:TYPES.ADD_TO_CART,
+              payload:id,
+            })}}>Agregar al carrito</button> */}
           </div>
         </div>
       </div>
     </div>
+    </Link>
   );
 };
 
