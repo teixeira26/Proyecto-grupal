@@ -27,7 +27,7 @@ module.exports = (sequelize) => {
     profilePicture:{
       type:DataTypes.STRING,
     },
-    adress:{
+    address:{
       type:DataTypes.JSONB,
     },
     service:{

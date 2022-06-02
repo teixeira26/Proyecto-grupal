@@ -9,7 +9,6 @@ import axios from "axios";
 
 export default function Profile() {
     const [userData, setUser] = useState({
-        pets:[]
 });
 const{user, isAuthenticated} = useAuth0();
 useEffect(()=>{
@@ -23,8 +22,8 @@ axios.get('http://localhost:3001/owners').then(x=>{
         nombre:user.name,
         picture:user.picture,
         email:user.email,
-        pets:x.data[0].pets,
-        address:x.data[0].address,
+        pets:userdb.pets,
+        address:userdb.address,
     })
 })}
     },[user])
@@ -54,7 +53,7 @@ axios.get('http://localhost:3001/owners').then(x=>{
             <section className={style.petsProfile}>
                 <h1 className={style.boxLabel}>Mis mascotas</h1>
                 <article> 
-                    {userData.map((x,y)=>{
+                    {userData.pets&&userData.pets.length>0?userData.pets.map((x,y)=>{
                         return(
                             <div className={style.petInfo} key={y}>
                                 <img src={x.profilePicture} alt="profilePicture" />
@@ -62,10 +61,11 @@ axios.get('http://localhost:3001/owners').then(x=>{
                                 <h2>Mascota 1: {x.name}</h2>
                                 <h4>Raza: {x.race}</h4>
                                 <p>Sobre {x.name}: {x.description}</p>
+                                </div>
                             </div>
-                    </div>
                         )
-                    })}
+                    }):null}
+                    
 
 
                     <NavLink to='/agregarmascota'>

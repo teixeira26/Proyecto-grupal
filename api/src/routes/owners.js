@@ -20,7 +20,24 @@ router.get('/', async(req, res, next) =>{
         next(err)
     }
 })
+router.get('/getFavorites/:email', async(req, res, next) =>{
+    const email = req.params.email
+    try{
 
+        let owner = await Owner.findOne({
+            where:{
+                email,
+            }
+        })
+
+        owner&&owner.favorites&&owner.favorites.length ?
+        res.status(200).send(owner.favorites) :
+        res.status(400).send('No hay usuarios cargados')
+
+    }catch(err){
+        next(err)
+    }
+})
 
 router.post('/', async(req, res, next) =>{
 
@@ -49,6 +66,25 @@ router.post('/', async(req, res, next) =>{
 })
 
 
+
+router.put('/addFavorite', async (req, res, next) =>{
+    const newOwner = req.body
+    console.log("iajdisjd",req.body)
+    try{
+        await Owner.update(newOwner,{
+            where:{
+                email:newOwner.email
+            }
+        })
+        
+    
+        return res.json('Usuario modificaado')
+
+    }catch(err){
+        next(err)
+    }
+
+})
 router.put('/:email', async (req, res, next) =>{
     const id = req.params.email
     const owner = req.body

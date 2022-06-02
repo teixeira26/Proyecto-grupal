@@ -9,12 +9,15 @@ import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx"
 import { useAuth0 } from "@auth0/auth0-react";
-import InfoProvider from "./Components/Forms/infoProvider";
+import InfoProvider from "./Components/Forms/InfoProvider";
+import InfoOwner from "./Components/Forms/InfoOwner";
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
+import Chat from "./Components/Chat/Chat";
+import Favorites from "./Components/Favorites/Favorites";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -54,9 +57,22 @@ function App() {
             isAuthenticated && !isLoading ? <Providers /> : <Loading />
           } />
 
+          <Route path='/chat' element={
+            isAuthenticated && !isLoading ? <Chat/> : <Loading />
+          } />
+          <Route path='/favorites' element={
+            isAuthenticated && !isLoading ? <Favorites/> : <Loading />}/>
+
+          <Route path='/infoOwner' element={
+            isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
+
+          } />
+
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
 
           <Route path="/shoppingcart" element={<ShoppingCart />} />
+
+
 
         </Routes>
       </div>

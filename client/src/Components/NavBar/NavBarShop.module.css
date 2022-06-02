@@ -8,7 +8,11 @@
     font-size: 2.2rem;
     font-weight: bold;
     text-transform: unset;
-    color: #52b788;
+    color: black;
+}
+
+.logoLink:hover{
+    color: black;
 }
 
 .contents{
@@ -37,17 +41,23 @@
 
 .navLink{
     padding: 0 2rem;
+    font-weight: 600;
 }
 
+
 ion-icon{
-    font-size: 2rem;
-    margin: 0 1.5rem;
-    color: #52b788;
+    font-size: 2rem;   
+    color: black;
+    margin: 0;
 }
 
 .icons{
     display: flex;
     align-items: center;
     color: #52b788;
+}
+
+.iconCart{
+    margin-right: 2rem;
 }
 
