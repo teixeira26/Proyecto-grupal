@@ -61,7 +61,7 @@ const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites,
   }
 
   return (
-    <Link to={`/shop/${id}`}>
+    // <Link to={`/shop/${id}`}>
     <div className={styles.container}>
       <div className={styles.card}>
         <img src={profilePicture} alt="" className={styles.cardImg} />
@@ -80,7 +80,12 @@ const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites,
           </div>
         </div>
       </div>
+<<<<<<< HEAD
     </Link>
+=======
+    </div>
+    // </Link>
+>>>>>>> fc850ca6722e6fa61c21363fd478391863800e1a
   );
 };
 

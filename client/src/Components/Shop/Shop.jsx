@@ -8,6 +8,7 @@ import { getProducts, chargeCart} from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
+import { NavLink } from "react-router-dom";
 
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
