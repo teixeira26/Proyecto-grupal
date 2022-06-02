@@ -16,14 +16,33 @@ const io = socketio(app, {
         methods: ["GET", "POST"]
       }
 })
-
+var conectados = [];
 io.on('connection', (socket) => {
-  socket.on('conectado', (algo) => { //cada vez que alguien se conecte, se ejecutara la funcion
+  
+  //Se conecta el usuario
+  socket.on('conectado', (algo, email) => { //cada vez que alguien se conecte, se ejecutara la funcion
+    //agregamos a la variable conectados {email:emaildelusuario@algo.com, id:928429848374(ejemplo)}
+    conectados.push({email, id:socket.id})
+    // sos Owner ?Provider.findAll(user => user.storageMessage.email === mailOwner)
+    console.log(conectados)
     console.log(algo) //cambiar por 'Usuario conectado'
   })
-  socket.on('mensaje enviado', (mensaje) => {
-    console.log("Soy el mensaje del usuario: ",mensaje)
-    io.emit('Mensaje agregado a Mensajes', mensaje)
+
+  //Quiero enviar un mensaje
+  socket.on('mensaje enviado', (mensaje, providerEmail) => {
+    //Che, el usuario con el cuál estas intentando hablar esta conectado ??
+        if(conectados.find(x=>x.email === providerEmail)){
+          console.log("Soy el mensaje del usuario: ",mensaje)
+          io.emit('Mensaje agregado a Mensajes', mensaje)
+        } 
+        //NOOO :(
+        else{
+          console.log('noi nada che')
+        }
+  })
+  socket.on('disconnect', () => {
+    conectados = conectados.filter(x=> x.id !== socket.id)
+    console.log(conectados)
   })
 });
 
