@@ -2,19 +2,16 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
 import socket from "./Socket";
 
-
-
-
-export const Chat = ()=>{
-    const {user} = useAuth0();
+export const Chat = () => {
+    const { user } = useAuth0();
     const [mensaje, setMensaje] = useState({nombre:user.name});
     const [mensajes, setMensajes] = useState([]);
     
-
-    useEffect(()=>{
-        socket.emit('conectado', "Servidor conectado con exito")
+    useEffect(() => {
+        socket.emit('conectado', "Chat conectado con exito")
     }, [])
-    const setMessage = (e)=>{
+    
+    const setMessage = (e) => {
         console.log(e.target.value)
         setMensaje({
             ...mensaje,
@@ -23,35 +20,39 @@ export const Chat = ()=>{
     }
 
     useEffect(()=>{
-        socket.on('polizonte',(obj)=>{
-            console.log('para polii, esto no es yerba es la hoja')
+        socket.on('Mensaje agregado a Mensajes', (obj) => {
+            console.log('Mensaje enviado')
             setMensajes([...mensajes, obj])
-        } )
+        })
+        return () => {socket.off()}; // Esto no permite que entre en un bucle de sockets
     },[mensajes])
+    
     const submitMessage = (e)=>{
         e.preventDefault();
         socket.emit("mensaje enviado", mensaje)
     }
-    return (
+
+  return (
+    <div>
       <div>
-        <form onSubmit={submitMessage}>
-          <input
-            type="text"
-            placeholder="mensaje"
-            name="message"
-            onChange={setMessage}
-          ></input>
-          <input type="submit" value="Enviar"></input>
-        </form>
-
-        {mensajes.map((x,y)=>{
-            return(
+        {mensajes.map((x, y) => {
+          return (
             <p key={y}>{`${x.nombre}:${x.mensaje}`}</p>
-            )
-        })}
-
+          )
+        })
+        }
       </div>
-    );
+      <form onSubmit={submitMessage}>
+        <input
+          type="text"
+          placeholder="mensaje"
+          name="message"
+          onChange={setMessage}
+        ></input>
+        <input type="submit" value="Enviar"></input>
+      </form>
+    </div>
+  );
 }
 
-export default Chat
+export default Chat;

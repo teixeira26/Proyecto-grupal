@@ -4,32 +4,27 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
-
 require('./db.js');
-const http = require('http')
+const http = require('http');
 const server = express();
 
 const app = http.createServer(server)
 const socketio = require('socket.io')
 const io = socketio(app, {
-  cors:{
-    origin: "http://localhost:3000",
-    methods: ["GET", "POST"]
-  }
+    cors: {
+        origin: "http://localhost:3000",
+        methods: ["GET", "POST"]
+      }
 })
 
-
-
-io.on('connection', (socket)=>{
-  socket.on('conectado', (algo)=>{
-    console.log(algo)
+io.on('connection', (socket) => {
+  socket.on('conectado', (algo) => { //cada vez que alguien se conecte, se ejecutara la funcion
+    console.log(algo) //cambiar por 'Usuario conectado'
   })
-  socket.on('mensaje enviado', (mensaje)=>{
-    console.log("soy el mensaje polizontal: ",mensaje)
-    io.emit('polizonte', mensaje)
+  socket.on('mensaje enviado', (mensaje) => {
+    console.log("Soy el mensaje del usuario: ",mensaje)
+    io.emit('Mensaje agregado a Mensajes', mensaje)
   })
-
-  
 });
 
 server.name = 'API';
