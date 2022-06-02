@@ -24,19 +24,4 @@ router.use('/products', productsRoute)
 
 
 
-
-// const PaymentController = require("../controllers/PaymentsController");
-// const PaymentService = require("../Services/PaymentsService");
-// const PaymentInstance = new PaymentController(new PaymentService())
-
-
-// router.post('/payment', function(req,res,next){
-
-//     PaymentInstance.getPaymentLink(req,res)
-// })
-
-// router.get('/subscription', function(req,res,next){
-//     PaymentInstance.getSubscriptionLink(req,res)
-// })
-
 module.exports = router;

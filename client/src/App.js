@@ -61,13 +61,8 @@ function App() {
             isAuthenticated && !isLoading ? <Chat/> : <Loading />
           } />
           <Route path='/favorites' element={
-<<<<<<< HEAD
-            isAuthenticated && !isLoading ? <Favorites/> : <Loading />
-          } />
-=======
             isAuthenticated && !isLoading ? <Favorites/> : <Loading />}/>
 
->>>>>>> fc850ca6722e6fa61c21363fd478391863800e1a
           <Route path='/infoOwner' element={
             isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
 
