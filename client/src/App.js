@@ -16,6 +16,8 @@ import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
+import Chat from "./Components/Chat/Chat";
+import Favorites from "./Components/Favorites/Favorites";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -51,12 +53,19 @@ function App() {
             isAuthenticated && !isLoading ? <InfoProvider /> : <Loading />
           }
           />
-          <Route path='/infoOwner' element={
-            isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
-          }
-          />
           <Route path='/providers' element={
             isAuthenticated && !isLoading ? <Providers /> : <Loading />
+          } />
+
+          <Route path='/chat' element={
+            isAuthenticated && !isLoading ? <Chat/> : <Loading />
+          } />
+          <Route path='/favorites' element={
+            isAuthenticated && !isLoading ? <Favorites/> : <Loading />
+          } />
+          <Route path='/infoOwner' element={
+            isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
+
           } />
 
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
