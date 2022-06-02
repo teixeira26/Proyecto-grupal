@@ -2,19 +2,15 @@ const { Router } = require ('express');
 const { Product } = require('../db')
 const { Op } = require('sequelize');
 
-const {mercadopago} = require('../utils/mercadoPago')
+const {mercadopago} = require('../utils/mercadoPago');
 
-const router = Router()
-
-
-
+const router = Router();
 
 const payProduct = async(req, res) => {
- 
     const {id} = req.params.id
     // const {data} = req.body.items
     // const product = await Product.findByPk(id)
-   let preference = {
+    let preference = {
         payer_email: "test_user_82405251@testuser.com",
         items: [
             {
@@ -33,7 +29,6 @@ const payProduct = async(req, res) => {
         },
         auto_return: 'approved'
     };
-
     mercadopago.preferences.create(preference)
     .then(response => {
         console.log(response)
@@ -50,139 +45,119 @@ const payProduct = async(req, res) => {
     .catch(err => console.log(err))
 }
 
-
-
 router.post('/:id/checkout', payProduct)
 
-
-
-
-
-router.get('/', async (req, res, next) =>{
-    const{name} = req.query
-
+router.get('/', async (req, res, next) => {
+    const { name } = req.query;
     let allProducts;
-
-    try{
-        if(name){
+    try {
+        if (name) {
             allProducts = await Product.findAll({
-                where:{
-                    name:{
+                where: {
+                    name: {
                         [Op.iLike]: '%' + name + '%'
                     }
                 }
             })
-        }else{
+        } else {
             allProducts = await Product.findAll({
-
             })
         }
-        allProducts?
-        res.status(200).send(allProducts) :
-        res.status(400).send('No hay productos cargados')
-
-
-    }catch(err){
+        allProducts ?
+            res.status(200).send(allProducts) :
+            res.status(400).send('No hay productos cargados')
+    } catch (err) {
         next(err)
     }
 })
 
-router.get('/:id', async (req, res, next) =>{
-    const {id} = req.params
+router.get('/:id', async (req, res, next) => {
+    const { id } = req.params;
     let productById
-    try{ 
+    try {
         productById = await Product.findByPk(id)
-       
         res.send(productById)
-        }
-    catch(error){
+    } catch (error) {
         next(error)
     }
 })
 
-    router.get('/:id', async (req, res, next) =>{
-        const {id} = req.params
-        let productById
-        try{ 
-            productById = await Product.findByPk(id)
-           
-            res.send(productById)
-            }
-        catch(error){
-            next(error)
-        }
-    })
+router.get('/:id', async (req, res, next) => {
+    const {id} = req.params;
+    let productById
+    try {
+        productById = await Product.findByPk(id)
+        res.send(productById)
+    } catch (error) {
+        next(error)
+    }
+})
 
-
-
-
-router.post('/', async(req, res, next) =>{
-
-    const {name, category, weight, price, stock, photos, profilePicture, targetAnimal, tradeMark, description } = req.body
-
-    try{
+router.post('/', async (req, res, next) => {
+    const {
+        name,
+        category,
+        weight,
+        price,
+        stock,
+        photos,
+        profilePicture,
+        targetAnimal,
+        tradeMark,
+        description
+    } = req.body;
+    try {
         await Product.findOrCreate({
-                where:{
-                    name,
-                    category,
-                    weight,
-                    price,
-                    stock,
-                    photos,
-                    profilePicture,
-                    description,
-                    targetAnimal,
-                    tradeMark,
-                    description,
-                }})
-
+            where: {
+                name,
+                category,
+                weight,
+                price,
+                stock,
+                photos,
+                profilePicture,
+                description,
+                targetAnimal,
+                tradeMark,
+                description,
+            }
+        })
         res.status(201).send('Producto agregado con éxito')
-
-    }catch(err){
+    } catch (err) {
         console.log(err)
         next(err)
     }
 })
 
-
-router.put('/:id', async (req, res, next) =>{
-    const id = req.params.id
-    const product = req.body
-
-    try{
-        await Product.update(product,{
-            where:{
+router.put('/:id', async (req, res, next) => {
+    const id = req.params.id;
+    const product = req.body;
+    try {
+        await Product.update(product, {
+            where: {
                 id: id
             }
         })
-    
         return res.json('Producto modificado')
-
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 })
 
-
-router.delete('/:id', async (req, res, next) =>{
-    const id = req.params.id
-
-    try{
-        await Product.update({isActive: false},{
-            where:{
+router.delete('/:id', async (req, res, next) => {
+    const id = req.params.id;
+    try {
+        await Product.update({
+            isActive: false
+        }, {
+            where: {
                 id: id
             }
         })
-    
         return res.json('Producto eliminado')
-
-    }catch(err){
+    } catch (err) {
         next(err)
     }
-
 })
-
-
-
 
 module.exports = router;

@@ -1,7 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY,REMOVE_FROM_CART, FILTER_TARGET_ANIMAL, CHARGE_CART, CLEAR_CART} from "../actions-type/petshopActionsTypes";
-
-
+import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT, REMOVE_FROM_CART, CHARGE_CART, CLEAR_CART} from "../actions-type/petshopActionsTypes";
 
 export function getProducts (){
     return async function (dispatch){
@@ -12,7 +10,6 @@ export function getProducts (){
         })
     }
 }
-
 
 export function searchBarProducts (name){
     return async function (dispatch){
@@ -39,7 +36,6 @@ export function chargeCart (email){
     }
 }
 
-
 export function sortByPrice(payload){
     return {
         type: SORT_PRICE,
@@ -58,6 +54,18 @@ export function filterTargetAnimal(payload){
     return {
         type: FILTER_TARGET_ANIMAL,
         payload,
+    }
+}
+
+export function getById(id){
+    return function(dispatch){
+        axios.get(`http://localhost:3001/products/${id}`)
+        .then(response => {
+            dispatch({
+                type: ID_PRODUCT,
+                payload: response.data
+            })
+        })
     }
 }
 

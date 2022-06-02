@@ -5,6 +5,7 @@ import {
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
     GET_PROVIDERS,
+    ID_PROVIDER
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
@@ -27,6 +28,18 @@ export function getProviders(filter, order) {
     }
 };
 
+export function getProviderById(email) {
+    return function(dispatch){
+        axios.get(`http://localhost:3001/providers/${email}`)
+        .then(response => {
+            dispatch({
+                type: ID_PROVIDER,
+                payload: response.data
+            })
+        })
+    }
+}
+
 export function getNameOwner(name) {
     return async function (dispatch) {
         try {
@@ -41,14 +54,12 @@ export function getNameOwner(name) {
     }
 };
 
-
 export function filterByOwner(payload) {
     return {
         type: FILTER_BY_OWNER,
         payload
     }
 };
-
 
 export function putProvider(modification){
     return async function (){
@@ -78,16 +89,3 @@ export function putOwnerInfo(email, modification){
         console.log(error)
     }
 }}
-
-export function getById(id){
-    return function(dispatch){
-        axios.get(`http://localhost:3001/products/${id}`)
-        .then(response => {
-            dispatch({
-                type: 'ID_PRODUCT',
-                payload: response.data
-            })
-        })
-    }
-}
-
