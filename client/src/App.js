@@ -8,26 +8,17 @@ import Shop from './Components/Shop/Shop';
 import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
-import Profile from "./Views/Profile/Profile.jsx"
-<<<<<<< HEAD
+import Profile from "./Views/Profile/Profile.jsx";
 import InfoProvider from "./Components/Forms/infoProvider";
 import InfoOwner from "./Components/Forms/infoOwner";
-=======
-import { useAuth0 } from "@auth0/auth0-react";
-import InfoProvider from "./Components/Forms/InfoProvider";
-import InfoOwner from "./Components/Forms/InfoOwner";
->>>>>>> 2aed12816794f487b2f70173f7b53db90fd03259
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
-<<<<<<< HEAD
 import DetailProvider from "./Components/Providers/DetailProvider";
-=======
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
->>>>>>> 2aed12816794f487b2f70173f7b53db90fd03259
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
