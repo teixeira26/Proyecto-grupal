@@ -7,21 +7,25 @@ const {mercadopago} = require('../utils/mercadoPago');
 const router = Router();
 
 const payProduct = async(req, res) => {
-    const {id} = req.params.id
-    // const {data} = req.body.items
-    // const product = await Product.findByPk(id)
+    const id = req.params.id
+    const cart = req.body.cart
+    console.log(cart)
+    const product = await Product.findByPk(id)
+
+    let items = []
+    
+    cart.forEach(i => items.push({
+        title: i.name,
+        description: i.description,
+        picture_url: i.profilePicture,
+        // category_id: i.id,
+        quantity: i.quantity,
+        unit_price: i.price
+    }))
+
     let preference = {
         payer_email: "test_user_82405251@testuser.com",
-        items: [
-            {
-                title: "product.name",
-                description: "product.description",
-                picture_url: "product.profilePicture",
-                category_id: "product.id",
-                quantity: 1,
-                unit_price: 1
-            }
-        ],
+        items: items,
         back_urls: {
             failure: "/failure",
             pending: "/pending",
@@ -32,7 +36,7 @@ const payProduct = async(req, res) => {
     mercadopago.preferences.create(preference)
     .then(response => {
         console.log(response)
-        res.set("Access-Control-Allow-Origin", 'http://localhost:3001');
+        res.set("Access-Control-Allow-Origin", '*');
         res.set("Access-Control-Allow-Methods", 'POST');
         res.set("Access-Control-Allow-Headers", 'Content-Type');
         res.set("Access-Control-Max-Age", '3600');
@@ -45,7 +49,7 @@ const payProduct = async(req, res) => {
     .catch(err => console.log(err))
 }
 
-router.post('/:id/checkout', payProduct)
+router.post('/checkout', payProduct)
 
 router.get('/', async (req, res, next) => {
     const { name } = req.query;

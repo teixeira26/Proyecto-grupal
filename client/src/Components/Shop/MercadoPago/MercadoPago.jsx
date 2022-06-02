@@ -4,11 +4,12 @@ import { fetchCToken } from "./fetchmetod.js";
 
 const FORM_ID = "payment-form";
 
-export default function MercadoPago({ items }) {
+export default function MercadoPago({ cart }) {
+  
   const { id } = useParams(); //id del producto
 
   const getPreference = useCallback(async () => {
-    const res = await fetchCToken(`products/${id}/checkout`, { items }, "POST");
+    const res = await fetchCToken(`products/checkout`, { cart }, "POST");
     console.log('res MP', res);
 
     if(res.global){
@@ -21,7 +22,7 @@ export default function MercadoPago({ items }) {
       const form = document.getElementById(FORM_ID);
       form.appendChild(script);}
     
-  }, [id, items]);
+  }, [id, cart]);
 
   useEffect(() => {
     getPreference();

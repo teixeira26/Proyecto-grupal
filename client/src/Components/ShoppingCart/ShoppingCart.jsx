@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getProducts, chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
 import { useAuth0 } from '@auth0/auth0-react';
 import { NavLink } from 'react-router-dom';
+import MercadoPago from '../Shop/MercadoPago/MercadoPago';
 
 const ShoppingCart = () => {
     const dispatch = useDispatch()
@@ -54,8 +55,10 @@ const ShoppingCart = () => {
                     )) : <h1>No hay ningún producto en el carrito</h1>
                 }
                 <h3>total: {total}</h3>
-            </article>
+                <MercadoPago cart={cart}/> 
 
+            </article>
+            
 
         </div>
     )
