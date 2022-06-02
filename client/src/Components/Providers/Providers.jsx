@@ -60,10 +60,11 @@ export default function Providers(){
 
                 <div className={styles.product}>
                     {!providers.length ? 'LOADING' :
-                        providers.map(p => {
+                        providers.map((p, g) => {
                             return <ProvidersCard key={p.id}
                                 name={p.name}
                                 lastName={p.lastName}
+                                email={p.email}
                                 profilePicture={p.profilePicture}
                                 price={p.price}
                                 service={p.service} />

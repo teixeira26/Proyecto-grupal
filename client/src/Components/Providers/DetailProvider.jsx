@@ -13,7 +13,12 @@ import inContainer from "../GlobalCss/InContainer.module.css";
 export default function DetailProvider() {
     
     const dispatch = useDispatch();
-    const {email} = useParams();
+    useEffect(()=>{
+        dispatch(getProviderById())
+    },[])
+    
+    const email = useParams().name;
+ 
     const provider = useSelector(state => state.providers);
 
     useEffect(() => {
@@ -30,7 +35,8 @@ export default function DetailProvider() {
                     : provider.map((p) => {
                         return (
                             <DetailProviderCard
-                                key={p.email}
+                                key={email}
+                                email={email}
                                 name={p.name}
                                 lastName={p.lastName}
                                 profilePicture={p.profilePicture}

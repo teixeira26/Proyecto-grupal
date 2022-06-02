@@ -9,8 +9,8 @@ import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Profile from "./Views/Profile/Profile.jsx";
-import InfoProvider from "./Components/Forms/infoProvider";
-import InfoOwner from "./Components/Forms/infoOwner";
+import InfoProvider from "./Components/Forms/InfoProvider";
+import InfoOwner from "./Components/Forms/InfoOwner";
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Loading from "./Components/Loading/loading";
 import NotRegistered from "./Components/Auth0/notRegistered";
@@ -58,7 +58,7 @@ function App() {
           <Route path='/providers/:name' element={
             isAuthenticated && !isLoading ? <DetailProvider/> : <Loading/>
           }/>
-          <Route path='/chat' element={
+          <Route path='/chat/:providerEmail/:ownerEmail' element={
             isAuthenticated && !isLoading ? <Chat/> : <Loading />
           } />
           <Route path='/favorites' element={
