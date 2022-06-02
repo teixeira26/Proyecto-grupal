@@ -1,7 +1,6 @@
 import axios from "axios";
 import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT, REMOVE_FROM_CART, CHARGE_CART, CLEAR_CART} from "../actions-type/petshopActionsTypes";
 
-
 export function getProducts (){
     return async function (dispatch){
         let response = await axios.get('http://localhost:3001/products');
@@ -11,7 +10,6 @@ export function getProducts (){
         })
     }
 }
-
 
 export function searchBarProducts (name){
     return async function (dispatch){
@@ -37,7 +35,6 @@ export function chargeCart (email){
         email,
     }
 }
-
 
 export function sortByPrice(payload){
     return {
