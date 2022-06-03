@@ -7,37 +7,37 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 
-const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites, favorites}) => {
-  const {user} = useAuth0();
+const ProductCard = ({ profilePicture, name, price, isFavorite, id, setFavorites, favorites }) => {
+  const { user } = useAuth0();
   const dispatch = useDispatch()
-  const addFavorite = async()=>{
-    if(!isFavorite){
+  const addFavorite = async () => {
+    if (!isFavorite) {
       const AllOwners = await axios.get("http://localhost:3001/owners")
       // console.log(owner)
-      const owner = AllOwners.data.find(x=>x.email === user.email)
+      const owner = AllOwners.data.find(x => x.email === user.email)
       console.log(owner)
       let objToPut = {
         ...owner,
-        favorites:owner.favorites[0]?[...owner.favorites, id]:[id]
+        favorites: owner.favorites[0] ? [...owner.favorites, id] : [id]
       }
-      setFavorites([...favorites,id])
+      setFavorites([...favorites, id])
       console.log(objToPut)
       await axios.put("http://localhost:3001/owners/addFavorite", objToPut)
     }
-    else{
+    else {
       const AllOwners = await axios.get("http://localhost:3001/owners")
       // console.log(owner)
-      const owner = AllOwners.data.find(x=>x.email === user.email)
+      const owner = AllOwners.data.find(x => x.email === user.email)
       console.log(owner)
       let objToPut = {
         ...owner,
-        favorites:owner.favorites[0]?owner.favorites.filter(x=>x !== id):[]
+        favorites: owner.favorites[0] ? owner.favorites.filter(x => x !== id) : []
       }
-      setFavorites(favorites.filter(x=>x !== id))
+      setFavorites(favorites.filter(x => x !== id))
       console.log(objToPut)
       await axios.put("http://localhost:3001/owners/addFavorite", objToPut)
     }
-    
+
   }
 
   return (
@@ -55,10 +55,10 @@ const ProductCard = ({profilePicture, name, price, isFavorite, id, setFavorites,
               type:TYPES.ADD_TO_CART,
               payload:id,
             })}}>Agregar al carrito</button> */}
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </Link>
   );
 };
