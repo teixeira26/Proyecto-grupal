@@ -10,7 +10,7 @@ const payProduct = async(req, res) => {
     const id = req.params.id
     const cart = req.body.cart
     console.log(cart)
-    const product = await Product.findByPk(id)
+    // const product = await Product.findByPk(id)
 
     let items = []
     
