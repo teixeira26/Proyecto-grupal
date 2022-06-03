@@ -1,7 +1,7 @@
 const { Router } = require ('express');
-const { Owner, Pet, Product, Sold } = require('../db')
+const { Owner, Pet, Product, Sold } = require('../db');
 
-const router = Router()
+const router = Router();
 
 router.get('/', async(req, res, next) =>{
 
@@ -62,10 +62,7 @@ router.post('/', async(req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
-
-
 
 router.put('/addFavorite', async (req, res, next) =>{
     const newOwner = req.body
@@ -101,9 +98,7 @@ router.put('/:email', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
-
 
 router.delete('/:id', async (req, res, next) =>{
     const id = req.params.id
@@ -120,7 +115,6 @@ router.delete('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
 
 
@@ -156,7 +150,6 @@ router.post('/checkout', async(req, res, next) =>{
     }catch(err){
         next(err)
     }
-
 })
 
 module.exports = router;

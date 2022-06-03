@@ -1,21 +1,29 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import socket from "./Socket";
 
-
-
-
-export const Chat = ()=>{
-    const {user} = useAuth0();
-    const [mensaje, setMensaje] = useState({nombre:user.name});
+export const Chat = () => {
+    const { user } = useAuth0();
+    const providerEmail = useParams().providerEmail
+    const [mensaje, setMensaje] = useState({
+      nombre:user.name,
+      mensaje:''
+    });
     const [mensajes, setMensajes] = useState([]);
     
-
-    useEffect(()=>{
-        socket.emit('conectado', "Servidor conectado con exito")
+    useEffect(() => {
+        socket.emit('conectado', "Chat conectado con exito")
+        const storedMessages = localStorage.getItem(`${providerEmail}`)
+        console.log(JSON.parse(storedMessages));
+        if(storedMessages){
+          setMensajes(JSON.parse(storedMessages))
+        }
+        
+        console.log(mensajes)
     }, [])
-    const setMessage = (e)=>{
-        console.log(e.target.value)
+    
+    const setMessage = (e) => {
         setMensaje({
             ...mensaje,
             mensaje:e.target.value
@@ -23,35 +31,41 @@ export const Chat = ()=>{
     }
 
     useEffect(()=>{
-        socket.on('polizonte',(obj)=>{
-            console.log('para polii, esto no es yerba es la hoja')
-            setMensajes([...mensajes, obj])
-        } )
+        socket.on('Mensaje agregado a Mensajes', (msj) => {
+            console.log('Mensaje enviado');
+            setMensajes([...mensajes, msj]);
+            const storedMessage = localStorage.getItem(`providerEmail`);
+            localStorage.setItem(`${providerEmail}`, JSON.stringify([...mensajes, msj]));
+        })
+        return () => {socket.off()}; // Esto no permite que entre en un bucle de sockets
     },[mensajes])
+    
     const submitMessage = (e)=>{
         e.preventDefault();
         socket.emit("mensaje enviado", mensaje)
     }
-    return (
+
+  return (
+    <div>
       <div>
-        <form onSubmit={submitMessage}>
-          <input
-            type="text"
-            placeholder="mensaje"
-            name="message"
-            onChange={setMessage}
-          ></input>
-          <input type="submit" value="Enviar"></input>
-        </form>
-
-        {mensajes.map((x,y)=>{
-            return(
+        {mensajes.length>0?mensajes.map((x, y) => {
+          return (
             <p key={y}>{`${x.nombre}:${x.mensaje}`}</p>
-            )
-        })}
-
+          )
+        }):null
+        }
       </div>
-    );
+      <form onSubmit={submitMessage}>
+        <input
+          type="text"
+          placeholder="mensaje"
+          name="message"
+          onChange={setMessage}
+        ></input>
+        <input type="submit" value="Enviar"></input>
+      </form>
+    </div>
+  );
 }
 
-export default Chat
+export default Chat;

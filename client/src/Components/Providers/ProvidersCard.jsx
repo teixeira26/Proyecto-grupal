@@ -1,6 +1,7 @@
-import styles from '../Providers/ProvidersCard.module.css'
+import styles from '../Providers/ProvidersCard.module.css';
+import { Link } from 'react-router-dom';
 
-export default function ProvidersCard({name, lastName, profilePicture, price, service}){
+export default function ProvidersCard({name, lastName, email, profilePicture, price, service}){
 
     return (
         <div className={styles.container}>
@@ -12,7 +13,9 @@ export default function ProvidersCard({name, lastName, profilePicture, price, se
               <div className={styles.cardBottom}>
                 <p className={styles.price}>{price}</p>
                 <p className={styles.price}>{service}</p>
-                <button className={styles.addButton}>Detalle</button>
+                <Link to={`/providers/${email}`}>
+                  <button className={styles.addButton}>Detalle</button>
+                </Link>
               </div>
             </div>
           </div>
