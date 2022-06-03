@@ -3,6 +3,9 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../redux/actions/petshopActions";
+import Button from "../GlobalCss/Button.module.css";
+import { Link } from "react-router-dom";
+
 
 
 const Favorites = ()=>{
@@ -28,6 +31,9 @@ const Favorites = ()=>{
 
     return(
         <div>
+          <Link to='/shop'>
+          <button>Volver al shop</button>
+          </Link>
           {productsFav&&productsFav.length?productsFav.map(x=>{
           return(
             <div>    

@@ -39,7 +39,9 @@ function NavBar() {
             </div>
 
             <div className={styles.iconFav}>
+            <NavLink to="/favorites">
               <ion-icon name="heart-outline"></ion-icon>
+            </NavLink>
             </div>
           </div>
 

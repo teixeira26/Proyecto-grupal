@@ -53,7 +53,7 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-
+                    p.stock > 0 ?
                     // <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
@@ -64,7 +64,8 @@ const Shop = () => {
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
-                      />
+                      /> 
+                      : null
 
                     // </a>
 
