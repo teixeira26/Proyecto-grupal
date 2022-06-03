@@ -1,7 +1,10 @@
 export const fetchCToken = async (endpoint, data, /* method = "GET", limit = 10 */) =>{
-    const url=`http://localhost:3001/${endpoint}`;
+    const url=`http://localhost:3001/products/checkout`;
     const token = localStorage.getItem('token') || '';
+    console.log('token', token)
     console.log('endpoint',endpoint)
+    console.log('soy la data', data)
+
 
     // if(method === 'GET'){
     //     const resp = await fetch(url, {

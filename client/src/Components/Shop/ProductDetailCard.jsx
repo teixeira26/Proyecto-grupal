@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import styles from "./ProductDetailCard.module.css";
 import { TYPES } from '../../redux/actions/shoppingActions';
@@ -17,7 +17,7 @@ const ProductDetailCard = ({profilePicture, name, price,category, stock, descrip
   useEffect(() => {
     dispatch(getProducts());
     dispatch(chargeCart(user.email));
-  }, [dispatch]);
+  }, [dispatch, user.email]);
 
 
   const addItem = ()=>{

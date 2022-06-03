@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./ShopFilters.module.css";
-import { filterByPet, getProducts, sortByPrice, filterByCategory,filterTargetAnimal } from "../../redux/actions/petshopActions";
+import { getProducts, sortByPrice, filterByCategory,filterTargetAnimal } from "../../redux/actions/petshopActions";
 import { useDispatch } from "react-redux";
 
 const ShopFilters = () => {
@@ -29,7 +29,7 @@ const ShopFilters = () => {
         dispatch(getProducts())
       }
 
-      let select = [];
+/*       let select = [];
       function checkPet(e) {
         let selection = e.target.value;
         let alredy = select.includes(selection);
@@ -43,7 +43,7 @@ const ShopFilters = () => {
     
         dispatch(filterByPet([select]));
       }
-    
+ */    
     
     
   return (

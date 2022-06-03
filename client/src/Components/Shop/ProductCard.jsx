@@ -1,8 +1,7 @@
-import { useAuth0, User } from "@auth0/auth0-react";
+import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import styles from "../Shop/ProductCard.module.css";
-import { TYPES } from '../../redux/actions/shoppingActions';
 import { Link } from "react-router-dom";
 
 import axios from "axios";
@@ -13,21 +12,20 @@ const ProductCard = ({ profilePicture, name, price, isFavorite, id, setFavorites
   const addFavorite = async () => {
     if (!isFavorite) {
       const AllOwners = await axios.get("http://localhost:3001/owners")
-      // console.log(owner)
-      const owner = AllOwners.data.find(x => x.email === user.email)
+      const owner = AllOwners.data.find(x=>x.email === user.email)
       console.log(owner)
       let objToPut = {
         ...owner,
         favorites: owner.favorites[0] ? [...owner.favorites, id] : [id]
       }
-      setFavorites([...favorites, id])
-      console.log(objToPut)
+      setFavorites([...favorites,id])
+
       await axios.put("http://localhost:3001/owners/addFavorite", objToPut)
     }
     else {
       const AllOwners = await axios.get("http://localhost:3001/owners")
-      // console.log(owner)
-      const owner = AllOwners.data.find(x => x.email === user.email)
+
+      const owner = AllOwners.data.find(x=>x.email === user.email)
       console.log(owner)
       let objToPut = {
         ...owner,
@@ -41,7 +39,7 @@ const ProductCard = ({ profilePicture, name, price, isFavorite, id, setFavorites
   }
 
   return (
-    <Link to={`/shop/${id}`}>
+     <Link to={`/shop/${id}`}>
     <div className={styles.container}>
       <div className={styles.card}>
         <img src={profilePicture} alt="" className={styles.cardImg} />
