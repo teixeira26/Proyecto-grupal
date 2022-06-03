@@ -15,9 +15,9 @@ useEffect(()=>{
 if (isAuthenticated){
 
 axios.get('http://localhost:3001/owners').then(x=>{
-    console.log(x)
-    const userdb = x.data.find(x=>x.email == user.email);
-    console.log(userdb)
+
+const userdb = x.data.find(x=>x.email === user.email);
+
     setUser({
         nombre:user.name,
         picture:user.picture,
@@ -26,7 +26,7 @@ axios.get('http://localhost:3001/owners').then(x=>{
         address:userdb.address,
     })
 })}
-    },[user])
+    },[user, isAuthenticated])
     return (
         <main>
             <NavBarRegistered />

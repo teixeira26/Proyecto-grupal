@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Form, Button } from "semantic-ui-react";
-import { Field, Formik, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { putOwnerInfo } from "../../redux/actions/ownProvActions";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import { Widget } from "@uploadcare/react-widget";
 
 
@@ -16,11 +15,6 @@ export default function InfoOwner() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const navigate = useNavigate()
-
-  const [infoProvider, setInfoProvider] = useState({
-    ownerEmail: user.email,
-  });
-//   console.log("infoProvider", infoProvider.email);
 
   
   const formik = useFormik({

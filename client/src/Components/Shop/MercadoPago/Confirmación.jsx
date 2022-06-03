@@ -1,16 +1,16 @@
 import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 // import { carritoTraerUno } from '../../../controllers/Carrito'
 import { useDispatch, useSelector } from 'react-redux';
-import { clearAllCart, getProducts } from '../../../redux/actions/petshopActions';
+import { clearAllCart, /* getProducts */ } from '../../../redux/actions/petshopActions';
 import { useAuth0 } from '@auth0/auth0-react';
 
 
 
 const Confirmación = () =>{
     const navigate = useNavigate();
-    const cart = useSelector(state => state.cart);
+    // const cart = useSelector(state => state.cart);
     const products = useSelector(state => state.products)
     const { user } = useAuth0()
     const dispatch = useDispatch()
@@ -46,7 +46,7 @@ const Confirmación = () =>{
     // }, [dispatch])
 
 
-    http://localhost:3000/confirmacion?collection_id=22853430296&collection_status=approved&payment_id=22853430296&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=4886373922&preference_id=1134140317-628056cc-5b68-4165-bc81-4131a793f9b1&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
+    // http://localhost:3000/confirmacion?collection_id=22853430296&collection_status=approved&payment_id=22853430296&status=approved&external_reference=null&payment_type=credit_card&merchant_order_id=4886373922&preference_id=1134140317-628056cc-5b68-4165-bc81-4131a793f9b1&site_id=MLA&processing_mode=aggregator&merchant_account_id=null
 
 
     console.log('PRODUCTOS', products)
@@ -89,7 +89,7 @@ const Confirmación = () =>{
                 // }
             }
         })();
-    }, [payment_id, status, idCliente, navigate, products]);
+    }, [payment_id, status, idCliente, navigate, products, clearCart]);
 
     return (
         <>

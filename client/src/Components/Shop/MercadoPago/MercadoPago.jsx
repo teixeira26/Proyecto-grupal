@@ -1,12 +1,10 @@
 import React, { useEffect, useCallback } from "react";
-import { useParams } from "react-router-dom";
 import { fetchCToken } from "./fetchmetod.js";
 
 const FORM_ID = "payment-form";
 
-export default function MercadoPago({ cart, clearCart }) {
+export default function MercadoPago({ cart }) {
   
-  const { id } = useParams(); //id del producto
 
   const getPreference = useCallback(async () => {
     const res = await fetchCToken(`products/checkout`, { cart }, "POST");
@@ -24,7 +22,7 @@ export default function MercadoPago({ cart, clearCart }) {
     
       }
     
-  }, [id, cart]);
+  }, [cart]);
 
   useEffect(() => {
     getPreference();

@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./NavBarRegistered.module.css";
-import Button from "../GlobalCss/Button.module.css";
-import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 import {useAuth0} from '@auth0/auth0-react'
 import Login from "../Auth0/Login"
@@ -33,7 +31,7 @@ function NavBar() {
               </a>
             </li> */}
           </ul>
-          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture}></img></NavLink>
+          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture} alt='img not found'></img></NavLink>
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
             {isAuthenticated && <Logout></Logout>}

@@ -1,9 +1,9 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartItem from './CartItem';
 import '../../index.css';
 import NavBarShop from '../NavBar/NavBarShop';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
+import { chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
 import { useAuth0 } from '@auth0/auth0-react';
 import { NavLink } from 'react-router-dom';
 import MercadoPago from '../Shop/MercadoPago/MercadoPago';
@@ -19,7 +19,7 @@ const ShoppingCart = () => {
         if (user) {
             dispatch(chargeCart(user.email))
         }
-    }, [user]);
+    }, [user, dispatch]);
 
     useEffect(() => {
         var suma = 0;

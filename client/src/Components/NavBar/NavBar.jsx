@@ -1,14 +1,12 @@
 import React from "react";
 import styles from "./NavBar.module.css";
-import Button from "../GlobalCss/Button.module.css";
-import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 import {useAuth0} from '@auth0/auth0-react'
 import Login from "../Auth0/Login"
 import Logout from "../Auth0/Logout"
 
 function NavBar() {
-  const {user, isAuthenticated} = useAuth0();
+  const { isAuthenticated} = useAuth0();
   return (
     
     <div className={OutContainer.container}>

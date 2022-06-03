@@ -16,7 +16,7 @@ const Favorites = ()=>{
         setProductsFavNumber(x.data)
       })
       dispatch(getProducts());
-      }, [dispatch]);
+      }, [dispatch, user.email]);
 
       useEffect(() => {
        setProductsFav(products.filter(x=>{
@@ -24,7 +24,7 @@ const Favorites = ()=>{
                return x
            }
        }))
-      }, [products]);
+      }, [products, productsFavNumber]);
 
     return(
         <div>
@@ -32,7 +32,7 @@ const Favorites = ()=>{
           return(
             <div>    
                 <h1>{x.name}</h1>
-                <img src={x.profilePicture}></img>
+                <img alt='img not found' src={x.profilePicture}></img>
             </div>
           )
           }):<h1>NO hay favoritos</h1>}

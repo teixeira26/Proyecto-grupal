@@ -1,6 +1,5 @@
 import React from "react";
 import LoginLanding from '../../Auth0/LoginLanding'
-import global from "../../GlobalCss/Global.module.css";
 import InContainer from "../../GlobalCss/InContainer.module.css";
 import styles from "../Hero/Hero.module.css";
 

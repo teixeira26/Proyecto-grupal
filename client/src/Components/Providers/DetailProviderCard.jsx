@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import styles from './DetailProviderCard.module.css';
-import NavBarRegistered from "../NavBar/NavBarRegistered";
+import React from "react";
 
 export default function DetailProviderCard({name, profilePicture}) {
     

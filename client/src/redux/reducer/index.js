@@ -35,14 +35,10 @@ function rootReducer(state = initialState, action) {
     switch (action.type) {
 
         case TYPES.ADD_TO_CART: {
-            console.log('entré al reducer')
-            // Buscamos id (pasado por payload) en el arreglo de productos y guardamos el producto que coincida con el id.
-                console.log(state.cart)
                 let product = state.products.find( product => product.id === action.payload);
                 if(state.cart.find(x=>x.id === action.payload)){
                     product = state.cart.find(x=>x.id === action.payload);
                     product.quantity = product.quantity + action.quantity;
-                    console.log(product)
                     var cart = state.cart.filter(x=>x.id!==action.payload)
                     cart = [...cart, product]
                     localStorage.setItem(action.email, JSON.stringify(cart))
@@ -53,8 +49,6 @@ function rootReducer(state = initialState, action) {
                 }
                 else{
                     product.quantity = action.quantity
-                    console.log(product)
-                    console.log("isjdjsdisdj:",state.owners)
                     var cart = [...state.cart, product]
                     localStorage.setItem(action.email, JSON.stringify(cart))
                 return{
@@ -88,12 +82,16 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: dataUser,
             }}
+
+
         case CLEAR_CART:
             localStorage.removeItem(action.email)
         return {
             ...state,
             cart: []
         }
+
+        
         case GET_OWNERS:
             return {
                 ...state,

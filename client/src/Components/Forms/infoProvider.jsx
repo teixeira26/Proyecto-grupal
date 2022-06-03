@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { putProvider } from "../../redux/actions/ownProvActions";
 import { useNavigate } from "react-router-dom";
@@ -14,11 +14,6 @@ export default function InfoProvider() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const navigate = useNavigate()
-
-  const [infoProvider, setInfoProvider] = useState({
-    email: user.email,
-  });
-//   console.log("infoProvider", infoProvider.email);
 
   
   const formik = useFormik({

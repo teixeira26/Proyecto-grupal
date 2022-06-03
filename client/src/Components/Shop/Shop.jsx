@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useSyncExternalStore } from "react";
+import React, { useEffect, useState } from "react";
 import NavBarShop from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import styles from "../Shop/Shop.module.css";
@@ -29,7 +29,7 @@ const Shop = () => {
     dispatch(getProducts());
     dispatch(chargeCart(user.email))
 
-  }, [dispatch]);
+  }, [dispatch, user.email]);
 
 
   return (

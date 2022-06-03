@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import NavBarShop from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from "../Shop/ProductDetail.module.css";
 import ProductDetailCard from "./ProductDetailCard";
 import { NavLink } from "react-router-dom";
-
-import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getById } from "../../redux/actions/petshopActions";
-import MercadoPago from "./MercadoPago/MercadoPago";
 
 const ProductDetail = () => {
 
@@ -26,7 +23,7 @@ const ProductDetail = () => {
   // return () =>{
   //   setProductID(null) //cleanup si trabajan con redux
   // }
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   console.log('product', product);
 
