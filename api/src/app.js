@@ -3,6 +3,8 @@ const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
+const { Owner } = require('./db');
+
 
 require('./db.js');
 const http = require('http');
@@ -18,7 +20,7 @@ const io = socketio(app, {
 })
 var conectados = [];
 io.on('connection', (socket) => {
-  
+
   //Se conecta el usuario
   socket.on('conectado', (algo, email) => { //cada vez que alguien se conecte, se ejecutara la funcion
     //agregamos a la variable conectados {email:emaildelusuario@algo.com, id:928429848374(ejemplo)}
@@ -29,7 +31,7 @@ io.on('connection', (socket) => {
   })
 
   //Quiero enviar un mensaje
-  socket.on('mensaje enviado', (mensaje, providerEmail) => {
+  socket.on('mensaje enviado', (mensaje, providerEmail, email) => {
     //Che, el usuario con el cuál estas intentando hablar esta conectado ??
         if(conectados.find(x=>x.email === providerEmail)){
           console.log("Soy el mensaje del usuario: ",mensaje)
@@ -37,6 +39,29 @@ io.on('connection', (socket) => {
         } 
         //NOOO :(
         else{
+          const unreadMessage = {
+            message: [mensaje],
+            providerEmail
+          }
+          Owner.findOne({
+            where:{
+              email:email,
+            }
+          }).then(x=>{
+            const hasProviderEmail = x.pendingMessages.find(x=>x.providerEmail === providerEmail);
+            if(hasProviderEmail){
+              hasProviderEmail.message.push(unreadMessage.message[0])
+
+              var newpendingMessages = x.pendingMessages.filter(x=>x.providerEmail !== providerEmail);
+              console.log(hasProviderEmail)
+              newpendingMessages.push(hasProviderEmail)
+              console.log(newpendingMessages)
+              x.update({...x, pendingMessages:newpendingMessages})
+            }
+            else{
+            x.update({...x, pendingMessages:[...x.pendingMessages, unreadMessage]})
+          }
+          })
           console.log('noi nada che')
         }
   })

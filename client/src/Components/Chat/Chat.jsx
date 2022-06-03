@@ -13,7 +13,7 @@ export const Chat = () => {
     const [mensajes, setMensajes] = useState([]);
     
     useEffect(() => {
-        socket.emit('conectado', "Chat conectado con exito")
+        socket.emit('conectado', "Chat conectado con exito", user.email)
         const storedMessages = localStorage.getItem(`${providerEmail}`)
         console.log(JSON.parse(storedMessages));
         if(storedMessages){
@@ -42,7 +42,7 @@ export const Chat = () => {
     
     const submitMessage = (e)=>{
         e.preventDefault();
-        socket.emit("mensaje enviado", mensaje)
+        socket.emit("mensaje enviado", mensaje, providerEmail, user.email)
     }
 
   return (
