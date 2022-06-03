@@ -29,7 +29,7 @@ const payProduct = async(req, res) => {
         back_urls: {
             failure: "/failure",
             pending: "/pending",
-            success: "http://localhost:3001/shop"
+            success: "http://localhost:3000/confirmacion"
         },
         auto_return: 'approved'
     };

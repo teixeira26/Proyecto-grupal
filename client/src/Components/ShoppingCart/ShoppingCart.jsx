@@ -55,7 +55,8 @@ const ShoppingCart = () => {
                     )) : <h1>No hay ningún producto en el carrito</h1>
                 }
                 <h3>total: {total}</h3>
-                <MercadoPago cart={cart}/> 
+                <MercadoPago cart={cart}
+                             clearCart={clearCart}/> 
 
             </article>
             

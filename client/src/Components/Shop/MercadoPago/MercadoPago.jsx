@@ -4,7 +4,7 @@ import { fetchCToken } from "./fetchmetod.js";
 
 const FORM_ID = "payment-form";
 
-export default function MercadoPago({ cart }) {
+export default function MercadoPago({ cart, clearCart }) {
   
   const { id } = useParams(); //id del producto
 
@@ -20,14 +20,16 @@ export default function MercadoPago({ cart }) {
         "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
       script.setAttribute("data-preference-id", res.global);
       const form = document.getElementById(FORM_ID);
-      form.appendChild(script);}
+      form.appendChild(script);
+    
+      }
     
   }, [id, cart]);
 
   useEffect(() => {
     getPreference();
   }, [getPreference]);
-
+  
   return(
       <form id={FORM_ID} method="GET"/>
   )
