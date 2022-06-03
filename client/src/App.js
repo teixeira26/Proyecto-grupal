@@ -59,7 +59,7 @@ function App() {
           <Route path='/providers/:name' element={
             isAuthenticated && !isLoading ? <DetailProvider/> : <Loading/>
           }/>
-          <Route path='/chat' element={
+          <Route path='/chat/:providerEmail/:ownerEmail' element={
             isAuthenticated && !isLoading ? <Chat/> : <Loading />
           } />
           <Route path='/favorites' element={

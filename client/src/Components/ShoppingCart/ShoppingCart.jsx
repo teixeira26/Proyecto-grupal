@@ -27,9 +27,9 @@ const ShoppingCart = () => {
             cart.forEach(x => {
                 suma += (x.price * x.quantity);
                 console.log('TOTAL', total);
-            })
+            }) 
             setTotal(suma);
-        }
+        } else { setTotal(0);}
     }, [cart]);
 
     const clearCart = () => {

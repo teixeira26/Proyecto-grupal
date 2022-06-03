@@ -1,7 +1,17 @@
+<<<<<<< HEAD
 import React from "react";
+=======
+import React, { useState } from "react";
+import styles from './DetailProviderCard.module.css';
+import NavBarRegistered from "../NavBar/NavBarRegistered";
+import { NavLink } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
 
-export default function DetailProviderCard({name, profilePicture}) {
-    
+export default function DetailProviderCard({name, profilePicture, email}) {
+    console.log(email)
+    const {user} = useAuth0()
+>>>>>>> bc3a4deb5943d2e8479da64298dec59f389dfffc
+
     return(
         <>
             <section>
@@ -17,7 +27,7 @@ export default function DetailProviderCard({name, profilePicture}) {
                 <div>
                     <h2>Sobre Name</h2>
                     <p>Descripcion</p>
-                    <button>Contactarme con Name</button>
+                    <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con Name</button></NavLink>
                 </div>
                 <div>
                     <h2>Comentarios recibidos por Name</h2>

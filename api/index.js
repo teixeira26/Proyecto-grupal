@@ -7,6 +7,10 @@ conn.sync({ force: false}).then(() => {
 
     console.log('%s listening at 3001');
   });
+<<<<<<< HEAD
 }).catch((error)=>console.log(error));
 
 
+=======
+}).catch((error)=>console.log(error));
+>>>>>>> bc3a4deb5943d2e8479da64298dec59f389dfffc
