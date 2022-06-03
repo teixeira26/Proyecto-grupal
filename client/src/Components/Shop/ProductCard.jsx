@@ -2,6 +2,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import React from "react";
 import { useDispatch } from "react-redux";
 import styles from "../Shop/ProductCard.module.css";
+import { Link } from "react-router-dom";
 
 import axios from "axios";
 

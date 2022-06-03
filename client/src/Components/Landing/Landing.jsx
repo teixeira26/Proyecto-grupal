@@ -15,11 +15,6 @@ function Landing() {
   const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isAuthenticated) {
-      buscarUser();
-    }
-  }, [isAuthenticated, buscarUser]);
 
   const buscarUser = async () => {
     try {
@@ -37,6 +32,13 @@ function Landing() {
       navigate("/tipo-usuario");
     }
   };
+
+
+  useEffect(() => {
+    if (isAuthenticated) {
+      buscarUser();
+    }
+  }, [isAuthenticated, buscarUser]);
 
   
   return (
