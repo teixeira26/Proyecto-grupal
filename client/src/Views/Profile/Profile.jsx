@@ -16,7 +16,7 @@ if (isAuthenticated){
 
 axios.get('http://localhost:3001/owners').then(x=>{
     console.log(x)
-    const userdb = x.data.find(x=>x.email == user.email);
+    const userdb = x.data.find(x=>x.email === user.email);
     console.log(userdb)
     setUser({
         nombre:user.name,
@@ -38,7 +38,6 @@ axios.get('http://localhost:3001/owners').then(x=>{
                     <h2>{userData.address?userData.address.city:null}</h2>
                 </article>
             </section>
-
             <section className={style.mainInfoProfile}>
                 <h1 className={style.boxLabel}>Mis datos</h1>
                 <h4>Correo electronico: {user.email}</h4>
@@ -49,7 +48,6 @@ axios.get('http://localhost:3001/owners').then(x=>{
                     </NavLink>
                 </div>
             </section>
-            
             <section className={style.petsProfile}>
                 <h1 className={style.boxLabel}>Mis mascotas</h1>
                 <article> 
@@ -65,13 +63,9 @@ axios.get('http://localhost:3001/owners').then(x=>{
                             </div>
                         )
                     }):null}
-                    
-
-
                     <NavLink to='/agregarmascota'>
                         <button>Agregar mascota</button>
                     </NavLink>
-                    
                 </article>
             </section>
             </div>

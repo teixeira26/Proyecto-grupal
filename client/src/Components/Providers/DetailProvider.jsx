@@ -11,20 +11,18 @@ import styles from "../Shop/ProductDetail.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 
 export default function DetailProvider() {
-    
     const dispatch = useDispatch();
-    useEffect(()=>{
-        dispatch(getProviderById())
-    },[])
-    
     const email = useParams().name;
- 
     const provider = useSelector(state => state.providers);
+    
+    useEffect(() => {
+        dispatch(getProviderById())
+    }, []);
 
     useEffect(() => {
         dispatch(getProviderById(email))
     }, [dispatch, email]);
-    
+
     return (
         <div className={styles.container}>
             <NavBarRegistered />
@@ -55,6 +53,5 @@ export default function DetailProvider() {
             </div>
             <Footer />
         </div>
-
     )
-}
+};

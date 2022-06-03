@@ -1,7 +1,5 @@
 import React from "react";
 import styles from "./NavBarShop.module.css";
-import Button from "../GlobalCss/Button.module.css";
-import global from "../GlobalCss/Global.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import Login from "../Auth0/Login";
@@ -16,20 +14,11 @@ function NavBar() {
         <NavLink to="/home" className={styles.logoLink}>
           iPet
         </NavLink>
-        {/* <span>LOGO</span> */}
-
         <section className={styles.contents}>
           <ul className={styles.navList}>
-            {/* <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
-                Acerca de nosotros
-              </a>
-            </li> */}
-            {/* <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
-                Contacto
-              </a>
-            </li> */}
+            <li className={styles.navItem}>
+              <NavLink to='/providers' className={styles.navLink}>Proveedores</NavLink>
+            </li>
           </ul>
           <div className={styles.icons}>
             <div className={styles.iconCart}>
@@ -37,17 +26,14 @@ function NavBar() {
                 <ion-icon name="bag-handle-outline"></ion-icon>
               </NavLink>
             </div>
-
             <div className={styles.iconFav}>
-              <ion-icon name="heart-outline"></ion-icon>
+              <NavLink to='/favorites'>
+                <ion-icon name="heart-outline"></ion-icon>
+              </NavLink>
             </div>
           </div>
-
           <NavLink to="/profile" className={styles.profile}>
-            <img
-              className={styles.profilePicture}
-              src={isAuthenticated && user.picture}
-            ></img>
+            <img className={styles.profilePicture} src={isAuthenticated && user.picture} alt='profile img'></img>
           </NavLink>
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
