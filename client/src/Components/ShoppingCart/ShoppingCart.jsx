@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import CartItem from './CartItem';
 import '../../index.css';
 import NavBarShop from '../NavBar/NavBarShop';
 import { useDispatch, useSelector } from 'react-redux';
-import { chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
+import { getProducts, chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
 import { useAuth0 } from '@auth0/auth0-react';
 import { NavLink } from 'react-router-dom';
 
@@ -25,10 +25,10 @@ const ShoppingCart = () => {
         if (cart && cart.length) {
             cart.forEach(x => {
                 suma += (x.price * x.quantity);
-                console.log('TOTAL', suma);
-            })
+                console.log('TOTAL', total);
+            }) 
             setTotal(suma);
-        } else { setTotal(0)}
+        } else { setTotal(0);}
     }, [cart]);
 
     const clearCart = () => {
@@ -50,11 +50,13 @@ const ShoppingCart = () => {
             <article className="box grid-responsive">
                 {
                     cart && cart.length > 0 ? cart.map((item, index) => (   //onClick={clearCart}
-                        <CartItem key={index} name={item.name} image={item.profilePicture} price={item.price} quantity={item.quantity} total={total} id={item.id} />//delFromCart={delFromCart}
+                        <CartItem key={index} name={item.name} image={item.profilePicture} price={item.price} quantity={item.quantity} id={item.id} />//delFromCart={delFromCart}
                     )) : <h1>No hay ningún producto en el carrito</h1>
                 }
-                <h3>TOTAL CARRITO: {total}</h3>
+                <h3>total: {total}</h3>
             </article>
+
+
         </div>
     )
 };
