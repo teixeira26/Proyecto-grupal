@@ -22,14 +22,14 @@ export default function MercadoPago({ cart }) {
     
       }
     
-  }, [cart]);
+  }, []);
 
   useEffect(() => {
     getPreference();
   }, [getPreference]);
   
   return(
-      <form id={FORM_ID} method="GET"/>
+      <form id={FORM_ID} method="GET" />
   )
 }
 

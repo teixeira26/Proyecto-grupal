@@ -118,7 +118,7 @@ router.delete('/:id', async (req, res, next) =>{
     const id = req.params.id
 
     try{
-        await Provider.update({isActive: false},{
+        await Provider.destroy({
             where:{
                 id: id
             }
