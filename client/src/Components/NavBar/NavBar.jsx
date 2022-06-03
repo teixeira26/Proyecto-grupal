@@ -10,7 +10,7 @@ import styles from "./NavBar.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 
 function NavBar() {
-  const {user, isAuthenticated} = useAuth0();
+  const { isAuthenticated} = useAuth0();
   return (
     
     <div className={OutContainer.container}>

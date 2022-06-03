@@ -19,6 +19,7 @@ import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
+import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -69,6 +70,11 @@ function App() {
           }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/shoppingcart" element={<ShoppingCart/>}/>
+
+          <Route path="/confirmacion" element={
+          isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
+
+
         </Routes>
       </div>
     </BrowserRouter>
