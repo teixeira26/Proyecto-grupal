@@ -1,11 +1,12 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import CartItem from './CartItem';
 import '../../index.css';
 import NavBarShop from '../NavBar/NavBarShop';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
+import { chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
 import { useAuth0 } from '@auth0/auth0-react';
 import { NavLink } from 'react-router-dom';
+import MercadoPago from '../Shop/MercadoPago/MercadoPago';
 
 const ShoppingCart = () => {
     const dispatch = useDispatch()
@@ -18,22 +19,22 @@ const ShoppingCart = () => {
         if (user) {
             dispatch(chargeCart(user.email))
         }
-    }, [user]);
+    }, [user, dispatch]);
+
     useEffect(() => {
         var suma = 0;
         if (cart && cart.length) {
             cart.forEach(x => {
                 suma += (x.price * x.quantity);
                 console.log('TOTAL', total);
-            })
-            setTotal(suma)
-
-
-        }
+            }) 
+            setTotal(suma);
+        } else { setTotal(0);}
     }, [cart]);
 
     const clearCart = () => {
-        dispatch(clearAllCart(user.email))
+        dispatch(clearAllCart(user.email));
+        setTotal(0);
     }
 
     return (
@@ -54,8 +55,11 @@ const ShoppingCart = () => {
                     )) : <h1>No hay ningún producto en el carrito</h1>
                 }
                 <h3>total: {total}</h3>
-            </article>
+                <MercadoPago cart={cart}
+                             clearCart={clearCart}/> 
 
+            </article>
+            
 
         </div>
     )

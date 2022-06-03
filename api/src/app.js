@@ -5,8 +5,27 @@ const morgan = require('morgan');
 const routes = require('./routes/index.js');
 
 require('./db.js');
-
+const http = require('http');
 const server = express();
+
+const app = http.createServer(server)
+const socketio = require('socket.io')
+const io = socketio(app, {
+    cors: {
+        origin: "*",
+        methods: ["GET", "POST"]
+      }
+})
+
+io.on('connection', (socket) => {
+  socket.on('conectado', (algo) => { //cada vez que alguien se conecte, se ejecutara la funcion
+    console.log(algo) //cambiar por 'Usuario conectado'
+  })
+  socket.on('mensaje enviado', (mensaje) => {
+    console.log("Soy el mensaje del usuario: ",mensaje)
+    io.emit('Mensaje agregado a Mensajes', mensaje)
+  })
+});
 
 server.name = 'API';
 
@@ -15,7 +34,7 @@ server.use(bodyParser.json({ limit: '50mb' }));
 server.use(cookieParser());
 server.use(morgan('dev'));
 server.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Origin', '*' ); // update to match the domain you will make the request from
   res.header('Access-Control-Allow-Credentials', 'true');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
@@ -23,6 +42,8 @@ server.use((req, res, next) => {
 });
 
 server.use('/', routes);
+
+
 
 // Error catching endware.
 server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
@@ -32,4 +53,4 @@ server.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
   res.status(status).send(message);
 });
 
-module.exports = server;
+module.exports = {server, app};

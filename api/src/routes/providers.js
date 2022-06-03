@@ -45,7 +45,15 @@ router.get('/', async(req, res, next) =>{
     }
 })
 
-
+router.get('/:email', async (req, res, next) => {
+    const {email} = req.params;
+    try {
+        let providerId = await Provider.findByPk(email);
+        res.send(providerId);
+    } catch (error) {
+        next(error)
+    }
+});
 
 router.post('/', async(req, res, next) =>{
 
@@ -62,7 +70,7 @@ router.post('/', async(req, res, next) =>{
                 lastName: auxLastName,
                 email,
                 profilePicture,
-                address,
+                adress:address,
                 name: auxName,
                 lastName: auxLastName,
                 email,
@@ -110,7 +118,7 @@ router.delete('/:id', async (req, res, next) =>{
     const id = req.params.id
 
     try{
-        await Provider.update({isActive: false},{
+        await Provider.destroy({
             where:{
                 id: id
             }

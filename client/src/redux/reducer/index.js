@@ -2,15 +2,23 @@ import {
     GET_OWNERS,
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
-    GET_PROVIDERS, 
+    GET_PROVIDERS,
+    ID_PROVIDER
 } from '../actions-type/ownProvActionTypes';
 import {
-    CHARGE_CART
-} from '../actions-type/petshopActionsTypes'
-import { FILTER_BY_PET, GET_PRODUCTS, SEARCHBAR_PRODUCTS, SORT_PRICE, FILTER_CATEGORY,CLEAR_CART, FILTER_TARGET_ANIMAL, REMOVE_FROM_CART } from '../actions-type/petshopActionsTypes';
+    FILTER_BY_PET,
+    GET_PRODUCTS,
+    SEARCHBAR_PRODUCTS,
+    SORT_PRICE,
+    FILTER_CATEGORY,
+    FILTER_TARGET_ANIMAL,
+    ID_PRODUCT,
+    CHARGE_CART,
+    REMOVE_FROM_CART,
+    CLEAR_CART
+} from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
-import axios from "axios";
-// Definir constante con un objeto de estados iniciales.
+
 const initialState = {
     owners: [],
     copyOwners: [],
@@ -22,20 +30,15 @@ const initialState = {
     productDetail:[],
 };
 
-// Definimos la función reducer
 function rootReducer(state = initialState, action) {
 
     switch (action.type) {
 
         case TYPES.ADD_TO_CART: {
-            console.log('entré al reducer')
-            // Buscamos id (pasado por payload) en el arreglo de productos y guardamos el producto que coincida con el id.
-                console.log(state.cart)
                 let product = state.products.find( product => product.id === action.payload);
                 if(state.cart.find(x=>x.id === action.payload)){
                     product = state.cart.find(x=>x.id === action.payload);
                     product.quantity = product.quantity + action.quantity;
-                    console.log(product)
                     var cart = state.cart.filter(x=>x.id!==action.payload)
                     cart = [...cart, product]
                     localStorage.setItem(action.email, JSON.stringify(cart))
@@ -46,8 +49,6 @@ function rootReducer(state = initialState, action) {
                 }
                 else{
                     product.quantity = action.quantity
-                    console.log(product)
-                    console.log("isjdjsdisdj:",state.owners)
                     var cart = [...state.cart, product]
                     localStorage.setItem(action.email, JSON.stringify(cart))
                 return{
@@ -81,12 +82,16 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: dataUser,
             }}
+
+
         case CLEAR_CART:
             localStorage.removeItem(action.email)
         return {
             ...state,
             cart: []
         }
+
+        
         case GET_OWNERS:
             return {
                 ...state,
@@ -140,7 +145,7 @@ function rootReducer(state = initialState, action) {
                         }
                         if(igual)array.push(state.products[i]);
                         }
-                 console.log('reducer', array)       
+                console.log('reducer', array)       
             return {
                 ...state,
                 filteredProducts: array
@@ -149,7 +154,7 @@ function rootReducer(state = initialState, action) {
 
             case SORT_PRICE:
                 let sortProduct = [...state.filteredProducts]
-               if(action.payload === 'ASC') {
+                if(action.payload === 'ASC') {
                 sortProduct.sort((a, b) => {
                         if(a.price > b.price) return 1
                         if(a.price < b.price) return -1
@@ -182,14 +187,18 @@ function rootReducer(state = initialState, action) {
                                             state.products
                     }
 
-            case 'ID_PRODUCT':
+            case ID_PRODUCT:
                 return{
                     ...state,
                     productDetail: [action.payload]
 
                 }
     
-            
+            case ID_PROVIDER:
+                return{
+                    ...state,
+                    providers: [action.payload]
+                }
     
         default:
             return state;

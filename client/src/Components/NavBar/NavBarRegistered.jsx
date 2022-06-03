@@ -33,7 +33,7 @@ function NavBar() {
               </a>
             </li> */}
           </ul>
-          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture}></img></NavLink>
+          <NavLink to='/profile'><img className={styles.profilePicture} src={isAuthenticated&&user.picture} alt='img not found'></img></NavLink>
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
             {isAuthenticated && <Logout></Logout>}

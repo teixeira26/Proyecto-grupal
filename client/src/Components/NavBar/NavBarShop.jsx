@@ -47,6 +47,7 @@ function NavBar() {
             <img
               className={styles.profilePicture}
               src={isAuthenticated && user.picture}
+              alt='img not found'
             ></img>
           </NavLink>
           <div className={styles.buttons}>
