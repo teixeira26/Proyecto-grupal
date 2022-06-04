@@ -22,6 +22,10 @@ export function getProducts (){
     }
 };
 
+
+
+
+
 export function searchBarProducts (name){
     return async function (dispatch){
         let response = await axios.get(`http://localhost:3001/products?name=${name}`);
@@ -93,4 +97,22 @@ export function clearAllCart(email){
         type: CLEAR_CART,
         email
     }
-};
+}
+
+
+export function addOneItem(id){
+    return {
+        type: ADD_ITEM,
+        payload: id
+    }
+}
+
+
+export function deleteItem(id){
+    return {
+        type: DELETE_ITEM,
+        payload: id
+    }
+}
+
+

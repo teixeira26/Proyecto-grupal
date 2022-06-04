@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 import NavBarRegistered from "../NavBar/NavBarRegistered";
+import NavBarShop from '../NavBar/NavBarShop'
 import Hero from "./Hero/Hero";
 import styles from "../Landing/Landing.module.css";
 import WhatWeOffer from "./WhatWeOffer/WhatWeOffer";
@@ -43,17 +44,17 @@ function Landing() {
   
   return (
     <div id="landing">
-      {!isAuthenticated && (
+      {/* {!isAuthenticated && (
         <div className={styles.navBar}>
           <NavBar />
         </div>
-      )}
+      )} */}
 
-      {isAuthenticated && (
+      {/* {isAuthenticated && ( */}
         <div className={styles.navBar}>
-          <NavBarRegistered />
+          <NavBarShop/>
         </div>
-      )}
+      {/* )} */}
 
       <div className={styles.hero}>
         <Hero img="/assets/img/pets-landing-cover.jpg" />

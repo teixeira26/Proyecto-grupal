@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getProviderById } from "../../redux/actions/ownProvActions";
-
+import NavBarShop from '../NavBar/NavBarShop'
 import NavBarRegistered from "../NavBar/NavBarRegistered";
 import Footer from "../Footer/Footer";
 import DetailProviderCard from "./DetailProviderCard";
@@ -25,7 +25,7 @@ export default function DetailProvider() {
 
     return (
         <div className={styles.container}>
-            <NavBarRegistered />
+            <NavBarShop />
             <div className={inContainer.container}>
                 <button>X</button>
                 {!provider.length

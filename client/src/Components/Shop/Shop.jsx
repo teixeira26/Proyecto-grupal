@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import styles from "../Shop/Shop.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import ProductCard from "./ProductCard";
-import { getProducts, chargeCart} from "../../redux/actions/petshopActions";
+import { getProducts, chargeCart, getFavoritesProducts} from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
@@ -37,10 +37,12 @@ const Shop = () => {
       <NavBarShop />
 
       <div className={inContainer.container}>
-      <NavLink to="/home"><p>Atras</p></NavLink>
+      <NavLink to="/home">
+          <img src="/assets/img/left-arrow.png" alt="" className={styles.leftArrow}/>
+        </NavLink>
 
         <h1 className={styles.shopTitle}>Pet Shop</h1>
-
+        
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
             <ShopSearchbar />
@@ -53,7 +55,7 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-
+                    p.stock > 0 ?
                     // <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
@@ -64,7 +66,8 @@ const Shop = () => {
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
-                      />
+                      /> 
+                      : null
 
                     // </a>
 

@@ -33,10 +33,10 @@ function App() {
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
           <Route path='/shop' element={
-            isAuthenticated && !isLoading ? <Shop/> : <Loading/>
+           !isLoading ? <Shop/> : <Loading/>
           }/>
           <Route path='/shop/:id' element={
-            isAuthenticated && !isLoading ? <ProductDetail/> : <Loading/>
+            !isLoading ? <ProductDetail/> : <Loading/>
           }/>
           <Route path='/agregarusuario' element={
             isAuthenticated && !isLoading ? <AddOwner/> : <Loading/>
@@ -73,7 +73,6 @@ function App() {
 
           <Route path="/confirmacion" element={
           isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
-
 
         </Routes>
       </div>
