@@ -7,15 +7,15 @@ import Login from "../Auth0/Login";
 import Logout from "../Auth0/Logout";
 
 import styles from "./NavBar.module.css";
+import buttons from '../GlobalCss/Button.module.css';
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 
 function NavBar() {
   const { isAuthenticated} = useAuth0();
   return (
-    
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <span className={styles.logo}>iPet</span>
+        <span className={styles.logo}>yumPaw</span>
         <section className={styles.contents}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>

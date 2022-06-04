@@ -38,7 +38,9 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerRight}>
-          <a href="#landing">GO TOP</a>
+          <a href="#landing">
+            <button><ion-icon name="chevron-up-outline"></ion-icon></button>
+          </a>
         </div>
       </div>
 
