@@ -37,10 +37,12 @@ const Shop = () => {
       <NavBarShop />
 
       <div className={inContainer.container}>
-      <NavLink to="/home"><p>Atras</p></NavLink>
+      <NavLink to="/home">
+          <img src="/assets/img/left-arrow.png" alt="" className={styles.leftArrow}/>
+        </NavLink>
 
         <h1 className={styles.shopTitle}>Pet Shop</h1>
-
+        
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
             <ShopSearchbar />

@@ -9,7 +9,7 @@ const Hero = (props) => {
     <div className={InContainer.container}>
       <section className={styles.flexHero}>
         <div className={styles.leftHero}>
-          <h1 className={styles.textHero}>¡Te damos la <br /> bienvenida a iPet!</h1>
+          <h1 className={styles.textHero}>¡Te damos la <br /> bienvenida a <br /> yumPaw!</h1>
           <p className={styles.paragraph}>Donde podrás encontrar todo para tus mascotas en un solo sitio. <br /> ¿Qué estás esperando para ingresar?</p>
           <div className={styles.previewItems}>
             <LoginLanding/ >

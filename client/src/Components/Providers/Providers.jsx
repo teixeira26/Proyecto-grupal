@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "../../redux/actions/ownProvActions";
 import ProvidersCard from "./ProvidersCard";
 import NavBarRegistered from "../NavBar/NavBarRegistered";
+import NavBarShop from '../NavBar/NavBarShop'
 import Footer from "../Footer/Footer";
 import styles from "../Providers/Providers.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
@@ -35,7 +36,7 @@ export default function Providers(){
 
     return (
         <div>
-            <NavBarRegistered />
+            <NavBarShop/>
             <section className={inContainer.container}>
                 <h1 className={styles.shopTitle}>Listado de proveedores</h1>
                 <h5>Filtrar por Servicio</h5>

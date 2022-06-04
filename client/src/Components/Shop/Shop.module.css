@@ -24,6 +24,15 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 4rem;
   font-size: 3rem;
+  background-color: #52b788;
+  padding: 2rem;
+  margin: 0;
+  color: white;
+}
+
+.leftArrow{
+  transform: scaleX(-1);
+  width: 70px;
+  height: 60px;
 }

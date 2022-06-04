@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "../Home/Home.module.css";
 import NavBarRegistered from "../NavBar/NavBarRegistered";
+import NavBarShop from '../NavBar/NavBarShop'
 import inContainer from "../GlobalCss/InContainer.module.css";
 import HomeCard from "./HomeCard";
 import Footer from "../Footer/Footer";
@@ -15,7 +16,7 @@ const Home = () => {
       {isAuthenticated && console.log(user)}
 
 
-        <NavBarRegistered />
+        <NavBarShop/>
 
 
       <div className={inContainer.container}>

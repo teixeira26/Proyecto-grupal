@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styles from "./NavBarShop.module.css";
 import Button from "../GlobalCss/Button.module.css";
 import global from "../GlobalCss/Global.module.css";
@@ -7,54 +7,84 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Login from "../Auth0/Login";
 import Logout from "../Auth0/Logout";
 import { NavLink } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
 
 function NavBar() {
   const { user, isAuthenticated } = useAuth0();
+  const [total, setTotal] = useState(0);
+  const state = useSelector((state) => {
+    return state;
+  });
+
+  useEffect(() => {
+    var total = 0;
+
+    state.cart.forEach((el) => {
+      total += el.quantity;
+    });
+    setTotal(total);
+  }, [state]);
+
   return (
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
-        <NavLink to="/home" className={styles.logoLink}>
-          iPet
-        </NavLink>
-        {/* <span>LOGO</span> */}
+        <div className={styles.item}>
+          <NavLink to="/home" className={styles.logoLink}>
+            yumPaw
+          </NavLink>
+        </div>
 
-        <section className={styles.contents}>
-          <ul className={styles.navList}>
-            {/* <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
-                Acerca de nosotros
-              </a>
-            </li> */}
-            {/* <li className={styles.navItem}>
-              <a href="#" className={styles.navLink}>
-                Contacto
-              </a>
-            </li> */}
-          </ul>
+        <div className={styles.item}>
+          <NavLink to="/about" className={styles.navLink}>
+            Acerca de
+          </NavLink>
+
+          <NavLink to="/contact" className={styles.navLink}>
+            Contacto
+          </NavLink>
+
+          <NavLink to="/shop" className={styles.navLink}>
+            Shop
+          </NavLink>
+        </div>
+
+        <div className={styles.item}>
           <div className={styles.icons}>
-            <div className={styles.iconCart}>
-              <NavLink to="/shoppingcart">
+            <div className={styles.icon}>
+              <NavLink to="/shoppingcart" className={styles.navLinkIcon}>
                 <ion-icon name="bag-handle-outline"></ion-icon>
               </NavLink>
+
+              <div className={styles.circle}>{total}</div>
             </div>
 
-            <div className={styles.iconFav}>
-              <ion-icon name="heart-outline"></ion-icon>
+            <div className={styles.icon}>
+              <NavLink to="/favorites" className={styles.navLinkIcon}>
+                <ion-icon name="heart-outline"></ion-icon>
+              </NavLink>
+              <div className={styles.circle}>0</div>
             </div>
           </div>
 
-          <NavLink to="/profile" className={styles.profile}>
-            <img
-              className={styles.profilePicture}
-              src={isAuthenticated && user.picture}
-              alt='img not found'
-            ></img>
-          </NavLink>
+          <div>
+            {!isAuthenticated && <img src="" alt=""></img>}
+            {isAuthenticated && (
+              <NavLink to="/profile" className={styles.profile}>
+                <img
+                  className={styles.profilePicture}
+                  src={isAuthenticated && user.picture}
+                  alt=""
+                ></img>
+              </NavLink>
+            )}
+          </div>
+
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
             {isAuthenticated && <Logout></Logout>}
           </div>
-        </section>
+        </div>
       </nav>
     </div>
   );
