@@ -1,0 +1,18 @@
+.chat{
+    max-width: 70vw;
+    min-width: 70vw;
+    max-height: 70vh;
+    min-height: 70vh;
+    overflow: scroll;
+    border:1px solid black
+
+}
+
+.chatContainer{
+    width:100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}

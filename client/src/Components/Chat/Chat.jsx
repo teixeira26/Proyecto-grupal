@@ -1,9 +1,11 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import socket from "./Socket";
+import styles from './Chat.module.css'
 
 export const Chat = () => {
+    
     const { user } = useAuth0();
     const providerEmail = useParams().providerEmail;
     const ownerEmail = useParams().ownerEmail;
@@ -37,11 +39,11 @@ export const Chat = () => {
     useEffect(() => {
         sendCache(false, false, false, true)
         socket.emit('conectado', "Chat conectado con exito", user.email, providerEmail, ownerEmail)
-        // const storedMessages = localStorage.getItem(`${providerEmail}`)
+        const storedMessages = localStorage.getItem(`${providerEmail}`)
         // console.log(JSON.parse(storedMessages));
-        // if(storedMessages){
-        //   setMensajes(JSON.parse(storedMessages))
-        // }
+        if(storedMessages){
+          setMensajes(JSON.parse(storedMessages))
+        }
         
     }, [])
     
@@ -53,11 +55,7 @@ export const Chat = () => {
     }
     
     useEffect(()=>{
-        socket.on('Mensaje agregado a Mensajes', (msj,caso1, caso2, caso3, lastMessageReceived) => {
-            
-            // if(mensajes.length > 5){
-            //   setMensajes(mensajes.shift())
-            // }
+        socket.on('Mensaje agregado a Mensajes', (msj, caso1, caso2, caso3, lastMessageReceived) => {
             if(caso1 === true){
               console.log('Se ejecutó un caso 1: ambos usuarios conectados');
               setMensajes([...mensajes, msj]);
@@ -77,34 +75,53 @@ export const Chat = () => {
                 sendCache(msj, true, false, false)//addCache
               }
             }
-        })
+        });
+        if(mensajes.length > 30){
+          mensajes.shift()
+          setMensajes(mensajes)
+          console.log(mensajes);
+        }
+        localStorage.setItem(`${providerEmail}`, JSON.stringify(mensajes))
         return () => {socket.off()}; // Esto no permite que entre en un bucle de sockets
     },[mensajes])
-    
+    const divRef = useRef(null);
+    useEffect(()=>{
+      divRef.current.scrollIntoView({behavior:'smooth'})
+    });
     const submitMessage = (e)=>{
         e.preventDefault();
-        socket.emit("mensaje enviado", mensaje, providerEmail, user.email)
+        socket.emit("mensaje enviado", mensaje, providerEmail, user.email, ownerEmail)
+        setMensaje({
+          ...mensaje,
+          mensaje:''
+        })
     }
 
   return (
     <div>
-      <div>
-        {mensajes.length>0?mensajes.map((x, y) => {
-          return (
-            <p key={y}>{`${x.nombre}: ${x.mensaje}`}</p>
-          )
-        }):null
-        }
-      </div>
-      <form onSubmit={submitMessage}>
+      <div className={styles.chatContainer}>
+        <h2>Bienvenido al ipeters chat</h2>
+        <div className={styles.chat}>
+          {mensajes.length>0?mensajes.map((x, y) => {
+            return (
+              <p key={y}>{`${x.nombre}: ${x.mensaje}`}</p>
+            )
+          }):null
+          }
+          <div ref={divRef}></div>
+        </div>
+        <form onSubmit={submitMessage}>
         <input
           type="text"
+          value={mensaje.mensaje}
           placeholder="mensaje"
           name="message"
           onChange={setMessage}
         ></input>
         <input type="submit" value="Enviar"></input>
       </form>
+      </div>
+      
     </div>
   );
 }
