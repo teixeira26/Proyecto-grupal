@@ -1,23 +1,22 @@
 import React from "react";
 import styles from "../Home/Home.module.css";
 import NavBarRegistered from "../NavBar/NavBarRegistered";
+import NavBarShop from '../NavBar/NavBarShop'
 import inContainer from "../GlobalCss/InContainer.module.css";
 import HomeCard from "./HomeCard";
 import Footer from "../Footer/Footer";
 
-import Login from "../Auth0/Login";
-import Logout from "../Auth0/Logout";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
   return (
     <div className={styles.body}>
       {isAuthenticated && console.log(user)}
 
 
-        <NavBarRegistered />
+        <NavBarShop/>
 
 
       <div className={inContainer.container}>

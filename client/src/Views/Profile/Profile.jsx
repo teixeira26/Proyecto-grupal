@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import NavBarRegistered from "../../Components/NavBar/NavBarRegistered";
+import NavBarShop from '../../Components/NavBar/NavBarShop'
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -15,9 +16,9 @@ useEffect(()=>{
 if (isAuthenticated){
 
 axios.get('http://localhost:3001/owners').then(x=>{
-    console.log(x)
-    const userdb = x.data.find(x=>x.email == user.email);
-    console.log(userdb)
+
+const userdb = x.data.find(x=>x.email === user.email);
+
     setUser({
         nombre:user.name,
         picture:user.picture,
@@ -26,10 +27,10 @@ axios.get('http://localhost:3001/owners').then(x=>{
         address:userdb.address,
     })
 })}
-    },[user])
+    },[user, isAuthenticated])
     return (
         <main>
-            <NavBarRegistered />
+            <NavBarShop />
             <div className={styleContainer.container}>
             <section className={style.infoProfile}>
                 <img src={userData.picture} alt="profilePicture" />

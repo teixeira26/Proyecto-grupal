@@ -1,7 +1,29 @@
-.nav{
+ .nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100px;
+    padding: 0 3rem;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    margin-bottom: 2rem;
+    background-color: white;
+}
+
+.item{
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.item:nth-child(2){
+    display: flex;
+    justify-content: flex-end;
+    flex: 1.2;
+}
+
+.item:last-child{
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .logoLink{
@@ -15,12 +37,12 @@
     color: black;
 }
 
-.contents{
+.profile{
     display: flex;
     align-items: center;
-    gap: 32px;
+    justify-content: center;
+    margin-right: 2rem;
 }
-
 
 .profilePicture {
     width: 50px;
@@ -30,20 +52,18 @@
     border-radius: 50%;
 }
 
-.navList{
-    display: flex;
-    align-items: center;
-}
-
-.navItem{
-    margin: 0 1rem;
-}
-
 .navLink{
-    padding: 0 2rem;
+    padding: 0 0.5rem;
     font-weight: 600;
+    margin: 0 1rem;
+    color: #000;
 }
 
+
+.navLink:hover{
+    color: #52b788;
+    transition: all ease-in 100ms;
+}
 
 ion-icon{
     font-size: 2rem;   
@@ -53,11 +73,35 @@ ion-icon{
 
 .icons{
     display: flex;
+    flex: 2;
     align-items: center;
-    color: #52b788;
+    justify-content: center;
 }
 
-.iconCart{
+.icon{
+    position: relative;
+}
+
+.navLinkIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon:not(:last-child){
     margin-right: 2rem;
 }
 
+.circle{
+    width: 20px;
+    height: 20px;
+    background-color: #52b788;
+    color: white;
+    border-radius: 50px;
+    position: absolute;
+    top: -6px;
+    right: -12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
@@ -7,11 +8,15 @@ const Footer = () => {
       <div className={styles.footerFlex}>
         <div className={styles.footerLeft}>
           <h2 className={styles.footerSign}>
-            Enterate de todas <br /> nuestras novedades!
+            {/* Enterate de todas <br /> nuestras novedades! */}
+            yumClaw
           </h2>
-          <p className={styles.newsletter}>¡Suscribite a nuestro Newsletter!</p>
+          <p className={styles.newsletter}>
+            {/* ¡Suscribite a nuestro Newsletter! */}
+            Matheus, Leo, Sabri, Alan, Frano
+          </p>
 
-          <div>
+          {/* <div>
             <input
               type="email"
               name="email"
@@ -19,7 +24,7 @@ const Footer = () => {
               className={styles.email}
             />
             <button className={styles.submit}>Suscribirme</button>
-          </div>
+          </div> */}
         </div>
 
         <div className={styles.footerMid}>
@@ -38,7 +43,13 @@ const Footer = () => {
         </div>
 
         <div className={styles.footerRight}>
-          <a href="#landing">GO TOP</a>
+          <a href="#">
+            <img
+              src="../assets/img/up-arrow.png"
+              alt="Go Up"
+              className={styles.goUp}
+            />
+          </a>
         </div>
       </div>
 
@@ -51,7 +62,6 @@ const Footer = () => {
         <div className={styles.social}>
           <ion-icon name="logo-instagram" className={styles.social}></ion-icon>
         </div>
-        
       </div>
     </div>
   );

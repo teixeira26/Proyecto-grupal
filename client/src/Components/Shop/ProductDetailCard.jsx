@@ -1,4 +1,4 @@
-import React, { useEffect, useReducer, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector} from "react-redux";
 import styles from "./ProductDetailCard.module.css";
 import { TYPES } from '../../redux/actions/shoppingActions';
@@ -9,7 +9,7 @@ import Swal from 'sweetalert2'
 
 const ProductDetailCard = ({profilePicture, name, price,category, stock, description, id}) => {
   const dispatch = useDispatch()
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(1)
   const {user} = useAuth0()
   const cart = useSelector(state=>state.cart);
   const cartItem = cart.find(x=>x.id===id)
@@ -17,7 +17,7 @@ const ProductDetailCard = ({profilePicture, name, price,category, stock, descrip
   useEffect(() => {
     dispatch(getProducts());
     dispatch(chargeCart(user.email));
-  }, [dispatch]);
+  }, [dispatch, user.email]);
 
 
   const addItem = ()=>{
@@ -32,7 +32,7 @@ const ProductDetailCard = ({profilePicture, name, price,category, stock, descrip
   }
 
   const delItem = ()=>{
-    if(count>0){
+    if(count>1){
     setCount(count -1)
     }
   }
@@ -59,7 +59,6 @@ const ProductDetailCard = ({profilePicture, name, price,category, stock, descrip
           </div>
 
           <div className={styles.detailAddCart}>
-            <button className={styles.addButtonNow}>Comprar ahora</button>
             <button className={styles.addButtonCart} onClick={()=>{
               if(count > 0){
               dispatch({
@@ -68,11 +67,7 @@ const ProductDetailCard = ({profilePicture, name, price,category, stock, descrip
               email:user.email,
               quantity:count,
             })}
-            else{
-              Swal.fire(`Aseguráte de agregar una cantidad antes de agregar el producto al carrito`)
-            }
             }}
-
               >Agregar al carrito</button>
               
           </div>

@@ -121,6 +121,13 @@ router.delete('/:id', async (req, res, next) =>{
 })
 
 
+
+
+
+
+
+
+
 router.post('/checkout', async(req, res, next) =>{
 
     const {email, id, quantity} = req.body

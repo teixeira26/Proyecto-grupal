@@ -8,7 +8,7 @@ import Login from "../Auth0/Login"
 import Logout from "../Auth0/Logout"
 
 function NavBar() {
-  const {user, isAuthenticated} = useAuth0();
+  const { isAuthenticated} = useAuth0();
   return (
     
     <div className={OutContainer.container}>
