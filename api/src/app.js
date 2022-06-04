@@ -22,10 +22,48 @@ var conectados = [];
 io.on('connection', (socket) => {
 
   //Se conecta el usuario
-  socket.on('conectado', (algo, email) => { //cada vez que alguien se conecte, se ejecutara la funcion
+  socket.on('conectado', (algo, email, providerEmail, ownerEmail) => { //cada vez que alguien se conecte, se ejecutara la funcion
     //agregamos a la variable conectados {email:emaildelusuario@algo.com, id:928429848374(ejemplo)}
     conectados.push({email, id:socket.id})
     // sos Owner ?Provider.findAll(user => user.storageMessage.email === mailOwner)
+    if(email === providerEmail){
+      Owner.findAll().then(owners=>{
+        owners.forEach((x)=>{
+          // por cada registro de owner, quiero verificar si existe algún mensaje para mí
+
+
+
+          //-------------------------- verificación owner----------------------
+          //pending messages tiene el valor de [], por lo tanto si su length es > 0, esto significa 
+          //que este owner tiene por lo menos un mensaje pendiente a alguien
+          if(x.dataValues.pendingMessages.length>0){
+            //  console.log(x.dataValues.pendingMessages[0].message)
+            //verifico si este usuario tiene algún mensaje pendiente para mí
+              let myMessages = x.dataValues.pendingMessages.find(x=>{
+                return x.providerEmail === email
+              })
+              const arrwithoutmyMessages = x.dataValues.pendingMessages.filter(x=>x!==myMessages)//{messages:[{nombre:idwhiher, mensaje:idjsijd}], provider.email}
+              console.log(myMessages.message);
+              //Si hay un mensaje pendiente para mí
+              if(myMessages){
+                console.log("Se ejecutó un caso 3: usuario 2 conectado")
+                for(let x=0;x<=myMessages.message.length-1;x++){
+                  if(x === myMessages.message.length-1){
+                    io.emit('Mensaje agregado a Mensajes', myMessages.message[x], false, false, true, true)
+                    Owner.update({...x, pendingMessages:arrwithoutmyMessages}, {where:{email:ownerEmail}}).then(()=>console.log("se vacio la base de datos")).catch((e)=>console.log(e))
+                  }
+                  else{
+                    io.emit('Mensaje agregado a Mensajes', myMessages.message[x], false, false, true, false)
+                  }
+                }
+                
+            }
+          }})
+        //si no hay mensajes pendientes no se ejecuta nada
+        
+      }).catch(error=>console.log(error))
+
+    }
     console.log(conectados)
     console.log(algo) //cambiar por 'Usuario conectado'
   })
@@ -34,35 +72,52 @@ io.on('connection', (socket) => {
   socket.on('mensaje enviado', (mensaje, providerEmail, email) => {
     //Che, el usuario con el cuál estas intentando hablar esta conectado ??
         if(conectados.find(x=>x.email === providerEmail)){
-          console.log("Soy el mensaje del usuario: ",mensaje)
-          io.emit('Mensaje agregado a Mensajes', mensaje)
+          console.log("Se ejecutó un caso 1: ambos usuarios conectados")
+          io.emit('Mensaje agregado a Mensajes', mensaje, true, false, false, false)
         } 
         //NOOO :(
         else{
+          //usuario no encontrado
+          console.log("Se ejecutó un caso 2: usuario 1 conectado, usuario 2 desconectado")
+          io.emit('Mensaje agregado a Mensajes', mensaje, false, true, false, false);
+          //almaceno en este objeto el mensaje y el mail de la persona con la cual queria hablar
           const unreadMessage = {
-            message: [mensaje],
+            message: [mensaje],//[{nombre:fulano, mensaje:'jsdijdsi'}]
             providerEmail
           }
+          //Busco en la base de datos por el registro que almacena mis infos
           Owner.findOne({
             where:{
               email:email,
             }
           }).then(x=>{
-            const hasProviderEmail = x.pendingMessages.find(x=>x.providerEmail === providerEmail);
+            //entonces, con este registro...
+            var hasProviderEmail = x.pendingMessages.find(x=>x.providerEmail === providerEmail);
+            //verifico si existe algun mensaje pendiente al mismo usuario
             if(hasProviderEmail){
-              hasProviderEmail.message.push(unreadMessage.message[0])
-
+              console.log('ya habias enviado ningún mensaje a esta persona, agregaremos una más a la db')
+              // console.log("hasprovideremail", hasProviderEmail)
+              //agarro el registro de los anteriores y agrego el nuevo mensaje que recién creé
+              hasProviderEmail = {
+                ...hasProviderEmail,
+                message: [...hasProviderEmail.message, unreadMessage.message[0]]
+              }
+              console.log("array inicial", x.pendingMessages)
+              //agarro el array con todos los registros de mensaje y le vuelvo a agregar con mis alteraciones
               var newpendingMessages = x.pendingMessages.filter(x=>x.providerEmail !== providerEmail);
-              console.log(hasProviderEmail)
+              // console.log("antiguo array", newpendingMessages)
               newpendingMessages.push(hasProviderEmail)
-              console.log(newpendingMessages)
+              console.log("base de datos actual: ", newpendingMessages)
+              //actualizo la base de datos con este nuevo array alterado
               x.update({...x, pendingMessages:newpendingMessages})
             }
+            //En el caso de que no actualizo la base de datos con lo agregado
             else{
+              console.log('no habias enviado ningún mensaje a esta persona, así que agregamos una ahora')
             x.update({...x, pendingMessages:[...x.pendingMessages, unreadMessage]})
           }
           })
-          console.log('noi nada che')
+    
         }
   })
   socket.on('disconnect', () => {
