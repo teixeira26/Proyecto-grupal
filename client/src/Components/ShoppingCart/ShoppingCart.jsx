@@ -51,7 +51,7 @@ const ShoppingCart = () => {
             <article className="box grid-responsive">
                 {
                     cart && cart.length > 0 ? cart.map((item, index) => (   //onClick={clearCart}
-                        <CartItem key={index} name={item.name} image={item.profilePicture} price={item.price} quantity={item.quantity} id={item.id} />//delFromCart={delFromCart}
+                        <CartItem key={index} name={item.name} image={item.profilePicture} price={item.price} quantity={item.quantity} id={item.id} stock={item.stock} />//delFromCart={delFromCart}
                     )) : <h1>No hay ningún producto en el carrito</h1>
                 }
                 <h3>total: {total}</h3>
