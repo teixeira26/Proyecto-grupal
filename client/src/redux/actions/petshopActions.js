@@ -13,6 +13,8 @@ export function getProducts (){
 
 
 
+
+
 export function searchBarProducts (name){
     return async function (dispatch){
         let response = await axios.get(`http://localhost:3001/products?name=${name}`);

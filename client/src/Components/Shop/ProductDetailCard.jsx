@@ -67,8 +67,6 @@ const ProductDetailCard = ({profilePicture, name, price,category, stock, descrip
               email:user.email,
               quantity:count,
             })}
-
-      
             }}
               >Agregar al carrito</button>
               

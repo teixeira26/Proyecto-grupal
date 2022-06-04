@@ -9,22 +9,32 @@ import Logout from "../Auth0/Logout";
 import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { chargeCart } from "../../redux/actions/petshopActions";
 
 function NavBar() {
+  const dispatch = useDispatch();
   const { user, isAuthenticated } = useAuth0();
   const [total, setTotal] = useState(0);
+
   const state = useSelector((state) => {
     return state;
   });
 
   useEffect(() => {
-    var total = 0;
+    if(user){
+      dispatch(chargeCart(user.email))
+    }
+    
+  }, [dispatch, user])
 
+  useEffect(() => {
+    let counter = 0;
     state.cart.forEach((el) => {
-      total += el.quantity;
+      counter = counter + el.quantity;
     });
-    setTotal(total);
-  }, [state]);
+    setTotal(counter);
+  }, [state.cart]);
 
   return (
     <div className={OutContainer.container}>
