@@ -29,6 +29,25 @@ const Favorites = ()=>{
        }))
       }, [products, productsFavNumber]);
 
+
+    async function deleteFav(id){
+      let withoutFav = productsFav.filter(fav => fav.id !== id)
+      setProductsFav(withoutFav)
+
+      const AllOwners = await axios.get("http://localhost:3001/owners")
+
+      const owner = AllOwners.data.find(x=>x.email === user.email)
+      console.log(owner)
+      let objToPut = {
+        ...owner,
+        favorites: owner.favorites[0] ? owner.favorites.filter(x => x !== id) : []
+      }
+      console.log(objToPut)
+      await axios.put("http://localhost:3001/owners/addFavorite", objToPut)
+
+
+    }
+
     return(
         <div>
           <Link to='/shop'>
@@ -36,9 +55,14 @@ const Favorites = ()=>{
           </Link>
           {productsFav&&productsFav.length?productsFav.map(x=>{
           return(
-            <div>    
+            <div> 
+                <Link to={`/shop/${x.id}`}>
                 <h1>{x.name}</h1>
                 <img alt='img not found' src={x.profilePicture}></img>
+                </Link>
+
+                <button onClick={() => deleteFav(x.id)}>Quitar de favoritos</button>
+
             </div>
           )
           }):<h1>NO hay favoritos</h1>}

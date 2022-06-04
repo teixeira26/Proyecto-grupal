@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT, REMOVE_FROM_CART, CHARGE_CART, CLEAR_CART} from "../actions-type/petshopActionsTypes";
+import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CATEGORY, FILTER_TARGET_ANIMAL, ID_PRODUCT, REMOVE_FROM_CART, CHARGE_CART, CLEAR_CART, ADD_ITEM, DELETE_ITEM} from "../actions-type/petshopActionsTypes";
 
 export function getProducts (){
     return async function (dispatch){
@@ -83,3 +83,21 @@ export function clearAllCart(email){
         email
     }
 }
+
+
+export function addOneItem(id){
+    return {
+        type: ADD_ITEM,
+        payload: id
+    }
+}
+
+
+export function deleteItem(id){
+    return {
+        type: DELETE_ITEM,
+        payload: id
+    }
+}
+
+
