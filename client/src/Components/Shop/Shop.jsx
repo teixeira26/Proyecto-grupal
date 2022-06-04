@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer";
 import styles from "../Shop/Shop.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import ProductCard from "./ProductCard";
-import { getProducts, chargeCart} from "../../redux/actions/petshopActions";
+import { getProducts, chargeCart, getFavoritesProducts} from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
@@ -55,7 +55,7 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                   return (
-
+                    p.stock > 0 ?
                     // <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
                       <ProductCard
                         key={p.id}
@@ -66,7 +66,8 @@ const Shop = () => {
                         profilePicture={p.profilePicture}
                         name={p.name}
                         price={p.price}
-                      />
+                      /> 
+                      : null
 
                     // </a>
 
