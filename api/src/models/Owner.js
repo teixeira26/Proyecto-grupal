@@ -26,6 +26,10 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.INTEGER),
       defaultValue:[]
     },
+    pendingMessages:{
+      type:DataTypes.ARRAY(DataTypes.JSONB),
+      defaultValue:[]
+    },
     isActive:{
       type:DataTypes.BOOLEAN,
       defaultValue: true,

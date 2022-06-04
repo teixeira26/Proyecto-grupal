@@ -41,6 +41,10 @@ module.exports = (sequelize) => {
     dogsPerWalk:{
       type: DataTypes.INTEGER
     },
+    pendingMessages:{
+      type:DataTypes.ARRAY(DataTypes.JSONB),
+      defaultValue:[]
+    },
     isActive:{
       type:DataTypes.BOOLEAN,
       defaultValue: true,
