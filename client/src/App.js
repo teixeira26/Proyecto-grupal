@@ -20,6 +20,7 @@ import DetailProvider from "./Components/Providers/DetailProvider";
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
+import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -73,6 +74,10 @@ function App() {
 
           <Route path="/confirmacion" element={
           isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
+
+
+          <Route path="/purchaseConfirmation" element={
+          isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loading/>}/>
 
         </Routes>
       </div>

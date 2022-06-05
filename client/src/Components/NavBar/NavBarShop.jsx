@@ -40,7 +40,7 @@ function NavBar() {
   }, [state.cart]);
 
   useEffect(() => {
-    setProductsFavNumber(state.favorites.length);
+    setProductsFavNumber(state.favorites? state.favorites.length : 0);
   }, [state.favorites]);
 
   return (

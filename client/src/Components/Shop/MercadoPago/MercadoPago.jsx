@@ -1,11 +1,11 @@
 import React, { useEffect, useCallback } from "react";
+import { useSelector } from "react-redux";
 import { fetchCToken } from "./fetchmetod.js";
 
 const FORM_ID = "payment-form";
 
 export default function MercadoPago({ cart }) {
   
-
   const getPreference = useCallback(async () => {
     const res = await fetchCToken(`products/checkout`, { cart }, "POST");
     console.log('res MP', res);
@@ -13,6 +13,7 @@ export default function MercadoPago({ cart }) {
     if(res.global){
     
       const script = document.createElement("script");
+      console.log(script)
       script.type = "text/javascript";
       script.src =
         "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
