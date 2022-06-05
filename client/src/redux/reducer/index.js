@@ -30,6 +30,7 @@ const initialState = {
     filteredProducts: [],
     cart: [],
     productDetail:[],
+    pets: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -200,6 +201,13 @@ function rootReducer(state = initialState, action) {
                 return{
                     ...state,
                     providers: [action.payload]
+                }
+
+
+            case 'GET_PETS':
+                return{
+                    ...state,
+                    pets: action.payload
                 }
 
 
