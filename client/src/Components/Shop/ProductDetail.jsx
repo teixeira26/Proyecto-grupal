@@ -32,7 +32,9 @@ const ProductDetail = () => {
       <NavBarShop />
 
       <div className={inContainer.container}>
-        <NavLink to="/shop"><p>Atras</p></NavLink>
+      <NavLink to="/shop">
+          <img src="/assets/img/arrow-left.svg" alt="" className={styles.leftArrow}/>
+        </NavLink>
 
         {!product.length
           ? "LOADING"

@@ -15,10 +15,7 @@ import {
     ID_PRODUCT,
     CHARGE_CART,
     REMOVE_FROM_CART,
-    CLEAR_CART,
-    ADD_ITEM,
-    DELETE_ITEM,
-    ADD_FAVORITE_REDUX
+    CLEAR_CART
 } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 
@@ -31,7 +28,6 @@ const initialState = {
     filteredProducts: [],
     cart: [],
     productDetail:[],
-    favorites:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -62,7 +58,7 @@ function rootReducer(state = initialState, action) {
 
         case REMOVE_FROM_CART:
             console.log(action.payload);
-            let newCart = state.cart.filter(x=>x.id !== action.payload)
+            const newCart = state.cart.filter(x=>x.id !== action.payload)
             localStorage.removeItem(action.email)
             localStorage.setItem(action.email,JSON.stringify(newCart))
             return{
@@ -78,14 +74,6 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: dataUser,
             }}
-
-        case ADD_FAVORITE_REDUX: 
-            console.log('llega')
-            return {
-
-                ...state,
-                favorites: action.payload,
-            }
 
         case CLEAR_CART:
             localStorage.removeItem(action.email)
@@ -197,38 +185,6 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     providers: [action.payload]
                 }
-
-
-            // case ADD_ITEM:
-            //     // let plusItem = [...state.cart]
-
-            //     console.log('state.cart',state.cart)
-
-            //     let newCart2 = state.cart.map(i => {
-            //         if(i.id===action.payload){
-            //        return i.quantity = i.quantity + 1
-            //     }})
-
-            //     // console.log('plusItem', plusItem)
-
-            //     localStorage.setItem(action.email,JSON.stringify(newCart2))
-
-            //     return{
-            //         ...state,
-            //         cart: newCart2
-            //     }
-    
-            // case DELETE_ITEM:
-            //     let delItem = [...state.cart]
-
-            //         delItem.map(i => {
-            //         if(i.id===action.payload){
-            //         i.quantity = i.quantity + 1
-            //     }})
-            //     return{
-            //         ...state,
-            //         cart: delItem
-            //     }
     
         default:
             return state;

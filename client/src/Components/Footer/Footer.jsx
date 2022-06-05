@@ -45,7 +45,7 @@ const Footer = () => {
         <div className={styles.footerRight}>
           <a href="#">
             <img
-              src="../assets/img/up-arrow.png"
+              src="../assets/img/arrow-up.svg"
               alt="Go Up"
               className={styles.goUp}
             />
