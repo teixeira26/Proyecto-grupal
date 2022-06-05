@@ -22,11 +22,11 @@ function NavBar() {
   });
 
   useEffect(() => {
-    if(user){
+    if(user.email){
       dispatch(chargeCart(user.email))
     }
     
-  }, [dispatch, user])
+  }, [dispatch, user.email])
 
   useEffect(() => {
     let counter = 0;
