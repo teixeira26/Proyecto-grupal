@@ -11,12 +11,13 @@ import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { chargeCart } from "../../redux/actions/petshopActions";
+import axios from "axios";
 
 function NavBar() {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useAuth0();
   const [total, setTotal] = useState(0);
-
+  const [productsFavNumber, setProductsFavNumber] = useState(0)
   const state = useSelector((state) => {
     return state;
   });
@@ -25,6 +26,8 @@ function NavBar() {
     if(user.email){
       dispatch(chargeCart(user.email))
     }
+    // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
+    //     setProductsFavNumber(x.data)})
     
   }, [dispatch, user.email])
 
@@ -35,6 +38,10 @@ function NavBar() {
     });
     setTotal(counter);
   }, [state.cart]);
+
+  useEffect(() => {
+    setProductsFavNumber(state.favorites.length);
+  }, [state.favorites]);
 
   return (
     <div className={OutContainer.container}>
@@ -73,7 +80,7 @@ function NavBar() {
               <NavLink to="/favorites" className={styles.navLinkIcon}>
                 <ion-icon name="heart-outline"></ion-icon>
               </NavLink>
-              <div className={styles.circle}>0</div>
+              <div className={styles.circle}>{productsFavNumber}</div>
             </div>
           </div>
 
