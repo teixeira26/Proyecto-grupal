@@ -4,7 +4,7 @@
     justify-content: space-between;
     height: 100px;
     padding: 0 3rem;
-    border-bottom: 1px solid rgb(201, 201, 201);
+    border-bottom: 1px solid #bbb7ae;
     margin-bottom: 2rem;
     background-color: white;
 }
@@ -28,9 +28,9 @@
 
 .logoLink{
     font-size: 2.2rem;
-    font-weight: bold;
+    font-weight: 800;
     text-transform: unset;
-    color: black;
+    color: #0f0b02;
 }
 
 .logoLink:hover{
@@ -61,7 +61,7 @@
 
 
 .navLink:hover{
-    color: #52b788;
+    color: #7e52a0;
     transition: all ease-in 100ms;
 }
 
@@ -93,14 +93,14 @@ ion-icon{
 }
 
 .circle{
-    width: 20px;
-    height: 20px;
-    background-color: #52b788;
+    width: 22px;
+    height: 22px;
+    background-color: #7e52a0;
     color: white;
     border-radius: 50px;
     position: absolute;
-    top: -6px;
-    right: -12px;
+    top: -7px;
+    right: -13px;
     display: flex;
     align-items: center;
     justify-content: center;

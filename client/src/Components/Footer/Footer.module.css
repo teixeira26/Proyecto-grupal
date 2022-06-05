@@ -1,5 +1,6 @@
 .container{
-    border-top: 1px solid rgb(204, 204, 204);
+    border-top: 1px solid #bbb7ae;
+    background-color: white;
 }
 .footerFlex{
     display: flex;
@@ -60,10 +61,6 @@ ion-icon{
     color: black;
 }
 
-.goUp{
-    width: 80px;
-    height: 80px;
-}
 
 
 

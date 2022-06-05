@@ -8,8 +8,8 @@
 
 .shopGrid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 26rem));
-  gap: 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 20rem));
+  gap: 4rem;
   justify-content:flex-start;
   width: 100%;
   margin-left: 5rem;
@@ -25,14 +25,7 @@
   display: flex;
   justify-content: center;
   font-size: 3rem;
-  background-color: #52b788;
   padding: 2rem;
   margin: 0;
-  color: white;
-}
-
-.leftArrow{
-  transform: scaleX(-1);
-  width: 70px;
-  height: 60px;
+  color: rgb(0, 0, 0);
 }

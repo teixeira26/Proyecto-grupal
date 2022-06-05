@@ -23,13 +23,13 @@ function NavBar() {
   });
 
   useEffect(() => {
-    if(user.email){
+    if(user){
       dispatch(chargeCart(user.email))
     }
     // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
     
-  }, [dispatch, user.email])
+  }, [dispatch, user])
 
   useEffect(() => {
     let counter = 0;
@@ -40,7 +40,7 @@ function NavBar() {
   }, [state.cart]);
 
   useEffect(() => {
-    setProductsFavNumber(state.favorites.length);
+    setProductsFavNumber(state.favorites);
   }, [state.favorites]);
 
   return (

@@ -1,12 +1,12 @@
 .button{
-    background-color: transparent;
-    color: black;
+    background-color: #7e52a0;
+    color: white;
     border: 1px solid black;
     border-radius: 25px;
 }
 
 .button:hover{
-    background-color: #52b788;
-    color: white;
+    background-color: transparent;
+    color: black;
     transition: all ease-in 200ms;
 }

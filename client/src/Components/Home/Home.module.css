@@ -1,6 +1,6 @@
 .cardWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 35rem));
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 30rem));
   gap: 5rem;
   justify-content: center;
   margin: 6rem 0;
