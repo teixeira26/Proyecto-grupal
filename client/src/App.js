@@ -33,7 +33,7 @@ function App() {
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
           <Route path='/shop' element={
-           !isLoading ? <Shop/> : <Loading/>
+            !isLoading ? <Shop/> : <Loading/>
           }/>
           <Route path='/shop/:id' element={
             !isLoading ? <ProductDetail/> : <Loading/>
@@ -70,10 +70,9 @@ function App() {
           }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/shoppingcart" element={<ShoppingCart/>}/>
-
           <Route path="/confirmacion" element={
           isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
-
+          <Route path="/shoppingcart" element={<ShoppingCart/>}/>
         </Routes>
       </div>
     </BrowserRouter>

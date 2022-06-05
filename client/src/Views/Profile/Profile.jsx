@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import NavBarRegistered from "../../Components/NavBar/NavBarRegistered";
+import { NavLink } from 'react-router-dom';
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import NavBarShop from '../../Components/NavBar/NavBarShop'
+import Footer from '../../Components/Footer/Footer';
+import CardFavoriteProduct from "../../Components/Cards/CardFavoriteProduct";
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
-import { useAuth0 } from "@auth0/auth0-react";
-import { NavLink } from 'react-router-dom';
-import Footer from '../../Components/Footer/Footer';
-import axios from "axios";
 
 export default function Profile() {
     const [userData, setUser] = useState({
@@ -71,6 +71,9 @@ export default function Profile() {
                     </article>
                 </section>
             </div>
+
+            <CardFavoriteProduct/>
+
             <Footer />
         </main>
     )

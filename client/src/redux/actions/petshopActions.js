@@ -9,7 +9,9 @@ import {
     ID_PRODUCT,
     REMOVE_FROM_CART,
     CHARGE_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    ADD_ITEM,
+    DELETE_ITEM
 } from "../actions-type/petshopActionsTypes";
 
 export function getProducts (){
@@ -21,10 +23,6 @@ export function getProducts (){
         })
     }
 };
-
-
-
-
 
 export function searchBarProducts (name){
     return async function (dispatch){
@@ -97,22 +95,18 @@ export function clearAllCart(email){
         type: CLEAR_CART,
         email
     }
-}
-
+};
 
 export function addOneItem(id){
     return {
         type: ADD_ITEM,
         payload: id
     }
-}
-
+};
 
 export function deleteItem(id){
     return {
         type: DELETE_ITEM,
         payload: id
     }
-}
-
-
+};
