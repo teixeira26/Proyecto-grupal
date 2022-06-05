@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink } from 'react-router-dom';
 import { getProviders } from "../../redux/actions/ownProvActions";
 import ProvidersCard from "./ProvidersCard";
-import NavBarRegistered from "../NavBar/NavBarRegistered";
 import NavBarShop from '../NavBar/NavBarShop'
 import Footer from "../Footer/Footer";
 import styles from "../Providers/Providers.module.css";
+import shopStyles from "../Shop/Shop.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 
 export default function Providers(){
@@ -35,10 +36,17 @@ export default function Providers(){
     }
 
     return (
-        <div>
-            <NavBarShop/>
+        <div className={styles.container}>
+            <NavBarShop />
             <section className={inContainer.container}>
-                <h1 className={styles.shopTitle}>Listado de proveedores</h1>
+                <NavLink to="/home">
+                    <img
+                        src="/assets/img/arrow-left.svg"
+                        alt=""
+                        className={styles.leftArrow}
+                    />
+                </NavLink>
+                <h1 className={shopStyles.shopTitle}>Listado de proveedores</h1>
                 <h5>Filtrar por Servicio</h5>
 
                 <select onChange={(e) => handleFilter(e)}>

@@ -4,9 +4,9 @@ import "../../index.css";
 import NavBarShop from "../NavBar/NavBarShop";
 import { useDispatch, useSelector } from "react-redux";
 import { chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
-import { useAuth0 } from "@auth0/auth0-react";
-import { NavLink } from "react-router-dom";
-import MercadoPago from "../Shop/MercadoPago/MercadoPago";
+import { useAuth0 } from '@auth0/auth0-react';
+import { Link, NavLink } from 'react-router-dom';
+import MercadoPago from '../Shop/MercadoPago/MercadoPago';
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -41,40 +41,34 @@ const ShoppingCart = () => {
 
   return (
     <div>
-      <NavBarShop />
+              <NavBarShop />
       <h2>Carrito de Compras</h2>
 
       <NavLink to="/shop">
         <p>Volver al shop</p>
       </NavLink>
 
-      <h3>Productos</h3>
-      <article className="box">
-        <button onClick={clearCart}>Limpiar Carrito</button>
-      </article>
-      <article className="box grid-responsive">
-        {cart && cart.length > 0 ? (
-          cart.map(
-            (
-              item,
-              index //onClick={clearCart}
-            ) => (
-              <CartItem
-                key={index}
-                name={item.name}
-                image={item.profilePicture}
-                price={item.price}
-                quantity={item.quantity}
-                id={item.id}
-              /> //delFromCart={delFromCart}
-            )
-          )
-        ) : (
-          <h1>No hay ningún producto en el carrito</h1>
-        )}
-        <h3>total: {total}</h3>
-        <MercadoPago cart={cart} clearCart={clearCart} />
-      </article>
+
+            <h3>Productos</h3>
+            <article className="box">
+                <button onClick={clearCart}>Limpiar Carrito</button>
+            </article>
+            <article className="box grid-responsive">
+                {
+                    cart && cart.length > 0 ? cart.map((item, index) => (   
+                        <CartItem key={index} name={item.name} image={item.profilePicture} price={item.price} quantity={item.quantity} id={item.id} stock={item.stock} />//delFromCart={delFromCart}
+                    )) : <h1>No hay ningún producto en el carrito</h1>
+                }
+                <h3>total: {total}</h3>
+                {/* <MercadoPago cart={cart}
+                              />  */}
+                <Link to='/purchaseConfirmation'>
+                <button>Continuar al pago</button>
+                </Link>
+                </article>
+
+
+      
     </div>
   );
 };

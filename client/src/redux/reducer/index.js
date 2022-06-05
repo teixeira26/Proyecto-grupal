@@ -15,7 +15,9 @@ import {
     ID_PRODUCT,
     CHARGE_CART,
     REMOVE_FROM_CART,
-    CLEAR_CART
+    CLEAR_CART,
+    ADD_ITEM,
+    DELETE_ITEM
 } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 
@@ -28,6 +30,8 @@ const initialState = {
     filteredProducts: [],
     cart: [],
     productDetail:[],
+    pets: [],
+    favorites:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -185,6 +189,47 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     providers: [action.payload]
                 }
+
+
+            case 'GET_PETS':
+                return{
+                    ...state,
+                    pets: action.payload
+                }
+
+
+            case ADD_ITEM:
+                let newCart2 = state.cart.map(i => {
+                    if(i.id===action.payload && i.quantity < action.stock){
+                        return( {
+                        ...i,
+                        quantity: i.quantity + 1
+                    })
+                }else return i})
+
+                localStorage.setItem(action.email,JSON.stringify(newCart2))
+
+                return{
+                    ...state,
+                    cart: newCart2
+                }
+    
+            case DELETE_ITEM:
+                let newCart3 = state.cart.map(i => {
+                    if(i.id===action.payload && i.quantity > 1){
+                        return( {
+                        ...i,
+                        quantity: i.quantity - 1
+                    })
+                }else return i})
+
+                localStorage.setItem(action.email,JSON.stringify(newCart3))
+
+                return{
+                    ...state,
+                    cart: newCart3
+                }
+            
     
         default:
             return state;
