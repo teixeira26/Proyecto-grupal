@@ -17,7 +17,8 @@ import {
     REMOVE_FROM_CART,
     CLEAR_CART,
     ADD_ITEM,
-    DELETE_ITEM
+    DELETE_ITEM,
+    ADD_FAVORITE_REDUX
 } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 
@@ -30,6 +31,7 @@ const initialState = {
     filteredProducts: [],
     cart: [],
     productDetail:[],
+    favorites:[],
 };
 
 function rootReducer(state = initialState, action) {
@@ -76,6 +78,14 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: dataUser,
             }}
+
+        case ADD_FAVORITE_REDUX: 
+            console.log('llega')
+            return {
+
+                ...state,
+                favorites: action.payload,
+            }
 
         case CLEAR_CART:
             localStorage.removeItem(action.email)

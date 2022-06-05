@@ -10,13 +10,15 @@ import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
 import { NavLink } from "react-router-dom";
 
+
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
   const {user} = useAuth0();
-  const [favorites, setFavorites] = useState([])
+  const [favorites, setFavorites] = useState([]);
+
 
 
   let dispatch = useDispatch();
