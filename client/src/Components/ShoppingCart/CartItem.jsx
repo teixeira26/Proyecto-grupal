@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addOneItem, deleteItem, removeFromCart } from "../../redux/actions/petshopActions";
 import styles from "../Shop/ProductDetailCard.module.css"
 import Swal from 'sweetalert2'
+import { ADD_ITEM, DELETE_ITEM } from "../../redux/actions-type/petshopActionsTypes";
 
 
 const CartItem = ({name, image, price, quantity, id, stock}) => {
@@ -17,15 +18,22 @@ const cartItem = cart.find(x=>x.id===id)
         dispatch(removeFromCart(id, user.email))
     }
 
-    // const addItem = (id)=>{
-    //     dispatch(addOneItem(id))
-    //   }
+    const addItem = ()=>{
+        dispatch({
+            type:ADD_ITEM,
+            payload:id,
+            email:user.email,
+            stock: stock
+          })
+      }
     
-    //   const delItem = (id)=>{
-   
-    //     dispatch(deleteItem(id))
-        
-    //   }
+      const delItem = ()=>{
+        dispatch({
+            type:DELETE_ITEM,
+            payload:id,
+            email:user.email,
+          })
+      }
     
 console.log('quantity', quantity)
     
@@ -37,11 +45,11 @@ console.log('quantity', quantity)
                 <h5>precio x 1un. ${price}.00</h5>
                 <h5>total: x {quantity}un. ${price * quantity}.00</h5>
                 <button onClick={() => delFromCart(id)}>X</button>
-                {/* <div>
+                <div>
                 <button className={styles.button} onClick={delItem}>-</button>
                 <button className={styles.button} onClick={addItem}>+</button>
 
-                </div> */}
+                </div>
             </div>
         </div>
     )

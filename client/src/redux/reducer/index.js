@@ -221,36 +221,38 @@ function rootReducer(state = initialState, action) {
                 }
 
 
-            // case ADD_ITEM:
-            //     // let plusItem = [...state.cart]
+            case ADD_ITEM:
+                let newCart2 = state.cart.map(i => {
+                    if(i.id===action.payload && i.quantity < action.stock){
+                        return( {
+                        ...i,
+                        quantity: i.quantity + 1
+                    })
+                }else return i})
 
-            //     console.log('state.cart',state.cart)
+                localStorage.setItem(action.email,JSON.stringify(newCart2))
 
-            //     let newCart2 = state.cart.map(i => {
-            //         if(i.id===action.payload){
-            //        return i.quantity = i.quantity + 1
-            //     }})
-
-            //     // console.log('plusItem', plusItem)
-
-            //     localStorage.setItem(action.email,JSON.stringify(newCart2))
-
-            //     return{
-            //         ...state,
-            //         cart: newCart2
-            //     }
+                return{
+                    ...state,
+                    cart: newCart2
+                }
     
-            // case DELETE_ITEM:
-            //     let delItem = [...state.cart]
+            case DELETE_ITEM:
+                let newCart3 = state.cart.map(i => {
+                    if(i.id===action.payload && i.quantity > 1){
+                        return( {
+                        ...i,
+                        quantity: i.quantity - 1
+                    })
+                }else return i})
 
-            //         delItem.map(i => {
-            //         if(i.id===action.payload){
-            //         i.quantity = i.quantity + 1
-            //     }})
-            //     return{
-            //         ...state,
-            //         cart: delItem
-            //     }
+                localStorage.setItem(action.email,JSON.stringify(newCart3))
+
+                return{
+                    ...state,
+                    cart: newCart3
+                }
+            
     
         default:
             return state;
