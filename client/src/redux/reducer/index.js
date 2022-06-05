@@ -17,8 +17,7 @@ import {
     REMOVE_FROM_CART,
     CLEAR_CART,
     ADD_ITEM,
-    DELETE_ITEM,
-    ADD_FAVORITE_REDUX
+    DELETE_ITEM
 } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 
@@ -68,7 +67,7 @@ function rootReducer(state = initialState, action) {
         }
         case REMOVE_FROM_CART:
             console.log(action.payload);
-            let newCart = state.cart.filter(x=>x.id !== action.payload)
+            const newCart = state.cart.filter(x=>x.id !== action.payload)
             localStorage.removeItem(action.email)
             localStorage.setItem(action.email,JSON.stringify(newCart))
             return{
@@ -87,14 +86,6 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: dataUser,
             }}
-
-        case ADD_FAVORITE_REDUX: 
-            console.log('llega')
-            return {
-
-                ...state,
-                favorites: action.payload,
-            }
 
 
         case CLEAR_CART:

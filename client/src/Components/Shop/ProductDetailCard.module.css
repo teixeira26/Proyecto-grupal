@@ -1,74 +1,101 @@
 .detailFlex{
     display: flex;
     justify-content: center;
-    width: 69vw;
-    margin: 10rem auto;
+    width: 80vw;
+    margin: 5rem auto;
 }
 
 .detailImg{
-    width: 550px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
     height: 550px;
-    margin-right: 5rem;
+    margin-right: 8rem;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #bbb7ae;
+    border-radius: 8px;
 }
 
 .detailRight{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 350px;
 }
 
 .detailCategory{
-    color: gray;
-    margin: 0.5rem 0;
-    font-weight: 400;
+    color: #bbb7ae;
+    margin: 0;
+    font-weight: 700;
 }
 
 .detailTitle{
     margin: 0;
-    margin-bottom: 1rem;
-    font-weight: 500;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #0f0b02;
 }
 
 .detailInfo{
-    color: gray;
+    color: #bbb7ae;
     margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
 .detailPrice{
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
     margin-bottom: 1rem;
-    font-weight: 600;
+    font-weight: 300;
+    color: #0f0b02;
 }
 
 .detailQuantity{
-    color: gray;
+    color: #bbb7ae;
     margin: 0;
-    font-size: 1.6rem;
+    font-weight: 700;
+    font-size: 1.4rem;
     text-transform: uppercase;
 }
 .productQuantity{
     display: flex;
     align-items: center;
-    
+    flex-direction: row;
+    width: fit-content;
+    border: 1px solid #bbb7ae;
+    border-radius: 25px;
+    padding: 0.4rem;
 }
 
+
 .stock{
-    color: red;
+    color: #bbb7ae;
+    font-weight: 700;
     margin-bottom: 1rem;
+    text-transform: uppercase;
 }
 
 .button{
     background-color: white;
     padding: 0;
     font-size: 1.6rem;
-    border: 1px solid gray;
-    border-radius: 6px;
     width: 30px;
-    height: 30px;
-    color: black;
+    max-height: fit-content;
+    color: #0f0b02;
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+.button:not(:last-child){
+    border-right: 1px solid #bbb7ae;
+}
+
+.button:last-child{
+    border-left: 1px solid #bbb7ae;
 }
 
 .count{
@@ -82,17 +109,19 @@
     justify-content: flex-end;
 }
 
-.addButtonNow{
-    margin-top: 1rem;
-    border-radius: 5px;
-    background-color: rgb(82, 185, 82);
-    width: 50%;
-}
 
 .addButtonCart{
-    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 70%;
     margin-top: 1rem;
-    border-radius: 5px;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: #7e52a0;
+    color: #ffffff;
+    font-weight: 600;
 }
 
 .profile{

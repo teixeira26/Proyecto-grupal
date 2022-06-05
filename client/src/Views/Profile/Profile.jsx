@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import NavBarRegistered from "../../Components/NavBar/NavBarRegistered";
-import NavBarShop from '../../Components/NavBar/NavBarShop'
+import NavBarShop from "../../Components/NavBar/NavBarShop";
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { NavLink } from 'react-router-dom';
-import Footer from '../../Components/Footer/Footer';
+import { NavLink } from "react-router-dom";
+import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import { useSelector,useDispatch } from "react-redux";
 import { getOwners, getPets } from "../../redux/actions/ownProvActions";

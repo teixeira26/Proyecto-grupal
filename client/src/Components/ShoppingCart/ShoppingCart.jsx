@@ -1,48 +1,53 @@
-import { useEffect, useState } from 'react';
-import CartItem from './CartItem';
-import '../../index.css';
-import NavBarShop from '../NavBar/NavBarShop';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useState } from "react";
+import CartItem from "./CartItem";
+import "../../index.css";
+import NavBarShop from "../NavBar/NavBarShop";
+import { useDispatch, useSelector } from "react-redux";
 import { chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
 import { useAuth0 } from '@auth0/auth0-react';
 import { Link, NavLink } from 'react-router-dom';
 import MercadoPago from '../Shop/MercadoPago/MercadoPago';
 
 const ShoppingCart = () => {
-    const dispatch = useDispatch()
-    const { user } = useAuth0()
-    const cart = useSelector(state => state.cart);
-    console.log('CARRITO: ', cart);
-    const [total, setTotal] = useState(0);
+  const dispatch = useDispatch();
+  const { user } = useAuth0();
+  const cart = useSelector((state) => state.cart);
+  console.log("CARRITO: ", cart);
+  const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        if (user) {
-            dispatch(chargeCart(user.email))
-        }
-    }, [user, dispatch]);
-
-    useEffect(() => {
-        var suma = 0;
-        if (cart && cart.length) {
-            cart.forEach(x => {
-                suma += (x.price * x.quantity);
-                console.log('TOTAL', total);
-            }) 
-            setTotal(suma);
-        } else { setTotal(0);}
-    }, [cart]);
-
-    const clearCart = () => {
-        dispatch(clearAllCart(user.email));
-        setTotal(0);
+  useEffect(() => {
+    if (user) {
+      dispatch(chargeCart(user.email));
     }
+  }, [user, dispatch]);
 
-    return (
-        <div>
-            <NavBarShop />
-            <h2>Carrito de Compras</h2>
+  useEffect(() => {
+    var suma = 0;
+    if (cart && cart.length) {
+      cart.forEach((x) => {
+        suma += x.price * x.quantity;
+        console.log("TOTAL", total);
+      });
+      setTotal(suma);
+    } else {
+      setTotal(0);
+    }
+  }, [cart]);
 
-            <NavLink to="/shop"><p>Volver al shop</p></NavLink>
+  const clearCart = () => {
+    dispatch(clearAllCart(user.email));
+    setTotal(0);
+  };
+
+  return (
+    <div>
+              <NavBarShop />
+      <h2>Carrito de Compras</h2>
+
+      <NavLink to="/shop">
+        <p>Volver al shop</p>
+      </NavLink>
+
 
             <h3>Productos</h3>
             <article className="box">
@@ -60,12 +65,12 @@ const ShoppingCart = () => {
                 <Link to='/purchaseConfirmation'>
                 <button>Continuar al pago</button>
                 </Link>
+                </article>
 
-            </article>
-            
 
-        </div>
-    )
+      
+    </div>
+  );
 };
 
 export default ShoppingCart;
