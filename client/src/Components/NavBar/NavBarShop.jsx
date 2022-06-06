@@ -28,6 +28,7 @@ function NavBar() {
     
     const userdb = x.data.find(x=>x.email === user.email);
         console.log(userdb)
+        if(x){
         setUser({
             nombre:user.name,
             picture:userdb.profilePicture&&userdb.profilePicture[0]?userdb.profilePicture[0]:'/assets/img/notloged.png',
@@ -35,7 +36,7 @@ function NavBar() {
             pets:userdb.pets,
             address:userdb.address,
         })
-        console.log('userdb', userdb)
+        console.log('userdb', userdb)}
 
     })
     }

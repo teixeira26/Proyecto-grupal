@@ -35,21 +35,6 @@ export default function Profile() {
         }
     }, [user, isAuthenticated, pets, dispatch])
 
-    useEffect(() => {
-        if (isAuthenticated) {
-            axios.get('http://localhost:3001/owners').then(x => {
-                const userdb = x.data.find(x => x.email === user.email);
-                setUser({
-                    nombre: user.name,
-                    picture: user.picture,
-                    email: user.email,
-                    pets: userdb.pets,
-                    address: userdb.address,
-                })
-                console.log('userdb', userdb)
-            })
-        }
-    }, [user, isAuthenticated, pets, dispatch]);
 
     async function byePet(id) {
         await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false })
