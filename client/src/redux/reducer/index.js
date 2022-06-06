@@ -3,7 +3,9 @@ import {
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
     GET_PROVIDERS,
-    ID_PROVIDER
+    ID_PROVIDER,
+    SORT_PROVIDER_PRICE,
+    FILTER_PROVIDER_PRICE
 } from '../actions-type/ownProvActionTypes';
 import {
     FILTER_BY_PET,
@@ -17,7 +19,8 @@ import {
     REMOVE_FROM_CART,
     CLEAR_CART,
     ADD_ITEM,
-    DELETE_ITEM
+    DELETE_ITEM,
+    CHARGE_FAVORITES
 } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 
@@ -32,6 +35,8 @@ const initialState = {
     productDetail:[],
     pets: [],
     favorites:[],
+    filteredProviders:[]
+
 };
 
 function rootReducer(state = initialState, action) {
@@ -69,7 +74,15 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: newCart
             }
-
+        
+            case CHARGE_FAVORITES:
+            console.log(action.payload);
+            return{
+                ...state,
+                favorites: action.payload,
+            }
+            
+            
         case CHARGE_CART:
             console.log("entré al reducer", action.email);
             if(localStorage.getItem(action.email)){
@@ -97,7 +110,7 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 providers: action.payload,
-                copyProviders: action.payload
+                filteredProviders: action.payload
             }
 
         case GET_NAME_OWNER:
@@ -229,6 +242,40 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     cart: newCart3
                 }
+
+
+
+
+
+
+                case FILTER_PROVIDER_PRICE:
+                    return {
+                        ...state,
+                        filteredProviders: action.payload !== 'all' ?
+                            state.providers.filter(p => action.payload === p.service[0]) : state.providers
+                    }
+        
+                case SORT_PROVIDER_PRICE:
+                    let sortService = [...state.filteredProviders]
+                    if (action.payload === 'ASC') {
+                        sortService.sort((a, b) => {
+                            if (a.price > b.price) return 1
+                            if (a.price < b.price) return -1
+                            return 0
+                        })
+                    }
+                    if (action.payload === 'DESC') {
+                        sortService.sort((a, b) => {
+                            if (a.price > b.price) return -1
+                            if (a.price < b.price) return 1
+                            return 0
+                        })
+                    }
+                    return {
+                        ...state,
+                        filteredProviders: sortService
+                    }
+
             
     
         default:

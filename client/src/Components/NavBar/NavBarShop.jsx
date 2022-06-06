@@ -15,7 +15,8 @@ function NavBar() {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useAuth0();
   const [total, setTotal] = useState(0);
-  const [productsFavNumber, setProductsFavNumber] = useState(0)
+  const [productsFavNumber, setProductsFavNumber] = useState(0);
+  const [userData, setUser] = useState({});
   const state = useSelector((state) => {
     return state;
   });
@@ -23,6 +24,20 @@ function NavBar() {
   useEffect(() => {
     if(user){
       dispatch(chargeCart(user.email))
+      axios.get('http://localhost:3001/owners').then(x=>{
+    
+    const userdb = x.data.find(x=>x.email === user.email);
+        console.log(userdb)
+        setUser({
+            nombre:user.name,
+            picture:userdb.profilePicture&&userdb.profilePicture[0]?userdb.profilePicture[0]:'/assets/img/notloged.png',
+            email:user.email,
+            pets:userdb.pets,
+            address:userdb.address,
+        })
+        console.log('userdb', userdb)
+
+    })
     }
     // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
@@ -70,7 +85,7 @@ function NavBar() {
           <div className={styles.icons}>
             <div className={styles.icon}>
               <NavLink to="/shoppingcart" className={styles.navLinkIcon}>
-                <ion-icon name="bag-handle-outline"></ion-icon>
+                <img src="../../assets/img/shopping-bag.svg" alt="" />
               </NavLink>
 
               <div className={styles.circle}>{total}</div>
@@ -78,7 +93,7 @@ function NavBar() {
 
             <div className={styles.icon}>
               <NavLink to="/favorites" className={styles.navLinkIcon}>
-                <ion-icon name="heart-outline"></ion-icon>
+                <img src="../../assets/img/favorite.svg" alt="" />
               </NavLink>
               <div className={styles.circle}>{productsFavNumber}</div>
             </div>
@@ -90,7 +105,7 @@ function NavBar() {
               <NavLink to="/profile" className={styles.profile}>
                 <img
                   className={styles.profilePicture}
-                  src={isAuthenticated && user.picture}
+                  src={isAuthenticated && userData.picture?userData.picture:user.picture}
                   alt=""
                 ></img>
               </NavLink>

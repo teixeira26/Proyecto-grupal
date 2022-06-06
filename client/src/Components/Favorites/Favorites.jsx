@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { getProducts } from "../../redux/actions/petshopActions";
+import { addTofavorites, getProducts } from "../../redux/actions/petshopActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBarShop from "../NavBar/NavBarShop";
 import Footer from '../Footer/Footer';
@@ -10,43 +10,43 @@ import inContainer from "../GlobalCss/InContainer.module.css";
 import shopStyles from "../Shop/Shop.module.css";
 import styles from "./Favorites.module.css";
 
-const Favorites = ()=>{
-    const products = useSelector((state) => state.filteredProducts);
-    const {user} = useAuth0()
-    const [productsFav, setProductsFav] = useState([])
-    const [productsFavNumber, setProductsFavNumber] = useState([])
-    const dispatch = useDispatch()
-    useEffect(() => {
-        axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
-        setProductsFavNumber(x.data)
-      })
-      dispatch(getProducts());
-      }, [dispatch, user.email]);
+const Favorites = () => {
+  const products = useSelector((state) => state.filteredProducts);
+  const { user } = useAuth0()
+  const [productsFav, setProductsFav] = useState([])
+  const [productsFavNumber, setProductsFavNumber] = useState([])
+  const dispatch = useDispatch()
+  useEffect(() => {
+    axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x => {
+      setProductsFavNumber(x.data)
+    })
+    dispatch(getProducts());
+  }, [dispatch, user.email]);
 
-    useEffect(() => {
-      setProductsFav(products.filter(x=>{
-          if(productsFavNumber.includes(x.id)){
-              return x
-          }
-      }))
-    }, [products, productsFavNumber]);
-
-
-    async function deleteFav(id){
-      let withoutFav = productsFav.filter(fav => fav.id !== id)
-      setProductsFav(withoutFav)
-
-      const AllOwners = await axios.get("http://localhost:3001/owners")
-
-      const owner = AllOwners.data.find(x=>x.email === user.email)
-      console.log(owner)
-      let objToPut = {
-        ...owner,
-        favorites: owner.favorites[0] ? owner.favorites.filter(x => x !== id) : []
+  useEffect(() => {
+    setProductsFav(products.filter(x => {
+      if (productsFavNumber.includes(x.id)) {
+        return x
       }
-      console.log(objToPut)
-      await axios.put("http://localhost:3001/owners/addFavorite", objToPut)
+    }))
+  }, [products, productsFavNumber]);
+
+  async function deleteFav(id) {
+    let withoutFav = productsFav.filter(fav => fav.id !== id)
+    setProductsFav(withoutFav)
+
+    const AllOwners = await axios.get("http://localhost:3001/owners");
+
+    const owner = AllOwners.data.find(x => x.email === user.email)
+    console.log(owner)
+    let objToPut = {
+      ...owner,
+      favorites: owner.favorites[0] ? owner.favorites.filter(x => x !== id) : []
     }
+    console.log(objToPut);
+    await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
+    dispatch(addTofavorites(objToPut.favorites));
+  };
 
   return (
     <div>
