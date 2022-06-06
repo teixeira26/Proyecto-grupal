@@ -5,7 +5,7 @@ const {Op} = require('sequelize');
 const router = Router();
 
 router.get('/', async(req, res, next) =>{
-    const {name, filter, order} = req.query
+    const {name} = req.query
     let allProviders;
 
     try{
@@ -16,18 +16,9 @@ router.get('/', async(req, res, next) =>{
                         [Op.iLike]: '%' + name + '%'
                     }
                 },
-                order:[["name", 'ASC']]
-            })
-        }else if(filter){
-            allProviders = await Provider.findAll({
-                where: {
-                    service: filter
-                },
-                order:[["price", order]]
             })
         }else{
             allProviders = await Provider.findAll({
-            order:[["name", order]]
             })
         }
 
