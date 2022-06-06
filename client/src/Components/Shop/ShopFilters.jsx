@@ -103,6 +103,8 @@ const ShopFilters = () => {
         <option value="gato">Gato</option>
         <option value="tortuga">Tortuga</option>
         <option value="conejo">Conejo</option>
+        <option value="pez">Peces</option>
+        <option value="pajaro">Aves</option>
       </select>
     </section>
 
