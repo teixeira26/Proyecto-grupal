@@ -1,23 +1,36 @@
-import React from "react";
+import React, {useEffect} from "react";
 import styles from "../Home/Home.module.css";
 import NavBarRegistered from "../NavBar/NavBarRegistered";
+import NavBarShop from '../NavBar/NavBarShop'
 import inContainer from "../GlobalCss/InContainer.module.css";
 import HomeCard from "./HomeCard";
-import Footer from "../Landing/Footer/Footer";
-
-import Login from "../Auth0/Login";
-import Logout from "../Auth0/Logout";
+import Footer from "../Footer/Footer";
+import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const { user, isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated } = useAuth0();
+  const navigate = useNavigate()
+
+  useEffect(()=>{
+    (async()=>{
+      let owner = {
+          email:user.email,
+          name:user.given_name,
+          lastName: user.family_name,
+        }
+        await axios.post('http://localhost:3001/owners', owner)
+        navigate('/home')
+  })()
+  }, [])
+
   return (
-    <div>
+    <div className={styles.body}>
       {isAuthenticated && console.log(user)}
 
 
-        <NavBarRegistered />
+        <NavBarShop/>
 
 
       <div className={inContainer.container}>
@@ -25,15 +38,18 @@ const Home = () => {
 
         <div className={styles.cardWrapper}>
           <Link to='/providers'>
-          <HomeCard name='Paseos y hospedaje' img='assets/img/pets-paseos-hospedaje.jpg'/>
+          <HomeCard name='Paseos y hospedaje' img='assets/img/paseador.png'/>
           </Link>
           <Link to="/shop">
-            <HomeCard name='Comprar productos' img='assets/img/pets-comprar-productos.jpg'/>
+            <HomeCard name='Comprar productos' img='assets/img/shop.png'/>
           </Link>
         </div>
       </div>
 
-      <Footer />
+      <div className={styles.stickyFooter}>
+        <Footer />
+      </div>
+      
     </div>
   );
 };

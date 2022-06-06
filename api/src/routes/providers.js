@@ -1,17 +1,14 @@
 const { Router } = require ('express');
-const { Provider, Pet } = require('../db')
-const {Op} = require('sequelize')
+const { Provider, Pet } = require('../db');
+const {Op} = require('sequelize');
 
-const router = Router()
+const router = Router();
 
 router.get('/', async(req, res, next) =>{
-
     const {name, filter, order} = req.query
-
     let allProviders;
 
     try{
-
         if(name){
             allProviders = await Provider.findAll({
                 where: {
@@ -21,7 +18,6 @@ router.get('/', async(req, res, next) =>{
                 },
                 order:[["name", 'ASC']]
             })
-
         }else if(filter){
             allProviders = await Provider.findAll({
                 where: {
@@ -29,7 +25,6 @@ router.get('/', async(req, res, next) =>{
                 },
                 order:[["price", order]]
             })
-
         }else{
             allProviders = await Provider.findAll({
             order:[["name", order]]
@@ -39,18 +34,37 @@ router.get('/', async(req, res, next) =>{
         allProviders.length ?
         res.status(200).send(allProviders) :
         res.status(400).send('No hay usuarios cargados')
-       
+
     }catch(err){
         next(err)
     }
-})
+});
 
-
+router.get('/:email', async (req, res, next) => {
+    const {email} = req.params;
+    try {
+        let providerId = await Provider.findByPk(email);
+        res.send(providerId);
+    } catch (error) {
+        next(error)
+    }
+});
 
 router.post('/', async(req, res, next) =>{
-
-    const {name, lastName, email, profilePicture, address, service, description, price, typeOfHousing, housingPhotos, schedule, dogsPerWalk} = req.body
-
+    const {
+        name,
+        lastName,
+        email,
+        profilePicture,
+        address,
+        service,
+        description,
+        price,
+        typeOfHousing,
+        housingPhotos,
+        schedule,
+        dogsPerWalk
+    } = req.body;
     let auxName = name.toLowerCase()
     let auxLastName = lastName.toLowerCase()
 
@@ -62,7 +76,7 @@ router.post('/', async(req, res, next) =>{
                 lastName: auxLastName,
                 email,
                 profilePicture,
-                address,
+                adress:address,
                 name: auxName,
                 lastName: auxLastName,
                 email,
@@ -83,18 +97,16 @@ router.post('/', async(req, res, next) =>{
     }catch(err){
         next(err)
     }
-})
+});
 
-
-router.put('/:email', async (req, res, next) =>{
-    const email = req.params.email
+router.put('/', async (req, res, next) =>{
     const provider = req.body;
     console.log(provider)
 
     try{
         await Provider.update(provider,{
             where:{
-                email: email
+                email: provider.email
             }
         })
     
@@ -103,15 +115,14 @@ router.put('/:email', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
-})
+});
 
 
 router.delete('/:id', async (req, res, next) =>{
     const id = req.params.id
 
     try{
-        await Provider.update({isActive: false},{
+        await Provider.destroy({
             where:{
                 id: id
             }
@@ -122,8 +133,6 @@ router.delete('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-
-})
-
+});
 
 module.exports = router;

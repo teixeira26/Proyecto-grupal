@@ -1,44 +1,108 @@
-.nav{
+ .nav{
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 100px;
+    padding: 0 3rem;
+    border-bottom: 1px solid #bbb7ae;
+    margin-bottom: 2rem;
+    background-color: white;
 }
 
-.contents{
+.item{
+    flex: 1;
     display: flex;
     align-items: center;
-    gap: 32px;
 }
 
+.item:nth-child(2){
+    display: flex;
+    justify-content: flex-end;
+    flex: 1.2;
+}
+
+.item:last-child{
+    flex: 1;
+    justify-content: flex-end;
+}
+
+.logoLink{
+    font-size: 2.2rem;
+    font-weight: 800;
+    text-transform: unset;
+    color: #0f0b02;
+}
+
+.logoLink:hover{
+    color: #0F0B02;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 2rem;
+}
 
 .profilePicture {
     width: 50px;
-    height: 50px ;
-    border-color: yellowgreen;
+    height: 50px;
+    border-color: #7e52a0;
     border-style: solid;
     border-radius: 50%;
 }
 
-.navList{
-    display: flex;
-    align-items: center;
-}
-
-.navItem{
-    margin: 0 1rem;
-}
-
 .navLink{
-    padding: 0 2rem;
+    padding: 0 0.5rem;
+    font-weight: 600;
+    margin: 0 1rem;
+    color: #0F0B02;
+    font-weight: 600;
+}
+
+
+.navLink:hover{
+    color: #7e52a0;
+    transition: all ease-in 100ms;
 }
 
 ion-icon{
-    font-size: 2rem;
-    margin: 0 1.5rem;
+    font-size: 2rem;   
+    color: #BBB7AE;
+    margin: 0;
 }
 
 .icons{
     display: flex;
+    flex: 2;
     align-items: center;
+    justify-content: center;
 }
 
+.icon{
+    position: relative;
+}
+
+.navLinkIcon{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon:not(:last-child){
+    margin-right: 2rem;
+}
+
+.circle{
+    width: 22px;
+    height: 22px;
+    background-color: #7e52a0;
+    color: white;
+    border-radius: 50px;
+    position: absolute;
+    top: -7px;
+    right: -13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

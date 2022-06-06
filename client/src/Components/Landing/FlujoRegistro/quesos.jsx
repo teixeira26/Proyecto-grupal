@@ -15,21 +15,29 @@ export const Quesos = ()=>{
           await axios.post('http://localhost:3001/owners', owner)
           navigate('/home')
     }
-    const providerRegister = async()=>{
-        let provider = {
-            email:user.email,
-            name:user.given_name,
-            lastName: user.family_name,
-          }
-          await axios.post('http://localhost:3001/providers', provider)
-          navigate('/infoProvider2')
-    }
+    // const providerRegister = async()=>{
+    //     let provider = {
+    //         email:user.email,
+    //         name:user.given_name,
+    //         lastName: user.family_name,
+    //       }
+    //       await axios.post('http://localhost:3001/providers', provider)
+    //       navigate('/infoProvider')
+    // }
     return(
+        // <div style={{
+        //     display:"flex",
+        //     justifyContent:"center",
+        //     alignItems:"center",
+        // }}>
+        // <div>
+        //     <h1>BIENVENIDO, AMANTE DE LAS MASCOTAS</h1>
+        // <button onClick={ownerRegister}>COMENZAR</button>
+        // {/* <button onClick={providerRegister}>provider</button> */}
+        // </div>
+        // </div>
         <div>
-            <h1>QUE SOS ??</h1>
-        <button onClick={ownerRegister}>owner</button>
-        <button onClick={providerRegister}>provider</button>
+        {ownerRegister()}
         </div>
-
     )
 }

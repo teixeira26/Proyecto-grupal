@@ -1,0 +1,131 @@
+.detailFlex{
+    display: flex;
+    justify-content: center;
+    width: 80vw;
+    margin: 5rem auto;
+}
+
+.detailImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 550px;
+    margin-right: 8rem;
+    object-fit: cover;
+    object-position: center;
+    border: 1px solid #bbb7ae;
+    border-radius: 8px;
+    background-color: white;
+}
+
+.detailRight{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 350px;
+}
+
+.detailCategory{
+    color: #bbb7ae;
+    margin: 0;
+    font-weight: 700;
+}
+
+.detailTitle{
+    margin: 0;
+    font-weight: 800;
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #0f0b02;
+}
+
+.detailInfo{
+    color: #bbb7ae;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.detailPrice{
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 1rem;
+    font-weight: 300;
+    color: #0f0b02;
+}
+
+.detailQuantity{
+    color: #bbb7ae;
+    margin: 0;
+    font-weight: 700;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+}
+.productQuantity{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: fit-content;
+    border: 1px solid #bbb7ae;
+    border-radius: 25px;
+    padding: 0.4rem;
+}
+
+.stock{
+    color: #bbb7ae;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.button{
+    background-color: white;
+    padding: 0;
+    font-size: 1.6rem;
+    width: 30px;
+    max-height: fit-content;
+    color: #0f0b02;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+.button:not(:last-child){
+    border-right: 1px solid #bbb7ae;
+}
+
+.button:last-child{
+    border-left: 1px solid #bbb7ae;
+}
+
+.count{
+    margin: 0 1.5rem;
+    font-size: 1.8rem;
+}
+
+.detailAddCart{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+
+.addButtonCart{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 4rem;
+    width: 70%;
+    margin-top: 1rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    background-color: #7e52a0;
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.profile{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -3,14 +3,14 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  margin: 8rem 0;
+  margin: 3rem 0;
 }
 
 .shopGrid{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 28rem));
-  gap: 8rem;
-  justify-content: space-between;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 20rem));
+  gap: 4rem;
+  justify-content:flex-start;
   width: 100%;
   margin-left: 5rem;
 }
@@ -24,5 +24,8 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  margin-top: 8rem;
+  font-size: 3rem;
+  padding: 2rem;
+  margin: 0;
+  color: rgb(0, 0, 0);
 }

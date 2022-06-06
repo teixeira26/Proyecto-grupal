@@ -1,14 +1,13 @@
 .detailFlex{
     display: flex;
     justify-content: center;
-    width: 60vw;
+    width: 69vw;
     margin: 10rem auto;
 }
 
 .detailImg{
-    width: 500px;
-    height: 450px;
-    background-color: gray;
+    width: 550px;
+    height: 550px;
     margin-right: 5rem;
 }
 
@@ -20,28 +19,37 @@
 
 .detailCategory{
     color: gray;
+    margin: 0.5rem 0;
+    font-weight: 400;
 }
 
 .detailTitle{
-    margin-bottom: 2rem;
+    margin: 0;
+    margin-bottom: 1rem;
+    font-weight: 500;
 }
 
 .detailInfo{
     color: gray;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 }
 
 .detailPrice{
-    font-size: 4rem;
-    margin-bottom: 2rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 .detailQuantity{
     color: gray;
+    margin: 0;
+    font-size: 1.6rem;
+    text-transform: uppercase;
 }
 .productQuantity{
     display: flex;
     align-items: center;
+    
 }
 
 .stock{
@@ -50,16 +58,22 @@
 }
 
 .button{
-    padding: 1rem;
     background-color: white;
-    font-size: 2rem;
-    border: 1px solid;
-    border-radius: 5px;
+    padding: 0;
+    font-size: 1.6rem;
+    border: 1px solid gray;
+    border-radius: 6px;
+    width: 30px;
+    height: 30px;
+    color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .count{
-    margin: 0 2rem;
-    font-size: 2rem;
+    margin: 0 1.5rem;
+    font-size: 1.8rem;
 }
 
 .detailAddCart{
@@ -68,16 +82,9 @@
     justify-content: flex-end;
 }
 
-.addButtonNow{
-    margin-top: 2rem;
-    border-radius: 5px;
-    background-color: rgb(82, 185, 82);
-    width: 50%;
-}
-
 .addButtonCart{
     width: 50%;
-    margin-top: 2rem;
+    margin-top: 1rem;
     border-radius: 5px;
 }
 

@@ -6,13 +6,13 @@ const WhatWeOffer = (props) => {
   return (
     <div className={InContainer.container}>
       <h2 className={styles.wwoTitle}>
-        En nuestro sitio podrás encontrar <br/> lo mejor para tus mascotas
+        Encontrá lo mejor  para tus mascotas.
       </h2>
 
       <section className={styles.wwoFlex}>
         <div className={styles.wwoGrid}>
           <div className={styles.wwoImgContainer}>
-            <span className={styles.wwoImg}>IMG</span>
+            <img src="/assets/img/paseador.png" alt="" className={styles.wwoImg}/>
           </div>
 
           <p className={styles.wwoText}>
@@ -21,8 +21,8 @@ const WhatWeOffer = (props) => {
         </div>
 
         <div className={styles.wwoGrid}>
-          <div className={styles.wwoImgContainer}>
-            <span className={styles.wwoImg}>IMG</span>
+        <div className={styles.wwoImgContainer}>
+            <img src="/assets/img/host.png" alt="" className={styles.wwoImg}/>
           </div>
 
           <p className={styles.wwoText}>
@@ -31,8 +31,8 @@ const WhatWeOffer = (props) => {
         </div>
 
         <div className={styles.wwoGrid}>
-          <div className={styles.wwoImgContainer}>
-            <span className={styles.wwoImg}>IMG</span>
+        <div className={styles.wwoImgContainer}>
+            <img src="/assets/img/shop.png" alt="" className={styles.wwoImg}/>
           </div>
 
           <p className={styles.wwoText}>

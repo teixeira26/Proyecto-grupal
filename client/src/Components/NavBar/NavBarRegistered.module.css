@@ -2,6 +2,18 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.logoLink{
+    font-size: 2.2rem;
+    font-weight: bold;
+    text-transform: unset;
+    color: black;
+}
+
+.logoLink:hover{
+    color: black;
 }
 
 .contents{
@@ -14,7 +26,7 @@
 .profilePicture {
     width: 50px;
     height: 50px ;
-    border-color: yellowgreen;
+    border-color: #52b788;
     border-style: solid;
     border-radius: 50%;
 }
@@ -30,4 +42,6 @@
 
 .navLink{
     padding: 0 2rem;
+    color: black;
+    font-weight: 600;
 }

@@ -3,6 +3,8 @@ button{
     padding: 1rem;
     border: none;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 6px;
+    background-color: #7e52a0;
+    color: #d8f3dc;
+    font-weight: 500;
 }
-

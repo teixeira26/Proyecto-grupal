@@ -1,26 +1,35 @@
-.card{
+.card {
     overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    cursor: pointer;
-    background-color: rgb(216, 214, 214);
     position: relative;
+    padding: 1rem;
+    transition: all 300ms ease-in-out;
+    border-radius: 8px;
+    box-shadow: 0px 3px 3px rgba(34, 34, 34, 0.692);
+    height: 30rem;
 }
 
-.cardImg{
-    height: 32rem;
+.card:hover {
+    transform: scale(1.01);
+    box-shadow: 0px 8px 30px rgba(34, 34, 34, 0.692);
+}
+
+.cardImg {
+    height: 20rem;
     width: 100%;
-    object-fit: contain;
-    background-color: gray;
+    object-fit: cover;
+    object-position: center;
 }
 
-.addFav{
+.addFav {
     position: absolute;
     width: 30px;
     height: 30px;
     right: 0;
     margin: 1rem;
+    cursor: pointer;
 }
 
 .cardBottom{
@@ -30,20 +39,23 @@
 }
 
 .cardTitle{
+    /* border-top: 1px solid rgb(192, 192, 192); */
     width: 100%;
-    margin-top: 1.5rem;
     display: flex;
     justify-content: flex-start;
-    margin: 0.5rem 0;
-    text-transform: uppercase; 
+    margin: 1rem 0 0;
+    padding: 1rem 0 0;
+    text-transform: uppercase;
+    color: black;
+    font-weight: 700;
 }
-
+/* 
 .addButton:hover{
     color: red;
-}
+} */
 
-.cardInfo{
+/* .cardInfo{
     bottom: 0px;
     background-color: white;
     width: 100%;
-}
+} */

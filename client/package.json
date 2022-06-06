@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@auth0/auth0-react": "^1.10.1",
+    "@craco/craco": "^6.4.3",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/user-event": "^13.5.0",
     "@uploadcare/react-widget": "^2.1.1",
@@ -20,6 +21,7 @@
     "redux-thunk": "^2.4.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^2.1.2",
+    "socket.io-client": "^4.5.1",
     "sweetalert2": "^11.4.17",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.11"
@@ -47,5 +49,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "autoprefixer": "^9.8.8",
+    "postcss": "^7.0.39",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }
