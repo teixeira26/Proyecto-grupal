@@ -1,37 +1,38 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {NavLink} from 'react-router-dom';
-import { getProviders } from "../../redux/actions/ownProvActions";
+import { filterByProviderService, getProviders, sortByProviderPrice } from "../../redux/actions/ownProvActions";
 import ProvidersCard from "./ProvidersCard";
 import NavBarShop from '../NavBar/NavBarShop'
 import Footer from "../Footer/Footer";
 import styles from "../Providers/Providers.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 
-export default function Providers(){
-    const dispatch = useDispatch();
-    const [order, setOrder] = useState('ASC');
-    const [filter, setFilter] = useState('');
+export default function Providers() {
+    const dispatch = useDispatch()
+    // const [order, setOrder] = useState('ASC')
+    // const [filter, setFilter] = useState('')
 
-    useEffect(()=>{
-        dispatch(getProviders(filter, order))
-    },[dispatch, filter, order]);
+    useEffect(() => {
+        dispatch(getProviders())
+    }, [dispatch])
 
-    const providers = useSelector(state => state.providers);
-    
-    function handleFilter(e){
+    const providers = useSelector(state => state.filteredProviders);
+
+    function handleFilterService(e) {
+        console.log(e.target.value);
+        dispatch(filterByProviderService(e.target.value))
+    }
+
+    function handleOrderPrice(e) {
         console.log(e.target.value)
-        setFilter(e.target.value)
-    };
+        dispatch(sortByProviderPrice(e.target.value))
+    }
 
-    function handleOrder(e){
-        setOrder(e.target.value)
-    };
-
-    function handleRemove(e){
+    function handleRemove(e) {
         e.preventDefault()
-        setFilter('')
-    };
+        dispatch(getProviders())
+    }
 
     return (
         <div>
@@ -49,7 +50,7 @@ export default function Providers(){
                     <div className={styles.providersFilters}>
                         <section className={styles.selects}>
                             <p className={styles.filterTitle}>Filtrar por</p>
-                            <select className={styles.select} onChange={(e) => handleFilter(e)}>
+                            <select className={styles.select} onChange={(e) => handleFilterService(e)}>
                                 <option hidden={true}>Tipo de servicio</option>
                                 <option value="">Todos</option>
                                 <option value="hospedaje">Hospedaje</option>
@@ -59,7 +60,7 @@ export default function Providers(){
                         <br />
                         <section className={styles.selects}>
                             <p className={styles.filterTitle}>Ordenar por</p>
-                            <select className={styles.select} onChange={handleOrder}>
+                            <select className={styles.select} onChange={handleOrderPrice}>
                                 <option hidden={true}>Rango de precio</option>
                                 <option value="ASC">Mayor a menor</option>s
                                 <option value="DESC">Menor a mayor</option>

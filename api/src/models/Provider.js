@@ -24,7 +24,8 @@ module.exports = (sequelize) => {
       type:DataTypes.JSONB,
     },
     service:{
-      type:DataTypes.ENUM('paseo', 'hospedaje')
+      type: DataTypes.ARRAY(DataTypes.ENUM('paseo', 'hospedaje'))
+      
     },
     description:{
       type:DataTypes.TEXT,
