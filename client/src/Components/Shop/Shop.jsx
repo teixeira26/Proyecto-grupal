@@ -42,7 +42,6 @@ const Shop = () => {
   return (
     <div className={styles.container}>
       <NavBarShop />
-
       <div className={inContainer.container}>
         <NavLink to="/home">
           <img
@@ -51,22 +50,18 @@ const Shop = () => {
             className={styles.leftArrow}
           />
         </NavLink>
-
         <h1 className={styles.shopTitle}>Pet Shop</h1>
-
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
             <ShopSearchbar />
             <ShopFilters />
           </div>
-
           <br />
           <section className={styles.shopGrid}>
             {!products.length
               ? "LOADING"
               : products.map((p) => {
                   return p.stock > 0 ? (
-                    // <a href={`http://localhost:3000/shop/${p.id}`} key={p.id}>
                     <ProductCard
                       key={p.id}
                       id={p.id}
@@ -78,8 +73,6 @@ const Shop = () => {
                       price={p.price}
                     />
                   ) : null;
-
-                  // </a>
                 })}
           </section>
         </div>
