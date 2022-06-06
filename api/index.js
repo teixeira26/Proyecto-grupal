@@ -8,5 +8,3 @@ conn.sync({ force: true}).then(() => {
     console.log('%s listening at 3001');
   });
 }).catch((error)=>console.log(error));
-
-
