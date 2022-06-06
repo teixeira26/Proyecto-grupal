@@ -9,8 +9,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 500px;
-    height: 550px;
+    width: 450px;
+    height: 500px;
     margin-right: 8rem;
     object-fit: cover;
     object-position: center;
@@ -35,7 +35,7 @@
 .detailTitle{
     margin: 0;
     font-weight: 800;
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 2.5rem);
     color: #0f0b02;
 }
 
@@ -46,7 +46,7 @@
 }
 
 .detailPrice{
-    font-size: clamp(2rem, 5vw, 3rem);
+    font-size: clamp(1.8rem, 5vw, 3rem);
     margin-bottom: 1rem;
     font-weight: 300;
     color: #0f0b02;
@@ -56,7 +56,7 @@
     color: #bbb7ae;
     margin: 0;
     font-weight: 700;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     text-transform: uppercase;
 }
 .productQuantity{
