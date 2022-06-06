@@ -22,15 +22,16 @@ function Landing() {
       let dbOwner = await axios.get("http://localhost:3001/owners");
       console.log(dbOwner);
       let userInfo = dbOwner.data.find((x) => x.email === user.email);
+
       if (typeof userInfo === "object") {
         navigate("/home");
         setNombre(user.name);
       } else {
-        navigate("/tipo-usuario");
+        navigate("/home");
       }
 
     } catch (error) {
-      navigate("/tipo-usuario");
+      navigate("/home");
     }
   };
 
