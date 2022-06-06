@@ -9,7 +9,7 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           <h2 className={styles.footerSign}>
             {/* Enterate de todas <br /> nuestras novedades! */}
-            yumClaw
+            yumpaw
           </h2>
           <p className={styles.newsletter}>
             {/* ¡Suscribite a nuestro Newsletter! */}

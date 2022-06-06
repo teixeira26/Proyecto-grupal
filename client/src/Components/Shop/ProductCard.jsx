@@ -67,16 +67,17 @@ const ProductCard = ({
         <Link to={`/shop/${id}`}>
           <img src={profilePicture} alt="" className={styles.cardImg} />
           <div className={styles.cardInfo}>
+          <div className={styles.cardBottom}>
+          <p className={styles.price}>${price}</p>
             <h2 className={styles.cardTitle}>{name}</h2>
 
-            <div className={styles.cardBottom}>
-              <p className={styles.price}>${price}</p>
+            
+              
               {/* <button className={styles.addButton} onClick={()=>{
               dispatch({
               type:TYPES.ADD_TO_CART,
               payload:id,
             })}}>Agregar al carrito</button> */}
-              <div className={styles.choContainer}></div>
             </div>
           </div>
         </Link>
