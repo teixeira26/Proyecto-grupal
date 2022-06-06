@@ -8,12 +8,9 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { putOwnerInfo } from "../../redux/actions/ownProvActions";
 import { useNavigate } from "react-router-dom";
 import { Widget } from "@uploadcare/react-widget";
-<<<<<<< HEAD
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import style from "./InfoOwner.module.css"
-=======
->>>>>>> 44ace397a11b9064402f6f214306fe6686fe351a
 
 export default function InfoOwner() {
   const dispatch = useDispatch();
