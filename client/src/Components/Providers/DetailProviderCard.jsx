@@ -1,8 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
+import inContainer from "../GlobalCss/InContainer.module.css";
+import style from './DetailProviderCard.module.css'
 
-export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state}) {
+export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price}) {
     console.log(email)
     console.log(city)
     console.log(state)
@@ -10,22 +12,24 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
 
     return(
         <>
-            <section>
-                <img src={profilePicture} alt="" />
-                <div>
-                    <div>
+            <section className={inContainer.container}>
+                <div className={style.topinfo}>
+                    <img className={style.detailImg} src={profilePicture} alt="profile img" />
+                    <div className={style.data}>
                         <h1>{name} {lastName}</h1>
-                        <span>Rating</span>
+                        <p>{service}</p>
+                        <p>{address}</p>
                     </div>
-                    <h3>{service}</h3>
-                    <h4>{address}</h4>
                 </div>
-                <div>
+                <div className={style.description}>
                     <h2>Sobre {name}</h2>
                     <p>{description}</p>
-                    <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con Name</button></NavLink>
+                    <span>Costo por {service}: <strong>${price}</strong></span>
                 </div>
-                <div>
+                <div className={style.contact}>
+                    <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>
+                </div>
+                {/* <div>
                     <h2>Comentarios recibidos por {name}</h2>
                     <div>
                         <img src="" alt="ratePhoto" />
@@ -43,7 +47,7 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                             <p>Comments</p>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </section>
         </>
     )

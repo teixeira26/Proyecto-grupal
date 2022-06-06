@@ -6,15 +6,14 @@ export default function ProvidersCard({name, lastName, email, profilePicture, pr
     return (
         <div className={styles.container}>
           <div className={styles.card}>
+            {/* <ion-icon name="heart-outline"></ion-icon> */}
             <img src={profilePicture} alt="" className={styles.cardImg} />
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Heart_coraz%C3%B3n.svg/640px-Heart_coraz%C3%B3n.svg.png" alt="" className={styles.addFav}/>
             <div className={styles.cardInfo}>
-              <h3 className={styles.cardTitle}>{name} {lastName}</h3>
+              <h2 className={styles.cardTitle}>{name} {lastName}</h2>
               <div className={styles.cardBottom}>
-                <p className={styles.price}>{price}</p>
-                <p className={styles.price}>{service}</p>
+                <h4 className={styles.price}>{service} - ${price}</h4>
                 <Link to={`/providers/${email}`}>
-                  <button className={styles.addButton}>Detalle</button>
+                  <button className={styles.addButton}>Ver detalle</button>
                 </Link>
               </div>
             </div>

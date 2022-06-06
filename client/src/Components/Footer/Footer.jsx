@@ -1,5 +1,4 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
@@ -7,26 +6,9 @@ const Footer = () => {
     <div className={styles.container}>
       <div className={styles.footerFlex}>
         <div className={styles.footerLeft}>
-          <h2 className={styles.footerSign}>
-            {/* Enterate de todas <br /> nuestras novedades! */}
-            yumClaw
-          </h2>
-          <p className={styles.newsletter}>
-            {/* ¡Suscribite a nuestro Newsletter! */}
-            Matheus, Leo, Sabri, Alan, Frano
-          </p>
-
-          {/* <div>
-            <input
-              type="email"
-              name="email"
-              placeholder="E-mail"
-              className={styles.email}
-            />
-            <button className={styles.submit}>Suscribirme</button>
-          </div> */}
+          <h2 className={styles.footerSign}>yumPaw</h2>
+          <p className={styles.newsletter}>Matheus, Leo, Sabri, Alan, Frano</p>
         </div>
-
         <div className={styles.footerMid}>
           <ul className={styles.navList}>
             <li className={styles.navItem}>
@@ -52,9 +34,8 @@ const Footer = () => {
           </a>
         </div>
       </div>
-
       <div className={styles.footerBottom}>
-        <p className={styles.copyright}>Copyright iPet @2022</p>
+        <p className={styles.copyright}>Copyright @yumPaw - 2022</p>
         <div className={styles.social}>
           <ion-icon name="logo-github"></ion-icon>
         </div>

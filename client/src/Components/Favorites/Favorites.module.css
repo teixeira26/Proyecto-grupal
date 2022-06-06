@@ -1,0 +1,50 @@
+.sectionFav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sectionFav h1 {
+    font-weight: 800;
+}
+
+.gridFav {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 1rem;
+    margin-bottom: 4rem;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border: 1px solid #bbb7ae;
+    border-radius: 8px;
+}
+
+.favImg{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 120px;
+    margin-right: 2rem;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+}
+
+.card h1 {
+    color: #0F0B02;
+    font-size: medium;
+}
+
+.cardData {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

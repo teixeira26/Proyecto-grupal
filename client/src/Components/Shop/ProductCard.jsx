@@ -4,9 +4,7 @@ import { useDispatch } from "react-redux";
 import styles from "../Shop/ProductCard.module.css";
 import { Link } from "react-router-dom";
 import { addTofavorites } from "../../redux/actions/petshopActions";
-
 import axios from "axios";
-
 
 const ProductCard = ({
   profilePicture,
@@ -60,9 +58,6 @@ const ProductCard = ({
               ? <ion-icon name="heart-outline"></ion-icon>
               : <ion-icon name="heart"></ion-icon>
           }
-          
-          
-          
           </div>
         <Link to={`/shop/${id}`}>
           <img src={profilePicture} alt="" className={styles.cardImg} />

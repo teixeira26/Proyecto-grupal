@@ -21,6 +21,8 @@ import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
 import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
+import About from "./Views/Profile/About";
+import Contact from "./Views/Profile/Contact";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -33,9 +35,10 @@ function App() {
           <Route path='/home' element={
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
+          <Route path="/about" element={<About/>} />
+          <Route path="/contact" element={<Contact/>} />
           <Route path='/shop' element={
-            !isLoading ? <Shop/> : <Loading/>
-          }/>
+            !isLoading ? <Shop/> : <Loading/>}/>
           <Route path='/shop/:id' element={
             !isLoading ? <ProductDetail/> : <Loading/>
           }/>
