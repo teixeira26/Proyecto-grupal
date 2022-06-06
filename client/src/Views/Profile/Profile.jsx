@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBarRegistered from "../../Components/NavBar/NavBarRegistered";
 import NavBarShop from "../../Components/NavBar/NavBarShop";
 import style from "./Profile.module.css";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
