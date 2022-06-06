@@ -5,52 +5,53 @@ import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { putProvider } from "../../redux/actions/ownProvActions";
-import { useNavigate } from "react-router-dom";
+import { postProvider, putProvider } from "../../redux/actions/ownProvActions";
+import { Link, useNavigate } from "react-router-dom";
 
 
 
 export default function InfoProvider() {
-  const dispatch = useDispatch();
-  const { user } = useAuth0();
-  const navigate = useNavigate()
 
-  
-  const formik = useFormik({
-    initialValues: {
+    const { user } = useAuth0();
+    const dispatch = useDispatch();
+
+
+
+  function walk(){
+    dispatch(postProvider({
       email:user.email,
-      address:{},  
-      city: "",
-      state: "",
-      road:"",
-    },
+      name:user.given_name,
+      lastName: user.family_name,
+      service: 'paseo'
+    }))
+  }
 
-    validationSchema:yup.object({
-        city:yup.string().required(),
-        state:yup.string().required(),
-        road:yup.string().required(),
-    }),
 
-    onSubmit: (formData) => {
-      formData = {
-          email:formData.email,
-          address:{
-              city:formData.city,
-              state:formData.state,
-              road:formData.road
-          }
-      }
-      console.log(formData);
-      dispatch(putProvider(formData.email, formData));
-      navigate('/home')
-    },
-  });
+  function lodging(){
+    dispatch(postProvider({
+      email:user.email,
+      name:user.given_name,
+      lastName: user.family_name,
+      service: 'hospedaje'
+    }))
+  }
+
+
+
 
   return (
     <Container>
-      <h2>Antes de Seguir necesitamos más información</h2>
+      <h2>¿Qué servicio te gustaría ofrecer?</h2>
+      <Link to='/paseo'>
+          <button onClick={walk}>PASEO</button>
+      </Link>
+      <Link to='/hospedaje'>
+          <button  onClick={lodging}>HOSPEDAJE</button>
+      </Link>
 
-      <Form onSubmit={formik.handleSubmit}>
+
+
+      {/* <Form onSubmit={formik.handleSubmit}>
         <Form.Input
           type="text"
           placeholder="Localidad"
@@ -75,7 +76,7 @@ export default function InfoProvider() {
 
 
         <Button type="submit">Enviar</Button>
-      </Form>
+      </Form> */}
     </Container>
   );
 }

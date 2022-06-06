@@ -34,11 +34,11 @@ export default function Profile() {
             pets:userdb.pets,
             address:userdb.address,
         })
+        console.log('userdb', userdb)
 
     })}
         },[user, isAuthenticated, pets, dispatch])
         
-
 
     async function byePet(id){
         await axios.delete(`http://localhost:3001/pets/${id}`, {isActive: false})
@@ -93,6 +93,10 @@ export default function Profile() {
                     <NavLink to='/agregarmascota'>
                         <button>Agregar mascota</button>
                     </NavLink>
+                    <NavLink to='/infoprovider'>
+                        <button>OFRECER SERVICIO</button>
+                    </NavLink>
+
                     
                 </article>
             </section>

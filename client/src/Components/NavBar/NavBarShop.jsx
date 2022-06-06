@@ -43,6 +43,8 @@ function NavBar() {
     setProductsFavNumber(state.favorites? state.favorites.length : 0);
   }, [state.favorites]);
 
+  console.log('state.favorites',state.favorites)
+
   return (
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
