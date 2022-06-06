@@ -70,7 +70,7 @@ function NavBar() {
           <div className={styles.icons}>
             <div className={styles.icon}>
               <NavLink to="/shoppingcart" className={styles.navLinkIcon}>
-                <img src="../assets/img/shopping-bag.svg" alt="" />
+                <img src="../../assets/img/shopping-bag.svg" alt="" />
               </NavLink>
 
               <div className={styles.circle}>{total}</div>
@@ -78,7 +78,7 @@ function NavBar() {
 
             <div className={styles.icon}>
               <NavLink to="/favorites" className={styles.navLinkIcon}>
-                <img src="../assets/img/favorite.svg" alt="" />
+                <img src="../../assets/img/favorite.svg" alt="" />
               </NavLink>
               <div className={styles.circle}>{productsFavNumber}</div>
             </div>

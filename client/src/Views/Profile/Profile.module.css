@@ -6,7 +6,7 @@
 }
 
 .infoProfile img {
-    height: 6rem;
+    height: 7rem;
     border-radius: 1em;
 }
 
@@ -62,4 +62,30 @@
     align-items: center;
     justify-content: left;
     padding: 1em;
+}
+
+.boxLabel{
+    margin: 0;
+}
+
+.email{
+    margin: 0;
+}
+
+.address{
+    margin: 0;
+}
+
+.name{
+    margin: 0;
+}
+
+.service{
+    display: flex;
+    width: 100%;
+    justify-content: flex-end;
+}
+
+.userData{
+    width: 100%;
 }
