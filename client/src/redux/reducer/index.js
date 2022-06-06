@@ -17,7 +17,8 @@ import {
     REMOVE_FROM_CART,
     CLEAR_CART,
     ADD_ITEM,
-    DELETE_ITEM
+    DELETE_ITEM,
+    CHARGE_FAVORITES
 } from '../actions-type/petshopActionsTypes';
 import { TYPES } from '../actions/shoppingActions';
 
@@ -69,7 +70,15 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: newCart
             }
-
+        
+            case CHARGE_FAVORITES:
+            console.log(action.payload);
+            return{
+                ...state,
+                favorites: action.payload,
+            }
+            
+            
         case CHARGE_CART:
             console.log("entré al reducer", action.email);
             if(localStorage.getItem(action.email)){

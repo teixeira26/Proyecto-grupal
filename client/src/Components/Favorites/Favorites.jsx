@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { getProducts } from "../../redux/actions/petshopActions";
+import { addTofavorites, getProducts } from "../../redux/actions/petshopActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBarShop from "../NavBar/NavBarShop";
 import Footer from '../Footer/Footer';
@@ -46,6 +46,7 @@ const Favorites = ()=>{
       }
       console.log(objToPut)
       await axios.put("http://localhost:3001/owners/addFavorite", objToPut)
+      dispatch(addTofavorites(objToPut.favorites))
     }
 
   return (

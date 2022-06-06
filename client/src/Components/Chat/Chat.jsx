@@ -103,7 +103,7 @@ export const Chat = () => {
     <div>
       <NavBarShop />
       <div className={inContainer.container}>
-        <NavLink to='/providers/:name'>
+        <NavLink to={`/providers/${providerEmail}`}>
           <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow}/>
         </NavLink>
         <div className={styles.titleChat}>
