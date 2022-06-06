@@ -21,6 +21,8 @@ import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
 import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
+import Walk from "./Components/Forms/Walk";
+import Lodging from "./Components/Forms/Lodging";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -78,6 +80,14 @@ function App() {
 
           <Route path="/purchaseConfirmation" element={
           isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loading/>}/>
+
+          <Route path="/paseo" element={
+          isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
+
+          <Route path="/hospedaje" element={
+          isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
+
+
 
         </Routes>
       </div>
