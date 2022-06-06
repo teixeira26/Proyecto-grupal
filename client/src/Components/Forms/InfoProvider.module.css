@@ -1,0 +1,22 @@
+.container{
+    min-height: 60vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.centerFlex{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.buttons{
+    display: flex;
+}
+
+.button{
+    margin-right: 2rem;
+}
