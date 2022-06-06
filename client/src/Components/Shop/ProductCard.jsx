@@ -53,8 +53,8 @@ const ProductCard = ({
           onClick={addFavorite}>
           {
             !isFavorite
-              ? <ion-icon name="heart-outline"></ion-icon>
-              : <ion-icon name="heart"></ion-icon>
+              ? <img src="../assets/img/favorite-item.svg" alt="" />
+              : <img src="../assets/img/favorite-fill.svg" alt="" />
           }
           </div>
         <Link to={`/shop/${id}`}>
