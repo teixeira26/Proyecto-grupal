@@ -4,7 +4,9 @@ import {
     GET_NAME_OWNER,
     FILTER_BY_OWNER,
     GET_PROVIDERS,
-    ID_PROVIDER
+    ID_PROVIDER,
+    SORT_PROVIDER_PRICE,
+    FILTER_PROVIDER_PRICE
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
@@ -17,9 +19,9 @@ export function getOwners() {
     }
 };
 
-export function getProviders(filter, order) {
+export function getProviders() {
     return async function (dispatch) {
-        var json = await axios.get(`http://localhost:3001/providers?filter=${filter || ''}&order=${order || 'ASC'}`)
+        var json = await axios.get(`http://localhost:3001/providers`)
         return dispatch({
             type: GET_PROVIDERS,
             payload: json.data
@@ -112,3 +114,18 @@ export function postProvider(newProvider){
     }
     }
 }
+
+
+export function sortByProviderPrice(payload){
+    return {
+        type: SORT_PROVIDER_PRICE,
+        payload,
+    }
+};
+
+export function filterByProviderService(payload){
+    return {
+        type: FILTER_PROVIDER_PRICE,
+        payload,
+    }
+};
