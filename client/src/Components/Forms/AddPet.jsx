@@ -5,7 +5,7 @@ import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { postPet } from "../../redux/actions/ownProvActions";
+import { getPets, postPet } from "../../redux/actions/ownProvActions";
 import { useNavigate } from "react-router-dom";
 import { Widget } from "@uploadcare/react-widget";
 
@@ -37,10 +37,11 @@ export default function InfoProvider() {
       description:yup.string().required(),
     }),
 
-    onSubmit: (formData) => {
+    onSubmit: async(formData) => {
       console.log(formData);
-      dispatch(postPet(formData.userEmail, formData));
+      await dispatch(postPet(formData.userEmail, formData));
       navigate('/profile')
+      dispatch(getPets());
     },
   });
 
@@ -88,7 +89,8 @@ export default function InfoProvider() {
         placeholder="Tamaño"
         options={categoriesOptions}
         onChange={(e)=>{
-          e.target.value = e.target.textContent
+          console.log(e.target.firstChild.textContent)
+          e.target.value = e.target.firstChild.textContent
           e.target.name = "size"
           // console.log(e.target)
           console.log(e.target.value)
@@ -103,7 +105,7 @@ export default function InfoProvider() {
         placeholder="Tipo"
         options={categoriesOptionstype}
         onChange={(e)=>{
-          e.target.value = e.target.textContent
+          e.target.value = e.target.firstChild.textContent
           e.target.name = "type"
           // console.log(e.target)
           // console.log(e.target.value)
