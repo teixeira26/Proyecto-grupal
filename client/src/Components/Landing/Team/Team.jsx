@@ -6,7 +6,7 @@ import TeamCard from "./TeamCard";
 const Team = () => {
   return (
     <div className={InContainer.container}>
-      <h2 className={styles.teamTitle}>Nosotros somos Ipet</h2>
+      <h2 className={styles.teamTitle}>Nosotros somos yumPaw</h2>
 
       <div className={styles.wrapper}>
         <TeamCard
