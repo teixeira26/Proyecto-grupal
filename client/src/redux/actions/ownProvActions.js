@@ -101,3 +101,14 @@ export function getPets() {
         })
     }
 };
+
+
+export function postProvider(newProvider){
+    return async function (){
+        try{
+            await axios.post(`http://localhost:3001/providers`, newProvider)
+    }catch(error){
+        console.log(error)
+    }
+    }
+}

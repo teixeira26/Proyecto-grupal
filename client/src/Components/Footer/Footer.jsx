@@ -6,8 +6,24 @@ const Footer = () => {
     <div className={styles.container}>
       <div className={styles.footerFlex}>
         <div className={styles.footerLeft}>
-          <h2 className={styles.footerSign}>yumPaw</h2>
-          <p className={styles.newsletter}>Matheus, Leo, Sabri, Alan, Frano</p>
+          <h2 className={styles.footerSign}>
+            {/* Enterate de todas <br /> nuestras novedades! */}
+            yumpaw
+          </h2>
+          <p className={styles.newsletter}>
+            {/* ¡Suscribite a nuestro Newsletter! */}
+            Matheus, Leo, Sabri, Alan, Frano
+          </p>
+
+          {/* <div>
+            <input
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              className={styles.email}
+            />
+            <button className={styles.submit}>Suscribirme</button>
+          </div> */}
         </div>
         <div className={styles.footerMid}>
           <ul className={styles.navList}>

@@ -16,6 +16,7 @@
     object-position: center;
     border: 1px solid #bbb7ae;
     border-radius: 8px;
+    background-color: white;
 }
 
 .detailRight{
@@ -67,7 +68,6 @@
     border-radius: 25px;
     padding: 0.4rem;
 }
-
 
 .stock{
     color: #bbb7ae;

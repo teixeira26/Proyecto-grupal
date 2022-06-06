@@ -1,6 +1,9 @@
 .container{
     border-top: 1px solid #bbb7ae;
     background-color: white;
+    left: 0;
+    right: 0;
+    bottom: 0%;
 }
 .footerFlex{
     display: flex;
