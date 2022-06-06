@@ -54,7 +54,7 @@ export default function Profile() {
                 <img src={userData.picture} alt="profilePicture" />
                 <article>
                     <h1>{user.name}</h1>
-                    <h2>{user.address?user.address.city:null}</h2>
+                    <h2>{userData.address?userData.address.city:null}</h2>
                 </article>
             </section>
 
