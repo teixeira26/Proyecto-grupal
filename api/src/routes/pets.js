@@ -4,11 +4,8 @@ const { Owner, Pet } = require('../db');
 const router = Router();
 
 router.get('/', async(req, res, next) =>{
-
     try{
-
         let allPets = await Pet.findAll({
-
             order: [['name', 'ASC']]
         })
 
@@ -19,45 +16,41 @@ router.get('/', async(req, res, next) =>{
     }catch(err){
         next(err)
     }
-})
+});
 
-router.post('/', async(req, res, next) =>{
+router.post('/', async (req, res, next) => {
+    const { name, type, race, size, photos, description, ownerEmail} = req.body;
+    let auxName = name.toLowerCase();
 
-    const {name, type, race, size, photos, description, ownerEmail} = req.body
-
-    let auxName = name.toLowerCase()
-
-    try{
+    try {
         let newPet = await Pet.create({
-            
-                name: auxName,
-                type,
-                race,
-                size,
-                profilePicture: photos,
-                description
-            })
+            name: auxName,
+            type,
+            race,
+            size,
+            profilePicture: photos,
+            description
+        })
 
-            console.log(newPet)
+        console.log(newPet)
 
         let found = await Owner.findOne({
-            where:{
+            where: {
                 email: ownerEmail
             }
         })
 
-            console.log('nombre', found)
-            console.log('nombre', ownerEmail)
-            
-        await found.addPet(newPet)
-            // await newPet.addOwner(1)
+        console.log('nombre', found)
+        console.log('nombre', ownerEmail)
 
+        await found.addPet(newPet)
+        // await newPet.addOwner(1)
         res.status(201).send('Usuario creado con éxito')
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
-})
+});
 
 router.put('/:id', async (req, res, next) =>{
     const id = req.params.id
@@ -75,7 +68,7 @@ router.put('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-})
+});
 
 router.delete('/:id', async (req, res, next) =>{
     const id = req.params.id
@@ -92,6 +85,6 @@ router.delete('/:id', async (req, res, next) =>{
     }catch(err){
         next(err)
     }
-})
+});
 
 module.exports = router;

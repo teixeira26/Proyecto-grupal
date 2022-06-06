@@ -1,8 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useRef, useState } from "react";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import socket from "./Socket";
-import styles from './Chat.module.css'
+import NavBarShop from '../NavBar/NavBarShop';
+import inContainer from "../GlobalCss/InContainer.module.css";
+import styles from './Chat.module.css';
 
 export const Chat = () => {
     
@@ -99,29 +101,28 @@ export const Chat = () => {
 
   return (
     <div>
-      <div className={styles.chatContainer}>
-        <h2>Bienvenido al ipeters chat</h2>
+      <NavBarShop />
+      <div className={inContainer.container}>
+        <NavLink to='/providers/:name'>
+          <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow}/>
+        </NavLink>
+        <div className={styles.titleChat}>
+          <h2>Tu conversacion con Provider</h2>
+        </div>
         <div className={styles.chat}>
-          {mensajes.length>0?mensajes.map((x, y) => {
+          {mensajes.length > 0 ? mensajes.map((x, y) => {
             return (
-              <p key={y}>{`${x.nombre}: ${x.mensaje}`}</p>
+              <p key={y}><strong className={styles.strong}>{x.nombre}:</strong> {`${x.mensaje}`}</p>
             )
-          }):null
+          }) : null
           }
           <div ref={divRef}></div>
         </div>
-        <form onSubmit={submitMessage}>
-        <input
-          type="text"
-          value={mensaje.mensaje}
-          placeholder="mensaje"
-          name="message"
-          onChange={setMessage}
-        ></input>
-        <input type="submit" value="Enviar"></input>
-      </form>
+        <form className={styles.form} onSubmit={submitMessage}>
+          <input type="text" value={mensaje.mensaje} placeholder="Tu mensaje" name="message" onChange={setMessage}></input>
+          <button type="submit" value="Enviar">Enviar</button>
+        </form>
       </div>
-      
     </div>
   );
 }

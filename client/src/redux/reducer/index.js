@@ -35,36 +35,31 @@ const initialState = {
 };
 
 function rootReducer(state = initialState, action) {
-
     switch (action.type) {
 
-        case TYPES.ADD_TO_CART: {
-                let product = state.products.find( product => product.id === action.payload);
-                if(state.cart.find(x=>x.id === action.payload)){
-                    product = state.cart.find(x=>x.id === action.payload);
-                    product.quantity = product.quantity + action.quantity;
-                    var cart = state.cart.filter(x=>x.id!==action.payload)
-                    cart = [...cart, product]
-                    localStorage.setItem(action.email, JSON.stringify(cart))
+        case TYPES.ADD_TO_CART:
+            let product = state.products.find( product => product.id === action.payload);
+            if(state.cart.find(x=>x.id === action.payload)){
+                product = state.cart.find(x=>x.id === action.payload);
+                product.quantity = product.quantity + action.quantity;
+                var cart = state.cart.filter(x=>x.id!==action.payload);
+                cart = [...cart, product];
+                localStorage.setItem(action.email, JSON.stringify(cart));
                 return{
-                        ...state,
-                        cart:cart
-                    }
+                    ...state,
+                    cart:cart
                 }
-                else{
-                    product.quantity = action.quantity
-                    var cart = [...state.cart, product]
-                    localStorage.setItem(action.email, JSON.stringify(cart))
+            }
+            else{
+                product.quantity = action.quantity;
+                var cart = [...state.cart, product];
+                localStorage.setItem(action.email, JSON.stringify(cart));
                 return{
-                        ...state,
-                        cart:[...state.cart, product]
-                    }
+                    ...state,
+                    cart:[...state.cart, product]
                 }
+            }
 
-                
-                
-                
-        }
         case REMOVE_FROM_CART:
             console.log(action.payload);
             const newCart = state.cart.filter(x=>x.id !== action.payload)
@@ -74,28 +69,23 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 cart: newCart
             }
-            
-            
 
         case CHARGE_CART:
-            console.log("entré al reducer", action.email)
+            console.log("entré al reducer", action.email);
             if(localStorage.getItem(action.email)){
-            let dataUser = JSON.parse(localStorage.getItem(action.email))
-            
+            let dataUser = JSON.parse(localStorage.getItem(action.email));          
             return {
                 ...state,
                 cart: dataUser,
             }}
 
-
         case CLEAR_CART:
             localStorage.removeItem(action.email)
-        return {
-            ...state,
-            cart: []
-        }
+            return {
+                ...state,
+                cart: []
+            }
 
-        
         case GET_OWNERS:
             return {
                 ...state,
@@ -116,7 +106,6 @@ function rootReducer(state = initialState, action) {
                 copyOwners: action.payload,
             }
 
-
         case FILTER_BY_OWNER:
             console.log("REDUCER FILTER_BY_OWNER", action.payload);
             console.log("REDUCER state.owners", state.owners);
@@ -124,7 +113,6 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 copyOwners: state.owners.filter(o => action.payload)
             }
-
 
         case GET_PRODUCTS:
             return {
@@ -142,61 +130,59 @@ function rootReducer(state = initialState, action) {
         case FILTER_BY_PET:
             var array = [];
             for (var i = 0; i < state.products.length; i++) {
-                var igual=false;
-                    for (var j = 0; j < action.payload.length & !igual; j++) {
-                        if(state.products[i]['targetAnimal'] === action.payload[j]) 
-                        igual=true;
-                        }
-                        if(igual)array.push(state.products[i]);
-                        }
-                console.log('reducer', array)       
+                var igual = false;
+                for (var j = 0; j < action.payload.length & !igual; j++) {
+                    if (state.products[i]['targetAnimal'] === action.payload[j])
+                        igual = true;
+                }
+                if (igual) array.push(state.products[i]);
+            }
+            console.log('reducer', array)       
             return {
                 ...state,
                 filteredProducts: array
             }
 
-
-            case SORT_PRICE:
-                let sortProduct = [...state.filteredProducts]
-                if(action.payload === 'ASC') {
+        case SORT_PRICE:
+            let sortProduct = [...state.filteredProducts]
+            if (action.payload === 'ASC') {
                 sortProduct.sort((a, b) => {
-                        if(a.price > b.price) return 1
-                        if(a.price < b.price) return -1
-                        return 0
-                    }) }
-            if(action.payload === 'DESC'){
+                    if (a.price > b.price) return 1
+                    if (a.price < b.price) return -1
+                    return 0
+                })
+            }
+            if (action.payload === 'DESC') {
                 sortProduct.sort((a, b) => {
-                        if(a.price > b.price) return -1
-                        if(a.price < b.price) return 1
-                        return 0
-                    })}
-                return{
-                    ...state,
-                    filteredProducts: sortProduct
-                    }
+                    if (a.price > b.price) return -1
+                    if (a.price < b.price) return 1
+                    return 0
+                })
+            }
+            return {
+                ...state,
+                filteredProducts: sortProduct
+            }
     
-            case FILTER_CATEGORY:
-                return{
-                    ...state,
-                    filteredProducts: action.payload !== 'all'? 
-                                        state.products.filter(p => action.payload === p.category) : 
-                                        state.products
-                }
+        case FILTER_CATEGORY:
+            return {
+                ...state,
+                filteredProducts: action.payload !== 'all' ?
+                    state.products.filter(p => action.payload === p.category) : state.products
+            }
 
-                case FILTER_TARGET_ANIMAL:
-                    return{
-                        ...state,
-                        filteredProducts: action.payload !== 'all'? 
-                                            state.products.filter(p => action.payload === p.targetAnimal) : 
-                                            state.products
-                    }
+        case FILTER_TARGET_ANIMAL:
+            return {
+                ...state,
+                filteredProducts: action.payload !== 'all' ?
+                    state.products.filter(p => action.payload === p.targetAnimal) : state.products
+            }
 
-            case ID_PRODUCT:
-                return{
-                    ...state,
-                    productDetail: [action.payload]
-
-                }
+        case ID_PRODUCT:
+            return{
+                ...state,
+                productDetail: [action.payload]
+            }
     
             case ID_PROVIDER:
                 return{
@@ -248,7 +234,6 @@ function rootReducer(state = initialState, action) {
         default:
             return state;
     }
-
-}
+};
 
 export default rootReducer;

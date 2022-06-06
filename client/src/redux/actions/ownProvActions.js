@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 import {
     GET_OWNERS,
     GET_NAME_OWNER,
@@ -38,7 +37,7 @@ export function getProviderById(email) {
             })
         })
     }
-}
+};
 
 export function getNameOwner(name) {
     return async function (dispatch) {
@@ -61,35 +60,37 @@ export function filterByOwner(payload) {
     }
 };
 
-export function putProvider(modification){
-    return async function (){
-        try{
+export function putProvider(modification) {
+    return async function () {
+        try {
             await axios.put(`http://localhost:3001/providers/`, modification)
-    }catch(error){
-        console.log(error)
+        } catch (error) {
+            console.log(error)
+        }
     }
-}}
+};
 
-export function postPet(email, modification){
-    return async function (){
-        try{
+export function postPet(email, modification) {
+    return async function () {
+        try {
             console.log(email)
             await axios.post(`http://localhost:3001/pets`, modification)
-    }catch(error){
-        console.log(error)
+        } catch (error) {
+            console.log(error)
+        }
     }
-}}
+};
 
-export function putOwnerInfo(email, modification){
-    return async function (){
-        try{
+export function putOwnerInfo(email, modification) {
+    return async function () {
+        try {
             console.log(email)
             await axios.put(`http://localhost:3001/owners/${email}`, modification)
-    }catch(error){
-        console.log(error)
+        } catch (error) {
+            console.log(error)
+        }
     }
-}}
-
+};
 
 export function getPets() {
     return async function (dispatch) {

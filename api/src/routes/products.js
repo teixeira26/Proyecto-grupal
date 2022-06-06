@@ -11,7 +11,6 @@ const payProduct = async(req, res) => {
     const cart = req.body.cart
     console.log(cart)
     // const product = await Product.findByPk(id)
-
     let items = []
     
     cart.forEach(i => items.push({
@@ -47,9 +46,9 @@ const payProduct = async(req, res) => {
         })
     })
     .catch(err => console.log(err))
-}
+};
 
-router.post('/checkout', payProduct)
+router.post('/checkout', payProduct);
 
 router.get('/', async (req, res, next) => {
     const { name } = req.query;
@@ -73,7 +72,7 @@ router.get('/', async (req, res, next) => {
     } catch (err) {
         next(err)
     }
-})
+});
 
 router.get('/:id', async (req, res, next) => {
     const { id } = req.params;
@@ -84,7 +83,7 @@ router.get('/:id', async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-})
+});
 
 router.get('/:id', async (req, res, next) => {
     const {id} = req.params;
@@ -95,7 +94,7 @@ router.get('/:id', async (req, res, next) => {
     } catch (error) {
         next(error)
     }
-})
+});
 
 router.post('/', async (req, res, next) => {
     const {
@@ -131,7 +130,7 @@ router.post('/', async (req, res, next) => {
         console.log(err)
         next(err)
     }
-})
+});
 
 router.put('/:id', async (req, res, next) => {
     const id = req.params.id;
@@ -146,7 +145,7 @@ router.put('/:id', async (req, res, next) => {
     } catch (err) {
         next(err)
     }
-})
+});
 
 router.delete('/:id', async (req, res, next) => {
     const id = req.params.id;
@@ -162,6 +161,6 @@ router.delete('/:id', async (req, res, next) => {
     } catch (err) {
         next(err)
     }
-})
+});
 
 module.exports = router;

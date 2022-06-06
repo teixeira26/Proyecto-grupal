@@ -21,6 +21,8 @@ import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
 import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
+import About from "./Views/Profile/About";
+import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
 
@@ -35,9 +37,10 @@ function App() {
           <Route path='/home' element={
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
+          <Route path="/about" element={<About/>} />
+          <Route path="/contact" element={<Contact/>} />
           <Route path='/shop' element={
-           !isLoading ? <Shop/> : <Loading/>
-          }/>
+            !isLoading ? <Shop/> : <Loading/>}/>
           <Route path='/shop/:id' element={
             !isLoading ? <ProductDetail/> : <Loading/>
           }/>
@@ -73,22 +76,14 @@ function App() {
           }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/shoppingcart" element={<ShoppingCart/>}/>
-
           <Route path="/confirmacion" element={
           isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
-
-
           <Route path="/purchaseConfirmation" element={
           isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loading/>}/>
-
           <Route path="/paseo" element={
           isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
-
           <Route path="/hospedaje" element={
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
-
-
-
         </Routes>
       </div>
     </BrowserRouter>

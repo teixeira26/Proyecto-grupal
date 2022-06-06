@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { getProviders } from "../../redux/actions/ownProvActions";
 import ProvidersCard from "./ProvidersCard";
-import NavBarRegistered from "../NavBar/NavBarRegistered";
 import NavBarShop from '../NavBar/NavBarShop'
 import Footer from "../Footer/Footer";
 import styles from "../Providers/Providers.module.css";
