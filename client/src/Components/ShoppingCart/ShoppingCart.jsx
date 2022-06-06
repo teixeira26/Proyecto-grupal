@@ -114,9 +114,13 @@ const ShoppingCart = () => {
             </div>
           </div>
 
-          {/* <article>
-            <button onClick={clearCart}>Limpiar Carrito</button>
-          </article> */}
+          {cart && cart.length > 0 ? (
+            <article>
+              <button onClick={clearCart}>Limpiar Carrito</button>
+            </article>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div className={styles.footer}>
