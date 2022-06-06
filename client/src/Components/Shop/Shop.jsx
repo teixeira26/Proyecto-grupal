@@ -8,6 +8,7 @@ import {
   getProducts,
   chargeCart,
   getFavoritesProducts,
+  addTofavorites,
 } from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
 import ShopSearchbar from "./ShopSearchbar";
@@ -23,7 +24,10 @@ const Shop = () => {
   const [favorites, setFavorites] = useState([]);
 
   let dispatch = useDispatch();
-
+  useEffect(()=>{
+    if(favorites){
+    dispatch(addTofavorites(favorites))}
+  }, [favorites])
   useEffect(() => {
     axios
       .get(`http://localhost:3001/owners/getFavorites/${user.email}`)

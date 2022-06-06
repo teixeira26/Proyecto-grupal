@@ -18,6 +18,10 @@ const ProductDetailCard = ({
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const { user } = useAuth0();
+  const [error, setError] = useState({
+    addItem:false,
+    delItem:false,
+  })
   const cart = useSelector((state) => state.cart);
   const cartItem = cart.find((x) => x.id === id);
 
@@ -45,6 +49,24 @@ const ProductDetailCard = ({
       setCount(count - 1);
     }
   };
+
+  const agregaraCarrito = ()=>{
+    if (cartItem) {
+      var limit = cartItem.stock - cartItem.quantity;
+    } 
+    else{ var limit = stock;}
+    console.log('entró')
+      if (count > 0 && count <= limit) {
+        dispatch({
+          type: TYPES.ADD_TO_CART,
+          payload: id,
+          email: user.email,
+          quantity: count,
+        });
+      }else{
+        Swal.fire(`la cantidad deseada excede al limit del stock`);
+      }
+    }
   return (
     <div>
       <div className={styles.detailFlex}>
@@ -73,16 +95,7 @@ const ProductDetailCard = ({
           <div className={styles.detailAddCart}>
             <button
               className={styles.addButtonCart}
-              onClick={() => {
-                if (count > 0) {
-                  dispatch({
-                    type: TYPES.ADD_TO_CART,
-                    payload: id,
-                    email: user.email,
-                    quantity: count,
-                  });
-                }
-              }}
+              onClick={agregaraCarrito}
             >
               Agregar al carrito
             </button>
