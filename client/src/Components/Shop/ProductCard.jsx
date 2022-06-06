@@ -27,7 +27,6 @@ const ProductCard = ({
         favorites: owner.favorites[0] ? [...owner.favorites, id] : [id],
       };
       setFavorites([...favorites, id]);
-      dispatch(addTofavorites([...favorites,id]));
 
       await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
     } else {
@@ -43,7 +42,6 @@ const ProductCard = ({
       };
       setFavorites(favorites.filter((x) => x !== id));
       console.log(objToPut)
-      dispatch(addTofavorites(objToPut.favorites));
       await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
     }
   };
