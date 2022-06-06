@@ -40,21 +40,25 @@
 }
 
 .cardTitle {
-  border-top: 1px solid rgb(192, 192, 192);
+  
   width: 100%;
   display: flex;
   justify-content: flex-start;
-  margin: 1rem 0 0;
-  padding: 1rem 0 0;
   text-transform: uppercase;
   color: black;
   font-weight: 700;
+  font-size: 1.4rem;
+  margin: 0;
 }
 
 .price{
+  border-top: 1px solid rgb(192, 192, 192);
   color: gray;
   font-size: 1.5rem;
   font-weight: 500;
+  margin: 0;
+  margin-top: 1rem;
+  padding: 0.5rem 0;
 }
 
 .addButton {
@@ -68,4 +72,8 @@
 .cardInfo {
   bottom: 0px;
   width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

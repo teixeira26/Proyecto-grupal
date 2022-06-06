@@ -1,0 +1,101 @@
+.container{
+    margin-bottom: 4rem;
+}
+
+.table{
+    width: 100%;
+}
+
+.tr{
+    display: flex;
+    align-items: center;
+}
+
+.th{
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;   
+}
+
+
+
+.productName{
+    text-align: left;
+    margin: 0;
+}
+
+.total{
+    font-weight: 800;
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.price{
+    font-weight: 400;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.addOneItem{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    width: fit-content;
+    border: 1px solid #bbb7ae;
+    border-radius: 25px;
+    padding: 0.4rem;
+    height: 34px;
+    background-color: white;
+}
+
+.centerButton{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.button{
+    background-color: transparent;
+    padding: 0;
+    font-size: 1.6rem;
+    width: 30px;
+    height: 25px;
+    max-height: fit-content;
+    color: #0f0b02;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0;
+    font-weight: bold;
+}
+
+.button:not(:last-child){
+    border-right: 1px solid #bbb7ae;
+}
+
+.button:last-child{
+    border-left: 1px solid #bbb7ae;
+}
+
+.count{
+    margin: 0 0.7rem;
+    font-size: 1.3rem;
+}
+
+.buttonDelete{
+    height: auto;
+    display: flex;
+    background-color: transparent;
+    color: #7e52a0;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.item{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    width: 200px;
+}
