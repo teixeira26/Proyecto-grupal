@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color:rgb(111, 197, 111);
+    height: 100vh;
+    color: white;
+    font-size: 4rem;
+}
+
+.confirm{
+    font-size: 4rem;
+}
+
+.paragraph{
+    font-size: 2rem;
+}
+
+.redi{
+    color: black;
+}

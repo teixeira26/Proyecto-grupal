@@ -21,10 +21,13 @@ export default function Profile() {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
-
+        console.log(userdb);
         setUser({
           nombre: user.name,
-          picture: user.picture,
+          picture:
+            userdb.profilePicture && userdb.profilePicture[0]
+              ? userdb.profilePicture[0]
+              : "/assets/img/notloged.png",
           email: user.email,
           pets: userdb.pets,
           address: userdb.address,
@@ -44,16 +47,14 @@ export default function Profile() {
       <NavBarShop />
       <div className={styleContainer.container}>
         <section className={style.infoProfile}>
-          <img src={user.picture} alt="profilePicture" />
-          <article className={style.userData}>
+          <img src={userData.picture} alt="profilePicture" />
+          <article className={style.profile}>
             <h1 className={style.name}>{user.name}</h1>
             <div>
               <NavLink to="/infoOwner">
-                <button>Cambiar datos</button>
+                <button className={style.data}>Cambiar datos</button>
               </NavLink>
             </div>
-
-            <h2>{user.address ? user.address.city : null}</h2>
           </article>
           <div className={style.service}>
             <NavLink to="/infoprovider">
@@ -63,26 +64,39 @@ export default function Profile() {
         </section>
 
         <section className={style.mainInfoProfile}>
-          <h2 className={style.boxLabel}>Mis datos</h2>
-          <h4 className={style.email}>Correo electronico: {user.email}</h4>
+          <h2>Mis datos</h2>
+          <h4 className={style.email}>
+            {" "}
+            Correo electronico: <span className={style.span}>{user.email}</span>
+          </h4>
           <h4 className={style.address}>
-            Direccion: {user.address ? user.address.road : null}
+            Direccion:{" "}
+            <span className={style.span}>
+              {userData.address ? userData.address.road : null}
+            </span>{" "}
           </h4>
         </section>
 
-        <section className={style.petsProfile}>
+        <section>
           <h1 className={style.boxLabel}>Mis mascotas</h1>
-          <article>
+
+          <div className={style.addPet}>
+            <NavLink to="/agregarmascota">
+              <button>Agregar mascota</button>
+            </NavLink>
+          </div>
+
+          <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0
               ? userData.pets.map((x, y) => {
                   if (x.isActive) {
                     return (
                       <div className={style.petInfo} key={y}>
-                        <img src={x.profilePicture} alt="profilePicture" />
+                        <img src={x.profilePicture} alt="profilePicture" className={style.profilePicture}/>
                         <div className={style.petData}>
-                          <h2>Mascota 1: {x.name}</h2>
+                          <h2>{x.name}</h2>
                           <h4>Raza: {x.race}</h4>
-                          <p>
+                          <p className={style.aboutDog}>
                             Sobre {x.name}: {x.description}
                           </p>
                           <button onClick={() => byePet(x.id)}>
@@ -94,10 +108,6 @@ export default function Profile() {
                   }
                 })
               : null}
-
-            <NavLink to="/agregarmascota">
-              <button>Agregar mascota</button>
-            </NavLink>
           </article>
         </section>
       </div>
