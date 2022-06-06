@@ -9,14 +9,11 @@ import { putOwnerInfo } from "../../redux/actions/ownProvActions";
 import { useNavigate } from "react-router-dom";
 import { Widget } from "@uploadcare/react-widget";
 
-
-
 export default function InfoOwner() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const navigate = useNavigate()
 
-  
   const formik = useFormik({
     initialValues: {
       email:user.email,
@@ -44,11 +41,9 @@ export default function InfoOwner() {
     },
   });
 
-
   return (
     <Container>
       <h2>Cambiá tus datos</h2>
-
       <Form onSubmit={formik.handleSubmit}>
         <Form.Input
           type="text"
@@ -74,18 +69,17 @@ export default function InfoOwner() {
           error={formik.errors.city}
         ></Form.Input>
 
-
-      <Widget 
-      publicKey='269841dc43864e62c49d' 
-      id='file'
-      name="photos"
-      onChange={(e)=>{
-        formik.values.profilePicture.push(e.originalUrl)
-        console.log(formik)
-      }}
-      perrito="profilePicture"
-      />
-      <Button type="submit">Enviar</Button>
+        <Widget
+          publicKey='269841dc43864e62c49d'
+          id='file'
+          name="photos"
+          onChange={(e) => {
+            formik.values.profilePicture.push(e.originalUrl)
+            console.log(formik)
+          }}
+          perrito="profilePicture"
+        />
+        <Button type="submit">Enviar</Button>
       </Form>
     </Container>
   );
