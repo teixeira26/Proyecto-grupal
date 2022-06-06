@@ -10,12 +10,31 @@ import { useSelector,useDispatch } from "react-redux";
 import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 
 export default function Profile() {
-    const pets = useSelector(state => state.pets);
-    const dispatch = useDispatch();
+    const pets = useSelector(state => state.pets)
+    const dispatch = useDispatch()
+
     const [userData, setUser] = useState({
     });
-
     const { user, isAuthenticated } = useAuth0();
+    useEffect(() => {
+        if (isAuthenticated) {
+
+            axios.get('http://localhost:3001/owners').then(x => {
+
+                const userdb = x.data.find(x => x.email === user.email);
+                console.log(userdb)
+                setUser({
+                    nombre: user.name,
+                    picture: userdb.profilePicture && userdb.profilePicture[0] ? userdb.profilePicture[0] : '/assets/img/notloged.png',
+                    email: user.email,
+                    pets: userdb.pets,
+                    address: userdb.address,
+                })
+                console.log('userdb', userdb)
+            })
+        }
+    }, [user, isAuthenticated, pets, dispatch])
+
     useEffect(() => {
         if (isAuthenticated) {
             axios.get('http://localhost:3001/owners').then(x => {
@@ -42,7 +61,7 @@ export default function Profile() {
             <NavBarShop />
             <div className={styleContainer.container}>
                 <section className={style.infoProfile}>
-                    <img src={user.picture} alt="profilePicture" />
+                    <img src={userData.picture} alt="profilePicture" />
                     <article>
                         <h1>{user.name}</h1>
                         <h2>{user.address ? user.address.city : null}</h2>
@@ -51,7 +70,7 @@ export default function Profile() {
                 <section className={style.mainInfoProfile}>
                     <h1 className={style.boxLabel}>Mis datos</h1>
                     <h4>Correo electronico: {user.email}</h4>
-                    <h4>Direccion: {user.address ? user.address.road : null}</h4>
+                    <h4>Direccion: {userData.address ? userData.address.road : null}</h4>
                     <div>
                         <NavLink to='/infoOwner'>
                             <button>Cambiar datos</button>
@@ -76,7 +95,6 @@ export default function Profile() {
                                 )
                             }
                         }) : null}
-
                         <NavLink to='/agregarmascota'>
                             <button>Agregar mascota</button>
                         </NavLink>

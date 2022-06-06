@@ -6,8 +6,8 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getPets, postPet } from "../../redux/actions/ownProvActions";
 import { Widget } from "@uploadcare/react-widget";
-import { postPet } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import global from '../GlobalCss/Button.module.css';
@@ -36,10 +36,12 @@ export default function InfoProvider() {
       type:yup.string().required(),
       description:yup.string().required(),
     }),
-    onSubmit: (formData) => {
+
+    onSubmit: async(formData) => {
       console.log(formData);
-      dispatch(postPet(formData.userEmail, formData));
+      await dispatch(postPet(formData.userEmail, formData));
       navigate('/profile')
+      dispatch(getPets());
     },
   });
 
@@ -81,9 +83,11 @@ export default function InfoProvider() {
           <Form.Dropdown
             placeholder="Tamaño"
             options={categoriesOptions}
-            onChange={(e) => {
-              e.target.value = e.target.textContent
+            onChange={(e)=>{
+              console.log(e.target.firstChild.textContent)
+              e.target.value = e.target.firstChild.textContent
               e.target.name = "size"
+              // console.log(e.target)
               console.log(e.target.value)
               formik.handleChange(e)
             }}
@@ -93,9 +97,11 @@ export default function InfoProvider() {
           <Form.Dropdown
             placeholder="Tipo de animal"
             options={categoriesOptionstype}
-            onChange={(e) => {
-              e.target.value = e.target.textContent
+            onChange={(e)=>{
+              e.target.value = e.target.firstChild.textContent
               e.target.name = "type"
+              // console.log(e.target)
+              // console.log(e.target.value)
               formik.handleChange(e)
             }}
             selection={true}
