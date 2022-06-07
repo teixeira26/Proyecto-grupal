@@ -46,6 +46,12 @@ module.exports = (sequelize) => {
       type:DataTypes.ARRAY(DataTypes.JSONB),
       defaultValue:[]
     },
+    weekSchedule: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    },
+    daySchedule: {
+      type: DataTypes.ARRAY(DataTypes.STRING)
+    },
     isActive:{
       type:DataTypes.BOOLEAN,
       defaultValue: true,

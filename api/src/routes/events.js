@@ -10,7 +10,7 @@ router.get('/', async (req, res, next) => {
         })
         allEvents.length ?
             res.status(200).send(allEvents) :
-            res.status(400).send('Actualmente no existen reservas en el sitio')
+            res.status(400).send('Actualmente no existen reservas en el sitio');
     } catch (error) {
         next(error)
     }
@@ -28,7 +28,7 @@ router.post('/', async (req, res, next) => {
                 eventType
             }
         })
-        res.status(201).send('La reserva ha sido creada con exito')
+        res.status(201).send('La reserva ha sido creada con exito');
     } catch (errpr) {
         next(error)
     }
@@ -44,7 +44,7 @@ router.delete('/:id', async (req, res, next) => {
                 id: id
             }
         })
-        return res.json('Reserva eliminada')
+        return res.json('Reserva eliminada');
     } catch (error) {
         next(error)
     }
