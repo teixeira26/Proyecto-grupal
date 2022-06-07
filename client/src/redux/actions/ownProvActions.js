@@ -6,7 +6,9 @@ import {
     GET_PROVIDERS,
     ID_PROVIDER,
     SORT_PROVIDER_PRICE,
-    FILTER_PROVIDER_PRICE
+    FILTER_PROVIDER_PRICE,
+    GET_EVENTS,
+    GET_PETS
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
@@ -98,7 +100,7 @@ export function getPets() {
     return async function (dispatch) {
         var json = await axios.get(`http://localhost:3001/pets`);
         return dispatch({
-            type: 'GET_PETS',
+            type: GET_PETS,
             payload: json.data
         })
     }
@@ -127,5 +129,15 @@ export function filterByProviderService(payload){
     return {
         type: FILTER_PROVIDER_PRICE,
         payload,
+    }
+};
+
+export function getEvents() {
+    return async function (dispatch) {
+        var json = await axios.get(`http://localhost:3001/events`);
+        return dispatch({
+            type: GET_EVENTS,
+            payload: json.data
+        })
     }
 };
