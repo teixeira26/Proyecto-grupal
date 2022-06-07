@@ -17,15 +17,16 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    const { date, eventType } = req.body;
+    const { date, eventType, payment } = req.body;
     try {
         await Event.findOrCreate({
             where: {
-                email: email
+                // email: email
             },
             defaults: {
                 date,
-                eventType
+                eventType,
+                payment: pending
             }
         })
         res.status(201).send('La reserva ha sido creada con exito');

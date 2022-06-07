@@ -13,7 +13,8 @@ module.exports = (sequelize) => {
     },
     payment: {
       type: DataTypes.ENUM('rejected', 'pending', 'approved'),
-      allowNull: false
+      allowNull: false,
+      defaultValue: pending
     },
     isActive: {
       type:DataTypes.BOOLEAN,

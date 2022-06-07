@@ -21,13 +21,13 @@ function Landing() {
       console.log(dbOwner);
       let userInfo = dbOwner.data.find((x) => x.email === user.email);
       if (typeof userInfo === "object") {
-        navigate("/home");
+        navigate("/inicio");
         setNombre(user.name);
       } else {
-        navigate("/home");
+        navigate("/inicio");
       }
     } catch (error) {
-      navigate("/home");
+      navigate("/inicio");
     }
   };
 

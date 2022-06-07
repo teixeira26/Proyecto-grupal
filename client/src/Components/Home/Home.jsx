@@ -20,7 +20,7 @@ const Home = () => {
         lastName: user.family_name,
       }
       await axios.post('http://localhost:3001/owners', owner)
-      navigate('/home')
+      navigate('/inicio')
     })()
   }, [])
 

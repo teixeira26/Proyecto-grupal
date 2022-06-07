@@ -40,11 +40,11 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing/>} />
-          <Route path='/home' element={
+          <Route path='/inicio' element={
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact/>} />
+          <Route path="/nosotros" element={<About/>} />
+          <Route path="/contacto" element={<Contact/>} />
           <Route path='/shop' element={
             !isLoading ? <Shop/> : <Loading/>}/>
           <Route path='/shop/:id' element={
@@ -74,14 +74,14 @@ function App() {
           <Route path='/chat/:providerEmail/:ownerEmail' element={
             isAuthenticated && !isLoading ? <Chat/> : <Loading />
           } />
-          <Route path='/favorites' element={
+          <Route path='/favoritos' element={
             isAuthenticated && !isLoading ? <Favorites/> : <Loading />
           }/>
           <Route path='/mis-datos' element={
             isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
           }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
-          <Route path="/shoppingcart" element={<ShoppingCart/>}/>
+          <Route path="/mi-carrito" element={<ShoppingCart/>}/>
           <Route path="/confirmacion" element={
           isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
           <Route path="/purchaseConfirmation" element={

@@ -43,7 +43,7 @@ const Shop = () => {
     <div className={styles.container}>
       <NavBarShop />
       <div className={inContainer.container}>
-        <NavLink to="/home">
+        <NavLink to="/inicio">
           <img
             src="/assets/img/arrow-left.svg"
             alt=""
