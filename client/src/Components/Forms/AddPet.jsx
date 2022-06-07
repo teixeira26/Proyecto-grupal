@@ -1,13 +1,13 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Container, Form, Button } from "semantic-ui-react";
+import { Form } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import "semantic-ui-css/semantic.min.css";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getPets, postPet } from "../../redux/actions/ownProvActions";
 import { Widget } from "@uploadcare/react-widget";
+import { getPets, postPet } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import global from '../GlobalCss/Button.module.css';
@@ -16,41 +16,41 @@ import style from './Form.module.css';
 export default function InfoProvider() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      ownerEmail:user.email,
+      ownerEmail: user.email,
       name: '',
       type: '',
       race: '',
       size: '',
-      description:'',
+      description: '',
       ownerName: '',
       photos: [],
     },
-    validationSchema:yup.object({
-      name:yup.string().required(),
-      race:yup.string().required(),
-      size:yup.string().required(),
-      type:yup.string().required(),
-      description:yup.string().required(),
+    validationSchema: yup.object({
+      name: yup.string().required(),
+      race: yup.string().required(),
+      size: yup.string().required(),
+      type: yup.string().required(),
+      description: yup.string().required(),
     }),
 
-    onSubmit: async(formData) => {
+    onSubmit: async (formData) => {
       console.log(formData);
       await dispatch(postPet(formData.userEmail, formData));
-      navigate('/profile')
+      navigate('/mi-perfil')
       dispatch(getPets());
     },
   });
 
   const categoriesOptions = [
-    {key:"Grande", value:"Grande", text:"Grande"},{key:"Mediano", value:"Mediano", text:"Mediano"},{key:"Chico", value:"Chico", text:"Chico"}
+    { key: "Grande", value: "Grande", text: "Grande" }, { key: "Mediano", value: "Mediano", text: "Mediano" }, { key: "Chico", value: "Chico", text: "Chico" }
   ];
 
   const categoriesOptionstype = [
-    {key:"Perro", value:"Perro", text:"Perro"},{key:"Gato", value:"Gato", text:"Gato"},{key:"Conejo", value:"Conejo", text:"Conejo"},{key:"Tortuga", value:"Tortuga", text:"Tortuga"}
+    { key: "Perro", value: "Perro", text: "Perro" }, { key: "Gato", value: "Gato", text: "Gato" }, { key: "Conejo", value: "Conejo", text: "Conejo" }, { key: "Tortuga", value: "Tortuga", text: "Tortuga" }
   ];
 
   return (
@@ -83,7 +83,7 @@ export default function InfoProvider() {
           <Form.Dropdown
             placeholder="Tamaño"
             options={categoriesOptions}
-            onChange={(e)=>{
+            onChange={(e) => {
               console.log(e.target.firstChild.textContent)
               e.target.value = e.target.firstChild.textContent
               e.target.name = "size"
@@ -97,7 +97,7 @@ export default function InfoProvider() {
           <Form.Dropdown
             placeholder="Tipo de animal"
             options={categoriesOptionstype}
-            onChange={(e)=>{
+            onChange={(e) => {
               e.target.value = e.target.firstChild.textContent
               e.target.name = "type"
               // console.log(e.target)

@@ -14,7 +14,6 @@ export default function DetailProvider() {
     const email = useParams().name;
     const provider = useSelector(state => state.providers);
     
-
     useEffect(() => {
         dispatch(getProviderById(email))
     }, [dispatch, email]);

@@ -7,9 +7,13 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    eventType:{
+    eventType: {
         type:DataTypes.ENUM('paseo', 'hospedaje'),
         allowNull: false,
+    },
+    isActive: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: true,
     }    
-  })
+  });
 };

@@ -35,7 +35,7 @@ const ProductDetailCard = ({
     if (cartItem) {
       var limit = cartItem.stock - cartItem.quantity;
     } else {
-      var limit = stock;
+      limit = stock;
     }
     if (count < limit) {
       setCount(count + 1);
@@ -54,7 +54,7 @@ const ProductDetailCard = ({
     if (cartItem) {
       var limit = cartItem.stock - cartItem.quantity;
     } 
-    else{ var limit = stock;}
+    else{ limit = stock;}
     console.log('entró')
       if (count > 0 && count <= limit) {
         dispatch({

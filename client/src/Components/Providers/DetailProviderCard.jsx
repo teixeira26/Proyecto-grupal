@@ -2,15 +2,15 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import inContainer from "../GlobalCss/InContainer.module.css";
-import style from './DetailProviderCard.module.css'
+import style from './DetailProviderCard.module.css';
 
-export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price}) {
+export default function DetailProviderCard({ name, lastName, profilePicture, address, email, service, description, city, state, price }) {
     console.log(email)
     console.log(city)
     console.log(state)
-    const {user} = useAuth0()
+    const { user } = useAuth0()
 
-    return(
+    return (
         <>
             <section className={inContainer.container}>
                 <div className={style.topinfo}>
@@ -51,4 +51,4 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
             </section>
         </>
     )
-}
+};

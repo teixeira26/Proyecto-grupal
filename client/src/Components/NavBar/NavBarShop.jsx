@@ -102,7 +102,7 @@ function NavBar() {
           <div>
             {!isAuthenticated && <img src="" alt=""></img>}
             {isAuthenticated && (
-              <NavLink to="/profile" className={styles.profile}>
+              <NavLink to="/mi-perfil" className={styles.profile}>
                 <img
                   className={styles.profilePicture}
                   src={isAuthenticated && userData.picture?userData.picture:user.picture}

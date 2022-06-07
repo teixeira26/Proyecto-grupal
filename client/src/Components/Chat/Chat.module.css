@@ -27,12 +27,11 @@
 }
 
 .form{
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 1rem;
 }
 
 .form input {
-    width: 74vw;
+    width: 50vw;
     height: 10vh;
     padding: 1rem;
     border: .1rem solid #BBB7AE;
@@ -40,5 +39,9 @@
 }
 
 .form button {
-    margin-left: .4rem;
+    margin-left: 1rem;
+}
+
+.reserveBtn {
+    justify-self: flex-end;
 }
