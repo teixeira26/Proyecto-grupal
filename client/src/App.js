@@ -13,6 +13,9 @@ import InfoProvider from "./Components/Forms/InfoProvider";
 import InfoOwner from "./Components/Forms/InfoOwner";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
+import MapView from "./Components/Map/MapView";
+import GeoLocProvider from "./Components/Map/GeoLocProvider";
+import './App.css';
 
 import Shop from './Components/Shop/Shop';
 import ProductDetail from "./Components/Shop/ProductDetail";
@@ -40,6 +43,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing/>} />
+          <Route path="/mapview" element={<MapView/>} />
+          <Route path="/geolocprovider" element={<GeoLocProvider/>} />
           <Route path='/inicio' element={
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
