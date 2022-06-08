@@ -25,12 +25,17 @@ import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
+import PrivateRoutes from "./Components/Admin/Routes/PrivateRoutes";
+import AdminRouter from "./Components/Admin/Routes/AdminRouter";
+
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import './App.css';
 
 function App() {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isAuthenticated, isLoading, user } = useAuth0();
+  console.log('app', user)
+
 
   return (
     <BrowserRouter>
@@ -89,7 +94,21 @@ function App() {
           isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
           <Route path="/hospedaje" element={
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
+
+
+          {/* -------------- RUTAS PRIVADAS -------------------- */}
+          <Route path='/admin' element={
+            <PrivateRoutes isAdmin={user}>
+              <AdminRouter />
+            </PrivateRoutes>
+            } 
+          
+          />
+
+
+
         </Routes>
+            
       </div>
     </BrowserRouter>
   );
