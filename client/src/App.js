@@ -25,6 +25,9 @@ import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
+import MapView from "./Components/Map/MapView";
+import GeoLocProvider from "./Components/Map/GeoLocProvider";
+import './App.css';
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -34,6 +37,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing/>} />
+          <Route path="/mapview" element={<MapView/>} />
+          <Route path="/geolocprovider" element={<GeoLocProvider/>} />
           <Route path='/home' element={
             isAuthenticated && !isLoading ? <Home/> : <Loading/>
           }/>
