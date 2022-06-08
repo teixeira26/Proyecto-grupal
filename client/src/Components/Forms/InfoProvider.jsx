@@ -21,7 +21,7 @@ export default function InfoProvider() {
         email: user.email,
         name: user.given_name,
         lastName: user.family_name,
-        service: "paseo",
+        service: ["paseo"],
       })
     );
   }
@@ -32,7 +32,7 @@ export default function InfoProvider() {
         email: user.email,
         name: user.given_name,
         lastName: user.family_name,
-        service: "hospedaje",
+        service: ["hospedaje"],
       })
     );
   }
