@@ -12,51 +12,53 @@ export default function PrivateRoutes({redirectPath = "/admin",  children}){
     const { user, isAuthenticated } = useAuth0();
 
     const [isAdmin, setIsAdmin] = useState(false)
+    const [finalizado, setFinalizado] = useState(false)
 
 
-    const searchUser = () => {
-       
-          axios.get("http://localhost:3001/owners")
-          .then(res =>{
-            console.log('res',res)
-
-             let resp = res.data.find((x) => x.email === user.email)
-             return resp
-
-            //          console.log('resp.isAdmin',resp.isAdmin)
-
-            // setIsAdmin(resp.isAdmin)
-
-            // console.log('isAdmin',isAdmin)
-
-
-            // console.log('user',user)
-
-          })
-        //   .then(res =>{
-        //     console.log('res2',res)            
-        //     console.log('reres.isAdmins2',res.isAdmin)
-
-
-        //     console.log('isAdmin',isAdmin)
-
-        //   })
-          
-            
-      };
+    
 
     useEffect(() => {
+      const searchUser = () => {
+       
+        axios.get("http://localhost:3001/owners")
+        .then(res =>{
+          // console.log('res',res)
+          console.log('ISADMIIIIIIIN', isAdmin)
+
+          let resp = res.data.find((x) => x.email === user.email)
+          console.log(resp, "USUARIIOOOOOO")
+          //  return resp
+
+          console.log('RESPUESTA RESP.ISADMIN',resp.isAdmin)
+
+          setIsAdmin(resp.isAdmin)
+          setFinalizado(true)
+          console.log(resp.isAdmin, "RESPUESTA DESPUES DEL SETISADMIN")
+          console.log('isAdmin',resp.isAdmin)
+
+        })
+        // .then(res =>{
+        //   console.log('res2',res)            
+        //   console.log('reres.isAdmins2',res.isAdmin)
+
+
+        //   console.log('isAdmin',isAdmin)
+
+        // })
+        
+          
+    };
         if(user){
-            let us = searchUser()
-            console.log('UUUSS', us)
+            searchUser()
+            // console.log('UUUSS', us)
             // setIsAdmin(us.isAdmin)
         }
-      }, [user, isAdmin]);
+      }, [user]);
 
 
     return (
         <div> <h2>HOLA</h2>
-        {user?
+        {user&&finalizado?
         
             isAdmin? <Navigate to='/admin/post-products' /> : <Navigate to='/home' />   :
             null   
