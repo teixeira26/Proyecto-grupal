@@ -14,14 +14,13 @@ export default function PrivateRoutes({redirectPath = "/admin",  children}){
     const [isAdmin, setIsAdmin] = useState(false)
 
 
-    const searchUser = () => {
+    const searchUser = async () => {
        
-          axios.get("http://localhost:3001/owners")
-          .then(res =>{
-            console.log('res',res)
+          let resp = await axios.get("http://localhost:3001/owners")
+  
 
-             let resp = res.data.find((x) => x.email === user.email)
-             return resp
+             let userAdmin = resp.data.find((x) => x.email === user.email)
+             return userAdmin
 
             //          console.log('resp.isAdmin',resp.isAdmin)
 
@@ -32,7 +31,8 @@ export default function PrivateRoutes({redirectPath = "/admin",  children}){
 
             // console.log('user',user)
 
-          })
+           }
+        // )
         //   .then(res =>{
         //     console.log('res2',res)            
         //     console.log('reres.isAdmins2',res.isAdmin)
@@ -43,12 +43,15 @@ export default function PrivateRoutes({redirectPath = "/admin",  children}){
         //   })
           
             
-      };
+    //   };
 
     useEffect(() => {
         if(user){
-            let us = searchUser()
-            console.log('UUUSS', us)
+             searchUser()
+            .then(resp => {
+                console.log('resppp', resp)
+                setIsAdmin(resp.isAdmin)})
+            // console.log('UUUSS', us)
             // setIsAdmin(us.isAdmin)
         }
       }, [user, isAdmin]);
@@ -58,7 +61,7 @@ export default function PrivateRoutes({redirectPath = "/admin",  children}){
         <div> <h2>HOLA</h2>
         {user?
         
-            isAdmin? <Navigate to='/admin/post-products' /> : <Navigate to='/home' />   :
+            isAdmin? children : <Navigate to='/home' />   :
             null   
         }
         </div>
