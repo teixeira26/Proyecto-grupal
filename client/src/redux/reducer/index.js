@@ -94,7 +94,7 @@ function rootReducer(state = initialState, action) {
         }
 
         case CLEAR_CART:
-            localStorage.removeItem(action.email)
+            localStorage.removeItem(action.email);
         return {
             ...state,
             cart: []

@@ -30,7 +30,6 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-
 const {Owner, Pet, Provider, Chat, Event, Review, Product, Sold} = sequelize.models;
 
 // Relaciones
@@ -51,8 +50,8 @@ Pet.belongsToMany(Provider, {
   through: 'Provider-Pet'
 });
 
-Pet.hasMany(Event);
-Event.belongsTo(Pet);
+Owner.hasMany(Event);
+Event.belongsTo(Owner);
 
 Provider.hasMany(Event);
 Event.belongsTo(Provider);

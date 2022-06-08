@@ -1,12 +1,12 @@
 const { Router } = require('express');
-const { Event, Pet } = require('../db');
+const { Event, Owner, Provider } = require('../db');
 
 const router = Router();
 
 router.get('/', async (req, res, next) => {
     try {
         let allEvents = await Event.findAll({
-            includes: Pet
+            includes: [Owner, Provider]
         })
         allEvents.length ?
             res.status(200).send(allEvents) :
@@ -17,20 +17,35 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    const { date, eventType, payment } = req.body;
+    const { date, eventType, comments, payment, ownerEmail, providerEmail, petName } = req.body;
     try {
-        await Event.findOrCreate({
-            where: {
-                // email: email
-            },
-            defaults: {
-                date,
-                eventType,
-                payment: pending
-            }
+        
+        let providerInfo = await Provider.findOne({
+            where: {email: providerEmail}
         })
-        res.status(201).send('La reserva ha sido creada con exito');
-    } catch (errpr) {
+        console.log(providerInfo)
+        if (providerInfo.dataValues.schedule[date.day].includes(date.hour)) {
+            let booking = await Event.findOrCreate({
+                where: {
+                    ownerEmail,
+                    providerEmail,
+                    date,
+                    eventType
+                },
+                defaults: {
+                    date,
+                    eventType,
+                    comments,
+                    payment,
+                    ownerEmail,
+                    providerEmail
+                }
+            })
+            res.status(201).send('La reserva ha sido creada con exito');
+        } else {
+            res.status(400).send('Ya existen reservas en este horario. Por favor, elige otra opcion')
+        }
+    } catch (error) {
         next(error)
     }
 });
@@ -46,6 +61,34 @@ router.delete('/:id', async (req, res, next) => {
             }
         })
         return res.json('Reserva eliminada');
+    } catch (error) {
+        next(error)
+    }
+});
+
+// ruta para cargar horario de trabajo
+router.put('/schedule', async (req, res, next) => {
+    const {
+        providerEmail,
+        schedule
+    } = req.body;
+
+    try {
+        let userData = await Provider.findOne({
+            where: {
+                email: providerEmail
+            }
+        })
+        userData = {
+            ...userData,
+            schedule
+        }
+        await Provider.update(userData, {
+            where: {
+                email: providerEmail
+            }
+        })
+        return res.json('Horario de trabajo actualizados')
     } catch (error) {
         next(error)
     }

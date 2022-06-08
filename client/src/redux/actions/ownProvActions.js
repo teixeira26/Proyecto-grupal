@@ -107,13 +107,13 @@ export function getPets() {
 };
 
 
-export function postProvider(newProvider){
-    return async function (){
-        try{
+export function postProvider(newProvider) {
+    return async function () {
+        try {
             await axios.post(`http://localhost:3001/providers`, newProvider)
-    }catch(error){
-        console.log(error)
-    }
+        } catch (error) {
+            console.log(error)
+        }
     }
 }
 
@@ -139,5 +139,15 @@ export function getEvents() {
             type: GET_EVENTS,
             payload: json.data
         })
+    }
+};
+
+export function postEvent(newEvent) {
+    return async function () {
+        try {
+            await axios.post(`http://localhost:3001/events`, newEvent)
+        } catch (error) {
+            console.log(error)
+        }
     }
 };

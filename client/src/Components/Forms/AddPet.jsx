@@ -49,7 +49,7 @@ export default function InfoProvider() {
     { key: "Grande", value: "Grande", text: "Grande" }, { key: "Mediano", value: "Mediano", text: "Mediano" }, { key: "Chico", value: "Chico", text: "Chico" }
   ];
 
-  const categoriesOptionstype = [
+  const categoriesOptionsType = [
     { key: "Perro", value: "Perro", text: "Perro" }, { key: "Gato", value: "Gato", text: "Gato" }, { key: "Conejo", value: "Conejo", text: "Conejo" }, { key: "Tortuga", value: "Tortuga", text: "Tortuga" }
   ];
 
@@ -96,7 +96,7 @@ export default function InfoProvider() {
           ></Form.Dropdown>
           <Form.Dropdown
             placeholder="Tipo de animal"
-            options={categoriesOptionstype}
+            options={categoriesOptionsType}
             onChange={(e) => {
               e.target.value = e.target.firstChild.textContent
               e.target.name = "type"

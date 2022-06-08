@@ -28,6 +28,7 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                 </div>
                 <div className={style.contact}>
                     <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>
+                    <NavLink to='/reservar-servicio'><button>Reservar servicio</button></NavLink>
                 </div>
                 {/* <div>
                     <h2>Comentarios recibidos por {name}</h2>

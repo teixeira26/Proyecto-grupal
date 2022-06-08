@@ -6,5 +6,5 @@ export const GET_NAME_PROVIDER = 'GET_NAME_PROVIDER';
 export const ID_PROVIDER = 'ID_PROVIDER';
 export const SORT_PROVIDER_PRICE = 'SORT_PROVIDER_PRICE';
 export const FILTER_PROVIDER_PRICE = 'FILTER_PROVIDER_PRICE';
-export const GET_EVENTS = 'GET_EVENTS';
 export const GET_PETS = 'GET_PETS';
+export const GET_EVENTS = 'GET_EVENTS';
