@@ -21,6 +21,7 @@ export default function InfoProvider() {
         email: user.email,
         name: user.given_name,
         lastName: user.family_name,
+        profilePicture: user.picture,
         service: ["paseo"],
       })
     );
