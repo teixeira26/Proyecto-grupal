@@ -35,8 +35,8 @@ const initialState = {
     productDetail:[],
     pets: [],
     favorites:[],
-    filteredProviders:[]
-
+    filteredProviders:[],
+    authUser: null
 };
 
 function rootReducer(state = initialState, action) {
@@ -275,6 +275,13 @@ function rootReducer(state = initialState, action) {
                         ...state,
                         filteredProviders: sortService
                     }
+
+
+            case 'AUTHENTICATED_USER':
+                return{
+                    ...state,
+                    authUser: action.payload
+                }
 
             
     

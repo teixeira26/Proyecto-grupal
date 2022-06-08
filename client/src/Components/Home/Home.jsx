@@ -8,12 +8,18 @@ import Footer from "../Footer/Footer";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authenticatedUser, getOwners } from "../../redux/actions/ownProvActions";
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  const users = useSelector(state => state.owners)
 
   useEffect(()=>{
+  
     (async()=>{
       let owner = {
           email:user.email,
@@ -21,9 +27,18 @@ const Home = () => {
           lastName: user.family_name,
         }
         await axios.post('http://localhost:3001/owners', owner)
-        navigate('/home')
+        // navigate('/home')
   })()
-  }, [])
+
+    dispatch(getOwners())
+    let userdb = users.find(us => us.email === user.email)
+    dispatch(authenticatedUser(userdb))
+  }, [dispatch])
+
+  const usersauth = useSelector(state => state.authUser)
+
+
+  console.log('usersauth', usersauth)
 
   return (
     <div className={styles.body}>

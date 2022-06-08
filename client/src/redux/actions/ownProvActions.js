@@ -131,4 +131,13 @@ export function filterByProviderService(payload){
 };
 
 
+export function authenticatedUser(payload) {
+    return {
+      type: "AUTHENTICATED_USER",
+      payload,
+    };
+  }
+  
+
+
 

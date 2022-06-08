@@ -8,60 +8,46 @@ import axios from "axios";
 
 
 export default function PrivateRoutes({redirectPath = "/admin",  children}){
-    const dispatch = useDispatch()
     const { user, isAuthenticated } = useAuth0();
 
     const [isAdmin, setIsAdmin] = useState(false)
+    const [finalizado, setFinalizado] = useState(false)
 
 
-    const searchUser = async () => {
+
+    
+
+      const searchUser = () => {
        
-          let resp = await axios.get("http://localhost:3001/owners")
-  
+        axios.get("http://localhost:3001/owners")
+        .then(res =>{
+            console.log('res', res)
+          let resp =  res.data.find((x) => x.email === user.email)
+          console.log('resp', resp)
 
-             let userAdmin = resp.data.find((x) => x.email === user.email)
-             return userAdmin
-
-            //          console.log('resp.isAdmin',resp.isAdmin)
-
-            // setIsAdmin(resp.isAdmin)
-
-            // console.log('isAdmin',isAdmin)
-
-
-            // console.log('user',user)
-
-           }
-        // )
-        //   .then(res =>{
-        //     console.log('res2',res)            
-        //     console.log('reres.isAdmins2',res.isAdmin)
-
-
-        //     console.log('isAdmin',isAdmin)
-
-        //   })
+          setIsAdmin(resp.isAdmin)
+        //   console.log(resp)
+         setFinalizado(true)
           
-            
-    //   };
 
-    useEffect(() => {
-        if(user){
-             searchUser()
-            .then(resp => {
-                console.log('resppp', resp)
-                setIsAdmin(resp.isAdmin)})
-            // console.log('UUUSS', us)
-            // setIsAdmin(us.isAdmin)
-        }
-      }, [user, isAdmin]);
+        })
+          
+    }
+
+    useEffect(()=>{
+      if(isAuthenticated)
+       { searchUser()}
+        
+    }, [isAuthenticated])
+
+
 
 
     return (
         <div> <h2>HOLA</h2>
-        {user?
+        {user&&finalizado?
         
-            isAdmin? children : <Navigate to='/home' />   :
+            isAdmin? <Navigate to='/admin/post-products' />  : <Navigate to='/home' />   :
             null   
         }
         </div>

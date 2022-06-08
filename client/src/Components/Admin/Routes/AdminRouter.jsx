@@ -3,7 +3,10 @@ import PostProducts from "../PostProducts";
 
 export default function AdminRouter(){
 
+    return(
+
     <Routes>
-        <Route path='/admin/post-products' element={<PostProducts />} />
+        <Route path='/post-products' element={<PostProducts />} />
+
     </Routes>
-}
+)}
