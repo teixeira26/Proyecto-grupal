@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { chargeCart } from "../../redux/actions/petshopActions";
+import { addTofavorites, chargeCart } from "../../redux/actions/petshopActions";
 import axios from "axios";
 
 function NavBar() {
@@ -20,6 +20,18 @@ function NavBar() {
   const state = useSelector((state) => {
     return state;
   });
+  const [favorites, setFavorites] = useState([]);
+  useEffect(()=>{
+    if(user && user.email){
+    axios
+      .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
+      .then((x) => {
+        console.log(x.data);
+        setFavorites(x.data);
+        dispatch(addTofavorites(x.data))
+      })};
+
+  }, [user])
 
   useEffect(() => {
     if(user){
@@ -28,7 +40,7 @@ function NavBar() {
     
     const userdb = x.data.find(x=>x.email === user.email);
         console.log(userdb)
-        if(x){
+        if(userdb){
         setUser({
             nombre:user.name,
             picture:userdb.profilePicture&&userdb.profilePicture[0]?userdb.profilePicture[0]:'/assets/img/notloged.png',
@@ -106,7 +118,7 @@ function NavBar() {
               <NavLink to="/profile" className={styles.profile}>
                 <img
                   className={styles.profilePicture}
-                  src={isAuthenticated && userData.picture?userData.picture:user.picture}
+                  src={isAuthenticated && userData.picture}
                   alt=""
                 ></img>
               </NavLink>

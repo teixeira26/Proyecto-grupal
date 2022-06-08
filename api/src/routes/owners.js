@@ -97,11 +97,11 @@ router.put('/:email', async (req, res, next) =>{
 });
 
 router.delete('/:id', async (req, res, next) =>{
-    const id = req.params.id
+    const id = req.params.email
     try{
         await Owner.update({isActive: false},{
             where:{
-                id: id
+                email: id
             }
         })
     

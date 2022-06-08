@@ -25,6 +25,7 @@ import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
+import Review from "./Components/Forms/Review";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -73,6 +74,9 @@ function App() {
           }/>
           <Route path='/infoOwner' element={
             isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
+          }/>
+          <Route path='/review/:providerEmail' element={
+            isAuthenticated && !isLoading ? <Review/> : <Loading/>
           }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/shoppingcart" element={<ShoppingCart/>}/>
