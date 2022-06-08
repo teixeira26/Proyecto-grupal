@@ -25,15 +25,12 @@ import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
-<<<<<<< HEAD
 import PrivateRoutes from "./Components/Admin/Routes/PrivateRoutes";
 import AdminRouter from "./Components/Admin/Routes/AdminRouter";
 
-=======
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import './App.css';
->>>>>>> 69e331ea564093f633951d2331634b01ba710196
 
 function App() {
   const { isAuthenticated, isLoading, user } = useAuth0();

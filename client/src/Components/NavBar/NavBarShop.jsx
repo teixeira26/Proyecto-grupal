@@ -35,7 +35,6 @@ function NavBar() {
             pets:userdb.pets,
             address:userdb.address,
         })
-        console.log('userdb', userdb)
 
     })
     }
@@ -56,7 +55,6 @@ function NavBar() {
     setProductsFavNumber(state.favorites? state.favorites.length : 0);
   }, [state.favorites]);
 
-  console.log('state.favorites',state.favorites)
 
   return (
     <div className={OutContainer.container}>
