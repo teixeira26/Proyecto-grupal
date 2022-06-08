@@ -10,6 +10,7 @@ const payProduct = async (req, res) => {
   // const id = req.params.id
   const cart = req.body.cart;
   const user = req.body.user;
+  const date = req.body.response
   console.log("USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", user);
 
   console.log("CARRITOOOOOOOOOOOOOO", cart);
@@ -31,6 +32,7 @@ const payProduct = async (req, res) => {
   let payer = {
       name: user.given_name,
       surname: user.family_name,
+      // client_id
         // id: body.client_id
     //   email: user.email
   }
@@ -50,7 +52,7 @@ const payProduct = async (req, res) => {
   mercadopago.preferences
     .create(preference)
     .then((response) => {
-      console.log(response);
+      console.log("RESPONSEEEEEEEEEEEEEEEE", response);
       res.set("Access-Control-Allow-Origin", "*");
       res.set("Access-Control-Allow-Methods", "POST");
       res.set("Access-Control-Allow-Headers", "Content-Type");
