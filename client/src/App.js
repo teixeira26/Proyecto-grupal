@@ -97,7 +97,7 @@ function App() {
 
 
           {/* -------------- RUTAS PRIVADAS -------------------- */}
-          <Route path='/admin' element={
+          <Route path='/admin/*' element={
             <PrivateRoutes isAdmin={user}>
               <AdminRouter />
             </PrivateRoutes>
