@@ -3,10 +3,10 @@ import Footer from "../Footer/Footer";
 import { useSelector } from 'react-redux';
 
 
-export default function PostProducts(){
+export default function SalesReceipts(){
     const authUser = useSelector(state => state.authUser)
     console.log("authuser", authUser)
 
 
-    return <h3>AGREGAR PRODUCTO</h3>
+    return <h3>COMPROBANTES DE VENTAS Y TRANSACCIONES</h3>
 }

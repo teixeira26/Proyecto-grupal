@@ -13,11 +13,8 @@ import { authenticatedUser, getOwners } from "../../redux/actions/ownProvActions
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
-  const navigate = useNavigate()
-  const dispatch = useDispatch()
 
-  const users = useSelector(state => state.owners)
-
+  
   useEffect(()=>{
   
     (async()=>{
@@ -27,18 +24,12 @@ const Home = () => {
           lastName: user.family_name,
         }
         await axios.post('http://localhost:3001/owners', owner)
-        // navigate('/home')
+        navigate('/home')
   })()
 
-    dispatch(getOwners())
-    let userdb = users.find(us => us.email === user.email)
-    dispatch(authenticatedUser(userdb))
-  }, [dispatch])
-
-  const usersauth = useSelector(state => state.authUser)
+  }, [])
 
 
-  console.log('usersauth', usersauth)
 
   return (
     <div className={styles.body}>
@@ -59,6 +50,7 @@ const Home = () => {
             <HomeCard name='Comprar productos' img='assets/img/shop.png'/>
           </Link>
         </div>
+       <Link to='/admin/post-product'> <button>A ADMIN</button></Link>
       </div>
 
       <div className={styles.stickyFooter}>

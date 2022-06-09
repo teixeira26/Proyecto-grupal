@@ -1,7 +1,6 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, {useEffect, useState} from "react";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth0 } from "@auth0/auth0-react";
-
 import Landing from "./Components/Landing/Landing";
 import Home from './Components/Home/Home';
 import Shop from './Components/Shop/Shop';
@@ -25,16 +24,42 @@ import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
-import PrivateRoutes from "./Components/Admin/Routes/PrivateRoutes";
-import AdminRouter from "./Components/Admin/Routes/AdminRouter";
-
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import './App.css';
+import SalesReceipts from "./Components/Admin/SalesReceipts";
+import DeleteProducts from "./Components/Admin/DeleteProducts"
+import PostProducts from "./Components/Admin/PostProducts";
+import GetUsers from "./Components/Admin/GetUsers";
+import axios from "axios";
+import BanUser from "./Components/Admin/BanUser";
 
 function App() {
-  const { isAuthenticated, isLoading, user } = useAuth0();
-  console.log('app', user)
+
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [isAdmin, setIsAdmin] = useState(false)
+  const [finalizado, setFinalizado] = useState(false)
+
+
+  
+
+  useEffect(() => {
+    const searchUser = () => {
+     
+      axios.get("http://localhost:3001/owners")
+      .then(res =>{
+
+        let resp = res.data.find((x) => x.email === user.email)
+        setIsAdmin(resp.isAdmin)
+        setFinalizado(true)
+      })
+      
+        
+  };
+      if(user){
+          searchUser()
+      }
+    }, [user]);
 
 
   return (
@@ -96,16 +121,28 @@ function App() {
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
 
 
+
+
           {/* -------------- RUTAS PRIVADAS -------------------- */}
-          <Route path='/admin/*' element={
-            <PrivateRoutes isAdmin={user}>
-              <AdminRouter />
-            </PrivateRoutes>
-            } 
-          
-          />
+          <Route path="/admin/post-products" element={
+          user&&finalizado? 
+          isAdmin? <PostProducts /> : <Navigate to='/home' /> : null}/>
 
+          <Route path="/admin/banUser" element={
+          user&&finalizado? 
+          isAdmin? <BanUser /> : <Navigate to='/home' /> : null}/>
 
+          <Route path="/admin/sales-receipts" element={
+          user&&finalizado? 
+          isAdmin? <SalesReceipts /> : <Navigate to='/home' /> : null}/>
+
+          <Route path="/admin/sales-receipts" element={
+          user&&finalizado? 
+          isAdmin? <DeleteProducts /> : <Navigate to='/home' /> : null}/>
+
+          <Route path="/admin/get-users" element={
+          user&&finalizado? 
+          isAdmin? <GetUsers /> : <Navigate to='/home' /> : null}/>
 
         </Routes>
             

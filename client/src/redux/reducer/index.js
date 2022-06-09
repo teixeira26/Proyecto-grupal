@@ -278,10 +278,14 @@ function rootReducer(state = initialState, action) {
 
 
             case 'AUTHENTICATED_USER':
-                return{
-                    ...state,
-                    authUser: action.payload
-                }
+                // let userdb = state.owners.find(us => us.email === action.payload.mail)
+                if(localStorage.getItem(action.payload)){
+                    let dataUser = JSON.parse(localStorage.getItem(action.payload));          
+                    return {
+                        ...state,
+                        authUser: dataUser,
+                    }}
+        
 
             
     
