@@ -4,10 +4,10 @@ import { useAuth0 } from "@auth0/auth0-react";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import style from './DetailProviderCard.module.css';
 
-export default function DetailProviderCard({ name, lastName, profilePicture, address, email, service, description, city, state, price }) {
-    console.log(email)
-    console.log(city)
-    console.log(state)
+export default function DetailProviderCard({ name, lastName, profilePicture, address, email, service, description, city, state, price, schedule }) {
+    // console.log(email)
+    // console.log(city)
+    // console.log(state)
     const { user } = useAuth0()
 
     return (
@@ -25,6 +25,12 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                     <h2>Sobre {name}</h2>
                     <p>{description}</p>
                     <span>Costo por {service}: <strong>${price}</strong></span>
+                </div>
+                <div>
+                    <h3>Disponibilidad de {name}</h3>
+                    {Object.keys(schedule).map((key) => {
+                    return [key, schedule[key]]
+                })}
                 </div>
                 <div className={style.contact}>
                     <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>

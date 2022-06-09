@@ -1,5 +1,5 @@
 const { Router } = require ('express');
-const { Provider, Pet } = require('../db');
+const { Provider, Pet, Event } = require('../db');
 const { Op } = require('sequelize');
 
 const router = Router();
@@ -112,7 +112,6 @@ router.put('/', async (req, res, next) => {
         next(err)
     }
 });
-
 
 router.delete('/:id', async (req, res, next) => {
     const id = req.params.id

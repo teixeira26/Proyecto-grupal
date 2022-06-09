@@ -1,5 +1,11 @@
-const { Router } = require('express');
-const { Event, Owner, Provider } = require('../db');
+const {
+    Router
+} = require('express');
+const {
+    Event,
+    Owner,
+    Provider
+} = require('../db');
 
 const router = Router();
 
@@ -18,14 +24,30 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
     const { date, eventType, comments, payment, ownerEmail, providerEmail, petName } = req.body;
+
     try {
-        
+        // busco al provider al que voy a hacer una reserva
         let providerInfo = await Provider.findOne({
-            where: {email: providerEmail}
-        })
-        console.log(providerInfo)
+            where: {
+                email: providerEmail
+            }
+        });
+
+        // reviso si incluye el horario que necesito en el dia que quiero el servicio
         if (providerInfo.dataValues.schedule[date.day].includes(date.hour)) {
-            let booking = await Event.findOrCreate({
+            
+            // guardo el evento asociado con el provider
+            let event = await Event.findAll({
+                where: {
+                    providerEmail,
+                }
+            });
+            let allEvents = event.map(x => x.dataValues);
+
+            // filtro todos los eventos que coincidan con el provider, dia y fecha en cuestion
+            allEvents = allEvents.filter(x => x.providerEmail === providerEmail && x.date.day === date.day && x.date.hour === date.hour);
+            let totalAllEvents = allEvents.length;
+            await Event.findOrCreate({
                 where: {
                     ownerEmail,
                     providerEmail,
@@ -38,12 +60,30 @@ router.post('/', async (req, res, next) => {
                     comments,
                     payment,
                     ownerEmail,
-                    providerEmail
+                    providerEmail,
+                    petName
                 }
-            })
+            });
+            // actualizo la cantidad de allEvents
+            totalAllEvents += 1;
+
+            // si la cantidad de eventos es igual a la cantidad de mascotas que puede pasear,
+            // descartamos la opcion para reservar en ese horario filtrando el schedule del provider
+            if (totalAllEvents >= providerInfo.dataValues.dogsPerWalk) {
+                filteredSchedule = providerInfo.dataValues.schedule[date.day].filter(x => x !== date.hour)
+                providerUpdated = {
+                    ...providerInfo,
+                    schedule: {...providerInfo.dataValues.schedule, [date.day]: filteredSchedule}
+                }
+                Provider.update(providerUpdated, {
+                    where: {
+                        email: providerEmail
+                    }
+                })
+            }
             res.status(201).send('La reserva ha sido creada con exito');
         } else {
-            res.status(400).send('Ya existen reservas en este horario. Por favor, elige otra opcion')
+            res.status(400).send('Este horario no esta disponible.');
         }
     } catch (error) {
         next(error)
@@ -51,7 +91,9 @@ router.post('/', async (req, res, next) => {
 });
 
 router.delete('/:id', async (req, res, next) => {
-    const { id } = req.params;
+    const {
+        id
+    } = req.params;
     try {
         await Event.update({
             isActive: false

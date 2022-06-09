@@ -4,7 +4,7 @@ import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useFormik } from "formik";
 // import * as yup from "yup";
-import { getEvents, postEvent } from "../../redux/actions/ownProvActions";
+import { getEvents, postEvent, getPets } from "../../redux/actions/ownProvActions";
 import { Form, Button } from "semantic-ui-react";
 import inContainer from '../GlobalCss/InContainer.module.css';
 import NavBar from "../NavBar/NavBarShop";
@@ -32,12 +32,12 @@ export default function Booking() {
     });
 
     // mapear un arreglo que tenga un objeto por cada mascota registrada en owner
-    console.log(providerEmail);
+    // console.log(providerEmail);
     const petOptions = [
         { key: "mascota1", value: "mascota 1", text: "Mascota 1" }, { key: "mascota2", value: "mascota 2", text: "Mascota 2" }
     ];
 
-    console.log(Date)
+    // console.log(Date)
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(null);
@@ -72,7 +72,7 @@ export default function Booking() {
                         error={formik.errors.size}
                     >
 
-                    moment().format('MMMM Do YYYY, h:mm:ss a');
+                    {/* moment().format('MMMM Do YYYY, h:mm:ss a'); */}
 
                     </Form.Dropdown>
                     <label htmlFor="">Elige un rango de fecha para el hospedaje de tu mascota</label>

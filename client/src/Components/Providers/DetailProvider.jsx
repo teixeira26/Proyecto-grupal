@@ -44,6 +44,7 @@ export default function DetailProvider() {
                                 typeOfHousing={p.typeOfHousing}
                                 housingPhotos={p.housingPhotos}
                                 dogsPerWalk={p.dogsPerWalk}
+                                schedule={p.schedule}
                             />
                         );
                     })}
