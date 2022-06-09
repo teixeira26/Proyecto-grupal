@@ -35,8 +35,8 @@ const initialState = {
     productDetail:[],
     pets: [],
     favorites:[],
-    filteredProviders:[]
-
+    filteredProviders:[],
+    authUser: null
 };
 
 function rootReducer(state = initialState, action) {
@@ -275,6 +275,17 @@ function rootReducer(state = initialState, action) {
                         ...state,
                         filteredProviders: sortService
                     }
+
+
+            case 'AUTHENTICATED_USER':
+                // let userdb = state.owners.find(us => us.email === action.payload.mail)
+                if(localStorage.getItem(action.payload)){
+                    let dataUser = JSON.parse(localStorage.getItem(action.payload));          
+                    return {
+                        ...state,
+                        authUser: dataUser,
+                    }}
+        
 
             
     
