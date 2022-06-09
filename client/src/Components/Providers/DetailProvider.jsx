@@ -28,6 +28,7 @@ export default function DetailProvider() {
                 {!provider.length
                     ? "LOADING"
                     : provider.map((p) => {
+                        console.log("soy toda la info de este provider",p)
                         return (
                             <DetailProviderCard
                                 key={email}
@@ -45,6 +46,8 @@ export default function DetailProvider() {
                                 housingPhotos={p.housingPhotos}
                                 dogsPerWalk={p.dogsPerWalk}
                                 schedule={p.schedule}
+                                latitude = {p.latitude}
+                                longitude = {p.longitude}
                             />
                         );
                     })}

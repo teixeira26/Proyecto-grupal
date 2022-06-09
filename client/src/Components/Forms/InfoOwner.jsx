@@ -29,7 +29,7 @@ export default function InfoOwner() {
       state: yup.string().required(),
     }),
 
-    onSubmit: (formData) => {
+    onSubmit: async(formData) => {
       formData = {
         ...formData,
         address: {
@@ -39,10 +39,10 @@ export default function InfoOwner() {
         },
       };
       console.log(formData);
-      dispatch(putOwnerInfo(formData.email, formData));
+      await dispatch(putOwnerInfo(formData.email, formData));
       navigate("/mi-perfil");
     },
-  });
+  }); 
 
   return (
     <div>

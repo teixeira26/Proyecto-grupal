@@ -1,6 +1,11 @@
 .topinfo {
     display: flex;
 }
+.star{
+    display:inline;
+    font-size: 3rem;
+    color: purple;
+}
 
 .topinfo h1 {
     color: #0f0b02;

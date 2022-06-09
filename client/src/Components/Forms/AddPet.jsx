@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { Form } from "semantic-ui-react";
@@ -12,10 +12,12 @@ import NavBar from "../NavBar/NavBarShop";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import global from '../GlobalCss/Button.module.css';
 import style from './Form.module.css';
+import axios from "axios";
 
 export default function InfoProvider() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
+  const auth0 = useAuth0();
   const navigate = useNavigate();
 
   const formik = useFormik({

@@ -21,7 +21,7 @@ const MapView = () => {
     const location = useLocation(); // Del Link de GeoLocProvider nos extraemos y lo utilizamos para trabajar con las coords.
     console.log('Location: ', location.state.latitude, location.state.longitude);
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
 
     useEffect(() => {
         if (location.state.latitude && location.state.longitude) {
@@ -30,7 +30,7 @@ const MapView = () => {
                 lng: location.state.longitude
             }
             setState({ ...state, currentLocation })
-            navigate("../mapview", { state: {} }, { replace: true }); // Cuando se refresca la página vuelven las coords al estado inicial.
+            // navigate("../mapview", { state: {} }, { replace: true }); // Cuando se refresca la página vuelven las coords al estado inicial.
         }
     }, [])
 
@@ -43,7 +43,7 @@ const MapView = () => {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
-            <Markers data={currentLocationProvider} />
+            {/* <Markers data={currentLocationProvider} /> */}
             <CircleMarker data={currentLocationProvider} />
         </Map>
     )

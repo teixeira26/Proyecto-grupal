@@ -13,9 +13,13 @@ import InfoProvider from "./Components/Forms/InfoProvider";
 import InfoOwner from "./Components/Forms/InfoOwner";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
+import Review from "./Components/Forms/Review";
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import './App.css';
+import Ratings from "./Components/Providers/Ratings";
+import RatingsOwner from "./Components/Providers/RatingsOwner";
+import PutReview from "./Components/Providers/PutReview";
 
 import Shop from './Components/Shop/Shop';
 import ProductDetail from "./Components/Shop/ProductDetail";
@@ -85,6 +89,9 @@ function App() {
           <Route path='/mis-datos' element={
             isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
           }/>
+          <Route path='/review/:providerEmail' element={
+            isAuthenticated && !isLoading ? <Review/> : <Loading/>
+          }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/mi-carrito" element={<ShoppingCart/>}/>
           <Route path="/confirmacion" element={
@@ -99,6 +106,12 @@ function App() {
           isAuthenticated && !isLoading ? <Booking/> : <Loading/>}/>
           <Route path='/confirmar-reserva' element={
           isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loading/>}/>
+          <Route path="/calificacionesProvider" element={
+            isAuthenticated && !isLoading ? <Ratings/> : <Loading/>}/>
+          <Route path="/calificacionesOwner" element={
+            isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
+          <Route path="/cambiarCalificacion/:id" element={
+            isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
         </Routes>
       </div>
     </BrowserRouter>

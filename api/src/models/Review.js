@@ -6,6 +6,13 @@ module.exports = (sequelize) => {
     message: {
       type: DataTypes.TEXT,
       allowNull: false,
-    } 
+    } ,
+    review:{
+      type: DataTypes.INTEGER,
+      validate:{
+        min:0,
+        max:5
+      }
+    }
   })
 };

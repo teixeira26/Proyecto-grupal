@@ -50,6 +50,14 @@ module.exports = (sequelize) => {
       type: DataTypes.JSONB(DataTypes.ARRAY),
       defaultValue: {lunes: [], martes: [], miercoles: [], jueves: [], viernes: [], sabado: [], domingo: []}
     },
+    latitude:{
+      type:DataTypes.FLOAT,
+      defaultValue:-27.7734016
+    },
+    longitude:{
+      type:DataTypes.FLOAT,
+      defaultValue:-58.6252288
+    },
     isActive:{
       type:DataTypes.BOOLEAN,
       defaultValue: true,
