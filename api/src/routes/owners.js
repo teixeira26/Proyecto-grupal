@@ -40,7 +40,7 @@ router.get('/getFavorites/:email', async(req, res, next) =>{
 });
 
 router.post('/', async(req, res, next) =>{
-    const {name, lastName, email, profilePicture, address} = req.body;
+    const {name, lastName, email, profilePicture, address, latitude, longitude} = req.body;
     let auxName = name.toLowerCase();
     let auxLastName = lastName.toLowerCase();
 
@@ -53,6 +53,8 @@ router.post('/', async(req, res, next) =>{
                     email,
                     profilePicture,
                     address,
+                    latitude,
+                    longitude
                 }})
 
         res.status(201).send('Usuario creado con éxito')
@@ -97,11 +99,11 @@ router.put('/:email', async (req, res, next) =>{
 });
 
 router.delete('/:id', async (req, res, next) =>{
-    const id = req.params.id
+    const id = req.params.email
     try{
         await Owner.update({isActive: false},{
             where:{
-                id: id
+                email: id
             }
         })
     

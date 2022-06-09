@@ -25,9 +25,13 @@ import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import Walk from "./Components/Forms/Walk";
 import Lodging from "./Components/Forms/Lodging";
+import Review from "./Components/Forms/Review";
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import './App.css';
+import Ratings from "./Components/Providers/Ratings";
+import RatingsOwner from "./Components/Providers/RatingsOwner";
+import PutReview from "./Components/Providers/PutReview";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -79,6 +83,9 @@ function App() {
           <Route path='/infoOwner' element={
             isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
           }/>
+          <Route path='/review/:providerEmail' element={
+            isAuthenticated && !isLoading ? <Review/> : <Loading/>
+          }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/shoppingcart" element={<ShoppingCart/>}/>
           <Route path="/confirmacion" element={
@@ -89,6 +96,12 @@ function App() {
           isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
           <Route path="/hospedaje" element={
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
+          <Route path="/calificacionesProvider" element={
+            isAuthenticated && !isLoading ? <Ratings/> : <Loading/>}/>
+          <Route path="/calificacionesOwner" element={
+            isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
+           <Route path="/cambiarCalificacion/:id" element={
+            isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
         </Routes>
       </div>
     </BrowserRouter>

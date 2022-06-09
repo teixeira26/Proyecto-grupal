@@ -16,8 +16,13 @@ export default function Profile() {
 
   const [userData, setUser] = useState({});
   const { user, isAuthenticated } = useAuth0();
+  const [isProvider, setIsProvider] = useState(false)
   useEffect(() => {
     if (isAuthenticated) {
+      axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+        const providerCheck = x.data.find((x) => x.email === user.email);
+        if (providerCheck) setIsProvider(true)
+      })
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
         console.log(userdb);
@@ -60,6 +65,16 @@ export default function Profile() {
               <button>OFRECER SERVICIO</button>
             </NavLink>
           </div>
+          <div className={style.service}>
+            <NavLink to="/calificacionesOwner">
+              <button>MIS RESEÑAS</button>
+            </NavLink>
+          </div>
+          {isProvider && <div className={style.service}>
+            <NavLink to="/calificacionesProvider">
+              <button>RESEÑAS RECIBIDAS</button>
+            </NavLink>
+          </div>}
         </section>
 
         <section className={style.mainInfoProfile}>

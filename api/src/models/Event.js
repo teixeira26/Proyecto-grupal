@@ -7,6 +7,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    
     eventType:{
         type:DataTypes.ENUM('paseo', 'hospedaje'),
         allowNull: false,

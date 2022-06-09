@@ -7,14 +7,19 @@ import NavBarShop from '../NavBar/NavBarShop'
 import Footer from "../Footer/Footer";
 import styles from "../Providers/Providers.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
+import { LabelDetail } from 'semantic-ui-react';
+import axios from 'axios';
 
 export default function Providers() {
     const dispatch = useDispatch()
+    const [reviews, setReviews] = useState([])
     // const [order, setOrder] = useState('ASC')
     // const [filter, setFilter] = useState('')
 
     useEffect(() => {
         dispatch(getProviders())
+        axios.get('http://localhost:3001/reviews').then(x=>setReviews(x.data))
+        console.log('isjdisjdsjdisdjiosdj',reviews)
     }, [dispatch])
 
     const providers = useSelector(state => state.filteredProviders);
@@ -72,13 +77,22 @@ export default function Providers() {
                     <div className={styles.providersGrid}>
                         {!providers.length ? 'LOADING' :
                             providers.map((p, g) => {
+                                let stars = 5
+                                let providerEvaluations = reviews.filter(x=>x.provider.email === p.email);
+                                providerEvaluations = providerEvaluations.map(x=> x.review)
+                                let numberEvaluations = providerEvaluations.length
+                                providerEvaluations = providerEvaluations.reduce((x,y)=>x+y, 0)
+                                stars = (providerEvaluations/numberEvaluations);
+                                console.log("estrellaaaaaaaaaaaaaaaaas",stars)
+
                                 return <ProvidersCard key={p.id}
                                     name={p.name}
                                     lastName={p.lastName}
                                     email={p.email}
                                     profilePicture={p.profilePicture}
                                     price={p.price}
-                                    service={p.service} />
+                                    service={p.service} 
+                                    stars = {stars?stars:5} />
                             })}
                     </div>
                 </div>
