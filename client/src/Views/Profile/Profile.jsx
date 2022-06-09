@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from "react";
-import NavBarShop from "../../Components/NavBar/NavBarShop";
-import style from "./Profile.module.css";
-import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
-import { useAuth0 } from "@auth0/auth0-react";
-import { NavLink } from "react-router-dom";
-import Footer from "../../Components/Footer/Footer";
-import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
 import { getOwners, getPets } from "../../redux/actions/ownProvActions";
+import NavBarShop from "../../Components/NavBar/NavBarShop";
+import Footer from "../../Components/Footer/Footer";
+import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
+import style from "./Profile.module.css";
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
-
   const dispatch = useDispatch();
-
   const [userData, setUser] = useState({});
   const { user, isAuthenticated } = useAuth0();
   const [isProvider, setIsProvider] = useState(false)
@@ -55,14 +53,14 @@ export default function Profile() {
           <article className={style.profile}>
             <h1 className={style.name}>{user.name}</h1>
             <div>
-              <NavLink to="/infoOwner">
+              <NavLink to="/mis-datos">
                 <button className={style.data}>Cambiar datos</button>
               </NavLink>
             </div>
           </article>
           <div className={style.service}>
-            <NavLink to="/infoprovider">
-              <button>OFRECER SERVICIO</button>
+            <NavLink to="/servicio">
+              <button>Ofrecer servicio</button>
             </NavLink>
           </div>
           <div className={style.service}>
@@ -76,7 +74,6 @@ export default function Profile() {
             </NavLink>
           </div>}
         </section>
-
         <section className={style.mainInfoProfile}>
           <h2>Mis datos</h2>
           <h4 className={style.email}>
@@ -90,42 +87,42 @@ export default function Profile() {
             </span>{" "}
           </h4>
         </section>
-
         <section>
-          <h1 className={style.boxLabel}>Mis mascotas</h1>
-
+          <h2 className={style.boxLabel}>Mis mascotas</h2>
           <div className={style.addPet}>
             <NavLink to="/agregarmascota">
               <button>Agregar mascota</button>
             </NavLink>
           </div>
-
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0
               ? userData.pets.map((x, y) => {
-                  if (x.isActive) {
-                    return (
-                      <div className={style.petInfo} key={y}>
-                        <img src={x.profilePicture} alt="profilePicture" className={style.profilePicture}/>
-                        <div className={style.petData}>
-                          <h2>{x.name}</h2>
-                          <h4>Raza: {x.race}</h4>
-                          <p className={style.aboutDog}>
-                            Sobre {x.name}: {x.description}
-                          </p>
-                          <button onClick={() => byePet(x.id)}>
-                            Desvincular mascota
-                          </button>
-                        </div>
+                if (x.isActive) {
+                  return (
+                    <div className={style.petInfo} key={y}>
+                      <img src={x.profilePicture} alt="profilePicture" className={style.profilePicture} />
+                      <div className={style.petData}>
+                        <h2>{x.name}</h2>
+                        <h4>Raza: {x.race}</h4>
+                        <p className={style.aboutDog}>
+                          Sobre {x.name}: {x.description}
+                        </p>
+                        <button onClick={() => byePet(x.id)}>
+                          Eliminar mascota
+                        </button>
                       </div>
-                    );
-                  }
-                })
+                    </div>
+                  );
+                }
+              })
               : null}
           </article>
+        </section>
+        <section>
+          <h2>Mis reservas</h2>
         </section>
       </div>
       <Footer />
     </main>
   );
-}
+};

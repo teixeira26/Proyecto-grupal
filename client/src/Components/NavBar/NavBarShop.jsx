@@ -75,17 +75,17 @@ function NavBar() {
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
         <div className={styles.item}>
-          <NavLink to="/home" className={styles.logoLink}>
+          <NavLink to="/inicio" className={styles.logoLink}>
             yumPaw
           </NavLink>
         </div>
 
         <div className={styles.item}>
-          <NavLink to="/about" className={styles.navLink}>
+          <NavLink to="/nosotros" className={styles.navLink}>
             Acerca de
           </NavLink>
 
-          <NavLink to="/contact" className={styles.navLink}>
+          <NavLink to="/contacto" className={styles.navLink}>
             Contacto
           </NavLink>
 
@@ -97,7 +97,7 @@ function NavBar() {
         <div className={styles.item}>
           <div className={styles.icons}>
             <div className={styles.icon}>
-              <NavLink to="/shoppingcart" className={styles.navLinkIcon}>
+              <NavLink to="/mi-carrito" className={styles.navLinkIcon}>
                 <img src="../../assets/img/shopping-bag.svg" alt="" />
               </NavLink>
 
@@ -105,7 +105,7 @@ function NavBar() {
             </div>
 
             <div className={styles.icon}>
-              <NavLink to="/favorites" className={styles.navLinkIcon}>
+              <NavLink to="/favoritos" className={styles.navLinkIcon}>
                 <img src="../../assets/img/favorite.svg" alt="" />
               </NavLink>
               <div className={styles.circle}>{productsFavNumber}</div>
@@ -115,7 +115,7 @@ function NavBar() {
           <div>
             {!isAuthenticated && <img src="" alt=""></img>}
             {isAuthenticated && (
-              <NavLink to="/profile" className={styles.profile}>
+              <NavLink to="/mi-perfil" className={styles.profile}>
                 <img
                   className={styles.profilePicture}
                   src={userData.picture}

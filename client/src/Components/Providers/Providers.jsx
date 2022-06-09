@@ -43,7 +43,7 @@ export default function Providers() {
         <div>
             <NavBarShop />
             <section className={inContainer.container}>
-                <NavLink to="/home">
+                <NavLink to="/inicio">
                     <img
                         src="/assets/img/arrow-left.svg"
                         alt=""

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { getServiceProviders } from '../redux/actions/ownProvActions';
 
@@ -10,7 +9,7 @@ export default function SearchBar() {
     function handleInputChange(e) {
         e.preventDefault();
         setService(e.target.value);
-            }
+    }
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -22,7 +21,7 @@ export default function SearchBar() {
         <div>
             <input
                 type='text'
-                value={service}  
+                value={service}
                 placeholder='Buscar Servicio...'
                 onChange={(e) => handleInputChange(e)}
             />
@@ -33,4 +32,4 @@ export default function SearchBar() {
             </button>
         </div>
     )
-}
+};

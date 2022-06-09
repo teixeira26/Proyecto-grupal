@@ -2,15 +2,29 @@ const { DataTypes } = require('sequelize');
 
 module.exports = (sequelize) => {
 
-  sequelize.define('Event', {
+  sequelize.define('event', {
     date: {
-      type: DataTypes.STRING,
+      type: DataTypes.JSONB,
       allowNull: false,
     },
-    
-    eventType:{
+    eventType: {
         type:DataTypes.ENUM('paseo', 'hospedaje'),
         allowNull: false,
+    },
+    comments: {
+      type: DataTypes.TEXT
+    },
+    payment: {
+      type: DataTypes.ENUM('rejected', 'pending', 'approved'),
+      allowNull: false,
+      defaultValue: 'pending'
+    },
+    petName: {
+      type: DataTypes.STRING
+    },
+    isActive: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: true,
     }    
-  })
+  });
 };

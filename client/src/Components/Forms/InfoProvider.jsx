@@ -70,15 +70,12 @@ export default function InfoProvider() {
                 <button onClick={walk} disabled={userInfo?false:true}>PASEO</button>
               </Link>
               </div>
-              
               <div>
               <Link to="/hospedaje">
                 <button onClick={lodging} disabled={userInfo?false:true}>HOSPEDAJE</button>
               </Link>
-              </div>
-              
+              </div>  
             </div>
-
             {/* <Form onSubmit={formik.handleSubmit}>
         <Form.Input
           type="text"
@@ -101,8 +98,6 @@ export default function InfoProvider() {
           onChange={formik.handleChange}
           error={formik.errors.state}
         ></Form.Input>
-
-
         <Button type="submit">Enviar</Button>
       </Form> */}
           </div>
@@ -111,4 +106,4 @@ export default function InfoProvider() {
       <Footer />
     </div>
   );
-}
+};

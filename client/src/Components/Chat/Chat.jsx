@@ -1,13 +1,12 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import React, { useEffect, useRef, useState } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import socket from "./Socket";
+import { useAuth0 } from "@auth0/auth0-react";
 import NavBarShop from '../NavBar/NavBarShop';
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from './Chat.module.css';
 
 export const Chat = () => {
-    
     const { user } = useAuth0();
     const providerEmail = useParams().providerEmail;
     const ownerEmail = useParams().ownerEmail;
@@ -16,6 +15,7 @@ export const Chat = () => {
       mensaje:''
     });
     const [mensajes, setMensajes] = useState([]);
+    
     const almacenar = ()=>{
       let cache = [];
       return function (msj, addCache, renderMessages, cleanCache){
@@ -37,6 +37,7 @@ export const Chat = () => {
           }
       }
     }
+    
     const sendCache = almacenar();
     useEffect(() => {
         sendCache(false, false, false, true)
@@ -46,7 +47,6 @@ export const Chat = () => {
         if(storedMessages){
           setMensajes(JSON.parse(storedMessages))
         }
-        
     }, [])
     
     const setMessage = (e) => {
@@ -90,6 +90,7 @@ export const Chat = () => {
     useEffect(()=>{
       divRef.current.scrollIntoView({behavior:'smooth'})
     });
+
     const submitMessage = (e)=>{
         e.preventDefault();
         socket.emit("mensaje enviado", mensaje, providerEmail, user.email, ownerEmail)
@@ -107,7 +108,7 @@ export const Chat = () => {
           <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow}/>
         </NavLink>
         <div className={styles.titleChat}>
-          <h2>Tu conversacion con Provider</h2>
+          <h2>Tu conversacion</h2>
         </div>
         <div className={styles.chat}>
           {mensajes.length > 0 ? mensajes.map((x, y) => {
@@ -120,8 +121,9 @@ export const Chat = () => {
         </div>
         <form className={styles.form} onSubmit={submitMessage}>
           <input type="text" value={mensaje.mensaje} placeholder="Tu mensaje" name="message" onChange={setMessage}></input>
-          <button type="submit" value="Enviar">Enviar</button>
+          <button type="submit" value="Enviar">Enviar mensaje</button>
         </form>
+        <NavLink to='/reservar-servicio'><button>Reservar servicio</button></NavLink>
       </div>
     </div>
   );

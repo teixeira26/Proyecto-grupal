@@ -15,7 +15,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
       unique: true,
-      primaryKey:true
+      primaryKey: true
     },
     profilePicture:{
       type:DataTypes.ARRAY(DataTypes.STRING),

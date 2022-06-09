@@ -7,7 +7,7 @@ import axios from "axios";
 import { Circle, Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
 import CircleMarker from "../Map/CircleMarker";
 
-export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude}) {
+export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule}) {
     // console.log(email)
     // console.log(city)
     // console.log(state)
@@ -59,9 +59,15 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     <p>{description}</p>
                     <span>Costo por {service}: <strong>${price}</strong></span>
                 </div>
-                
+                <div>
+                    <h3>Disponibilidad de {name}</h3>
+                    {Object.keys(schedule).map((key) => {
+                    return [key, schedule[key]]
+                })}
+                </div>
                 <div className={style.contact}>
                     <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>
+                    <NavLink to='/reservar-servicio'><button>Reservar servicio</button></NavLink>
                     <NavLink to={`/review/${email}`}><button>Calificar a {name}</button></NavLink>
                 </div>
                 
@@ -87,4 +93,4 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
             </section>
         </>
     )
-}
+};
