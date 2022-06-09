@@ -118,7 +118,7 @@ function NavBar() {
               <NavLink to="/profile" className={styles.profile}>
                 <img
                   className={styles.profilePicture}
-                  src={isAuthenticated && userData.picture}
+                  src={userData.picture}
                   alt=""
                 ></img>
               </NavLink>

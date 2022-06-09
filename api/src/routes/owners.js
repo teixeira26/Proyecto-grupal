@@ -40,7 +40,7 @@ router.get('/getFavorites/:email', async(req, res, next) =>{
 });
 
 router.post('/', async(req, res, next) =>{
-    const {name, lastName, email, profilePicture, address} = req.body;
+    const {name, lastName, email, profilePicture, address, latitude, longitude} = req.body;
     let auxName = name.toLowerCase();
     let auxLastName = lastName.toLowerCase();
 
@@ -53,6 +53,8 @@ router.post('/', async(req, res, next) =>{
                     email,
                     profilePicture,
                     address,
+                    latitude,
+                    longitude
                 }})
 
         res.status(201).send('Usuario creado con éxito')

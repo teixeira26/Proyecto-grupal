@@ -11,6 +11,12 @@
     height: 30rem;
 }
 
+.star{
+    color:purple;
+    display: inline;
+    font-size: 2rem;
+}
+
 .card:hover {
     transform: scale(1.01);
     box-shadow: 0px 8px 30px rgba(34, 34, 34, 0.692);

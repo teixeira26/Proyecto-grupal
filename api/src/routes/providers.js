@@ -54,7 +54,9 @@ router.post('/', async(req, res, next) =>{
         typeOfHousing,
         housingPhotos,
         schedule,
-        dogsPerWalk
+        dogsPerWalk,
+        longitude,
+        latitude
     } = req.body;
     let auxName = name.toLowerCase()
     let auxLastName = lastName.toLowerCase()
@@ -79,7 +81,9 @@ router.post('/', async(req, res, next) =>{
                 housingPhotos,
                 housingPhotos,
                 schedule,
-                dogsPerWalk
+                dogsPerWalk,
+                latitude,
+                longitude,
             }
         })
 

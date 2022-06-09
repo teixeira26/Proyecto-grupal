@@ -33,6 +33,21 @@ router.post('/', async(req,res)=>{
         res.status(404).send('encontramos nada')
     }
 })
+router.put('/', async (req, res, next) =>{
+    const newReview = req.body
+    try{
+        await Review.update(newReview,{
+            where:{
+                id: newReview.id
+            }
+        })
+        
+        return res.json('Usuario modificado')
+
+    }catch(err){
+        next(err)
+    }
+});
 
 
 module.exports = router;

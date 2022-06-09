@@ -4,11 +4,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import style from './DetailProviderCard.module.css'
 import axios from "axios";
+import { Circle, Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
+import CircleMarker from "../Map/CircleMarker";
 
-export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price}) {
+export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude}) {
     // console.log(email)
     // console.log(city)
     // console.log(state)
+    console.log(latitude, longitude)
     const {user} = useAuth0()
     const [stars, setStars] = useState(5)
     useEffect(()=>{
@@ -22,6 +25,19 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
     },[])
     return(
         <>
+            <Map
+            center={{lat: latitude,
+            lng: longitude}}
+            zoom={14}
+            >
+            <TileLayer
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            {/* <Markers data={currentLocationProvider} /> */}
+            <CircleMarker data={{lat: latitude,
+            lng: longitude}} />
+            </Map>
             <section className={inContainer.container}>
                 <div className={style.topinfo}>
                     <img className={style.detailImg} src={profilePicture} alt="profile img" />
@@ -37,7 +53,6 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     <p className={style.star}>{stars>=3?'★':'☆'}</p>
                     <p className={style.star}>{stars>=4?'★':'☆'}</p>
                     <p className={style.star}>{stars===5?'★':'☆'}</p>
-
                 </div>
                 <div className={style.description}>
                     <h2>Sobre {name}</h2>

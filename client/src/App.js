@@ -29,6 +29,9 @@ import Review from "./Components/Forms/Review";
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import './App.css';
+import Ratings from "./Components/Providers/Ratings";
+import RatingsOwner from "./Components/Providers/RatingsOwner";
+import PutReview from "./Components/Providers/PutReview";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -93,6 +96,12 @@ function App() {
           isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
           <Route path="/hospedaje" element={
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
+          <Route path="/calificacionesProvider" element={
+            isAuthenticated && !isLoading ? <Ratings/> : <Loading/>}/>
+          <Route path="/calificacionesOwner" element={
+            isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
+           <Route path="/cambiarCalificacion/:id" element={
+            isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
         </Routes>
       </div>
     </BrowserRouter>
