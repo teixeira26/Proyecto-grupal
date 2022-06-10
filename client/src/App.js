@@ -33,6 +33,8 @@ import PostProducts from "./Components/Admin/PostProducts";
 import GetUsers from "./Components/Admin/GetUsers";
 import axios from "axios";
 import BanUser from "./Components/Admin/BanUser";
+import AdminDashboard from "./Components/Admin/AdminDashboard";
+import ModifyProducts from "./Components/Admin/ModifyProducts";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -151,6 +153,23 @@ function App() {
           />
 
           {/* -------------- RUTAS PRIVADAS -------------------- */}
+          
+          <Route
+            path="/admin/dashboard"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <AdminDashboard />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            } />
+
+          
+          
+          
+          
           <Route
             path="/admin/post-products"
             element={
@@ -191,7 +210,7 @@ function App() {
           />
 
           <Route
-            path="/admin/sales-receipts"
+            path="/admin/delete-products"
             element={
               user && finalizado ? (
                 isAdmin ? (
@@ -215,6 +234,20 @@ function App() {
               ) : null
             }
           />
+
+          <Route
+            path="/admin/modify-products"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <ModifyProducts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
         </Routes>
       </div>
     </BrowserRouter>
