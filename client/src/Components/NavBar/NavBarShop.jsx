@@ -8,7 +8,7 @@ import { NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { chargeCart } from "../../redux/actions/petshopActions";
+import { addTofavorites, chargeCart } from "../../redux/actions/petshopActions";
 import axios from "axios";
 
 function NavBar() {
@@ -20,6 +20,18 @@ function NavBar() {
   const state = useSelector((state) => {
     return state;
   });
+  const [favorites, setFavorites] = useState([]);
+  useEffect(()=>{
+    if(user && user.email){
+    axios
+      .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
+      .then((x) => {
+        console.log(x.data);
+        setFavorites(x.data);
+        dispatch(addTofavorites(x.data))
+      })};
+
+  }, [user])
 
   useEffect(() => {
     if(user){
@@ -27,7 +39,7 @@ function NavBar() {
       axios.get('http://localhost:3001/owners').then(x=>{
     
     const userdb = x.data.find(x=>x.email === user.email);
-        console.log(userdb)
+        if(userdb){
         setUser({
             nombre:user.name,
             picture:userdb.profilePicture&&userdb.profilePicture[0]?userdb.profilePicture[0]:'/assets/img/notloged.png',
@@ -36,8 +48,10 @@ function NavBar() {
             address:userdb.address,
         })
 
-    })
     }
+  
+  })}
+    
     // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
     
@@ -60,17 +74,17 @@ function NavBar() {
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
         <div className={styles.item}>
-          <NavLink to="/home" className={styles.logoLink}>
+          <NavLink to="/inicio" className={styles.logoLink}>
             yumPaw
           </NavLink>
         </div>
 
         <div className={styles.item}>
-          <NavLink to="/about" className={styles.navLink}>
+          <NavLink to="/nosotros" className={styles.navLink}>
             Acerca de
           </NavLink>
 
-          <NavLink to="/contact" className={styles.navLink}>
+          <NavLink to="/contacto" className={styles.navLink}>
             Contacto
           </NavLink>
 
@@ -82,7 +96,7 @@ function NavBar() {
         <div className={styles.item}>
           <div className={styles.icons}>
             <div className={styles.icon}>
-              <NavLink to="/shoppingcart" className={styles.navLinkIcon}>
+              <NavLink to="/mi-carrito" className={styles.navLinkIcon}>
                 <img src="../../assets/img/shopping-bag.svg" alt="" />
               </NavLink>
 
@@ -90,7 +104,7 @@ function NavBar() {
             </div>
 
             <div className={styles.icon}>
-              <NavLink to="/favorites" className={styles.navLinkIcon}>
+              <NavLink to="/favoritos" className={styles.navLinkIcon}>
                 <img src="../../assets/img/favorite.svg" alt="" />
               </NavLink>
               <div className={styles.circle}>{productsFavNumber}</div>
@@ -100,10 +114,10 @@ function NavBar() {
           <div>
             {!isAuthenticated && <img src="" alt=""></img>}
             {isAuthenticated && (
-              <NavLink to="/profile" className={styles.profile}>
+              <NavLink to="/mi-perfil" className={styles.profile}>
                 <img
                   className={styles.profilePicture}
-                  src={isAuthenticated && userData.picture?userData.picture:user.picture}
+                  src={userData.picture}
                   alt=""
                 ></img>
               </NavLink>

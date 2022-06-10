@@ -4,8 +4,6 @@ import { getOwners, filterByOwner } from "../redux/actions/ownProvActions";
 
 export default function FilterByOwner() {
     const dispatch = useDispatch();
-
-    // Traemos el estdo de redux con los owners
     const owners = useSelector(state => state.copyOwners);
     const ownersArr = owners?.map(o => o.name);
 
@@ -20,9 +18,7 @@ export default function FilterByOwner() {
 
     return (
         <div>
-
             <h5>Filtrar por Dueño</h5>
-
             <select onChange={(e) => handleFilterByOwner(e)}>
                 <option value="All">Todos</option>
                 {ownersArr?.map(a => (
@@ -31,8 +27,6 @@ export default function FilterByOwner() {
                     </option>
                 ))}
             </select>
-
         </div>
     );
-
-}
+};

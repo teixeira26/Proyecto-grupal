@@ -1,25 +1,35 @@
-const { Router } = require ('express');
+const { Router } = require('express');
 const { Owner, Pet } = require('../db');
 
 const router = Router();
 
-router.get('/', async(req, res, next) =>{
-    try{
+router.get('/', async (req, res, next) => {
+    try {
         let allPets = await Pet.findAll({
-            order: [['name', 'ASC']]
+            order: [
+                ['name', 'ASC']
+            ]
         })
 
         allPets.length ?
-        res.status(200).send(allPets) :
-        res.status(400).send('No hay mascotas cargados')
+            res.status(200).send(allPets) :
+            res.status(400).send('No hay mascotas cargados')
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 });
 
 router.post('/', async (req, res, next) => {
-    const { name, type, race, size, photos, description, ownerEmail} = req.body;
+    const {
+        name,
+        type,
+        race,
+        size,
+        photos,
+        description,
+        ownerEmail
+    } = req.body;
     let auxName = name.toLowerCase();
 
     try {
@@ -52,37 +62,39 @@ router.post('/', async (req, res, next) => {
     }
 });
 
-router.put('/:id', async (req, res, next) =>{
+router.put('/:id', async (req, res, next) => {
     const id = req.params.id
     const pet = req.body
 
-    try{
-        await Pet.update(pet,{
-            where:{
+    try {
+        await Pet.update(pet, {
+            where: {
                 id: id
             }
         })
-    
+
         return res.json('Mascota modificada')
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 });
 
-router.delete('/:id', async (req, res, next) =>{
+router.delete('/:id', async (req, res, next) => {
     const id = req.params.id
 
-    try{
-        await Pet.update({isActive: false},{
-            where:{
+    try {
+        await Pet.update({
+            isActive: false
+        }, {
+            where: {
                 id: id
             }
         })
-    
+
         return res.json('Mascota desvinculado')
 
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 });

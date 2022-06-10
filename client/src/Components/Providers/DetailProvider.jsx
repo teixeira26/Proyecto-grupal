@@ -14,7 +14,6 @@ export default function DetailProvider() {
     const email = useParams().name;
     const provider = useSelector(state => state.providers);
     
-
     useEffect(() => {
         dispatch(getProviderById(email))
     }, [dispatch, email]);
@@ -29,6 +28,7 @@ export default function DetailProvider() {
                 {!provider.length
                     ? "LOADING"
                     : provider.map((p) => {
+                        console.log("soy toda la info de este provider",p)
                         return (
                             <DetailProviderCard
                                 key={email}
@@ -45,6 +45,9 @@ export default function DetailProvider() {
                                 typeOfHousing={p.typeOfHousing}
                                 housingPhotos={p.housingPhotos}
                                 dogsPerWalk={p.dogsPerWalk}
+                                schedule={p.schedule}
+                                latitude = {p.latitude}
+                                longitude = {p.longitude}
                             />
                         );
                     })}

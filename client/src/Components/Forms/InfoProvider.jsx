@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { postProvider, putProvider } from "../../redux/actions/ownProvActions";
+import { getOwners, getProviderById, postProvider, putProvider } from "../../redux/actions/ownProvActions";
 import { Link, useNavigate } from "react-router-dom";
 import style from "./InfoProvider.module.css";
 import NavBar from "../NavBar/NavBarShop";
@@ -14,8 +14,21 @@ import Footer from "../Footer/Footer";
 export default function InfoProvider() {
   const { user } = useAuth0();
   const dispatch = useDispatch();
+  const provider = useSelector(state => state.owners);
+  const [userInfo, setUserInfo] = useState(false)
+    
 
+  useEffect(() => {
+      dispatch(getOwners())
+  }, [dispatch]);
+  useEffect(() => {
+    if(user){
+    setUserInfo(provider.find(x=>x.email === user.email))
+
+    }
+}, [provider, user]);
   function walk() {
+    console.log("user infoooooooooooooooooooooooooo",userInfo);
     dispatch(
       postProvider({
         email: user.email,
@@ -23,17 +36,23 @@ export default function InfoProvider() {
         lastName: user.family_name,
         profilePicture: user.picture,
         service: ["paseo"],
+        latitude: userInfo.latitude,
+        longitude: userInfo.longitude,
       })
     );
   }
 
   function lodging() {
+    console.log(userInfo);
     dispatch(
       postProvider({
         email: user.email,
         name: user.given_name,
+        profilePicture: user.picture,
         lastName: user.family_name,
         service: ["hospedaje"],
+        latitude: userInfo.latitude,
+        longitude: userInfo.longitude,
       })
     );
   }
@@ -48,18 +67,15 @@ export default function InfoProvider() {
             <div className={style.buttons}>
               <div className={style.button}>
               <Link to="/paseo">
-                <button onClick={walk}>PASEO</button>
+                <button onClick={walk} disabled={userInfo?false:true}>PASEO</button>
               </Link>
               </div>
-              
               <div>
               <Link to="/hospedaje">
-                <button onClick={lodging}>HOSPEDAJE</button>
+                <button onClick={lodging} disabled={userInfo?false:true}>HOSPEDAJE</button>
               </Link>
-              </div>
-              
+              </div>  
             </div>
-
             {/* <Form onSubmit={formik.handleSubmit}>
         <Form.Input
           type="text"
@@ -82,8 +98,6 @@ export default function InfoProvider() {
           onChange={formik.handleChange}
           error={formik.errors.state}
         ></Form.Input>
-
-
         <Button type="submit">Enviar</Button>
       </Form> */}
           </div>
@@ -92,4 +106,4 @@ export default function InfoProvider() {
       <Footer />
     </div>
   );
-}
+};

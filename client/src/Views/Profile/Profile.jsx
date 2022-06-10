@@ -1,24 +1,30 @@
 import React, { useEffect, useState } from "react";
 import NavBarShop from "../../Components/NavBar/NavBarShop";
-import style from "./Profile.module.css";
-import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Link, NavLink } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
 import { getOwners, getPets } from "../../redux/actions/ownProvActions";
-import AdminDashboard from "../../Components/Admin/AdminDashboard";
+import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
+import style from "./Profile.module.css";
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
-
   const dispatch = useDispatch();
-
   const [userData, setUser] = useState({});
   const { user, isAuthenticated } = useAuth0();
+  const [isProvider, setIsProvider] = useState(false)
+  const [providerInfo, setProviderInfo] = useState()
   useEffect(() => {
     if (isAuthenticated) {
+      axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+        const providerCheck = x.data.find((x) => x.email === user.email);
+        if (providerCheck){ 
+          setIsProvider(true);
+          setProviderInfo(providerCheck);
+        }
+      })
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
         console.log(userdb);
@@ -55,18 +61,27 @@ export default function Profile() {
           <article className={style.profile}>
             <h1 className={style.name}>{user.name}</h1>
             <div>
-              <NavLink to="/infoOwner">
+              <NavLink to="/mis-datos">
                 <button className={style.data}>Cambiar datos</button>
               </NavLink>
             </div>
           </article>
           <div className={style.service}>
-            <NavLink to="/infoprovider">
-              <button>OFRECER SERVICIO</button>
+            <NavLink to="/servicio">
+              <button>Ofrecer servicio</button>
             </NavLink>
           </div>
+          <div className={style.service}>
+            <NavLink to="/calificacionesOwner">
+              <button>MIS RESEÑAS</button>
+            </NavLink>
+          </div>
+          {isProvider && <div className={style.service}>
+            <NavLink to="/calificacionesProvider">
+              <button>RESEÑAS RECIBIDAS</button>
+            </NavLink>
+          </div>}
         </section>
-
         <section className={style.mainInfoProfile}>
           <h2>Mis datos</h2>
           <h4 className={style.email}>
@@ -80,16 +95,30 @@ export default function Profile() {
             </span>{" "}
           </h4>
         </section>
-
+        
+       {providerInfo&& providerInfo.schedule &&<section className={style.mainInfoProfile}>
+          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
+          <br/>
+          <br/>
+          {console.log(providerInfo)}
+          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+          <NavLink to="/misHorarios">
+              <button>CAMBIAR HORARIOS</button>
+            </NavLink>
+        </section>}
         <section>
-          <h1 className={style.boxLabel}>Mis mascotas</h1>
-
+          <h2 className={style.boxLabel}>Mis mascotas</h2>
           <div className={style.addPet}>
             <NavLink to="/agregarmascota">
               <button>Agregar mascota</button>
             </NavLink>
-          </div>
-          {
+            {
            userData.isAdmin?
             <Link to='/admin/dashboard'>
             <button>Herramientas de Admin</button> 
@@ -97,35 +126,36 @@ export default function Profile() {
               : null
           
                 }
-
-
+          </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0
               ? userData.pets.map((x, y) => {
-                  if (x.isActive) {
-                    return (
-                      <div className={style.petInfo} key={y}>
-                        <img src={x.profilePicture} alt="profilePicture" className={style.profilePicture}/>
-                        <div className={style.petData}>
-                          <h2>{x.name}</h2>
-                          <h4>Raza: {x.race}</h4>
-                          <p className={style.aboutDog}>
-                            Sobre {x.name}: {x.description}
-                          </p>
-                          <button onClick={() => byePet(x.id)}>
-                            Desvincular mascota
-                          </button>
-
-                        </div>
+                if (x.isActive) {
+                  return (
+                    <div className={style.petInfo} key={y}>
+                      <img src={x.profilePicture} alt="profilePicture" className={style.profilePicture} />
+                      <div className={style.petData}>
+                        <h2>{x.name}</h2>
+                        <h4>Raza: {x.race}</h4>
+                        <p className={style.aboutDog}>
+                          Sobre {x.name}: {x.description}
+                        </p>
+                        <button onClick={() => byePet(x.id)}>
+                          Eliminar mascota
+                        </button>
                       </div>
-                    );
-                  }
-                })
+                    </div>
+                  );
+                }
+              })
               : null}
           </article>
+        </section>
+        <section>
+          <h2>Mis reservas</h2>
         </section>
       </div>
       <Footer />
     </main>
   );
-}
+};
