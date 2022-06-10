@@ -8,6 +8,7 @@ import NavBarShop from "../../Components/NavBar/NavBarShop";
 import Footer from "../../Components/Footer/Footer";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import style from "./Profile.module.css";
+import InfoProvider from "../../Components/Forms/AddPet";
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
@@ -15,11 +16,15 @@ export default function Profile() {
   const [userData, setUser] = useState({});
   const { user, isAuthenticated } = useAuth0();
   const [isProvider, setIsProvider] = useState(false)
+  const [providerInfo, setProviderInfo] = useState()
   useEffect(() => {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
         const providerCheck = x.data.find((x) => x.email === user.email);
-        if (providerCheck) setIsProvider(true)
+        if (providerCheck){ 
+          setIsProvider(true);
+          setProviderInfo(providerCheck);
+        }
       })
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
@@ -87,6 +92,23 @@ export default function Profile() {
             </span>{" "}
           </h4>
         </section>
+        
+       {providerInfo&& providerInfo.schedule &&<section className={style.mainInfoProfile}>
+          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
+          <br/>
+          <br/>
+          {console.log(providerInfo)}
+          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+          <NavLink to="/misHorarios">
+              <button>CAMBIAR HORARIOS</button>
+            </NavLink>
+        </section>}
         <section>
           <h2 className={style.boxLabel}>Mis mascotas</h2>
           <div className={style.addPet}>

@@ -39,6 +39,7 @@ import Favorites from "./Components/Favorites/Favorites";
 import Profile from "./Views/Profile/Profile.jsx";
 import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
+import ScheduleProvider from "./Components/Forms/scheduleProvider";
 
 function App() {
   const { isAuthenticated, isLoading } = useAuth0();
@@ -112,6 +113,8 @@ function App() {
             isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
           <Route path="/cambiarCalificacion/:id" element={
             isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
+          <Route path="/misHorarios" element={
+            isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
         </Routes>
       </div>
     </BrowserRouter>
