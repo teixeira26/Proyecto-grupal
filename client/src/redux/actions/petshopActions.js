@@ -104,3 +104,17 @@ export function addTofavorites(favoritos){
         payload: favoritos
     }
 };
+
+
+
+
+export function postSold(payload) {
+    return async function () {
+        try {
+
+            await axios.post(`http://localhost:3001/solds`, payload)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};

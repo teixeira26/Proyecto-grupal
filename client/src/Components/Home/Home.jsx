@@ -49,6 +49,8 @@ useEffect(()=>{
   
   }, [user, location])
 
+
+
   return (
     <div className={styles.body}>
       {isAuthenticated && console.log(user)}

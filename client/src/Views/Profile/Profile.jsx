@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 import NavBarShop from "../../Components/NavBar/NavBarShop";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link, NavLink } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import style from "./Profile.module.css";
-import InfoProvider from "../../Components/Forms/AddPet";
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
@@ -38,6 +37,7 @@ export default function Profile() {
           email: user.email,
           pets: userdb.pets,
           address: userdb.address,
+          isAdmin: userdb.isAdmin
         });
         console.log("userdb", userdb);
       });
@@ -48,6 +48,9 @@ export default function Profile() {
     await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });
     dispatch(getPets());
   }
+
+  console.log('USERDATA', userData)
+
 
   return (
     <main>
@@ -115,6 +118,14 @@ export default function Profile() {
             <NavLink to="/agregarmascota">
               <button>Agregar mascota</button>
             </NavLink>
+            {
+           userData.isAdmin?
+            <Link to='/admin/dashboard'>
+            <button>Herramientas de Admin</button> 
+            </Link>
+              : null
+          
+                }
           </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0

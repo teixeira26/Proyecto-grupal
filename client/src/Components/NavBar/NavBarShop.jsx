@@ -39,7 +39,6 @@ function NavBar() {
       axios.get('http://localhost:3001/owners').then(x=>{
     
     const userdb = x.data.find(x=>x.email === user.email);
-        console.log(userdb)
         if(userdb){
         setUser({
             nombre:user.name,
@@ -48,10 +47,11 @@ function NavBar() {
             pets:userdb.pets,
             address:userdb.address,
         })
-        console.log('userdb', userdb)}
 
-    })
     }
+  
+  })}
+    
     // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
     
@@ -69,7 +69,6 @@ function NavBar() {
     setProductsFavNumber(state.favorites? state.favorites.length : 0);
   }, [state.favorites]);
 
-  console.log('state.favorites',state.favorites)
 
   return (
     <div className={OutContainer.container}>
