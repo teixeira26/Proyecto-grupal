@@ -13,7 +13,7 @@ import { authenticatedUser, getOwners } from "../../redux/actions/ownProvActions
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
-
+  const navigate = useNavigate()
   
   useEffect(()=>{
   
@@ -50,7 +50,6 @@ const Home = () => {
             <HomeCard name='Comprar productos' img='assets/img/shop.png'/>
           </Link>
         </div>
-       <Link to='/admin/post-product'> <button>A ADMIN</button></Link>
       </div>
 
       <div className={styles.stickyFooter}>

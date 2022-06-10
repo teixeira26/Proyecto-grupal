@@ -112,40 +112,4 @@ router.delete('/:id', async (req, res, next) =>{
     }
 });
 
-
-
-
-
-
-
-
-router.post('/checkout', async(req, res, next) =>{
-    const {email, id, quantity} = req.body
-
-    try{
-        // let 
-        await Sold.create({
-            quantity,
-            ownerEmail: email,
-            productId: id,
-        })
-        // let foundOwner = await Owner.findOne({
-        //     where:{
-        //         email: email
-        //     }
-        // })
-        // let foundProduct = await Product.findOne({
-        //     where:{
-        //         id: id
-        //     }
-        // })
-        // await foundProduct.addSold(newSold)
-
-        res.status(201).send('Producto vendido con éxito')
-
-    }catch(err){
-        next(err)
-    }
-});
-
 module.exports = router;

@@ -9,7 +9,7 @@ export default function MercadoPago({ cart }) {
   const {user } = useAuth0();
 
   const getPreference = useCallback(async () => {
-    const res = await fetchCToken(`products/checkout`, { cart, user: user }, "POST");
+    const res = await fetchCToken(`products/checkout/`, { cart, user: user }, "POST");
    
     console.log('res MP', res);
 
