@@ -7,7 +7,7 @@ import {
   clearAllCart,
 } from "../../../redux/actions/petshopActions";
 import { useAuth0 } from "@auth0/auth0-react";
-import style from "./Confirmación.module.css"
+import style from "./Confirmación.module.css";
 
 const Confirmación = () => {
   const navigate = useNavigate();
@@ -22,6 +22,8 @@ const Confirmación = () => {
   };
   let query = useQuery();
   let payment_id = query.get("payment_id");
+  let collection_id = query.get("collection_id");
+  console.log("COLLECIOOOOOOOOOOOOOOOOON", collection_id);
   let status = query.get("status");
   const idCliente = localStorage.getItem("IdCliente");
 
@@ -49,13 +51,20 @@ const Confirmación = () => {
       if (payment_id !== null && status === "approved") {
         setCompraExitosa("comprado");
 
-        setTimeout(()=>{
-            clearCart()
-        }, 3000)
+        let res = await axios.get(
+          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-2420739168238379-060913-b26faddf6d640dd5510456dca90bd65c-1139786546`
+        );
+        console.log("RESPUESTA COMPRAAAAAAAAAAA", res);
+        
+        await axios.post(`http://localhost:3001/solds`, res)
+       
+        setTimeout(() => {
+          clearCart();
+        }, 3000);
 
-        setTimeout(()=>{
-            navigate('/shop')
-        }, 4000)
+        setTimeout(() => {
+          navigate("/shop");
+        }, 4000);
       }
     })();
   }, [payment_id, status, idCliente, navigate, clearCart]);
@@ -63,9 +72,9 @@ const Confirmación = () => {
   return (
     <>
       <div className={style.container}>
-      <p className={style.paragraph}>Esperando confirmación de compra:</p>
+        <p className={style.paragraph}>Esperando confirmación de compra:</p>
         <h2 className={style.confirm}>CONFIRMACIÓN DEL PEDIDO</h2>
-        
+
         {compraExitosa === "esperando" && <h3>Procesando...</h3>}
         {compraExitosa === "comprado" && <h3>Gracias por comprar</h3>}
         {compraExitosa === "error" && <h3>Error en la compra</h3>}

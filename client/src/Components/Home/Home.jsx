@@ -48,7 +48,6 @@ const Home = () => {
             <HomeCard name='Comprar productos' img='assets/img/shop.png'/>
           </Link>
         </div>
-       <Link to='/admin/post-product'> <button>A ADMIN</button></Link>
       </div>
 
       <div className={styles.stickyFooter}>
