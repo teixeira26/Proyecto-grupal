@@ -11,8 +11,10 @@ import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import style from "./Star.module.css";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 export default function PutReview() {
+  const navigate = useNavigate()
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const id = useParams().id
@@ -37,8 +39,21 @@ export default function PutReview() {
       };
       console.log(formData);
       // await dispatch(putOwnerInfo(formData.email, formData));
-      await axios.put('http://localhost:3001/reviews', formData)
-
+      Swal.fire({
+        title: 'Estás seguro que querés guardar los cambios?',
+        showDenyButton: true,
+        confirmButtonText: 'Guardar',
+        denyButtonText: `No guardar`,
+      }).then(async(result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          Swal.fire('Informaciones guardadas!', '', 'success')
+          await axios.put('http://localhost:3001/reviews', formData)
+          navigate('/inicio')
+        } else if (result.isDenied) {
+          Swal.fire('Los cambios no fueron guardados', '', 'info')
+        }
+      })
       // navigate("/profile");
     },
   }); 
