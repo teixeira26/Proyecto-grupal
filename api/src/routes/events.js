@@ -1,11 +1,5 @@
-const {
-    Router
-} = require('express');
-const {
-    Event,
-    Owner,
-    Provider
-} = require('../db');
+const { Router } = require('express');
+const { Event, Owner, Provider } = require('../db');
 
 const router = Router();
 

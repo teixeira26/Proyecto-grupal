@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Home/Home.module.css";
-import NavBarRegistered from "../NavBar/NavBarRegistered";
 import NavBarShop from '../NavBar/NavBarShop'
 import inContainer from "../GlobalCss/InContainer.module.css";
 import HomeCard from "./HomeCard";
