@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chargeCart,
   clearAllCart,
+  postSold,
 } from "../../../redux/actions/petshopActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import style from "./Confirmación.module.css";
@@ -52,11 +53,25 @@ const Confirmación = () => {
         setCompraExitosa("comprado");
 
         let res = await axios.get(
-          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-2420739168238379-060913-b26faddf6d640dd5510456dca90bd65c-1139786546`
+          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-7012537343723443-053123-5facd15f88649bf31385f5ab06f47cb9-1134140317`
         );
-        console.log("RESPUESTA COMPRAAAAAAAAAAA", res);
-        
-        await axios.post(`http://localhost:3001/solds`, res)
+
+        console.log('REEEESSS', res.data)
+        let resp = {
+          id: res.data.id,
+          first_name: user.given_name,
+          last_name: user.family_name,
+          items: res.data.additional_info.items,
+          status: res.data.status,
+          date_created: res.data.date_created,
+          transaction_amount: res.data.transaction_amount,
+          email: user.email
+         }
+
+         console.log('REEEESSSpp', resp)
+
+
+        dispatch(postSold(resp))
        
         setTimeout(() => {
           clearCart();
@@ -67,7 +82,7 @@ const Confirmación = () => {
         }, 4000);
       }
     })();
-  }, [payment_id, status, idCliente, navigate, clearCart]);
+  }, [payment_id, status, idCliente, navigate, clearCart, user]);
 
   return (
     <>

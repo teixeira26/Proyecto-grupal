@@ -3,7 +3,7 @@ const ownersRoute = require('./owners.js');
 const petsRoute = require('./pets.js');
 const providersRoute = require('./providers.js');
 const productsRoute = require('./products.js');
-const soldsRoute = require('./solds')
+const soldsRoute = require('./solds.js')
 
 const cors = require('cors');
 

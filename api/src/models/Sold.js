@@ -3,37 +3,39 @@ const { DataTypes } = require("sequelize");
 module.exports = (sequelize) => {
   sequelize.define("sold", {
     id: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       primaryKey: true,
+      allowNull: false
       
     },
-    firs_name: {
+    first_name: {
       type: DataTypes.STRING,
-      
+      allowNull: false
+
     },
     last_name: {
       type: DataTypes.STRING,
-      
+      allowNull: false
+
     },
-    name_product: {
-      type: DataTypes.STRING,
-     
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
- 
+    items: {
+      type: DataTypes.ARRAY(DataTypes.JSON),
+      allowNull: false
     },
     status: {
       type: DataTypes.STRING,
+      allowNull: false
 
     },
     date_created: {
       type: DataTypes.STRING,
+      allowNull: false
 
     },
     transaction_amount: {
       type: DataTypes.STRING,
-     
+      allowNull: false
+
     },
   });
 };

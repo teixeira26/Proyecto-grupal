@@ -8,7 +8,7 @@ router.get('/', async(req, res, next) =>{
     try{
 
         let allOwners = await Owner.findAll({
-            include: Pet,
+            include: [Pet, Sold],
             order: [['name', 'ASC']]
         })
 

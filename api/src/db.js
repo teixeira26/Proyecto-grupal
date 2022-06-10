@@ -65,13 +65,8 @@ Provider.hasMany(Review);
 Review.belongsTo(Provider);
 
 
-// Owner.belongsToMany(Product, {
-//   through: "Sold"
-// })
-
-// Product.belongsToMany(Owner, {
-//   through: "Sold"
-// })
+Owner.hasMany(Sold);
+Sold.belongsTo(Owner);
 
 module.exports = {
   ...sequelize.models,
