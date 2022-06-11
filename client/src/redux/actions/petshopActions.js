@@ -21,12 +21,6 @@ export function searchBarProducts (name){
     }
 };
 
-export function filterByPet (payload){
-    return {
-        type: FILTER_BY_PET,
-        payload,
-    }
-};
 
 export function chargeCart (email){
     console.log("se ejecuta la función charge cart")
@@ -102,5 +96,19 @@ export function addTofavorites(favoritos){
     return {
         type: CHARGE_FAVORITES,
         payload: favoritos
+    }
+};
+
+
+
+
+export function postSold(payload) {
+    return async function () {
+        try {
+
+            await axios.post(`http://localhost:3001/solds`, payload)
+        } catch (error) {
+            console.log(error)
+        }
     }
 };

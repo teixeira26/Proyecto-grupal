@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 import NavBarShop from "../../Components/NavBar/NavBarShop";
+import { useAuth0 } from "@auth0/auth0-react";
+import { Link, NavLink } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
+import axios from "axios";
+import { useSelector, useDispatch } from "react-redux";
+import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import style from "./Profile.module.css";
 
@@ -15,11 +15,15 @@ export default function Profile() {
   const [userData, setUser] = useState({});
   const { user, isAuthenticated } = useAuth0();
   const [isProvider, setIsProvider] = useState(false)
+  const [providerInfo, setProviderInfo] = useState()
   useEffect(() => {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
         const providerCheck = x.data.find((x) => x.email === user.email);
-        if (providerCheck) setIsProvider(true)
+        if (providerCheck){ 
+          setIsProvider(true);
+          setProviderInfo(providerCheck);
+        }
       })
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
@@ -33,6 +37,7 @@ export default function Profile() {
           email: user.email,
           pets: userdb.pets,
           address: userdb.address,
+          isAdmin: userdb.isAdmin
         });
         console.log("userdb", userdb);
       });
@@ -43,6 +48,9 @@ export default function Profile() {
     await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });
     dispatch(getPets());
   }
+
+  console.log('USERDATA', userData)
+
 
   return (
     <main>
@@ -87,12 +95,37 @@ export default function Profile() {
             </span>{" "}
           </h4>
         </section>
+        
+       {providerInfo&& providerInfo.schedule &&<section className={style.mainInfoProfile}>
+          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
+          <br/>
+          <br/>
+          {console.log(providerInfo)}
+          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+          <NavLink to="/misHorarios">
+              <button>CAMBIAR HORARIOS</button>
+            </NavLink>
+        </section>}
         <section>
           <h2 className={style.boxLabel}>Mis mascotas</h2>
           <div className={style.addPet}>
             <NavLink to="/agregarmascota">
               <button>Agregar mascota</button>
             </NavLink>
+            {
+           userData.isAdmin?
+            <Link to='/admin/dashboard'>
+            <button>Herramientas de Admin</button> 
+            </Link>
+              : null
+          
+                }
           </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0

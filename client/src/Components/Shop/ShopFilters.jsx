@@ -2,18 +2,16 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { getProducts, sortByPrice, filterByCategory,filterTargetAnimal } from "../../redux/actions/petshopActions";
 import styles from "./ShopFilters.module.css";
+import { useState } from "react";
 
 const ShopFilters = () => {
   let dispatch = useDispatch();
 
+  let [select, setSelect] = useState([])
+
   function handleFilterTargetAnimal(e) {
     console.log(e.target.value);
     dispatch(filterTargetAnimal(e.target.value))
-  };
-
-  function handleFilterCategory(e) {
-    console.log(e.target.value);
-    dispatch(filterByCategory(e.target.value))
   };
 
   function handleOrder(e) {
@@ -26,60 +24,22 @@ const ShopFilters = () => {
     dispatch(getProducts())
   };
 
-  /*       let select = [];
-        function checkPet(e) {
+        function checkCategory(e) {
           let selection = e.target.value;
           let alredy = select.includes(selection);
           console.log("alredy", alredy);
-          if (!alredy) select.push(e.target.value);
+          if (!alredy) setSelect(select = [...select, e.target.value]);
           if (alredy) {
-            select = select.filter((el) => el !== selection);
+            let aux = select.filter((el) => el !== selection);
+            setSelect(select = aux)
           }
-          dispatch(filterByPet([select]));
+          dispatch(filterByCategory(select));
         }
-   */
+   
 
   return (
     <div className={styles.container}>
-      {/* <section className={styles.selects}>
-      <p className={styles.filterTitle}>Filtrar por</p>
-      <div className={styles.checkbox}>
-        <input
-          type="checkbox"
-          value="perro"
-          onChange={checkPet}
-          className={styles.inputCheck}
-        />
-        <span className={styles.checkTitle}>Perro</span>
-      </div>
-      <div className={styles.checkbox}>
-        <input
-          type="checkbox"
-          value="gato"
-          onChange={checkPet}
-          className={styles.inputCheck}
-        />
-        <span className={styles.checkTitle}>Gato</span>
-      </div>
-      <div className={styles.checkbox}>
-        <input
-          type="checkbox"
-          value="conejo"
-          onChange={checkPet}
-          className={styles.inputCheck}
-        />
-        <span className={styles.checkTitle}>Conejo</span>
-      </div>
-      <div className={styles.checkbox}>
-        <input
-          type="checkbox"
-          value="tortuga"
-          onChange={checkPet}
-          className={styles.inputCheck}
-        />
-        <span className={styles.checkTitle}>Tortuga</span>
-      </div>
-    </section> */}
+
       <br />
       <section className={styles.selects}>
         <p className={styles.filterTitle}>Filtrar por</p>
@@ -96,16 +56,43 @@ const ShopFilters = () => {
 
         </select>
       </section>
+
+
       <section className={styles.selects}>
-        <select name="" id="" className={styles.select} onChange={handleFilterCategory}>
-          <option disabled selected>
-            Categoría de producto
-          </option>
-          <option value="alimento">Alimento</option>
-          <option value="accesorios">Accesorios</option>
-          <option value="salud y bienestar">Salud Y Bienestar</option>
-        </select>
+        <div className={styles.checkbox}>
+        <input
+          type="checkbox"
+          value="alimento"
+          onChange={checkCategory}
+          className={styles.inputCheck}
+        />
+        <span className={styles.checkTitle}>Alimento</span>
+      </div>
+      <div className={styles.checkbox}>
+        <input
+          type="checkbox"
+          value="accesorios"
+          onChange={checkCategory}
+          className={styles.inputCheck}
+        />
+        <span className={styles.checkTitle}>Accesorios</span>
+      </div>
+      <div className={styles.checkbox}>
+        <input
+          type="checkbox"
+          value="salud y bienestar"
+          onChange={checkCategory}
+          className={styles.inputCheck}
+        />
+        <span className={styles.checkTitle}>Salud y bienestar</span>
+      </div>
+
       </section>
+
+
+
+
+      
       <section className={styles.selects} onChange={(e) => handleOrder(e)}>
         <p className={styles.filterTitle}>Ordenar por</p>
         <select name="" id="" className={styles.select}>

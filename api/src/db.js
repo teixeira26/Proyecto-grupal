@@ -6,6 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
+
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/proyecto`, {
   logging: false,
   native: false,
@@ -62,21 +63,9 @@ Chat.belongsTo(Provider);
 Provider.hasMany(Review);
 Review.belongsTo(Provider);
 
-Owner.belongsToMany(Product, {
-  through: Sold
-});
 
-Product.belongsToMany(Owner, {
-  through: Sold
-});
-
-Provider.belongsToMany(Product, {
-  through: Sold
-});
-
-Product.belongsToMany(Provider, {
-  through: Sold
-});
+Owner.hasMany(Sold);
+Sold.belongsTo(Owner);
 
 module.exports = {
   ...sequelize.models,

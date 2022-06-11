@@ -1,13 +1,12 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import Landing from "./Components/Landing/Landing";
+import Shop from "./Components/Shop/Shop";
+import AddOwner from "./Components/Forms/AddOwner";
 import NotRegistered from "./Components/Auth0/notRegistered";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Home from './Components/Home/Home';
-
-import AddOwner from './Components/Forms/AddOwner'
 import AddPet from "./Components/Forms/AddPet";
 import InfoProvider from "./Components/Forms/InfoProvider";
 import InfoOwner from "./Components/Forms/InfoOwner";
@@ -16,32 +15,52 @@ import Lodging from "./Components/Forms/Lodging";
 import Review from "./Components/Forms/Review";
 import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
-import './App.css';
+import "./App.css";
+import SalesReceipts from "./Components/Admin/SalesReceipts";
+import DeleteProducts from "./Components/Admin/DeleteProducts";
+import PostProducts from "./Components/Admin/PostProducts";
+import axios from "axios";
+import AdminDashboard from "./Components/Admin/AdminDashboard";
 import Ratings from "./Components/Providers/Ratings";
 import RatingsOwner from "./Components/Providers/RatingsOwner";
 import PutReview from "./Components/Providers/PutReview";
-
-import Shop from './Components/Shop/Shop';
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
 import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
-
 import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
 import Booking from "./Components/Providers/Booking";
 import CheckoutBooking from "./Components/Providers/CheckoutBooking";
-
 import Loading from "./Components/Loading/loading";
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
-
 import Profile from "./Views/Profile/Profile.jsx";
 import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
+import ScheduleProvider from "./Components/Forms/scheduleProvider";
+import UsersTable from "./Components/Admin/UsersTable";
+import ProductsList from "./Components/Admin/ProductsList";
+
 
 function App() {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [finalizado, setFinalizado] = useState(false);
+
+  useEffect(() => {
+    const searchUser = () => {
+      axios.get("http://localhost:3001/owners").then((res) => {
+        let resp = res.data.find((x) => x.email === user.email);
+        setIsAdmin(resp.isAdmin);
+        setFinalizado(true);
+      });
+    };
+    if (user) {
+      searchUser();
+    }
+  }, [user]);
+
   return (
     <BrowserRouter>
       <div className="App">
@@ -112,7 +131,98 @@ function App() {
             isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
           <Route path="/cambiarCalificacion/:id" element={
             isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
+          <Route path="/misHorarios" element={
+            isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
+
+
+
+                      {/* -------------- RUTAS PRIVADAS -------------------- */}
+          
+          <Route
+            path="/admin/dashboard"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <AdminDashboard />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            } />
+
+          
+          
+          
+          
+          <Route
+            path="/admin/post-products"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <PostProducts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+
+          <Route
+            path="/admin/sales-receipts"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <SalesReceipts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+          <Route
+            path="/admin/delete-products"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <DeleteProducts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+          <Route
+            path="/admin/get-users"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <UsersTable />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+          <Route
+            path="/admin/listado-productos"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <ProductsList />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
         </Routes>
+
+
       </div>
     </BrowserRouter>
   );
