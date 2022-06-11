@@ -21,12 +21,6 @@ export function searchBarProducts (name){
     }
 };
 
-export function filterByPet (payload){
-    return {
-        type: FILTER_BY_PET,
-        payload,
-    }
-};
 
 export function chargeCart (email){
     console.log("se ejecuta la función charge cart")
