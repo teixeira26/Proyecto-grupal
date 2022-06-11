@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useFormik } from "formik";
+import { FieldArray, useFormik } from "formik";
 // import * as yup from "yup";
 import { getEvents, postEvent, getPets } from "../../redux/actions/ownProvActions";
 import { Form, Button } from "semantic-ui-react";
@@ -11,6 +11,7 @@ import NavBar from "../NavBar/NavBarShop";
 
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { addDays } from 'date-fns';
 
 export default function Booking() {
     const dispatch = useDispatch();
@@ -41,11 +42,44 @@ export default function Booking() {
 
     const [startDate, setStartDate] = useState(new Date());
     const [endDate, setEndDate] = useState(null);
+    const linkedListWeek = {lunes:{name:'lunes', next:'martes'}, martes:{name:'martes',next:'miercoles'}, miercoles:{name:'miercoles',next:'jueves'}, jueves:{name:'jueves',next:"viernes"}, viernes:{name:'viernes',next:"sabado"},sabado:{name:'sabado',next:"domingo"},domingo:{name:'domingo',next:"lunes"} }
+    
     const onChange = (dates) => {
         const [start, end] = dates;
         setStartDate(start);
         setEndDate(end);
     };
+    
+    function convert(day){
+        switch (day) {
+            case 'mon':
+                return 'lunes'
+            case 'tue':
+                return 'martes'
+            case 'wed':
+                return 'miercoles'
+            case 'thu':
+                return 'jueves'
+            case 'fri':
+                return 'viernes'
+            case 'sat':
+                return 'sabado'
+            case 'sun':
+                return 'domingo'
+            default:
+                break;
+        }
+    }
+
+    const recursiveWekend = (initialDay, finalDay)=>{
+        console.log('INITIAL DATE', initialDay, 'final date', finalDay)
+        if(linkedListWeek[initialDay].name === linkedListWeek[finalDay].name) {
+            console.log(linkedListWeek[finalDay])
+            return linkedListWeek[finalDay].name
+        };
+            console.log(linkedListWeek[initialDay])
+        return `${linkedListWeek[initialDay].name} ` + `${recursiveWekend(linkedListWeek[initialDay].next, finalDay)}`
+    }                                       
 
     return (
         <>
@@ -78,10 +112,22 @@ export default function Booking() {
                     <label htmlFor="">Elige un rango de fecha para el hospedaje de tu mascota</label>
                     <DatePicker
                         selected={startDate}
-                        onChange={onChange}
+                        onChange={(e)=>{
+                            if(e[0]){
+                             setStartDate(e[0]);
+                             let initialDay = convert(e[0].toString().split(' ')[0].toLowerCase())
+                             if(e[1]){
+                             setEndDate(e[1]);
+                             let finalDay = convert(e[1].toString().split(' ')[0].toLowerCase())
+                             console.log(recursiveWekend(initialDay, finalDay).split(' '))
+                            }
+                            console.log(e)}}}
+                            // onChange()}}
                         startDate={startDate}
                         endDate={endDate}
                         selectsRange
+                        minDate={new Date()}
+                        maxDate={addDays(new Date(), 6)}
                         showDisabledMonthNavigation
                     />
 

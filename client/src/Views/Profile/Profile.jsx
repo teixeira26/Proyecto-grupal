@@ -31,7 +31,7 @@ export default function Profile() {
         setUser({
           nombre: user.name,
           picture:
-            userdb.profilePicture && userdb.profilePicture[0]
+            userdb && userdb.profilePicture && userdb.profilePicture[0]
               ? userdb.profilePicture[0]
               : "/assets/img/notloged.png",
           email: user.email,
@@ -96,7 +96,7 @@ export default function Profile() {
           </h4>
         </section>
         
-       {providerInfo&& providerInfo.schedule &&<section className={style.mainInfoProfile}>
+       {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
           <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
           <br/>
           <br/>
@@ -109,6 +109,24 @@ export default function Profile() {
           <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
           <NavLink to="/misHorarios">
+              <button>CAMBIAR HORARIOS</button>
+            </NavLink>
+        </section>}
+
+
+        {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'hospedaje' &&<section className={style.mainInfoProfile}>
+          <h2 style={{display:"block"}}>Mis días de trabajo</h2>
+          <br/>
+          <br/>
+          {console.log(providerInfo)}
+          <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
+          <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
+          <div>{providerInfo.schedule.miercoles && <h3>miércoles</h3>}</div>
+          <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
+          <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
+          <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
+          <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
+          <NavLink to="/misHorariosHospedaje">
               <button>CAMBIAR HORARIOS</button>
             </NavLink>
         </section>}

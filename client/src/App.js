@@ -43,6 +43,8 @@ import Profile from "./Views/Profile/Profile.jsx";
 import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
+import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
+import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
 
 
 function App() {
@@ -54,8 +56,11 @@ function App() {
     const searchUser = () => {
       axios.get("http://localhost:3001/owners").then((res) => {
         let resp = res.data.find((x) => x.email === user.email);
+        console.log(resp)
+        if(resp){
         setIsAdmin(resp.isAdmin);
         setFinalizado(true);
+        }
       });
     };
     if (user) {
@@ -135,6 +140,8 @@ function App() {
             isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
           <Route path="/misHorarios" element={
             isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
+          <Route path="/misHorariosHospedaje" element={
+            isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
 
 
 
