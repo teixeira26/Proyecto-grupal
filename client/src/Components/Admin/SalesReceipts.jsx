@@ -29,7 +29,7 @@ export default function SalesReceipts() {
     { field: "name", headerName: "Nombre", minWidth: 150 },
     { field: "lastName", headerName: "Apellido", minWidth: 150 },
     { field: "transaction_amount", headerName: "Valor total", minWidth: 150 },
-    { field: " date_created", headerName: "Fecha", minWidth: 150 },
+    { field: "date_created", headerName: "Fecha de compra", minWidth: 230 },
     { field: "status", headerName: "Estado", minWidth: 150 },
     {
       field: "Detalle",
@@ -42,8 +42,8 @@ export default function SalesReceipts() {
   const rows = solds.map((so) => {
     return {
       id: so.id,
-      name: so.name,
-      lastName: so.lastName,
+      name: so.first_name,
+      lastName: so.last_name,
       transaction_amount: so.transaction_amount,
       date_created: so.date_created,
       status: so.status,
