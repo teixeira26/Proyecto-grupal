@@ -1,74 +1,80 @@
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import { useSelector, useDispatch } from 'react-redux';
-import { getProviders, getOwners } from '../../redux/actions/ownProvActions';
-import {useEffect} from 'react'
-import Button from '@material-ui/core/Button'
-import NavBar from '../NavBar/NavBarShop'
+import React from "react";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useSelector, useDispatch } from "react-redux";
+import { getOwners, getProviders } from "../../redux/actions/ownProvActions";
+import { useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
+import TableCell from "@mui/material/TableCell";
+import Table from "@mui/material/Table";
 
+import TableRow from "@mui/material/TableRow";
 
+export default function ProductsList() {
+  const navigate = useNavigate();
 
+  const dispatch = useDispatch();
 
-export default function UsersTable() {
-  
-    const dispatch = useDispatch()
-    const users = useSelector(state => state.owners)
+  useEffect(() => {
+    dispatch(getOwners());
+    dispatch(getProviders());
+  }, [dispatch]);
 
+  const providers = useSelector((state) => state.providers);
 
-    useEffect(()=>{
-        dispatch(getOwners())
-        dispatch(getProviders())
+  const users = useSelector((state) => state.owners);
 
-    }, [dispatch])
+  function ban() {}
 
-      const providers = useSelector(state => state.providers)
+  const columns = [
+    { field: "email", headerName: "Email", minWidth: 200 },
+    { field: "name", headerName: "Nombre", minWidth: 150 },
+    { field: "lastName", headerName: "Apellido", minWidth: 150 },
+    { field: "service", headerName: "Ofrece Servicio", minWidth: 150 },
+    { field: "raiting", headerName: "Raiting", minWidth: 150 },
+    { field: "state", headerName: "Estado", minWidth: 150 },
+    {
+      field: "Banear",
+      renderCell: () => {
+        return <Button onClick={() => ban()}>BANEAR</Button>;
+      },
+    },
+  ];
 
+  const rows = users.map((us) => {
+    return {
+      id: us.email,
 
+      email: us.email,
+      name: us.name,
+      lastName: us.lastName,
+      service: providers.find((el) => el.email === us.email) ? "SÍ" : "NO",
+      raiting: "ESTRELLAS",
+      state: us.isActive ? "ACTIVO" : "INACTIVO",
+    };
+  });
 
   return (
     <>
-    <NavBar />
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
-        <TableHead>
-          <TableRow>
-            <TableCell align="right">Email</TableCell>
-            <TableCell align="right">Nombre</TableCell>
-            <TableCell align="right">Apellido</TableCell>
-            <TableCell align="right">Ofrece servicio</TableCell>
-            <TableCell align="right">Estado</TableCell>
-            <TableCell align="right"></TableCell>
-
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {users?.map((row) => (
-            <TableRow
-              key={row.id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.email}
-              </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.lastName}</TableCell>
-              <TableCell align="right">{providers.find(el =>el.email === row.email)? 'SÍ' : 'NO'}</TableCell>
-              <TableCell align="right">{row.isActive? 'ACTIVO' : 'INACTIVO'}</TableCell>
-              
-              <TableCell align="right"><Button >BANEAR</Button></TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+      <NavBar />
+      <Table stickyHeader aria-label="sticky table">
+        <TableRow stickyHeader aria-label="sticky table">
+          <TableCell align="center" colSpan={7}>
+            LISTADO DE YUMPAWIS REGISTRADOS
+          </TableCell>
+        </TableRow>
       </Table>
-    </TableContainer>
-    <Footer />
+
+      <div style={{ height: 375, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+        />
+      </div>
+      <Footer />
     </>
   );
 }

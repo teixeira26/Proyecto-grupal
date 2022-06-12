@@ -8,7 +8,8 @@ import {
     SORT_PROVIDER_PRICE,
     FILTER_PROVIDER_PRICE,
     GET_EVENTS,
-    GET_PETS
+    GET_PETS,
+    GET_SOLDS
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
@@ -20,6 +21,7 @@ export function getOwners() {
         })
     }
 };
+
 
 export function getProviders() {
     return async function (dispatch) {
@@ -56,6 +58,17 @@ export function getNameOwner(name) {
         }
     }
 };
+
+export function getSolds() {
+    return async function (dispatch) {
+        var json = await axios.get(`http://localhost:3001/solds`);
+        return dispatch({
+            type: GET_SOLDS,
+            payload: json.data
+        })
+    }
+};
+
 
 export function filterByOwner(payload) {
     return {

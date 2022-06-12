@@ -112,3 +112,32 @@ export function postSold(payload) {
         }
     }
 };
+
+export function selectedProduct(payload){
+    return {
+        type: 'SELECTED_PRODUCT',
+        payload,
+    }
+}
+
+
+export function putProduct(id, modification) {
+    return async function () {
+        try {
+            await axios.put(`http://localhost:3001/products/${id}`, modification)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+
+export function postProduct(product) {
+    return async function () {
+        try {
+            await axios.post(`http://localhost:3001/products/`, product)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};

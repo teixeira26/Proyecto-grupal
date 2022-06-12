@@ -102,8 +102,6 @@ export default function InfoProvider() {
             onChange={(e) => {
               e.target.value = e.target.firstChild.textContent
               e.target.name = "type"
-              // console.log(e.target)
-              // console.log(e.target.value)
               formik.handleChange(e)
             }}
             selection={true}

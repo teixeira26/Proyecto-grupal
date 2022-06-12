@@ -1,12 +1,74 @@
-import NavBarShop from '../NavBar/NavBarShop'
+import React from "react";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
+import { useSelector, useDispatch } from "react-redux";
+import { getSolds } from "../../redux/actions/ownProvActions";
+import { useEffect } from "react";
+import Button from "@material-ui/core/Button";
+import { useNavigate } from "react-router-dom";
+import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
-import { useSelector } from 'react-redux';
+import TableCell from "@mui/material/TableCell";
+import Table from "@mui/material/Table";
+import TableRow from "@mui/material/TableRow";
 
+export default function SalesReceipts() {
+  const navigate = useNavigate();
 
-export default function SalesReceipts(){
-    const authUser = useSelector(state => state.authUser)
-    console.log("authuser", authUser)
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getSolds());
+  }, [dispatch]);
 
-    return <h3>COMPROBANTES DE VENTAS Y TRANSACCIONES</h3>
+  const solds = useSelector((state) => state.solds);
+
+  function detail() {}
+
+  const columns = [
+    { field: "id", headerName: "ID de la compra", minWidth: 200 },
+    { field: "name", headerName: "Nombre", minWidth: 150 },
+    { field: "lastName", headerName: "Apellido", minWidth: 150 },
+    { field: "transaction_amount", headerName: "Valor total", minWidth: 150 },
+    { field: " date_created", headerName: "Fecha", minWidth: 150 },
+    { field: "status", headerName: "Estado", minWidth: 150 },
+    {
+      field: "Detalle",
+      renderCell: () => {
+        return <Button onClick={() => detail()}>Detalle</Button>;
+      },
+    },
+  ];
+
+  const rows = solds.map((so) => {
+    return {
+      id: so.id,
+      name: so.name,
+      lastName: so.lastName,
+      transaction_amount: so.transaction_amount,
+      date_created: so.date_created,
+      status: so.status,
+    };
+  });
+
+  return (
+    <>
+      <NavBar />
+      <Table stickyHeader aria-label="sticky table">
+        <TableRow stickyHeader aria-label="sticky table">
+          <TableCell align="center" colSpan={7}>
+            TRANSACCIONES HECHAS EN LA PLATAFORMA
+          </TableCell>
+        </TableRow>
+      </Table>
+
+      <div style={{ height: 375, width: "100%" }}>
+        <DataGrid
+          rows={rows}
+          columns={columns}
+          components={{ Toolbar: GridToolbar }}
+        />
+      </div>
+      <Footer />
+    </>
+  );
 }

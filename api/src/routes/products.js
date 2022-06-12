@@ -23,8 +23,6 @@ const payProduct = async (req, res) => {
   cart.forEach((i) =>
     items.push({
       title: i.name,
-      description: i.description,
-      picture_url: i.profilePicture,
       id: i.id,
       quantity: i.quantity,
       unit_price: i.price,
@@ -154,7 +152,6 @@ router.post("/", async (req, res, next) => {
     weight,
     price,
     stock,
-    photos,
     profilePicture,
     targetAnimal,
     tradeMark,
@@ -168,7 +165,6 @@ router.post("/", async (req, res, next) => {
         weight,
         price,
         stock,
-        photos,
         profilePicture,
         description,
         targetAnimal,

@@ -8,3 +8,4 @@ export const SORT_PROVIDER_PRICE = 'SORT_PROVIDER_PRICE';
 export const FILTER_PROVIDER_PRICE = 'FILTER_PROVIDER_PRICE';
 export const GET_PETS = 'GET_PETS';
 export const GET_EVENTS = 'GET_EVENTS';
+export const GET_SOLDS = 'GET_SOLDS'
