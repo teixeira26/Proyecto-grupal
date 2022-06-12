@@ -19,12 +19,8 @@ import "./App.css";
 import SalesReceipts from "./Components/Admin/SalesReceipts";
 import DeleteProducts from "./Components/Admin/DeleteProducts";
 import PostProducts from "./Components/Admin/PostProducts";
-import GetUsers from "./Components/Admin/GetUsers";
 import axios from "axios";
-import BanUser from "./Components/Admin/BanUser";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
-import ModifyProducts from "./Components/Admin/ModifyProducts";
-import './App.css';
 import Ratings from "./Components/Providers/Ratings";
 import RatingsOwner from "./Components/Providers/RatingsOwner";
 import PutReview from "./Components/Providers/PutReview";
@@ -47,6 +43,8 @@ import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
 import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
 import BookingLodging from "./Components/Providers/BookingLodging";
 import BookingWalk from "./Components/Providers/BookingWalk";
+import UsersTable from "./Components/Admin/UsersTable";
+import ProductsList from "./Components/Admin/ProductsList";
 
 
 function App() {
@@ -180,18 +178,6 @@ function App() {
             }
           />
 
-          <Route
-            path="/admin/banUser"
-            element={
-              user && finalizado ? (
-                isAdmin ? (
-                  <BanUser />
-                ) : (
-                  <Navigate to="/home" />
-                )
-              ) : null
-            }
-          />
 
           <Route
             path="/admin/sales-receipts"
@@ -224,7 +210,7 @@ function App() {
             element={
               user && finalizado ? (
                 isAdmin ? (
-                  <GetUsers />
+                  <UsersTable />
                 ) : (
                   <Navigate to="/home" />
                 )
@@ -233,11 +219,11 @@ function App() {
           />
 
           <Route
-            path="/admin/modify-products"
+            path="/admin/listado-productos"
             element={
               user && finalizado ? (
                 isAdmin ? (
-                  <ModifyProducts />
+                  <ProductsList />
                 ) : (
                   <Navigate to="/home" />
                 )

@@ -10,7 +10,6 @@ import {
     GET_PETS
 } from '../actions-type/ownProvActionTypes';
 import {
-    FILTER_BY_PET,
     GET_PRODUCTS,
     SEARCHBAR_PRODUCTS,
     SORT_PRICE,
@@ -141,16 +140,19 @@ function rootReducer(state = initialState, action) {
                 filteredProducts: action.payload
             }
 
-        case FILTER_BY_PET:
+        case FILTER_CATEGORY:
             var array = [];
-        for (var i = 0; i < state.products.length; i++) {
-            var igual = false;
-            for (var j = 0; j < action.payload.length & !igual; j++) {
-                if (state.products[i]['targetAnimal'] === action.payload[j])
-                    igual = true;
+
+        state.products.map(
+            prod => {
+                action.payload.map(
+                    target => {
+                        prod.category === target && array.push(prod);
+                    }
+                )
             }
-            if (igual) array.push(state.products[i]);
-        }
+        )
+        if(!array.length) array = state.products
         console.log('reducer', array)
         return {
             ...state,
@@ -177,13 +179,6 @@ function rootReducer(state = initialState, action) {
             ...state,
             filteredProducts: sortProduct
         }
-
-        case FILTER_CATEGORY:
-            return {
-                ...state,
-                filteredProducts: action.payload !== 'all' ?
-                    state.products.filter(p => action.payload === p.category) : state.products
-            }
 
         case FILTER_TARGET_ANIMAL:
             return {
@@ -250,7 +245,7 @@ function rootReducer(state = initialState, action) {
         case SORT_PROVIDER_PRICE:
             let sortService = [...state.filteredProviders]
         if (action.payload === 'ASC') {
-            sortService.sort((a, b) => {
+            sortService.sort((a, b) => { 
                 if (a.price > b.price) return 1
                 if (a.price < b.price) return -1
                 return 0
