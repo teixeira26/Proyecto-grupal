@@ -23,8 +23,6 @@ const payProduct = async (req, res) => {
   cart.forEach((i) =>
     items.push({
       title: i.name,
-      description: i.description,
-      picture_url: i.profilePicture,
       id: i.id,
       quantity: i.quantity,
       unit_price: i.price,
@@ -50,7 +48,7 @@ const payProduct = async (req, res) => {
       pending: "/pending",
       success: "http://localhost:3000/confirmacion",
     },
-    notification_url: "https://2bd1-181-168-161-231.sa.ngrok.io/products/notificacion",
+    notification_url: "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
     auto_return: "approved",
   };
   mercadopago.preferences
@@ -154,7 +152,6 @@ router.post("/", async (req, res, next) => {
     weight,
     price,
     stock,
-    photos,
     profilePicture,
     targetAnimal,
     tradeMark,
@@ -168,7 +165,6 @@ router.post("/", async (req, res, next) => {
         weight,
         price,
         stock,
-        photos,
         profilePicture,
         description,
         targetAnimal,

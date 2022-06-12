@@ -60,7 +60,7 @@ export default function PurchaseConfirmation() {
         <h2>Continuá con el pago</h2>
         <MercadoPago cart={cart} />
 
-        <Link to="/shoppingcart">
+        <Link to="/mi-carrito">
           <button>Volver al carrito</button>
         </Link>
       </div>

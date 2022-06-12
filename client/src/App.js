@@ -17,7 +17,6 @@ import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import "./App.css";
 import SalesReceipts from "./Components/Admin/SalesReceipts";
-import DeleteProducts from "./Components/Admin/DeleteProducts";
 import PostProducts from "./Components/Admin/PostProducts";
 import axios from "axios";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
@@ -45,6 +44,7 @@ import BookingLodging from "./Components/Providers/BookingLodging";
 import BookingWalk from "./Components/Providers/BookingWalk";
 import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
+import PutProduct from "./Components/Admin/PutProduct";
 
 
 function App() {
@@ -166,7 +166,7 @@ function App() {
           
           
           <Route
-            path="/admin/post-products"
+            path="/admin/agregar-productos"
             element={
               user && finalizado ? (
                 isAdmin ? (
@@ -193,11 +193,11 @@ function App() {
           />
 
           <Route
-            path="/admin/delete-products"
+            path="/admin/modificar-producto"
             element={
               user && finalizado ? (
                 isAdmin ? (
-                  <DeleteProducts />
+                  <PutProduct />
                 ) : (
                   <Navigate to="/home" />
                 )
@@ -231,7 +231,10 @@ function App() {
             }
           />
 
+          
+
         </Routes>
+
 
 
       </div>
