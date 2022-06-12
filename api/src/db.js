@@ -34,6 +34,9 @@ sequelize.models = Object.fromEntries(capsEntries);
 const {Owner, Pet, Provider, Chat, Event, Review, Product, Sold} = sequelize.models;
 
 // Relaciones
+Owner.hasMany(Sold);
+Sold.belongsTo(Owner);
+
 Owner.hasMany(Pet);
 Pet.belongsTo(Owner);
 
@@ -64,8 +67,6 @@ Provider.hasMany(Review);
 Review.belongsTo(Provider);
 
 
-Owner.hasMany(Sold);
-Sold.belongsTo(Owner);
 
 module.exports = {
   ...sequelize.models,

@@ -50,7 +50,7 @@ const payProduct = async (req, res) => {
       pending: "/pending",
       success: "http://localhost:3000/confirmacion",
     },
-    notification_url: "https://2bd1-181-168-161-231.sa.ngrok.io/products/notificacion",
+    notification_url: "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
     auto_return: "approved",
   };
   mercadopago.preferences
