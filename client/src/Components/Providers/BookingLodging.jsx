@@ -104,8 +104,8 @@ export default function BookingLodging() {
         })
     }
     }, [user])
-   
 
+    
     // mapear un arreglo que tenga un objeto por cada mascota registrada en owner
     // console.log(providerEmail);
    const [petOptions, setPetOptions] = useState([])
