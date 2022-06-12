@@ -20,7 +20,7 @@ export default function Profile() {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
         const providerCheck = x.data.find((x) => x.email === user.email);
-        if (providerCheck){ 
+        if (providerCheck) {
           setIsProvider(true);
           setProviderInfo(providerCheck);
         }
@@ -95,22 +95,22 @@ export default function Profile() {
             </span>{" "}
           </h4>
         </section>
-        
-       {providerInfo&& providerInfo.schedule &&<section className={style.mainInfoProfile}>
-          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
-          <br/>
-          <br/>
+
+        {providerInfo && providerInfo.schedule && <section className={style.mainInfoProfile}>
+          <h2 style={{ display: "block" }}>Mis horarios de trabajo</h2>
+          <br />
+          <br />
           {console.log(providerInfo)}
-          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>martes</h3>{providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>jueves</h3>{providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>viernes</h3>{providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div style={{ display: 'block' }}><h3>lunes</h3>{providerInfo.schedule.lunes.map(x => <div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.map(x => <div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.map(x => <div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.map(x => <div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.map(x => <div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x => <div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x => <div><h4>{x}</h4></div>)}</div>
           <NavLink to="/misHorarios">
-              <button>CAMBIAR HORARIOS</button>
-            </NavLink>
+            <button>CAMBIAR HORARIOS</button>
+          </NavLink>
         </section>}
         <section>
           <h2 className={style.boxLabel}>Mis mascotas</h2>
@@ -119,13 +119,13 @@ export default function Profile() {
               <button>Agregar mascota</button>
             </NavLink>
             {
-           userData.isAdmin?
-            <Link to='/admin/dashboard'>
-            <button>Herramientas de Admin</button> 
-            </Link>
-              : null
-          
-                }
+              userData.isAdmin ?
+                <Link to='/admin/dashboard'>
+                  <button>Herramientas de Admin</button>
+                </Link>
+                : null
+
+            }
           </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0
