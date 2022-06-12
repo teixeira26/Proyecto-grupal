@@ -257,7 +257,7 @@ function rootReducer(state = initialState, action) {
         case SORT_PROVIDER_PRICE:
             let sortService = [...state.filteredProviders]
         if (action.payload === 'ASC') {
-            sortService.sort((a, b) => {
+            sortService.sort((a, b) => { 
                 if (a.price > b.price) return 1
                 if (a.price < b.price) return -1
                 return 0
