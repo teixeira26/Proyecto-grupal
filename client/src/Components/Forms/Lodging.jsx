@@ -29,6 +29,7 @@ export default function Lodging() {
       lastName: user.family_name,
       typeOfHousing: "",
       price: "",
+      dogsPerWalk: "",
       housingPhotos: [],
       description: "",
     },
@@ -42,14 +43,14 @@ export default function Lodging() {
       dispatch(putProvider(formData));
       console.log("formData", formData);
       // dispatch(postProvider(newProvider));
-      navigate("/mi-perfil");
+      // navigate("/mi-perfil");
     },
   });
 
   const categoriesOptions = [
-    { key: "Casa", value: "Casa", text: "Casa" },
-    { key: "Departamento", value: "Departamento", text: "Departamento" },
-    { key: "Quinta", value: "Quinta", text: "Quinta" },
+    { key: "casa", value: "casa", text: "casa" },
+    { key: "departamento", value: "cepartamento", text: "departamento" },
+    { key: "quinta", value: "quinta", text: "quinta" },
   ];
   return (
     <div>
@@ -71,6 +72,13 @@ export default function Lodging() {
               selection={true}
               error={formik.errors.size}
             ></Form.Dropdown>
+            <Form.Input
+                type="number"
+                placeholder="Cantidad máxima de perros por hospedaje"
+                name="dogsPerWalk"
+                onChange={formik.handleChange}
+              //   error={formik.errors.city}
+              ></Form.Input>
             <Form.Input
               type="number"
               placeholder="Precio por hora"

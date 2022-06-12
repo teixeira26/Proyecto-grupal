@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-    const { date, eventType, comments, payment, ownerEmail, providerEmail, petName,day } = req.body;
+    const { date, eventType, comments, payment, ownerEmail, providerEmail, petName, ownerName, providerName } = req.body;
 
     try {
         // busco al provider al que voy a hacer una reserva
@@ -65,6 +65,8 @@ router.post('/', async (req, res, next) => {
                         ownerEmail,
                         providerEmail,
                         petName,
+                        ownerName,
+                        providerName
                         
                     }
                 });
@@ -108,7 +110,8 @@ router.post('/', async (req, res, next) => {
                         ownerEmail,
                         providerEmail,
                         date,
-                        eventType
+                        eventType,
+                        petName
                     },
                     defaults: {
                         date,
@@ -118,6 +121,8 @@ router.post('/', async (req, res, next) => {
                         ownerEmail,
                         providerEmail,
                         petName,
+                        ownerName,
+                        providerName
                         
                     }
                 });

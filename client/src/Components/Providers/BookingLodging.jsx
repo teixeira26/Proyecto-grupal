@@ -24,6 +24,7 @@ export default function BookingLodging() {
     const ownerEmail = useParams().ownerEmail;
     const [myInfo, setMyinfo] = useState();
     const [bookingDay, setBookingDays] = useState([])
+    const [bookingRealDays, setBookingRealDays] = useState([])
     const [ableDays, setAbleDays] = useState();
     const navigate = useNavigate()
 
@@ -32,6 +33,7 @@ export default function BookingLodging() {
       
         axios.get('http://localhost:3001/providers?filter=&order=ASC').then(info=>{
             let data = info.data.find(x=>x.email === providerEmail);
+            formik.values.providerName = data.name + ' ' + data.lastName
             let arr = [];
             for(let propiedad in data.schedule){
                 if(data.schedule[propiedad]) arr.push(propiedad)
@@ -47,6 +49,7 @@ export default function BookingLodging() {
             date:{
                 day:'',
                 hour:'',
+                realDate:''
             },
             petName:'',
             eventType:'hospedaje',
@@ -54,37 +57,42 @@ export default function BookingLodging() {
             payment:'pending',
             ownerEmail:user.email,
             providerEmail:providerEmail,
+            ownerName:user.name,
+            providerName: '',
         },
         validationSchema: yup.object({
             petName: yup.string().required('Debes seleccionar una mascota'),
           }),
         onSubmit: async (formData) => {
+            console.log(ableDays);
+            console.log(bookingDay);
             for (let x = 0; x < bookingDay.length; x++) {
-                if (ableDays.includes(x)) {}
-            else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Intentaste reservar un día no disponible.',
-                  })
-              }}
+                console.log('soy la x', bookingDay[x])
+                console.log('soy la respuesta del if',ableDays.includes(bookingDay[x]))
+                if (ableDays.includes(bookingDay[x])) {}
+                else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Intentaste reservar un día no disponible.',
+                    })
+                    navigate(`/reservar-hospedaje/${providerEmail}`)
+                }}
             for (let x = 0; x < bookingDay.length; x++) {
-              if (ableDays.includes(x)) {
-                console.log(x);
                 formData = {
                   ...formData,
                   date: {
                     day: bookingDay[x],
+                    realDate:bookingRealDays[x],
                   },
                 };
                 await axios.post("http://localhost:3001/events", formData);
                 console.log(formData);
-              } 
             }
             navigate('/confirmar-reserva')
            
-            // 
-            // dispatch(getEvents());
+            
+            dispatch(getEvents());
         }
     });
 
@@ -113,7 +121,7 @@ export default function BookingLodging() {
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-    const linkedListWeek = {lunes:{name:'lunes', next:'martes', value:0}, martes:{name:'martes',next:'miercoles', value:1}, miercoles:{name:'miercoles',next:'jueves',value:2}, jueves:{name:'jueves',next:"viernes", value:3}, viernes:{name:'viernes',next:"sabado", value:4},sabado:{name:'sabado',next:"domingo", value:4},domingo:{name:'domingo',next:"lunes", value:6} }
+    const linkedListWeek = {lunes:{name:'lunes', next:'martes', value:0,}, martes:{name:'martes',next:'miercoles', value:1, }, miercoles:{name:'miercoles',next:'jueves',value:2, }, jueves:{name:'jueves',next:"viernes", value:3, }, viernes:{name:'viernes',next:"sabado", value:4,},sabado:{name:'sabado',next:"domingo", value:4, },domingo:{name:'domingo',next:"lunes", value:6, } }
 
    
     
@@ -148,6 +156,21 @@ export default function BookingLodging() {
             console.log(linkedListWeek[initialDay])
         return `${linkedListWeek[initialDay].name} ` + `${recursiveWekend(linkedListWeek[initialDay].next, finalDay)}`
     }        
+    function sumarDias(fecha, dias){
+        console.log('fecha: ', fecha, 'dias: ', dias)
+        fecha.setDate(fecha.getDate() + dias);
+        return fecha;
+      }
+    const recursiveDays = (initialDay, finalDay, initialDate)=>{
+        if(!finalDay) return initialDate
+        if(linkedListWeek[initialDay].name === linkedListWeek[finalDay].name) {
+            console.log('final',initialDate)
+            return initialDate
+        };
+            console.log(initialDate)
+        return `${initialDate} ` + `${recursiveDays(linkedListWeek[initialDay].next, finalDay, initialDate+1)}`
+    }        
+    
     
     // const disableDates = (date) => {
     //     if(ableDays){
@@ -200,6 +223,15 @@ export default function BookingLodging() {
                              let finalDay = dates[1]?convert(dates[1].toString().split(' ')[0].toLowerCase()):null
                              console.log(finalDay)
                             let bookingDays = recursiveWekend(initialDay, finalDay).split(' ');
+ 
+                            let initialDate = parseInt(dates[0].toString().split(' ')[2])
+                            let initialRealDate = new Date().toString().split(' ')[2]
+                            console.log(initialDate)
+                            console.log(recursiveDays(initialDay, finalDay, initialDate).toString().split(' '))
+                            let realDays = recursiveDays(initialDay, finalDay, initialDate).toString().split(' ').map(x=>sumarDias(new Date(),x-initialRealDate));
+                            setBookingRealDays(realDays.map(x=>{
+                                return x.toLocaleString().split(' ')[0]
+                            }))
                             setBookingDays(bookingDays)
                              
                             }

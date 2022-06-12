@@ -37,7 +37,7 @@ export default function Profile() {
               ? userdb.profilePicture[0]
               : "/assets/img/notloged.png",
           email: user.email,
-          pets: userdb.pets,
+          pets: userdb?userdb.pets:[],
           address: userdb.address,
           isAdmin: userdb.isAdmin
         });
@@ -73,11 +73,11 @@ export default function Profile() {
               </NavLink>
             </div>
           </article>
-          <div className={style.service}>
-            <NavLink to="/servicio">
-              <button>Ofrecer servicio</button>
-            </NavLink>
-          </div>
+          {!isProvider&&<div className={style.service}>
+              <NavLink to="/servicio">
+                <button>Ofrecer servicio</button>
+              </NavLink>
+            </div>}
           <div className={style.service}>
             <NavLink to="/calificacionesOwner">
               <button>MIS RESEÑAS</button>
@@ -108,13 +108,13 @@ export default function Profile() {
           <br/>
           <br/>
           {console.log(providerInfo)}
-          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>martes</h3>{providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>jueves</h3>{providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>viernes</h3>{providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>sábado</h3>{providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>domingo</h3>{providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.length>0 &&providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.length>0&&providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.length>0&&providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.length>0&&providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
           <NavLink to="/misHorarios">
               <button>CAMBIAR HORARIOS</button>
             </NavLink>
@@ -181,9 +181,12 @@ export default function Profile() {
           {eventsOwner&&eventsOwner.length?
           eventsOwner.map(x=>{
             return (<div>
-            <h2>{x.date.day}</h2>
+            <h5>Día del evento: {x.date.day}</h5>
+            <h4>Fecha del evento: {x.date.realDate}</h4>
+            <p>Nombre del Yump: {x.providerName}</p>
             <p>{x.date.hour}</p>
             <p>{x.eventType}</p>
+            <p>Mascota: {x.petName}</p>
             </div>)
           }):null
           }
@@ -193,9 +196,12 @@ export default function Profile() {
 
           eventsProvider.map(x=>{
             return (<div>
-            <h2>{x.date.day}</h2>
+            <h5>Día del evento: {x.date.day}</h5>
+            <h4>Fecha del evento: {x.date.realDate}</h4>
+            <p>Nombre del cliente: {x.ownerName}</p>
             <p>{x.date.hour}</p>
             <p>{x.eventType}</p>
+            <p>Pet del cliente: {x.petName}</p>
             </div>)
           })
    

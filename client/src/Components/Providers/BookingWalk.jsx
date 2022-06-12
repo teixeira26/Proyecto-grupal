@@ -25,13 +25,15 @@ export default function BookingWalk() {
     const [myInfo, setMyinfo] = useState();
     const [bookingDay, setBookingDays] = useState([])
     const [schedule, setSchedule] = useState();
-    const [petOptions, setPetOptions] = useState([])
+    const [petOptions, setPetOptions] = useState([]);
+    const [providerName, setProviderName] = useState();
 
 
     useEffect(()=>{
       
         axios.get('http://localhost:3001/providers?filter=&order=ASC').then(info=>{
             let data = info.data.find(x=>x.email === providerEmail);
+            formik.values.providerName = data.name + ' ' + data.lastName
             setSchedule(data.schedule)
         })
         
@@ -61,6 +63,7 @@ export default function BookingWalk() {
             date:{
                 day:'',
                 hour:'',
+                realDate:'02/10/2022',   
             },
             petName:'',
             eventType:'paseo',
@@ -68,6 +71,8 @@ export default function BookingWalk() {
             payment:'pending',
             ownerEmail:user.email,
             providerEmail:providerEmail,
+            ownerName:user.name,
+            providerName: '',
         },
         validationSchema: yup.object({
             petName: yup.string().required('Debes seleccionar una mascota'),
