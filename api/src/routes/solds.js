@@ -1,56 +1,57 @@
 const { Router } = require("express");
-const { Sold } = require("../db");
+const { Sold, Owner } = require("../db");
 const router = Router();
 
+router.get("/", async (req, res, next) => {
+  try {
+    let allSolds = await Sold.findAll({});
 
-
-router.get('/', async(req, res, next) =>{
-
-    try{
-
-        let allSolds = await Sold.findAll({
-        })
-
-        allSolds.length ?
-        res.status(200).send(allSolds) :
-        res.status(400).send('No hay ventas')
-
-    }catch(err){
-        next(err)
-    }
+    allSolds.length
+      ? res.status(200).send(allSolds)
+      : res.status(400).send("No hay ventas");
+  } catch (err) {
+    next(err);
+  }
 });
 
+router.post("/", async (req, res, next) => {
+  const {
+    id,
+    first_name,
+    last_name,
+    items,
+    status,
+    date_created,
+    transaction_amount,
+    email,
+  } = req.body;
+  try {
+    let newSold = await Sold.create({
+      id,
+      first_name,
+      last_name,
+      items,
+      status,
+      date_created,
+      transaction_amount,
+    });
 
-router.post("/", async(req,res,next) => {
-    const {id, first_name, last_name, items, status, date_created, transaction_amount,email }= req.body;
-    try{
-        let newSold = await Sold.create({
+    console.log("SOY UN NEWSOLD",newSold)
 
-            id,
-            first_name,
-            last_name,
-            items,
-            status,
-            date_created,
-            transaction_amount,
+    let found = await Owner.findOne({
+      where: {
+        email: email,
+      },
+    });
+    console.log("nombre", found)
+    console.log("nombre", email)
 
-                })
+    await found.addSold(newSold);
 
-        let found = await Owner.findOne({
-            where: {
-                email: email
-            }
-        })
+    res.status(201).send("Venta cargada con éxito");
+  } catch (err) {
+    next(err);
+  }
+});
 
-        await newSold.addOwner(found)
-
-
-        res.status(201).send('Venta cargada con éxito')
-
-    }catch(err){
-        next(err)
-    }
-})
-
-
-module.exports = router
+module.exports = router;

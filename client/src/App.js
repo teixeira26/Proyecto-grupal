@@ -17,7 +17,6 @@ import MapView from "./Components/Map/MapView";
 import GeoLocProvider from "./Components/Map/GeoLocProvider";
 import "./App.css";
 import SalesReceipts from "./Components/Admin/SalesReceipts";
-import DeleteProducts from "./Components/Admin/DeleteProducts";
 import PostProducts from "./Components/Admin/PostProducts";
 import axios from "axios";
 import AdminDashboard from "./Components/Admin/AdminDashboard";
@@ -30,7 +29,7 @@ import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirma
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
-import Booking from "./Components/Providers/Booking";
+import Booking from "./Components/Providers/BookingLodging";
 import CheckoutBooking from "./Components/Providers/CheckoutBooking";
 import Loading from "./Components/Loading/loading";
 import Chat from "./Components/Chat/Chat";
@@ -39,8 +38,13 @@ import Profile from "./Views/Profile/Profile.jsx";
 import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
+import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
+import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
+import BookingLodging from "./Components/Providers/BookingLodging";
+import BookingWalk from "./Components/Providers/BookingWalk";
 import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
+import PutProduct from "./Components/Admin/PutProduct";
 
 
 function App() {
@@ -52,8 +56,11 @@ function App() {
     const searchUser = () => {
       axios.get("http://localhost:3001/owners").then((res) => {
         let resp = res.data.find((x) => x.email === user.email);
+        console.log(resp)
+        if(resp){
         setIsAdmin(resp.isAdmin);
         setFinalizado(true);
+        }
       });
     };
     if (user) {
@@ -121,8 +128,10 @@ function App() {
           isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
           <Route path="/hospedaje" element={
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
-          <Route path='/reservar-servicio' element={
-          isAuthenticated && !isLoading ? <Booking/> : <Loading/>}/>
+          <Route path='/reservar-hospedaje/:providerEmail' element={
+          isAuthenticated && !isLoading ? <BookingLodging/> : <Loading/>}/>
+          <Route path='/reservar-paseo/:providerEmail' element={
+          isAuthenticated && !isLoading ? <BookingWalk/> : <Loading/>}/>
           <Route path='/confirmar-reserva' element={
           isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loading/>}/>
           <Route path="/calificacionesProvider" element={
@@ -133,6 +142,8 @@ function App() {
             isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
           <Route path="/misHorarios" element={
             isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
+          <Route path="/misHorariosHospedaje" element={
+            isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
 
 
 
@@ -155,7 +166,7 @@ function App() {
           
           
           <Route
-            path="/admin/post-products"
+            path="/admin/agregar-productos"
             element={
               user && finalizado ? (
                 isAdmin ? (
@@ -182,11 +193,11 @@ function App() {
           />
 
           <Route
-            path="/admin/delete-products"
+            path="/admin/modificar-producto"
             element={
               user && finalizado ? (
                 isAdmin ? (
-                  <DeleteProducts />
+                  <PutProduct />
                 ) : (
                   <Navigate to="/home" />
                 )
@@ -220,7 +231,10 @@ function App() {
             }
           />
 
+          
+
         </Routes>
+
 
 
       </div>

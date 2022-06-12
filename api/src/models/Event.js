@@ -22,6 +22,12 @@ module.exports = (sequelize) => {
     petName: {
       type: DataTypes.STRING
     },
+    providerName:{
+      type:DataTypes.STRING,
+    },
+    ownerName:{
+      type:DataTypes.STRING,
+    },
     isActive: {
       type:DataTypes.BOOLEAN,
       defaultValue: true,
