@@ -7,7 +7,7 @@ import ProductDetailCard from "./ProductDetailCard";
 import { Link, NavLink } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getById } from "../../redux/actions/petshopActions";
+import { getById, cleanDetail } from "../../redux/actions/petshopActions";
 import { Button } from "@material-ui/core";
 import { getOwners } from "../../redux/actions/ownProvActions";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -25,8 +25,14 @@ const ProductDetail = () => {
   useEffect( () => {
     dispatch(getById(id))
     dispatch(getOwners())
-
   }, [dispatch, id]);
+
+
+  useEffect( () => {
+      return dispatch(cleanDetail())
+  }, [dispatch]);
+
+
 
   const allUsers = useSelector(state => state.owners)
   const userDb = allUsers.find(us => us.email === user.email)

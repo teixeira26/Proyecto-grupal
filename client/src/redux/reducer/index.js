@@ -8,7 +8,8 @@ import {
     FILTER_PROVIDER_PRICE,
     GET_EVENTS,
     GET_PETS,
-    GET_SOLDS
+    GET_SOLDS,
+    GET_REVIEWS
 } from '../actions-type/ownProvActionTypes';
 import {
     GET_PRODUCTS,
@@ -40,7 +41,8 @@ const initialState = {
     filteredProviders:[],
     events: [],
     selectedProduct: null,
-    solds: []
+    solds: [],
+    reviews: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -285,6 +287,19 @@ function rootReducer(state = initialState, action) {
                 selectedProduct: action.payload
             }
 
+
+        case GET_REVIEWS:
+            return {
+                ...state,
+                reviews: action.payload
+            }
+
+            case 'CLEAN_DETAIL':
+                return {
+                    ...state,
+                    productDetail: []
+                }
+    
         default:
             return state;
     }

@@ -40,10 +40,26 @@ export default function PutProduct(){
 
       },
       onSubmit: (formData) => {
-        dispatch(putProduct(product.id,formData));
         console.log("formData", formData);
+
+        Swal.fire({
+          title: 'Confirme que desea modificar esta publicación',
+          showDenyButton: true,
+          confirmButtonText: 'Confirmar',
+          denyButtonText: `Descartar`,
+        }).then(async(result) => {
+          if (result.isConfirmed) {
+            Swal.fire('Publicación MODIFICADA', '', 'success')
+            dispatch(putProduct(product.id,formData));
+            navigate('/admin/listado-productos')
+          } else if (result.isDenied) {
+            Swal.fire('Modificación descartada', '', 'info')
+          }
+        })
+  
       },
     });
+
 
     function inactive(e){
       e.preventDefault()

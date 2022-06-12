@@ -141,3 +141,9 @@ export function postProduct(product) {
         }
     }
 };
+
+export function cleanDetail(){
+    return {
+        type: 'CLEAN_DETAIL',
+    }
+}
