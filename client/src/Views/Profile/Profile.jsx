@@ -16,6 +16,8 @@ export default function Profile() {
   const { user, isAuthenticated } = useAuth0();
   const [isProvider, setIsProvider] = useState(false)
   const [providerInfo, setProviderInfo] = useState()
+  const [eventsProvider, setEventsProvider] = useState()
+  const [eventsOwner, setEventsOwner] = useState()
   useEffect(() => {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
@@ -40,7 +42,12 @@ export default function Profile() {
           isAdmin: userdb.isAdmin
         });
         console.log("userdb", userdb);
-      });
+      }).then(()=>{
+        return axios.get('http://localhost:3001/events')
+      }).then(x=>{
+        setEventsOwner(x.data.filter(x=>x.ownerEmail === user.email))
+        setEventsProvider(x.data.filter(x=>x.providerEmail === user.email))
+      })
     }
   }, [user, isAuthenticated, pets, dispatch]);
 
@@ -171,6 +178,28 @@ export default function Profile() {
         </section>
         <section>
           <h2>Mis reservas</h2>
+          {eventsOwner&&eventsOwner.length?
+          eventsOwner.map(x=>{
+            return (<div>
+            <h2>{x.date.day}</h2>
+            <p>{x.date.hour}</p>
+            <p>{x.eventType}</p>
+            </div>)
+          }):null
+          }
+          {isProvider && <div><h2>mis servicios acordados</h2></div>}
+          {isProvider && eventsProvider?
+  
+
+          eventsProvider.map(x=>{
+            return (<div>
+            <h2>{x.date.day}</h2>
+            <p>{x.date.hour}</p>
+            <p>{x.eventType}</p>
+            </div>)
+          })
+   
+          :null}
         </section>
       </div>
       <Footer />

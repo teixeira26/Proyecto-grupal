@@ -34,7 +34,7 @@ import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirma
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
-import Booking from "./Components/Providers/Booking";
+import Booking from "./Components/Providers/BookingLodging";
 import CheckoutBooking from "./Components/Providers/CheckoutBooking";
 import Loading from "./Components/Loading/loading";
 import Chat from "./Components/Chat/Chat";
@@ -45,6 +45,8 @@ import Contact from "./Views/Profile/Contact";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
 import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
 import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
+import BookingLodging from "./Components/Providers/BookingLodging";
+import BookingWalk from "./Components/Providers/BookingWalk";
 
 
 function App() {
@@ -128,8 +130,10 @@ function App() {
           isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
           <Route path="/hospedaje" element={
           isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
-          <Route path='/reservar-servicio' element={
-          isAuthenticated && !isLoading ? <Booking/> : <Loading/>}/>
+          <Route path='/reservar-hospedaje/:providerEmail' element={
+          isAuthenticated && !isLoading ? <BookingLodging/> : <Loading/>}/>
+          <Route path='/reservar-paseo/:providerEmail' element={
+          isAuthenticated && !isLoading ? <BookingWalk/> : <Loading/>}/>
           <Route path='/confirmar-reserva' element={
           isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loading/>}/>
           <Route path="/calificacionesProvider" element={

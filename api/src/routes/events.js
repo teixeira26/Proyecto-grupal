@@ -101,7 +101,7 @@ router.post('/', async (req, res, next) => {
                 
                 // filtro todos los eventos que coincidan con el provider, dia y fecha en cuestion 
                 allEvents = allEvents.filter(x => x.providerEmail === providerEmail && x.date.day === date.day);
-                console.log(allEvents);
+                console.log(`se ejecuto un evento post con el dia ${date.day}`);
                 let totalAllEvents = allEvents.length;
                 await Event.findOrCreate({
                     where: {
