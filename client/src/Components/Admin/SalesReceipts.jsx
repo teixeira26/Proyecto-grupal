@@ -22,19 +22,24 @@ export default function SalesReceipts() {
 
   const solds = useSelector((state) => state.solds);
 
-  function detail() {}
+  function detail() {
+    
+  }
 
   const columns = [
     { field: "id", headerName: "ID de la compra", minWidth: 200 },
     { field: "name", headerName: "Nombre", minWidth: 150 },
     { field: "lastName", headerName: "Apellido", minWidth: 150 },
     { field: "transaction_amount", headerName: "Valor total", minWidth: 150 },
-    { field: " date_created", headerName: "Fecha", minWidth: 150 },
+    { field: "date_created", headerName: "Fecha", minWidth: 150 },
     { field: "status", headerName: "Estado", minWidth: 150 },
     {
       field: "Detalle",
-      renderCell: () => {
-        return <Button onClick={() => detail()}>Detalle</Button>;
+      renderCell: (cellValues) => {
+        return (
+
+        <Button onClick={() => detail(cellValues.id)}>Detalle</Button>
+        )
       },
     },
   ];
@@ -42,8 +47,8 @@ export default function SalesReceipts() {
   const rows = solds.map((so) => {
     return {
       id: so.id,
-      name: so.name,
-      lastName: so.lastName,
+      name: so.first_name,
+      lastName: so.last_name,
       transaction_amount: so.transaction_amount,
       date_created: so.date_created,
       status: so.status,
