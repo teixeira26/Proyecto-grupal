@@ -31,7 +31,7 @@ export default function SalesReceipts() {
     { field: "name", headerName: "Nombre", minWidth: 150 },
     { field: "lastName", headerName: "Apellido", minWidth: 150 },
     { field: "transaction_amount", headerName: "Valor total", minWidth: 150 },
-    { field: "date_created", headerName: "Fecha", minWidth: 150 },
+    { field: "date_created", headerName: "Fecha de compra", minWidth: 230 },
     { field: "status", headerName: "Estado", minWidth: 150 },
     {
       field: "Detalle",

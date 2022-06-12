@@ -9,7 +9,8 @@ import {
     FILTER_PROVIDER_PRICE,
     GET_EVENTS,
     GET_PETS,
-    GET_SOLDS
+    GET_SOLDS,
+    GET_REVIEWS
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
@@ -164,3 +165,14 @@ export function postEvent(newEvent) {
         }
     }
 };
+
+export function getReviews() {
+    return async function (dispatch) {
+        var json = await axios.get(`http://localhost:3001/reviews`);
+        return dispatch({
+            type: GET_REVIEWS,
+            payload: json.data
+        })
+    }
+};
+

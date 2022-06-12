@@ -38,13 +38,13 @@ import Profile from "./Views/Profile/Profile.jsx";
 import About from "./Views/Profile/About";
 import Contact from "./Views/Profile/Contact";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
-import UsersTable from "./Components/Admin/UsersTable";
-import ProductsList from "./Components/Admin/ProductsList";
-import PutProduct from "./Components/Admin/PutProduct";
 import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
 import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
 import BookingLodging from "./Components/Providers/BookingLodging";
 import BookingWalk from "./Components/Providers/BookingWalk";
+import UsersTable from "./Components/Admin/UsersTable";
+import ProductsList from "./Components/Admin/ProductsList";
+import PutProduct from "./Components/Admin/PutProduct";
 
 
 function App() {
