@@ -10,6 +10,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addTofavorites, chargeCart } from "../../redux/actions/petshopActions";
 import axios from "axios";
+import DropdownMenu from "./DropdownMenu";
 
 function NavBar() {
   const dispatch = useDispatch();
@@ -21,41 +22,41 @@ function NavBar() {
     return state;
   });
   const [favorites, setFavorites] = useState([]);
-  useEffect(()=>{
-    if(user && user.email){
-    axios
-      .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
-      .then((x) => {
-        console.log(x.data);
-        setFavorites(x.data);
-        dispatch(addTofavorites(x.data))
-      })};
-
-  }, [user])
+  useEffect(() => {
+    if (user && user.email) {
+      axios
+        .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
+        .then((x) => {
+          console.log(x.data);
+          setFavorites(x.data);
+          dispatch(addTofavorites(x.data));
+        });
+    }
+  }, [user]);
 
   useEffect(() => {
-    if(user){
-      dispatch(chargeCart(user.email))
-      axios.get('http://localhost:3001/owners').then(x=>{
-    
-    const userdb = x.data.find(x=>x.email === user.email);
-        if(userdb){
-        setUser({
-            nombre:user.name,
-            picture:userdb.profilePicture&&userdb.profilePicture[0]?userdb.profilePicture[0]:'/assets/img/notloged.png',
-            email:user.email,
-            pets:userdb.pets,
-            address:userdb.address,
-        })
-
+    if (user) {
+      dispatch(chargeCart(user.email));
+      axios.get("http://localhost:3001/owners").then((x) => {
+        const userdb = x.data.find((x) => x.email === user.email);
+        if (userdb) {
+          setUser({
+            nombre: user.name,
+            picture:
+              userdb.profilePicture && userdb.profilePicture[0]
+                ? userdb.profilePicture[0]
+                : "/assets/img/notloged.png",
+            email: user.email,
+            pets: userdb.pets,
+            address: userdb.address,
+          });
+        }
+      });
     }
-  
-  })}
-    
+
     // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
-    
-  }, [dispatch, user])
+  }, [dispatch, user]);
 
   useEffect(() => {
     let counter = 0;
@@ -66,8 +67,10 @@ function NavBar() {
   }, [state.cart]);
 
   useEffect(() => {
-    setProductsFavNumber(state.favorites? state.favorites.length : 0);
+    setProductsFavNumber(state.favorites ? state.favorites.length : 0);
   }, [state.favorites]);
+
+  // Perfil desplegable
 
 
   return (
@@ -111,7 +114,9 @@ function NavBar() {
             </div>
           </div>
 
-          <div>
+          
+
+          {/* <div>
             {!isAuthenticated && <img src="" alt=""></img>}
             {isAuthenticated && (
               <NavLink to="/mi-perfil" className={styles.profile}>
@@ -122,11 +127,11 @@ function NavBar() {
                 ></img>
               </NavLink>
             )}
-          </div>
+          </div> */}
 
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
-            {isAuthenticated && <Logout></Logout>}
+            {isAuthenticated && <DropdownMenu/>}
           </div>
         </div>
       </nav>

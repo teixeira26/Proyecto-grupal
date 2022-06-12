@@ -1,53 +1,104 @@
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
-import { postProduct } from "../../redux/actions/petshopActions";
+import { putProduct } from "../../redux/actions/petshopActions";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import { Widget } from "@uploadcare/react-widget";
+import { getProducts } from "../../redux/actions/petshopActions";
 import Swal from "sweetalert2";
-import { useDispatch } from "react-redux";
 
 
 export default function PutProduct(){
-    const dispatch = useDispatch()
 
     const navigate = useNavigate()
+
+    const dispatch = useDispatch();
+    useEffect(()=>{
+      dispatch(getProducts())
+    }, [])
+
+    const selectedProduct = useSelector(state => state.selectedProduct)
+    const allProducts = useSelector(state => state.products)
+
+    const product = allProducts.find(prod => prod.id === selectedProduct)
   
     const formik = useFormik({
       initialValues: {
-        name: '',
-        category: '',
-        price: 0,
-        profilePicture: [],
-        targetAnimal:'',
-        tradeMark: '',
-        weight: null,
-        isActive: true,
+        id: product.id,
+        name: product.name,
+        category: product.category,
+        price: product.price,
+        profilePicture: product.profilePicture,
+        targetAnimal: product.targetAnimal,
+        tradeMark: product.tradeMark,
+        weight: product.weight,
+        isActive: product.isActive
 
       },
       onSubmit: (formData) => {
-    
-            Swal.fire({
-            title: `Confirme que desea agregar ${formData.name}`,
-            showDenyButton: true,
-            confirmButtonText: 'Confirmar',
-            denyButtonText: `Descartar`,
-          }).then(async(result) => {
-            if (result.isConfirmed) {
-              Swal.fire(`${formData.name} ya se encuentra en el shop`, '', 'success')
-              dispatch(postProduct(formData));
-              navigate('/admin/listado-productos')
-            } else if (result.isDenied) {
-              Swal.fire(`${formData.name} aún no está en el shop :( `, '', 'info')
-            }
-          })
-    
+        console.log("formData", formData);
+
+        Swal.fire({
+          title: 'Confirme que desea modificar esta publicación',
+          showDenyButton: true,
+          confirmButtonText: 'Confirmar',
+          denyButtonText: `Descartar`,
+        }).then(async(result) => {
+          if (result.isConfirmed) {
+            Swal.fire('Publicación MODIFICADA', '', 'success')
+            dispatch(putProduct(product.id,formData));
+            navigate('/admin/listado-productos')
+          } else if (result.isDenied) {
+            Swal.fire('Modificación descartada', '', 'info')
+          }
+        })
+  
       },
     });
 
 
+    function inactive(e){
+      e.preventDefault()
+
+      Swal.fire({
+        title: 'Confirme que desea desactivar esta publicación',
+        showDenyButton: true,
+        confirmButtonText: 'Confirmar',
+        denyButtonText: `Descartar`,
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Publicación DESACTIVADA', '', 'success')
+          dispatch(putProduct(product.id,{isActive: false}))
+          navigate('/admin/listado-productos')
+        } else if (result.isDenied) {
+          Swal.fire('La publicación continúa ACTIVA', '', 'info')
+        }
+      })
+    }
+
+    function active(e){
+      e.preventDefault()
+
+      Swal.fire({
+        title: 'Confirme que desea activar esta publicación',
+        showDenyButton: true,
+        confirmButtonText: 'Confirmar',
+        denyButtonText: `Descartar`,
+      }).then(async(result) => {
+        if (result.isConfirmed) {
+          Swal.fire('Publicación ACTIVADA', '', 'success')
+          dispatch(putProduct(product.id,{isActive: true}))
+          navigate('/admin/listado-productos')
+        } else if (result.isDenied) {
+          Swal.fire('La publicación continúa DESACTIVADA', '', 'info')
+        }
+      })
+
+    }
 
 
 
@@ -61,7 +112,7 @@ export default function PutProduct(){
     ];
 
     const tradeMarkOptions = [
-      { key: "pro plan", value: "pro plan", text: "pro plan" }, { key: "pedigree", value: "pedigree", text: "pedigree" }, { key: "vital can", value: "vital can", text: "vital can" }, { key: "eukanuba", value: "eukanuba", text: "eukanuba" }
+      { key: "pro plan", value: "pro plan", text: "pro plan" }, { key: "pedigree", value: "pedigree", text: "pedigree" }, { key: "vital can", value: "vital can", text: "vital Can" }, { key: "eukanuba", value: "eukanuba", text: "eukanuba" }
     ];
 
     
@@ -72,10 +123,12 @@ export default function PutProduct(){
         <NavBar />
         <Container>
           <div >
-            <h2>AGREGAR NUEVO PRODUCTO AL PETSHOP</h2>
+            <h2>Modificar producto</h2>
+
 
             <Form onSubmit={formik.handleSubmit}>
               <div >
+                <h5>Producto: {product.name}</h5>
                 <Form.Input
                   type="string"
                   placeholder="Nombre del producto"
@@ -83,6 +136,7 @@ export default function PutProduct(){
                   onChange={formik.handleChange}
                 ></Form.Input>
                 
+                <h5>Categoría: {product.category}</h5>
                  <Form.Dropdown
                   placeholder="Categoría"
                   options={categoriesOptions}
@@ -94,6 +148,7 @@ export default function PutProduct(){
                   selection={true}
                 ></Form.Dropdown>    
 
+                <h5>Precio: {product.price} </h5>
                 <Form.Input
                   type="number"
                   placeholder="Precio"
@@ -102,6 +157,7 @@ export default function PutProduct(){
 
                 ></Form.Input>
 
+              <h5>Stock disponible {product.stock}</h5>
                 <Form.Input
                   type="number"
                   placeholder="Stock"
@@ -109,6 +165,7 @@ export default function PutProduct(){
                   onChange={formik.handleChange}
                 ></Form.Input>
 
+              <h5>Mascota (a la que está destinada el producto):{product.targetAnimal}</h5>
                   <Form.Dropdown
                   placeholder="Animal"
                   options={targetAnimalOptions}
@@ -121,6 +178,7 @@ export default function PutProduct(){
 
                 ></Form.Dropdown>                      
 
+              <h5>Descripción: {product.description}</h5>
                 <Form.Input
                   type="text"
                   placeholder="Descripción"
@@ -128,6 +186,7 @@ export default function PutProduct(){
                   onChange={formik.handleChange}
                 ></Form.Input>
 
+              <h5>Peso (para alimentos): {product.weight}</h5>
                 <Form.Input
                   type="number"
                   placeholder="Peso (para alimentos)"
@@ -136,6 +195,7 @@ export default function PutProduct(){
                   
                 ></Form.Input>
 
+              <h5>Marca: {product.tradeMark}</h5>
                 <Form.Dropdown
                   placeholder="Marca"
                   options={tradeMarkOptions}
@@ -146,7 +206,6 @@ export default function PutProduct(){
                   }}
                   selection={true}
                 ></Form.Dropdown>                      
-
 
                   <Widget
                   publicKey='269841dc43864e62c49d'
@@ -159,7 +218,9 @@ export default function PutProduct(){
                   product="profilePicture"
                 />
 
-                <Button type="submit">AGREGAR</Button>
+                {product.isActive? <Button onClick={inactive}> DESACTIVAR PUBLICACIÓN</Button> : <Button onClick={active}> ACTIVAR PUBLICACIÓN</Button>}
+
+                <Button type="submit">Confirmar cambios</Button>
               </div>
             </Form>
           </div>
