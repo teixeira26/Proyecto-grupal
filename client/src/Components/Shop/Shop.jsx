@@ -61,7 +61,8 @@ const Shop = () => {
             {!products.length
               ? "LOADING"
               : products.map((p) => {
-                  return p.stock > 0 ? (
+                console.log(p)
+                  return p.stock > 0 && p.isActive ? (
                     <ProductCard
                       key={p.id}
                       id={p.id}

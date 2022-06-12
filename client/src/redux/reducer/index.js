@@ -7,7 +7,8 @@ import {
     SORT_PROVIDER_PRICE,
     FILTER_PROVIDER_PRICE,
     GET_EVENTS,
-    GET_PETS
+    GET_PETS,
+    GET_SOLDS
 } from '../actions-type/ownProvActionTypes';
 import {
     GET_PRODUCTS,
@@ -37,7 +38,9 @@ const initialState = {
     pets: [],
     favorites:[],
     filteredProviders:[],
-    events: []
+    events: [],
+    selectedProduct: null,
+    solds: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -118,6 +121,13 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 copyOwners: action.payload,
             }
+
+        case GET_SOLDS:
+            return {
+                ...state,
+                solds: action.payload,
+            }
+    
 
         case FILTER_BY_OWNER:
             console.log("REDUCER FILTER_BY_OWNER", action.payload);
@@ -267,6 +277,12 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 events: action.payload,
+            }
+
+        case 'SELECTED_PRODUCT':
+            return {
+                ...state,
+                selectedProduct: action.payload
             }
 
         default:
