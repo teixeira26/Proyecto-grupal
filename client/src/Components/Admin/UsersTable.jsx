@@ -22,35 +22,27 @@ export default function ProductsList() {
 
   const dispatch = useDispatch();
   const users = useSelector((state) => state.owners);
-  const [stars, setStars] = useState(5)
-  
+  const reviews = useSelector((state) => state.reviews);
+
 
 
   useEffect(() => {
     dispatch(getProviders());
     dispatch(getOwners())
     dispatch(getReviews())
-    let myreviews = reviews.filter((x) => x.provider.email === user.email);
 
-    if(myreviews.length) {
-      myreviews= myreviews.map(x=> x.review) 
-      let numberEvaluations = myreviews.length
-      myreviews = myreviews.reduce((x,y)=>x+y, 0)
-      setStars(myreviews/numberEvaluations)
-      }
-
-  }, [dispatch]);
+  }, [dispatch, ]);
 
   
   useEffect(() => {
-   
-  }, [users]);
+ 
 
+  }, [users, reviews]);
 
-  const reviews = useSelector((state) => state.reviews);
-  console.log('reviews', reviews)
 
   const providers = useSelector((state) => state.providers);
+
+console.log(reviews)
 
 
   function ban() {
@@ -95,22 +87,36 @@ export default function ProductsList() {
     { field: "name", headerName: "Nombre", minWidth: 150 },
     { field: "lastName", headerName: "Apellido", minWidth: 150 },
     { field: "service", headerName: "Ofrece Servicio", minWidth: 150 },
-    { field: "raiting",       renderCell: () => {
-      return <div style={{display:'inline'}}>
-      <p className={style.star}>{stars>=1?'★':'☆'}</p>
-      <p className={style.star}>{stars>=2?'★':'☆'}</p>
-      <p className={style.star}>{stars>=3?'★':'☆'}</p>
-      <p className={style.star}>{stars>=4?'★':'☆'}</p>
-      <p className={style.star}>{stars===5?'★':'☆'}</p>
-</div>
-    }, minWidth: 200 ,
-},
+    { field: "raiting", 
+      renderCell:(cellValues) =>{
+        let rev = reviews?.find((el) => el.providerEmail === cellValues.id)
+        console.log('reviews', reviews)
+        console.log('rev',rev)
+        console.log('cellValues',cellValues)
+   
+       
+       if (rev) 
+        return <div style={{display:'inline'}}>
+        <p className={style.star}>{rev.review>=1?'★':'☆'}</p>
+       <p className={style.star}>{rev.review>=2?'★':'☆'}</p>
+       <p className={style.star}>{rev.review>=3?'★':'☆'}</p>
+       <p className={style.star}>{rev.review>=4?'★':'☆'}</p>
+       <p className={style.star}>{rev.review===5?'★':'☆'}</p> 
+        </div> 
+        
+        else return null
+          
+      }, minWidth: 130 
+    },
+{ field: '', headerName: '', maxWidth: 80 },
+
     { field: "state", headerName: "Estado", minWidth: 150 },
     { field: "ban", headerName: "Baneado", minWidth: 150 },
 
     {
-      field: null, 
+      field: ban, 
       renderCell: (cellValues) => {
+        console.log('cellValues',cellValues)
         return cellValues.row.ban === 'BANEADO'?  
          <Button onClick={unBan}>HABILITAR</Button> :
          <Button onClick={ban}>BANEAR</Button>;
@@ -119,6 +125,8 @@ export default function ProductsList() {
   ];
 
   const rows = users.map((us) => {
+    console.log('reviews', reviews)
+
     return {
       id: us.email,
 
@@ -126,10 +134,16 @@ export default function ProductsList() {
       name: us.name,
       lastName: us.lastName,
       service: providers.find((el) => el.email === us.email) ? "SÍ" : "NO",
+      '': (() => {let rev = reviews?.find((el) => el.providerEmail === us.email )
+                          return rev? rev.review : null })(),
       state: us.isActive ? "ACTIVO" : "INACTIVO",
       ban: us.isBanned ? "BANEADO" : null,
     };
   });
+  function back(){
+    navigate('/admin/dashboard')
+  }
+
 
   return (
     <>
@@ -149,6 +163,8 @@ export default function ProductsList() {
           components={{ Toolbar: GridToolbar }}
         />
       </div>
+      <Button onClick={back}>REGRESAR</Button>
+
       <Footer />
     </>
   );

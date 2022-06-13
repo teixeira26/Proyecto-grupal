@@ -61,45 +61,11 @@ export default function PutProduct(){
     });
 
 
-    function inactive(e){
-      e.preventDefault()
 
-      Swal.fire({
-        title: 'Confirme que desea desactivar esta publicación',
-        showDenyButton: true,
-        confirmButtonText: 'Confirmar',
-        denyButtonText: `Descartar`,
-      }).then(async(result) => {
-        if (result.isConfirmed) {
-          Swal.fire('Publicación DESACTIVADA', '', 'success')
-          dispatch(putProduct(product.id,{isActive: false}))
-          navigate('/admin/listado-productos')
-        } else if (result.isDenied) {
-          Swal.fire('La publicación continúa ACTIVA', '', 'info')
-        }
-      })
-    }
-
-    function active(e){
-      e.preventDefault()
-
-      Swal.fire({
-        title: 'Confirme que desea activar esta publicación',
-        showDenyButton: true,
-        confirmButtonText: 'Confirmar',
-        denyButtonText: `Descartar`,
-      }).then(async(result) => {
-        if (result.isConfirmed) {
-          Swal.fire('Publicación ACTIVADA', '', 'success')
-          dispatch(putProduct(product.id,{isActive: true}))
-          navigate('/admin/listado-productos')
-        } else if (result.isDenied) {
-          Swal.fire('La publicación continúa DESACTIVADA', '', 'info')
-        }
-      })
-
-    }
-
+    function backToTheList(){
+      navigate('/admin/listado-productos')
+     }
+    
 
 
 
@@ -218,7 +184,7 @@ export default function PutProduct(){
                   product="profilePicture"
                 />
 
-                {product.isActive? <Button onClick={inactive}> DESACTIVAR PUBLICACIÓN</Button> : <Button onClick={active}> ACTIVAR PUBLICACIÓN</Button>}
+                <Button onClick={backToTheList}>REGRESAR AL LISTADO</Button>
 
                 <Button type="submit">Confirmar cambios</Button>
               </div>
