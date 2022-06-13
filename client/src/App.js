@@ -145,8 +145,6 @@ function App() {
           <Route path="/misHorariosHospedaje" element={
             isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
 
-
-
                       {/* -------------- RUTAS PRIVADAS -------------------- */}
           
           <Route
@@ -161,10 +159,6 @@ function App() {
               ) : null
             } />
 
-          
-          
-          
-          
           <Route
             path="/admin/agregar-productos"
             element={
@@ -177,7 +171,6 @@ function App() {
               ) : null
             }
           />
-
 
           <Route
             path="/admin/sales-receipts"
@@ -230,12 +223,7 @@ function App() {
               ) : null
             }
           />
-
-          
-
         </Routes>
-
-
 
       </div>
     </BrowserRouter>
