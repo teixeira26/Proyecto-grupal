@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
@@ -29,7 +29,7 @@ export default function InfoOwner() {
       state: yup.string().required(),
     }),
 
-    onSubmit: async(formData) => {
+    onSubmit: async (formData) => {
       formData = {
         ...formData,
         address: {
@@ -42,7 +42,7 @@ export default function InfoOwner() {
       await dispatch(putOwnerInfo(formData.email, formData));
       navigate("/mi-perfil");
     },
-  }); 
+  });
 
   return (
     <div>
@@ -82,6 +82,9 @@ export default function InfoOwner() {
               }}
               perrito="profilePicture"
             />
+            <Link to={`/mi-perfil`}>
+              <Button>Cancelar cambios</Button>
+            </Link>
             <Button type="submit">Confirmar cambios</Button>
           </Form>
         </div>
