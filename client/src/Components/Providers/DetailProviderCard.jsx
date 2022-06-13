@@ -69,6 +69,7 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>
                     {service == 'hospedaje'?<NavLink to={`/reservar-hospedaje/${email}`}><button>Reservar servicio</button></NavLink>:null}
                     {service == 'paseo'?<NavLink to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></NavLink>:null}
+                    <NavLink to={`/review/${email}`}><button>Calificar a {name}</button></NavLink>
                 </div>
                 
                 {/* <div>
