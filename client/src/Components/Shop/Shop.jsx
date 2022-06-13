@@ -17,6 +17,7 @@ import { NavLink } from "react-router-dom";
 
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import NoResults from "../../Views/Profile/NoResultsShop";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
@@ -59,7 +60,7 @@ const Shop = () => {
           <br />
           <section className={styles.shopGrid}>
             {!products.length
-              ? "LOADING"
+              ? <NoResults/>
               : products.map((p) => {
                 console.log(p)
                   return p.stock > 0 && p.isActive ? (

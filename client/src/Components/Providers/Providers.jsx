@@ -9,6 +9,7 @@ import styles from "../Providers/Providers.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import { LabelDetail } from 'semantic-ui-react';
 import axios from 'axios';
+import NoResults from '../../Views/Profile/NoResultsProviders';
 
 export default function Providers() {
     const dispatch = useDispatch()
@@ -50,7 +51,8 @@ export default function Providers() {
                         className={styles.leftArrow}
                     />
                 </NavLink>
-                <h1 className={styles.providersTitle}>Listado de proveedores</h1>
+                <h1 className={styles.providersTitle}>¡Conoce a nuestros yumpys!</h1>
+                <p>Encuentra la mejor opción para el paseo u hospedaje que estás necesitando</p>
                 <div className={styles.providersFlex}>
                     <div className={styles.providersFilters}>
                         <section className={styles.selects}>
@@ -75,7 +77,7 @@ export default function Providers() {
                         <button onClick={handleRemove}>Limpiar filtros</button>
                     </div>
                     <div className={styles.providersGrid}>
-                        {!providers.length ? 'LOADING' :
+                        {!providers.length ? <NoResults/> :
                             providers.map((p, g) => {
                                 let stars = 5
                                 let providerEvaluations = reviews.filter(x=>x.provider.email === p.email);
