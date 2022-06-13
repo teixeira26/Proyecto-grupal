@@ -7,7 +7,7 @@ import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from './Chat.module.css';
 import axios from "axios";
 
-export const Chat = ({ email, service }) => {
+export const Chat = () => {
   const { user } = useAuth0();
   const providerEmail = useParams().providerEmail;
   const ownerEmail = useParams().ownerEmail;
