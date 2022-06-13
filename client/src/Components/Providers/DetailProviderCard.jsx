@@ -13,14 +13,19 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
     // console.log(state)
     console.log(latitude, longitude)
     const {user} = useAuth0()
-    const [stars, setStars] = useState(5)
+    const [stars, setStars] = useState(0)
+    const [quantityReviews, setquantityReviews] = useState(0)
+    const [reviews, setReviews] = useState()
     useEffect(()=>{
         axios.get('http://localhost:3001/reviews').then(x=>{
             let providerEvaluations = x.data.filter(x=>x.provider.email === email);
+            setReviews(providerEvaluations);
+            console.log(providerEvaluations)
             providerEvaluations = providerEvaluations.map(x=> x.review)
             let numberEvaluations = providerEvaluations.length
             providerEvaluations = providerEvaluations.reduce((x,y)=>x+y, 0)
             setStars(providerEvaluations/numberEvaluations);
+            if(providerEvaluations)setquantityReviews(numberEvaluations)
         })
     },[])
     return(
@@ -54,6 +59,7 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     <p className={style.star}>{stars>=4?'★':'☆'}</p>
                     <p className={style.star}>{stars===5?'★':'☆'}</p>
                 </div>
+                <p>({quantityReviews})</p>
                 <div className={style.description}>
                     <h2>Sobre {name}</h2>
                     <p>{description}</p>
@@ -71,7 +77,27 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     {service == 'paseo'?<NavLink to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></NavLink>:null}
                     <NavLink to={`/review/${email}`}><button>Calificar a {name}</button></NavLink>
                 </div>
-                
+                <h2>Calificaciones</h2>
+                <div>
+                    {reviews&&reviews.map((x,y)=>{
+                        if(y<5){
+                            return(
+                                <div key={y}>
+                                <hr/>  
+                                <div>
+                                <p className={style.star}>{x.review>=1?'★':'☆'}</p>
+                                <p className={style.star}>{x.review>=2?'★':'☆'}</p>
+                                <p className={style.star}>{x.review>=3?'★':'☆'}</p>
+                                <p className={style.star}>{x.review>=4?'★':'☆'}</p>
+                                <p className={style.star}>{x.review===5?'★':'☆'}</p>
+                                </div>
+                                <h4 style={{display:'inline'}}>{x.owner.name} {x.owner.lastName}:</h4>
+                                <p style={{display:"inline", color:'blue'}}> {x.message}</p>
+                            </div>
+                            )
+                        }
+                    })}
+                </div>
                 {/* <div>
                     <h2>Comentarios recibidos por {name}</h2>
                     <div>

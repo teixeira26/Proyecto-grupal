@@ -40,7 +40,7 @@ export default function Providers() {
     }
 
     function handleOrderStars(){
-        
+
     }
 
     function handleFilterStars(){
@@ -92,7 +92,7 @@ export default function Providers() {
                                 let numberEvaluations = providerEvaluations.length
                                 providerEvaluations = providerEvaluations.reduce((x,y)=>x+y, 0)
                                 stars = (providerEvaluations/numberEvaluations);
-                                console.log("estrellaaaaaaaaaaaaaaaaas",stars)
+                                
 
                                 return p.email === user.email? null :
                                 <ProvidersCard key={p.id}
@@ -102,8 +102,7 @@ export default function Providers() {
                                     profilePicture={p.profilePicture}
                                     price={p.price}
                                     service={p.service} 
-                                    stars = {stars?stars:5} />
-                                   
+                                    stars = {stars?stars:0} />
                             })}
                     </div>
                 </div>

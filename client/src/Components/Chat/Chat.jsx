@@ -5,16 +5,29 @@ import { useAuth0 } from "@auth0/auth0-react";
 import NavBarShop from '../NavBar/NavBarShop';
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from './Chat.module.css';
+import axios from "axios";
 
 export const Chat = () => {
     const { user } = useAuth0();
     const providerEmail = useParams().providerEmail;
     const ownerEmail = useParams().ownerEmail;
+    const [name, setName] = useState()
+    const [service, setService] = useState()
     const [mensaje, setMensaje] = useState({
       nombre:user.name,
       mensaje:''
     });
     const [mensajes, setMensajes] = useState([]);
+
+    useEffect(()=>{
+      axios.get('http://localhost:3001/providers?filter=&order=ASC').then(x=>{
+        
+         const mame = x.data.find(x=>x.email === providerEmail)
+         console.log(`${mame.name} ${mame.lastName} ${mame.service[0]}`)
+        setName(`${mame.name} ${mame.lastName}`)
+        setService(mame.service[0])
+    })
+    }, [])
     
     const almacenar = ()=>{
       let cache = [];
@@ -108,7 +121,7 @@ export const Chat = () => {
           <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow}/>
         </NavLink>
         <div className={styles.titleChat}>
-          <h2>Tu conversacion</h2>
+          <h2>Tu conversacion con {name}</h2>
         </div>
         <div className={styles.chat}>
           {mensajes.length > 0 ? mensajes.map((x, y) => {
@@ -123,7 +136,8 @@ export const Chat = () => {
           <input type="text" value={mensaje.mensaje} placeholder="Tu mensaje" name="message" onChange={setMessage}></input>
           <button type="submit" value="Enviar">Enviar mensaje</button>
         </form>
-        <NavLink to='/reservar-servicio'><button>Reservar servicio</button></NavLink>
+        {service == 'hospedaje'?<NavLink to={`/reservar-hospedaje/${providerEmail}`}><button>Reservar servicio</button></NavLink>:null}
+        {service == 'paseo'?<NavLink to={`/reservar-paseo/${providerEmail}`}><button>Reservar servicio</button></NavLink>:null}
       </div>
     </div>
   );

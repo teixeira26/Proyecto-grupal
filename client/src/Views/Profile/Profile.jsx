@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import style from "./Profile.module.css";
+import Swal from 'sweetalert2'
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
@@ -170,7 +171,23 @@ export default function Profile() {
                         <p className={style.aboutDog}>
                           Sobre {x.name}: {x.description}
                         </p>
-                        <button onClick={() => byePet(x.id)}>
+                        <button onClick={() => {
+                           Swal.fire({
+                            title: 'Estás seguro que querés eliminar a esta mascota ?',
+                            showDenyButton: true,
+                            confirmButtonText: 'Si',
+                            denyButtonText: `No`,
+                          }).then(async(result) => {
+                            /* Read more about isConfirmed, isDenied below */
+                            if (result.isConfirmed) {
+                              Swal.fire('Mascota eliminada!', '', 'success')
+                              byePet(x.id)
+                            } else if (result.isDenied) {
+                              Swal.fire('La mascota no fue eliminada', '', 'info')
+                            }
+                          })
+                          
+                          }}>
                           Eliminar mascota
                         </button>
                       </div>
