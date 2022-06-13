@@ -22,14 +22,15 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
   const delFromCart = (id) => {
     dispatch(removeFromCart(id, user.email));
   };
-
   const addItem = () => {
-    dispatch({
+    if(cartItem.stock > cartItem.quantity)
+    {dispatch({
       type: ADD_ITEM,
       payload: id,
       email: user.email,
       stock: stock,
-    });
+    });}
+    else Swal.fire(`La cantidad deseada excede al limite en stock`);
   };
 
   const delItem = () => {

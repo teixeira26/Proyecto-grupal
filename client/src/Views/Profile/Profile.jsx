@@ -152,6 +152,11 @@ export default function Profile() {
               : null
           
                 }
+            <Link to='/compras-realizadas'>
+            <button>Mis compras</button> 
+            </Link>
+
+
           </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0

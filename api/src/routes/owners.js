@@ -41,15 +41,15 @@ router.get('/getFavorites/:email', async (req, res, next) => {
 
 router.post('/', async(req, res, next) =>{
     const {name, lastName, email, profilePicture, address, latitude, longitude} = req.body;
-    let auxName = name.toLowerCase();
-    let auxLastName = lastName.toLowerCase();
+    // let auxName = name.toLowerCase();
+    // let auxLastName = lastName.toLowerCase();
 
     try {
         await Owner.findOrCreate({
                 where: {email: email},
                 defaults:{
-                    name: auxName,
-                    lastName: auxLastName,
+                    name,
+                    lastName,
                     email,
                     profilePicture,
                     address,
