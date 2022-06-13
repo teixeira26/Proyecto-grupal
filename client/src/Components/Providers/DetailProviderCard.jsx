@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import style from './DetailProviderCard.module.css'
 import axios from "axios";
-import { Circle, Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
+import { Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
 import CircleMarker from "../Map/CircleMarker";
 
 export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule}) {
@@ -69,7 +69,6 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>
                     {service == 'hospedaje'?<NavLink to={`/reservar-hospedaje/${email}`}><button>Reservar servicio</button></NavLink>:null}
                     {service == 'paseo'?<NavLink to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></NavLink>:null}
-                    <NavLink to={`/review/${email}`}><button>Calificar a {name}</button></NavLink>
                 </div>
                 
                 {/* <div>
