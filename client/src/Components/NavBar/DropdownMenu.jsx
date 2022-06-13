@@ -85,7 +85,11 @@ const DropdownMenu = () => {
       >
         <ul>
           <li className="li-flex">
-            <img src="../assets/img/person-outline.svg" alt="" className="person-outline"/>
+            <img
+              src="../assets/img/person-outline.svg"
+              alt=""
+              className="person-outline"
+            />
             <NavLink to="/mi-perfil">Perfil</NavLink>
           </li>
           {/* <li>

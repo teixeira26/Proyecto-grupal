@@ -3,3 +3,7 @@
     gap: 1rem;
     margin-top: 1rem;
 }
+
+.container{
+    z-index: 10000;
+}

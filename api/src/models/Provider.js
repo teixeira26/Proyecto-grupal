@@ -48,7 +48,7 @@ module.exports = (sequelize) => {
     },
     schedule: {
       type: DataTypes.JSONB(DataTypes.ARRAY),
-      defaultValue: {lunes: false, martes: false, miercoles: false, jueves: false, viernes: false, sabado: false, domingo: false}
+      defaultValue: {lunes: [], martes: [], miercoles: [], jueves: [], viernes: [], sabado: [], domingo: []}
     },
     latitude:{
       type:DataTypes.FLOAT,
