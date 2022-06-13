@@ -58,7 +58,6 @@ export default function Profile() {
 
   console.log('USERDATA', userData)
 
-
   return (
     <main>
       <NavBarShop />
@@ -69,7 +68,7 @@ export default function Profile() {
             <h1 className={style.name}>{user.name}</h1>
             <div>
               <NavLink to="/mis-datos">
-                <button className={style.data}>Cambiar datos</button>
+                <button className={style.data}>Editar perfil</button>
               </NavLink>
             </div>
           </article>
@@ -120,7 +119,6 @@ export default function Profile() {
           </NavLink>
         </section>}
 
-
         {providerInfo && providerInfo.schedule && providerInfo.service[0] === 'hospedaje' && <section className={style.mainInfoProfile}>
           <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
           <br />
@@ -149,7 +147,6 @@ export default function Profile() {
                   <button>Herramientas de Admin</button>
                 </Link>
                 : null
-
             }
           </div>
           <article className={style.petsProfile}>
@@ -193,7 +190,6 @@ export default function Profile() {
           {isProvider && <div><h2>mis servicios acordados</h2></div>}
           {isProvider && eventsProvider ?
 
-
             eventsProvider.map(x => {
               return (<div>
                 <h5>Día del evento: {x.date.day}</h5>
@@ -204,7 +200,6 @@ export default function Profile() {
                 <p>Pet del cliente: {x.petName}</p>
               </div>)
             })
-
             : null}
         </section>
       </div>
