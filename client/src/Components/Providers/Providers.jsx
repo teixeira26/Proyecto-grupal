@@ -11,17 +11,17 @@ import { LabelDetail } from 'semantic-ui-react';
 import axios from 'axios';
 import NoResults from '../../Views/Profile/NoResultsProviders';
 import Pagination from '@mui/material/Pagination';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Providers() {
     const dispatch = useDispatch()
     const [reviews, setReviews] = useState([])
-    // const [order, setOrder] = useState('ASC')
-    // const [filter, setFilter] = useState('')
+    const { user } = useAuth0()
+
 
     useEffect(() => {
         dispatch(getProviders())
-        axios.get('http://localhost:3001/reviews').then(x => setReviews(x.data))
-        console.log('isjdisjdsjdisdjiosdj', reviews)
+        axios.get('http://localhost:3001/reviews').then(x=>setReviews(x.data))
     }, [dispatch])
 
     const providers = useSelector(state => state.filteredProviders);
@@ -39,6 +39,14 @@ export default function Providers() {
     function handleRemove(e) {
         e.preventDefault()
         dispatch(getProviders())
+    }
+
+    function handleOrderStars(){
+
+    }
+
+    function handleFilterStars(){
+
     }
 
     return (
@@ -80,6 +88,7 @@ export default function Providers() {
                     <div className={styles.providersGrid}>
                         {!providers.length ? <NoResults /> :
                             providers.map((p, g) => {
+                                
                                 let stars = 5
                                 let providerEvaluations = reviews.filter(x => x.provider.email === p.email);
                                 providerEvaluations = providerEvaluations.map(x => x.review)
@@ -88,7 +97,8 @@ export default function Providers() {
                                 stars = (providerEvaluations/numberEvaluations);
                                 
 
-                                return <ProvidersCard key={p.id}
+                                return p.email === user.email? null :
+                                <ProvidersCard key={p.id}
                                     name={p.name}
                                     lastName={p.lastName}
                                     email={p.email}

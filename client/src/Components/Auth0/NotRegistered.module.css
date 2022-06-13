@@ -1,0 +1,19 @@
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.img{
+    position: relative;
+}
+
+.log{
+    display: flex;
+    flex-direction: column;
+}
+
+.button{
+    width: 100%;
+}

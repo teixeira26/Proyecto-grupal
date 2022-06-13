@@ -143,12 +143,18 @@ export default function Profile() {
               <button>Agregar mascota</button>
             </NavLink>
             {
-              userData.isAdmin ?
-                <Link to='/admin/dashboard'>
-                  <button>Herramientas de Admin</button>
-                </Link>
-                : null
-            }
+           userData.isAdmin?
+            <Link to='/admin/dashboard'>
+            <button>Herramientas de Admin</button> 
+            </Link>
+              : null
+          
+                }
+            <Link to='/compras-realizadas'>
+            <button>Mis compras</button> 
+            </Link>
+
+
           </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0
