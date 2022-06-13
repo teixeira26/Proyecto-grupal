@@ -21,12 +21,15 @@ function Landing() {
       console.log(dbOwner);
       let userInfo = dbOwner.data.find((x) => x.email === user.email);
       if (typeof userInfo === "object") {
+        console.log('se ejecuto if')
         navigate("/inicio");
         setNombre(user.name);
       } else {
+        axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Bienvenido a YumPaw", text:"Te damos la bienvenida por ingresar a nuestra app, espero que disfrutes :)"})
         navigate("/inicio");
       }
     } catch (error) {
+      console.log('se ejecutó catch')
       navigate("/inicio");
     }
   };

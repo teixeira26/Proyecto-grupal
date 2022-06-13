@@ -41,6 +41,7 @@ const RatingsOwner = ()=>{
                     </div>
                     <h4 style={{display:'inline'}}>{x.owner.name} {x.owner.lastName}:</h4>
                     <p style={{display:"inline", color:'blue'}}> {x.message}</p>
+                    <h4>reseña hecha a: {x.provider.name} {x.provider.lastName}</h4>
                     <Link to={`/cambiarCalificacion/${x.id}?providerEmail=${x.provider.email}`}>
                       <button style={{display:"block"}}>cambiar</button>
                     </Link>

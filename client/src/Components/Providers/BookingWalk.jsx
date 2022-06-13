@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FieldArray, useFormik } from "formik";
 // import * as yup from "yup";
@@ -27,6 +27,7 @@ export default function BookingWalk() {
     const [schedule, setSchedule] = useState();
     const [petOptions, setPetOptions] = useState([]);
     const [providerName, setProviderName] = useState();
+    const navigate = useNavigate()
 
 
     useEffect(()=>{
@@ -78,10 +79,25 @@ export default function BookingWalk() {
             petName: yup.string().required('Debes seleccionar una mascota'),
           }),
         onSubmit: async (formData) => {
-          
-            await axios.post("http://localhost:3001/events", formData);
-            console.log(formData);
-            alert('funcionó')
+            Swal.fire({
+                title: 'Estás seguro que las informaciones sobre este evento son correctas ?',
+                showDenyButton: true,
+                confirmButtonText: 'Si',
+                denyButtonText: `No`,
+              }).then(async(result) => {
+                /* Read more about isConfirmed, isDenied below */
+                if (result.isConfirmed) {
+                    await axios.post("http://localhost:3001/events", formData);
+                    axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
+                    console.log(formData);
+                    Swal.fire('Evento confirmado!', '', 'success')
+                    navigate('/confirmar-reserva')
+                } else if (result.isDenied) {
+                  Swal.fire('Los cambios no fueron guardados', '', 'info')
+                }
+              })
+            
+            
            
         }
     });

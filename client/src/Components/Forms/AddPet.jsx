@@ -83,6 +83,7 @@ export default function InfoProvider() {
             error={formik.errors.race}
           ></Form.Input>
           <Form.Dropdown
+            style={{zIndex:1000}}
             placeholder="Tamaño"
             options={categoriesOptions}
             onChange={(e) => {

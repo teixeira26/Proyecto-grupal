@@ -18,15 +18,16 @@ const DropdownMenu = () => {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useAuth0();
   const { logout } = useAuth0();
-  const [userData, setUser] = useState({});
+  const [userData, setUserData] = useState({});
 
   useEffect(() => {
     if (user) {
       dispatch(chargeCart(user.email));
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
+        console.log('isdjhidjsijjids', userdb)
         if (userdb) {
-          setUser({
+          setUserData({
             nombre: user.name,
             picture:
               userdb.profilePicture && userdb.profilePicture[0]
@@ -75,7 +76,7 @@ const DropdownMenu = () => {
         <div className="picture-flex">
           {!isAuthenticated && <img src="" alt=""></img>}
           {isAuthenticated && (
-            <img className="profilePicture" src={userData.picture} alt=""></img>
+            <img className="profilePicture" src={userData.picture?userData.picture: "/assets/img/notloged.png"} alt=""></img>
           )}
         </div>
       </div>
