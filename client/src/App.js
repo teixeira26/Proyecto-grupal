@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Landing from "./Components/Landing/Landing";
 import Shop from "./Components/Shop/Shop";
 import AddOwner from "./Components/Forms/AddOwner";
-import NotRegistered from "./Components/Auth0/notRegistered";
+import NotRegistered from "./Components/Auth0/NotRegistered";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Home from './Components/Home/Home';
 import AddPet from "./Components/Forms/AddPet";

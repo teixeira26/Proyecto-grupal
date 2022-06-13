@@ -5,6 +5,8 @@ import { TYPES } from "../../redux/actions/shoppingActions";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getProducts, chargeCart } from "../../redux/actions/petshopActions";
 import Swal from "sweetalert2";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ProductDetailCard = ({
   profilePicture,
@@ -19,9 +21,9 @@ const ProductDetailCard = ({
   const [count, setCount] = useState(1);
   const { user } = useAuth0();
   const [error, setError] = useState({
-    addItem:false,
-    delItem:false,
-  })
+    addItem: false,
+    delItem: false,
+  });
   const cart = useSelector((state) => state.cart);
   const cartItem = cart.find((x) => x.id === id);
 
@@ -50,23 +52,36 @@ const ProductDetailCard = ({
     }
   };
 
-  const agregaraCarrito = ()=>{
+  const agregaraCarrito = () => {
     if (cartItem) {
       var limit = cartItem.stock - cartItem.quantity;
-    } 
-    else{ limit = stock;}
-    console.log('entró')
-      if (count > 0 && count <= limit) {
-        dispatch({
-          type: TYPES.ADD_TO_CART,
-          payload: id,
-          email: user.email,
-          quantity: count,
-        });
-      }else{
-        Swal.fire(`la cantidad deseada excede al limit del stock`);
-      }
+    } else {
+      limit = stock;
     }
+    console.log("entró");
+    if (count > 0 && count <= limit) {
+      
+        toast.success("Producto agregado al carrito", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      
+      dispatch({
+        type: TYPES.ADD_TO_CART,
+        payload: id,
+        email: user.email,
+        quantity: count,
+      });
+    } else {
+      Swal.fire(`la cantidad deseada excede al limit del stock`);
+    }
+  };
+
   return (
     <div>
       <div className={styles.detailFlex}>
@@ -77,10 +92,9 @@ const ProductDetailCard = ({
           <h1 className={styles.detailTitle}>{name}</h1>
           <p className={styles.detailInfo}>{description}</p>
           <p className={styles.detailPrice}>${price}</p>
-          
 
           <p className={styles.detailQuantity}>Cantidad</p>
-          
+
           <div className={styles.productQuantity}>
             <button className={styles.button} onClick={delItem}>
               -
@@ -91,14 +105,25 @@ const ProductDetailCard = ({
             </button>
           </div>
           <p className={styles.stock}>Stock disponible: {stock}</p>
+          <p className={styles.cartQuantity}>
+            Cantidad en el carrito: {cartItem?.quantity}
+          </p>
 
           <div className={styles.detailAddCart}>
-            <button
-              className={styles.addButtonCart}
-              onClick={agregaraCarrito}
-            >
+            <button className={styles.addButtonCart} onClick={agregaraCarrito}>
               Agregar al carrito
             </button>
+            <ToastContainer
+              position="top-right"
+              autoClose={2000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
           </div>
         </div>
       </div>
