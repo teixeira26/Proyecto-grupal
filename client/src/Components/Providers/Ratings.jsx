@@ -9,7 +9,8 @@ import Footer from "../Footer/Footer";
 const Ratings = ()=>{
     const {user, isAuthenticated} = useAuth0();
     const [reviews, setReviews] = useState([]);
-    const [stars, setStars] = useState(5)
+    const [stars, setStars] = useState(0)
+    const [quantityReviews, setquantityReviews] = useState(0)
     useEffect(()=>{
         if (isAuthenticated) {
             axios.get("http://localhost:3001/reviews").then((x) => {
@@ -21,6 +22,7 @@ const Ratings = ()=>{
                 let numberEvaluations = myreviews.length
                 myreviews = myreviews.reduce((x,y)=>x+y, 0)
                 setStars(myreviews/numberEvaluations)
+                setquantityReviews(numberEvaluations)
                 }
             })}
     },[isAuthenticated])
@@ -38,7 +40,7 @@ const Ratings = ()=>{
                     <p className={style.star}>{stars>=4?'★':'☆'}</p>
                     <p className={style.star}>{stars===5?'★':'☆'}</p>
             </div>
-            <h3 style={{display:'inline'}}> ({stars})</h3>
+            <h3 style={{display:'inline'}}> ({quantityReviews})</h3>
             <br/>
             <br/>
         <div style={{marginBottom:30}}>

@@ -11,6 +11,7 @@ import { putProvider } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import styles from "./Lodging.module.css";
+import Swal from "sweetalert2";
 
 export default function Lodging() {
   const dispatch = useDispatch();
@@ -40,8 +41,24 @@ export default function Lodging() {
     //   }),
 
     onSubmit: (formData) => {
-      dispatch(putProvider(formData));
-      console.log("formData", formData);
+      Swal.fire({
+        title: 'Estás seguro que querés guardar los cambios?',
+        showDenyButton: true,
+        confirmButtonText: 'Guardar',
+        denyButtonText: `No guardar`,
+      }).then(async(result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          dispatch(putProvider(formData));
+          console.log("formData", formData);
+          Swal.fire('Informaciones guardadas!', '', 'success')
+          dispatch(putProvider(formData));
+          navigate('/mi-perfil')
+        } else if (result.isDenied) {
+          Swal.fire('Los cambios no fueron guardados', '', 'info')
+        }
+      })
+
       // dispatch(postProvider(newProvider));
       // navigate("/mi-perfil");
     },
