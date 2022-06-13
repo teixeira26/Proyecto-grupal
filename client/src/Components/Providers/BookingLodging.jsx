@@ -86,10 +86,26 @@ export default function BookingLodging() {
                     realDate:bookingRealDays[x],
                   },
                 };
-                await axios.post("http://localhost:3001/events", formData);
-                console.log(formData);
+                Swal.fire({
+                    title: 'Estás seguro que las informaciones sobre este evento son correctas ?',
+                    showDenyButton: true,
+                    confirmButtonText: 'Si',
+                    denyButtonText: `No`,
+                  }).then(async(result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        await axios.post("http://localhost:3001/events", formData);
+                        axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
+                        console.log(formData);
+                        Swal.fire('Evento confirmado!', '', 'success')
+                        navigate('/confirmar-reserva')
+                    } else if (result.isDenied) {
+                      Swal.fire('Los cambios no fueron guardados', '', 'info')
+                    }
+                  })
+                
             }
-            navigate('/confirmar-reserva')
+          
            
             
             dispatch(getEvents());
@@ -105,7 +121,7 @@ export default function BookingLodging() {
     }
     }, [user])
 
-    
+
     // mapear un arreglo que tenga un objeto por cada mascota registrada en owner
     // console.log(providerEmail);
    const [petOptions, setPetOptions] = useState([])

@@ -84,9 +84,9 @@ export default function Providers() {
                                 let providerEvaluations = reviews.filter(x => x.provider.email === p.email);
                                 providerEvaluations = providerEvaluations.map(x => x.review)
                                 let numberEvaluations = providerEvaluations.length
-                                providerEvaluations = providerEvaluations.reduce((x, y) => x + y, 0)
-                                stars = (providerEvaluations / numberEvaluations);
-                                console.log("estrellaaaaaaaaaaaaaaaaas", stars)
+                                providerEvaluations = providerEvaluations.reduce((x,y)=>x+y, 0)
+                                stars = (providerEvaluations/numberEvaluations);
+                                
 
                                 return <ProvidersCard key={p.id}
                                     name={p.name}
@@ -94,8 +94,8 @@ export default function Providers() {
                                     email={p.email}
                                     profilePicture={p.profilePicture}
                                     price={p.price}
-                                    service={p.service}
-                                    stars={stars ? stars : 5} />
+                                    service={p.service} 
+                                    stars = {stars?stars:0} />
                             })}
                     </div>
                 </div>
