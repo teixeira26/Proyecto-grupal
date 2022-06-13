@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { filterByProviderService, getProviders, sortByProviderPrice } from "../../redux/actions/ownProvActions";
 import ProvidersCard from "./ProvidersCard";
 import NavBarShop from '../NavBar/NavBarShop'
@@ -10,6 +10,7 @@ import inContainer from "../GlobalCss/InContainer.module.css";
 import { LabelDetail } from 'semantic-ui-react';
 import axios from 'axios';
 import NoResults from '../../Views/Profile/NoResultsProviders';
+import Pagination from '@mui/material/Pagination';
 
 export default function Providers() {
     const dispatch = useDispatch()
@@ -19,8 +20,8 @@ export default function Providers() {
 
     useEffect(() => {
         dispatch(getProviders())
-        axios.get('http://localhost:3001/reviews').then(x=>setReviews(x.data))
-        console.log('isjdisjdsjdisdjiosdj',reviews)
+        axios.get('http://localhost:3001/reviews').then(x => setReviews(x.data))
+        console.log('isjdisjdsjdisdjiosdj', reviews)
     }, [dispatch])
 
     const providers = useSelector(state => state.filteredProviders);
@@ -77,15 +78,15 @@ export default function Providers() {
                         <button onClick={handleRemove}>Limpiar filtros</button>
                     </div>
                     <div className={styles.providersGrid}>
-                        {!providers.length ? <NoResults/> :
+                        {!providers.length ? <NoResults /> :
                             providers.map((p, g) => {
                                 let stars = 5
-                                let providerEvaluations = reviews.filter(x=>x.provider.email === p.email);
-                                providerEvaluations = providerEvaluations.map(x=> x.review)
+                                let providerEvaluations = reviews.filter(x => x.provider.email === p.email);
+                                providerEvaluations = providerEvaluations.map(x => x.review)
                                 let numberEvaluations = providerEvaluations.length
-                                providerEvaluations = providerEvaluations.reduce((x,y)=>x+y, 0)
-                                stars = (providerEvaluations/numberEvaluations);
-                                console.log("estrellaaaaaaaaaaaaaaaaas",stars)
+                                providerEvaluations = providerEvaluations.reduce((x, y) => x + y, 0)
+                                stars = (providerEvaluations / numberEvaluations);
+                                console.log("estrellaaaaaaaaaaaaaaaaas", stars)
 
                                 return <ProvidersCard key={p.id}
                                     name={p.name}
@@ -93,12 +94,13 @@ export default function Providers() {
                                     email={p.email}
                                     profilePicture={p.profilePicture}
                                     price={p.price}
-                                    service={p.service} 
-                                    stars = {stars?stars:5} />
+                                    service={p.service}
+                                    stars={stars ? stars : 5} />
                             })}
                     </div>
                 </div>
             </section>
+            {/* <Pagination count={10} shape="rounded" /> */}
             <Footer />
         </div>
     )
