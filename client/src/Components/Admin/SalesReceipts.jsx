@@ -50,6 +50,10 @@ export default function SalesReceipts() {
     };
   });
 
+  function back(){
+    navigate('/admin/dashboard')
+  }
+  
   return (
     <>
       <NavBar />
@@ -68,6 +72,8 @@ export default function SalesReceipts() {
           components={{ Toolbar: GridToolbar }}
         />
       </div>
+      <Button onClick={back}>REGRESAR</Button>
+
       <Footer />
     </>
   );

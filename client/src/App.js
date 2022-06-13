@@ -45,6 +45,7 @@ import BookingWalk from "./Components/Providers/BookingWalk";
 import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
+import PurchasesMade from "./Components/Shop/PurchasesMade";
 
 
 function App() {
@@ -144,6 +145,8 @@ function App() {
             isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
           <Route path="/misHorariosHospedaje" element={
             isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
+          <Route path="/compras-realizadas" element={
+            isAuthenticated && !isLoading ? <PurchasesMade/> : <Loading/>}/>
 
 
 
