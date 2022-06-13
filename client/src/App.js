@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import Landing from "./Components/Landing/Landing";
 import Shop from "./Components/Shop/Shop";
 import AddOwner from "./Components/Forms/AddOwner";
-import NotRegistered from "./Components/Auth0/notRegistered";
+import NotRegistered from "./Components/Auth0/NotRegistered";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
 import Home from './Components/Home/Home';
 import AddPet from "./Components/Forms/AddPet";
@@ -45,6 +45,7 @@ import BookingWalk from "./Components/Providers/BookingWalk";
 import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
+import PurchasesMade from "./Components/Shop/PurchasesMade";
 
 
 function App() {
@@ -144,6 +145,8 @@ function App() {
             isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
           <Route path="/misHorariosHospedaje" element={
             isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
+          <Route path="/compras-realizadas" element={
+            isAuthenticated && !isLoading ? <PurchasesMade/> : <Loading/>}/>
 
 
 

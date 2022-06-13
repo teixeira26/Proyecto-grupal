@@ -4,9 +4,8 @@ const { Router } = require('express');
 
 const router = Router();
 
-router.get('/:email',(req, res)=>{
-    
-    const email = req.params.email;
+router.post('/',(req, res)=>{
+    const {email, subject, text} = req.body
     console.log(req.params.email)
     var transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -20,8 +19,8 @@ router.get('/:email',(req, res)=>{
     var mailOptions = {
         from:"yumpaloompa",
         to:email,
-        subject:'Que onda compa',
-        text:'T.T'
+        subject:subject,
+        text:text
     }
 
 

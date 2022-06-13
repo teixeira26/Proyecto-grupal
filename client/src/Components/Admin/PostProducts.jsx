@@ -47,7 +47,9 @@ export default function PutProduct(){
       },
     });
 
-
+ function backToTheList(){
+  navigate('/admin/listado-productos')
+ }
 
 
 
@@ -158,7 +160,7 @@ export default function PutProduct(){
                   }}
                   product="profilePicture"
                 />
-
+                <Button onClick={backToTheList}>REGRESAR AL LISTADO</Button>
                 <Button type="submit">AGREGAR</Button>
               </div>
             </Form>

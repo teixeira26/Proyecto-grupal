@@ -9,19 +9,18 @@ import styles from "../Providers/Providers.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import { LabelDetail } from 'semantic-ui-react';
 import axios from 'axios';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Providers() {
     const dispatch = useDispatch()
     const [reviews, setReviews] = useState([])
-    // const [order, setOrder] = useState('ASC')
-    // const [filter, setFilter] = useState('')
     const [valueService, setValueService] = useState('servicio');
     const [valuePrice, setValuePrice] = useState('precio');
+    const { user } = useAuth0()
 
     useEffect(() => {
         dispatch(getProviders())
         axios.get('http://localhost:3001/reviews').then(x => setReviews(x.data))
-        console.log('isjdisjdsjdisdjiosdj', reviews)
     }, [dispatch])
 
     const providers = useSelector(state => state.filteredProviders);
@@ -43,6 +42,14 @@ export default function Providers() {
         dispatch(getProviders())
         setValueService('servicio');
         setValuePrice('precio')
+    }
+
+    function handleOrderStars() {
+
+    }
+
+    function handleFilterStars() {
+
     }
 
     return (
@@ -71,7 +78,7 @@ export default function Providers() {
                         <section className={styles.selects}>
                             <p className={styles.filterTitle}>Ordenar por Precio</p>
                             <select className={styles.select} value={valuePrice} onChange={handleOrderPrice}>
-                            <option value="precio" disabled selected>Precio</option>
+                                <option value="precio" disabled selected>Precio</option>
                                 <option value="ASC">Menor a mayor</option>
                                 <option value="DESC">Mayor a menor</option>
                             </select>
@@ -82,22 +89,24 @@ export default function Providers() {
                     <div className={styles.providersGrid}>
                         {!providers.length ? 'LOADING' :
                             providers.map((p, g) => {
+
                                 let stars = 5
                                 let providerEvaluations = reviews.filter(x => x.provider.email === p.email);
                                 providerEvaluations = providerEvaluations.map(x => x.review)
                                 let numberEvaluations = providerEvaluations.length
                                 providerEvaluations = providerEvaluations.reduce((x, y) => x + y, 0)
                                 stars = (providerEvaluations / numberEvaluations);
-                                console.log("estrellaaaaaaaaaaaaaaaaas", stars)
 
-                                return <ProvidersCard key={p.id}
-                                    name={p.name}
-                                    lastName={p.lastName}
-                                    email={p.email}
-                                    profilePicture={p.profilePicture}
-                                    price={p.price}
-                                    service={p.service}
-                                    stars={stars ? stars : 5} />
+
+                                return p.email === user.email ? null :
+                                    <ProvidersCard key={p.id}
+                                        name={p.name}
+                                        lastName={p.lastName}
+                                        email={p.email}
+                                        profilePicture={p.profilePicture}
+                                        price={p.price}
+                                        service={p.service}
+                                        stars={stars ? stars : 0} />
                             })}
                     </div>
                 </div>
