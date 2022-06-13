@@ -22,7 +22,9 @@ export default function SalesReceipts() {
 
   const solds = useSelector((state) => state.solds);
 
-  function detail() {}
+  function detail() {
+    
+  }
 
   const columns = [
     { field: "id", headerName: "ID de la compra", minWidth: 200 },
@@ -33,8 +35,11 @@ export default function SalesReceipts() {
     { field: "status", headerName: "Estado", minWidth: 150 },
     {
       field: "Detalle",
-      renderCell: () => {
-        return <Button onClick={() => detail()}>Detalle</Button>;
+      renderCell: (cellValues) => {
+        return (
+
+        <Button onClick={() => detail(cellValues.id)}>Detalle</Button>
+        )
       },
     },
   ];

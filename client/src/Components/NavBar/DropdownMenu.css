@@ -8,17 +8,15 @@
   top: 77px;
   right: 0;
   width: 200px;
-  /* box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3); */
   border: 1px solid #bbb7ae;
-  opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
   transition: opacity 0.1s ease, transform 0.2s ease, visibility 0.1s;
   z-index: 999;
 }
 
-.menu::before{
-  content: '';
+.menu::before {
+  content: "";
   position: absolute;
   top: -10px;
   right: 17px;
@@ -53,7 +51,7 @@
   display: block;
 }
 
-.menu li a:hover{
+.menu li a:hover {
   color: #7e52a0;
 }
 
@@ -85,49 +83,48 @@
 
 .menu-trigger img {
   border-radius: 90px;
-  
 }
 
-.profilePicture{
+.profilePicture {
   width: 47px;
   height: auto;
   /* border: 3px solid #7e52a0; */
 }
 
-.picture-flex{
+.picture-flex {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.profile{
+.profile {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.button{
+.button {
   background-color: transparent;
   color: #333333;
   padding: 15px 15px;
   text-transform: uppercase;
 }
 
-.button:hover{
+.button:hover {
   color: #7e52a0;
 }
 
-.li-flex{
+.li-flex {
   display: flex;
-  
+
   align-items: center;
 }
 
-.log-out{
+.log-out {
   transform: scaleX(-1);
   margin-left: 1rem;
 }
 
-.person-outline{
+.person-outline {
   margin-left: 1rem;
 }
