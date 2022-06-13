@@ -93,6 +93,7 @@ export default function BookingWalk() {
       <div className={inContainer.container}>
         <Form onSubmit={formik.handleSubmit}>
           <h2>Tu reserva</h2>
+          <p>Te pediremos algunos datos para registrar tu reserva</p>
 
           <label htmlFor="">Tu nombre</label>
           <Form.Input
@@ -118,15 +119,12 @@ export default function BookingWalk() {
             selection={true}
             error={formik.errors.petName}
           ></Form.Dropdown>
+          
           <label htmlFor="">
-            Elige un rango de fecha para el hospedaje de tu mascota
+            Estos son los horarios disponibles del yumpy. Elige uno para avanzar con la reserva de tu paseo
           </label>
-
-          <h2>horas disponibles</h2>
           {schedule && (
             <div>
-              <br />
-              <br />
               {console.log(schedule)}
               <div style={{ display: "block" }}>
                 <h3>lunes</h3>
@@ -298,14 +296,14 @@ export default function BookingWalk() {
               </div>
             </div>
           )}
-          <label htmlFor="">Comentarios adicionales</label>
+          <label htmlFor="">Puedes dejarle algunos comentarios adicionales a tu yumpy</label>
           <textarea
             onChange={(e) => {
               formik.values.comments = e.target.value;
             }}
           ></textarea>
 
-          <Link to={`/chat/${providerEmail}/${ownerEmail}`}>
+          <Link to={`/providers/${providerEmail}`}>
             <Button>Cancelar</Button>
           </Link>
           <button>Continuar con el pago</button>
