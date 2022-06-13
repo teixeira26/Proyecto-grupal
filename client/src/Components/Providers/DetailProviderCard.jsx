@@ -4,7 +4,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import style from './DetailProviderCard.module.css'
 import axios from "axios";
-import { Circle, Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
+import { Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
 import CircleMarker from "../Map/CircleMarker";
 
 export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule}) {
