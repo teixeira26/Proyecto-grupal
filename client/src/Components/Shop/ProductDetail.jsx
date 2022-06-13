@@ -11,7 +11,7 @@ import { getById, cleanDetail } from "../../redux/actions/petshopActions";
 import { Button } from "@material-ui/core";
 import { getOwners } from "../../redux/actions/ownProvActions";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import Loader from "../Loading/Loader";
 
 const ProductDetail = () => {
   const { user } = useAuth0();
@@ -48,7 +48,7 @@ const ProductDetail = () => {
         </NavLink>
 
         {!product.length
-          ? "LOADING"
+          ? <Loader/>
           : product.map((p) => {
               return (
                 <ProductDetailCard

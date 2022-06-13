@@ -83,9 +83,10 @@ function App() {
           <Route path="/contacto" element={<Contact/>} />
           <Route path='/shop' element={
             !isLoading ? <Shop/> : <Loading/>}/>
-          <Route path='/shop/:id' element={
+          {/* <Route path='/shop/:id' element={
             !isLoading ? <ProductDetail/> : <Loading/>
-          }/>
+          }/> */}
+          <Route path='/shop/:id' element={<ProductDetail/>}/>
           <Route path='/agregarusuario' element={
             isAuthenticated && !isLoading ? <AddOwner/> : <Loading/>
           }/>
