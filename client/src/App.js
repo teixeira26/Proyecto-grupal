@@ -25,6 +25,7 @@ import RatingsOwner from "./Components/Providers/RatingsOwner";
 import PutReview from "./Components/Providers/PutReview";
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
+import Confirmation from "./Components/Providers/MercadoPago/Confirmation"
 import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
@@ -123,6 +124,8 @@ function App() {
           <Route path="/mi-carrito" element={<ShoppingCart/>}/>
           <Route path="/confirmacion" element={
           isAuthenticated && !isLoading ? <Confirmación/> : <Loader/>}/>
+          <Route path="/confirmation" element={
+          isAuthenticated && !isLoading ? <Confirmation/> : <Loader/>}/>
           <Route path="/purchaseConfirmation" element={
           isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loader/>}/>
           <Route path="/paseo" element={

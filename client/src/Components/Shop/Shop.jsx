@@ -20,7 +20,6 @@ const Shop = () => {
   const [favorites, setFavorites] = useState([]);
 
   let dispatch = useDispatch();
-
   useEffect(() => {
     if (favorites) {
       dispatch(addTofavorites(favorites))
@@ -28,15 +27,17 @@ const Shop = () => {
   }, [favorites]);
 
   useEffect(() => {
+    if(user && user.email){
     axios
       .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
       .then((x) => {
         console.log(x.data);
         setFavorites(x.data);
       });
-    dispatch(getProducts());
+    // dispatch(getProducts());
     dispatch(chargeCart(user.email));
-  }, [dispatch, user.email]);
+  }
+  }, [dispatch, user]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -66,7 +67,6 @@ const paginated = (pageNumber) => {
         <h1 className={styles.shopTitle}>Pet Shop</h1>
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
-            <ShopSearchbar />
             <ShopFilters />
           </div>
           <br />

@@ -176,3 +176,21 @@ export function getReviews() {
     }
 };
 
+export function putEvent(id, modification) {
+    return async function () {
+        try {
+            await axios.put(`http://localhost:3001/events/${id}`, modification)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function selectedEvent(payload){
+    return {
+        type: 'SELECTED_EVENT',
+        payload,
+    }
+}
+
+
