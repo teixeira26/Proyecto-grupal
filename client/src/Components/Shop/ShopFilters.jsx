@@ -43,10 +43,8 @@ const ShopFilters = () => {
     dispatch(filterByCategory(select));
   }
 
-
   return (
     <div className={styles.container}>
-
       <br />
       <section className={styles.selects}>
         <p className={styles.filterTitle}>Filtrar por Mascota</p>
@@ -58,11 +56,8 @@ const ShopFilters = () => {
           <option value="conejo">Conejo</option>
           <option value="pez">Peces</option>
           <option value="pajaro">Aves</option>
-
         </select>
       </section>
-
-
       <section className={styles.selects}>
         <div className={styles.checkbox}>
           <input
@@ -91,9 +86,7 @@ const ShopFilters = () => {
           />
           <span className={styles.checkTitle}>Salud y bienestar</span>
         </div>
-
       </section>
-
       <section className={styles.selects} onChange={(e) => handleOrder(e)}>
         <p className={styles.filterTitle}>Ordenar por</p>
         <select name="" id="" className={styles.select} value={priceValue}>

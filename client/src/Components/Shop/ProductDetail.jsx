@@ -34,12 +34,10 @@ const ProductDetail = () => {
   return (
     <div className={styles.container}>
       <NavBarShop />
-
       <div className={inContainer.container}>
       <NavLink to="/shop">
           <img src="/assets/img/arrow-left.svg" alt="" className={styles.leftArrow}/>
         </NavLink>
-
         {!product.length
           ? <Loader/>
           : product.map((p) => {
@@ -57,7 +55,6 @@ const ProductDetail = () => {
               );
             })}
             {userDb?.isAdmin? <Link to='/admin/listado-productos'><Button>VOLVER AL LISTADO</Button></Link> : null}
-
       </div>
       <Footer />
     </div>

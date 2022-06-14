@@ -63,9 +63,6 @@ const ProductCard = ({
           <div className={styles.cardBottom}>
           <p className={styles.price}>${price}</p>
             <h2 className={styles.cardTitle}>{name}</h2>
-
-            
-              
               {/* <button className={styles.addButton} onClick={()=>{
               dispatch({
               type:TYPES.ADD_TO_CART,

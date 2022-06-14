@@ -8,17 +8,18 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOwners, getPets } from "../../redux/actions/ownProvActions";
 import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import style from "./Profile.module.css";
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
   const dispatch = useDispatch();
   const [userData, setUser] = useState({});
   const { user, isAuthenticated } = useAuth0();
-  const [isProvider, setIsProvider] = useState(false)
-  const [providerInfo, setProviderInfo] = useState()
-  const [eventsProvider, setEventsProvider] = useState()
-  const [eventsOwner, setEventsOwner] = useState()
+  const [isProvider, setIsProvider] = useState(false);
+  const [providerInfo, setProviderInfo] = useState();
+  const [eventsProvider, setEventsProvider] = useState();
+  const [eventsOwner, setEventsOwner] = useState();
+
   useEffect(() => {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
@@ -116,7 +117,7 @@ export default function Profile() {
           <div><h3>sábado</h3>{providerInfo.schedule.sabado.length > 0 && providerInfo.schedule.sabado.map(x => <div><h4>{x}</h4></div>)}</div>
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length > 0 && providerInfo.schedule.domingo.map(x => <div><h4>{x}</h4></div>)}</div>
           <NavLink to="/misHorarios">
-            <button>CAMBIAR HORARIOS</button>
+            <button>Cambiar horarios</button>
           </NavLink>
         </section>}
 
@@ -133,7 +134,7 @@ export default function Profile() {
           <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
           <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
           <NavLink to="/misHorariosHospedaje">
-            <button>CAMBIAR HORARIOS</button>
+            <button>Cambiar horarios</button>
           </NavLink>
         </section>}
         <section>
@@ -143,17 +144,15 @@ export default function Profile() {
               <button>Agregar mascota</button>
             </NavLink>
             {
-           userData.isAdmin?
-            <Link to='/admin/dashboard'>
-            <button>Herramientas de Admin</button> 
-            </Link>
-              : null
-          
-                }
+              userData.isAdmin ?
+                <Link to='/admin/dashboard'>
+                  <button>Herramientas de Admin</button>
+                </Link>
+                : null
+            }
             <Link to='/compras-realizadas'>
-            <button>Mis compras</button> 
+              <button>Mis compras</button>
             </Link>
-
 
           </div>
           <article className={style.petsProfile}>
@@ -170,22 +169,21 @@ export default function Profile() {
                           Sobre {x.name}: {x.description}
                         </p>
                         <button onClick={() => {
-                           Swal.fire({
-                            title: 'Estás seguro que querés eliminar a esta mascota ?',
+                          Swal.fire({
+                            title: '¿Estás seguro que querés eliminar a esta mascota?',
                             showDenyButton: true,
-                            confirmButtonText: 'Si',
-                            denyButtonText: `No`,
-                          }).then(async(result) => {
+                            confirmButtonText: 'Eliminar',
+                            denyButtonText: `Cancelar`,
+                          }).then(async (result) => {
                             /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
-                              Swal.fire('Mascota eliminada!', '', 'success')
+                              Swal.fire('¡La mascota fue eliminada!', '', 'success')
                               byePet(x.id)
                             } else if (result.isDenied) {
-                              Swal.fire('La mascota no fue eliminada', '', 'info')
+                              Swal.fire('', '', 'info')
                             }
                           })
-                          
-                          }}>
+                        }}>
                           Eliminar mascota
                         </button>
                       </div>
@@ -201,26 +199,19 @@ export default function Profile() {
           {eventsOwner && eventsOwner.length ?
             eventsOwner.map(x => {
               return (<div>
-                <h5>Día del evento: {x.date.day}</h5>
-                <h4>Fecha del evento: {x.date.realDate}</h4>
-                <p>Nombre del Yump: {x.providerName}</p>
-                <p>{x.date.hour}</p>
-                <p>{x.eventType}</p>
-                <p>Mascota: {x.petName}</p>
+                <h3>Mascota: {x.petName}</h3>
+                <h4>{x.eventType} con {x.providerName}</h4>
+                <p>Fecha del evento: {x.date.day} {x.date.realDate} - {x.date.hour}</p>
               </div>)
             }) : null
           }
-          {isProvider && <div><h2>mis servicios acordados</h2></div>}
+          {isProvider && <div><h2>Mis servicios acordados</h2></div>}
           {isProvider && eventsProvider ?
-
             eventsProvider.map(x => {
               return (<div>
-                <h5>Día del evento: {x.date.day}</h5>
-                <h4>Fecha del evento: {x.date.realDate}</h4>
-                <p>Nombre del cliente: {x.ownerName}</p>
-                <p>{x.date.hour}</p>
-                <p>{x.eventType}</p>
-                <p>Pet del cliente: {x.petName}</p>
+                <h3>{x.eventType} acordado con {x.ownerName}</h3>
+                <p>Mascota: {x.petName}</p>
+                <p>Fecha del evento: {x.date.day} {x.date.realDate} - {x.date.hour}</p>
               </div>)
             })
             : null}

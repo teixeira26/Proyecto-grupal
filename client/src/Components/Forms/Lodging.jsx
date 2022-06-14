@@ -42,7 +42,7 @@ export default function Lodging() {
 
     onSubmit: (formData) => {
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Quieres Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
         confirmButtonText: 'Guardar',
         denyButtonText: `No guardar`,
@@ -74,7 +74,7 @@ export default function Lodging() {
       <NavBar />
       <Container>
         <div className={styles.container}>
-          <h2>Contanos los detalles de tu servicio</h2>
+          <h2>Cuéntanos los detalles de tu servicio</h2>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Dropdown
               placeholder="Tipo de vivienda"
@@ -105,7 +105,7 @@ export default function Lodging() {
             ></Form.Input>
             <Form.Input
               type="text"
-              placeholder="Contanos por qué deberían elegirte"
+              placeholder="Cuéntanos por qué deberían elegirte"
               name="description"
               onChange={formik.handleChange}
             //   error={formik.errors.state}

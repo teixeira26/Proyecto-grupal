@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { searchBarProducts } from "../../redux/actions/petshopActions";
 import styles from "./ShopFilters.module.css";
 

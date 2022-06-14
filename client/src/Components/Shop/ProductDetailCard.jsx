@@ -42,7 +42,7 @@ const ProductDetailCard = ({
     if (count < limit) {
       setCount(count + 1);
     } else {
-      Swal.fire(`la cantidad deseada excede al limit del stock`);
+      Swal.fire(`Estas intentando agregar más productos de los que existen en stock`);
     }
   };
 
@@ -78,7 +78,7 @@ const ProductDetailCard = ({
         quantity: count,
       });
     } else {
-      Swal.fire(`la cantidad deseada excede al limit del stock`);
+      Swal.fire(`Estas intentando agregar más productos de los que existen en stock`);
     }
   };
 
