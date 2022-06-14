@@ -60,7 +60,7 @@ const Shop = () => {
           <br />
           <section className={styles.shopGrid}>
             {!products.length
-              ? 'No existe mascota.'
+              ? 'No existe mascoota.'
               : products.map((p) => {
                 console.log(p)
                 return p.stock > 0 && p.isActive ? (
