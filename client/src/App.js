@@ -32,12 +32,12 @@ import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
 import Booking from "./Components/Providers/BookingLodging";
 import CheckoutBooking from "./Components/Providers/CheckoutBooking";
-import Loading from "./Components/Loading/loading";
+import Loader from "./Components/Loading/Loader";
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Profile from "./Views/Profile/Profile.jsx";
-import About from "./Views/Profile/About";
-import Contact from "./Views/Profile/Contact";
+import About from "./Views/Profile/About/About.jsx";
+import Contact from "./Views/Profile/Contact/Contact.jsx";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
 import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
 import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
@@ -47,6 +47,7 @@ import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
 import PurchasesMade from "./Components/Shop/PurchasesMade";
+import AdminProfile from "./Views/Profile/AdminProfile";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -86,17 +87,17 @@ function App() {
               ) : !isLoading ? (
                 <Home />
               ) : (
-                <Loading />
+                <Loader />
               )
             }
           />
 
           <Route path="/nosotros" element={<About />} />
           <Route path="/contacto" element={<Contact />} />
-          <Route path="/shop" element={!isLoading ? <Shop /> : <Loading />} />
+          <Route path="/shop" element={!isLoading ? <Shop /> : <Loader />} />
           <Route
             path="/shop/:id"
-            element={!isLoading ? <ProductDetail /> : <Loading />}
+            element={!isLoading ? <ProductDetail /> : <Loader />}
           />
           <Route
             path="/agregarmascota"
@@ -106,55 +107,58 @@ function App() {
               ) : !isLoading ? (
                 <AddPet />
               ) : (
-                <Loading />
+                <Loader />
               )
             }
           />
           <Route
             path="/tipo-usuario"
-            element={isAuthenticated && !isLoading ? <Quesos /> : <Loading />}
+            element={isAuthenticated && !isLoading ? <Quesos /> : <Loader />}
           />
           <Route
             path="/mi-perfil"
-            element={isAuthenticated && isBanned ? (<h1>baneado</h1>): !isLoading ? <Profile /> : <Loading />}
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>): !isLoading ? <Profile /> : <Loader />}
           />
+          <Route path='/admin' element={
+            isAuthenticated && !isLoading ? <AdminProfile/> : <Loader/>
+          }/>
           <Route
             path="/servicio"
             element={
-              isAuthenticated && isBanned ? (<h1>baneado</h1>): !isLoading ? <InfoProvider /> : <Loading />
+              isAuthenticated && isBanned ? (<h1>baneado</h1>): !isLoading ? <InfoProvider /> : <Loader />
             }
           />
           <Route
             path="/providers"
             element={
-              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Providers /> : <Loading />
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Providers /> : <Loader />
             }
           />
           <Route
             path="/providers/:name"
             element={
-              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <DetailProvider /> : <Loading />
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <DetailProvider /> : <Loader />
             }
           />
           <Route
             path="/chat/:providerEmail/:ownerEmail"
-            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Chat /> : <Loading />}
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Chat /> : <Loader />}
           />
           <Route
             path="/favoritos"
             element={
-              isAuthenticated && !isLoading ? <Favorites /> : <Loading />
+              isAuthenticated && !isLoading ? <Favorites /> : <Loader />
             }
           />
           <Route
             path="/mis-datos"
             element={
-              isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
+              isAuthenticated && !isLoading ? <InfoOwner /> : <Loader />
             }
           />
           <Route
             path="/review/:providerEmail"
-            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Review /> : <Loading />}
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Review /> : <Loader />}
           />
           <Route
             path="/no-registrado"
@@ -164,13 +168,13 @@ function App() {
           <Route
             path="/confirmacion"
             element={
-              isAuthenticated && !isLoading ? <Confirmación /> : <Loading />
+              isAuthenticated && !isLoading ? <Confirmación /> : <Loader />
             }
           />
           <Route
             path="/confirmation"
             element={
-              isAuthenticated && !isLoading ? <Confirmation /> : <Loading />
+              isAuthenticated && !isLoading ? <Confirmation /> : <Loader />
             }
           />
           <Route
@@ -179,56 +183,56 @@ function App() {
               isAuthenticated && !isLoading ? (
                 <PurchaseConfirmation />
               ) : (
-                <Loading />
+                <Loader />
               )
             }
           />
           <Route
             path="/paseo"
-            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Walk /> : <Loading />}
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Walk /> : <Loader />}
           />
           <Route
             path="/hospedaje"
-            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Lodging /> : <Loading />}
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Lodging /> : <Loader />}
           />
           <Route
             path="/reservar-hospedaje/:providerEmail"
             element={
-              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <BookingLodging /> : <Loading />
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <BookingLodging /> : <Loader />
             }
           />
           <Route
             path="/reservar-paseo/:providerEmail"
             element={
-              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <BookingWalk /> : <Loading />
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <BookingWalk /> : <Loader />
             }
           />
           <Route
             path="/confirmar-reserva"
             element={
-              isAuthenticated && !isLoading ? <CheckoutBooking /> : <Loading />
+              isAuthenticated && !isLoading ? <CheckoutBooking /> : <Loader />
             }
           />
           <Route
             path="/calificacionesProvider"
-            element={isAuthenticated && !isLoading ? <Ratings /> : <Loading />}
+            element={isAuthenticated && !isLoading ? <Ratings /> : <Loader />}
           />
           <Route
             path="/calificacionesOwner"
             element={
-              isAuthenticated && !isLoading ? <RatingsOwner /> : <Loading />
+              isAuthenticated && !isLoading ? <RatingsOwner /> : <Loader />
             }
           />
           <Route
             path="/cambiarCalificacion/:id"
             element={
-              isAuthenticated && !isLoading ? <PutReview /> : <Loading />
+              isAuthenticated && !isLoading ? <PutReview /> : <Loader />
             }
           />
           <Route
             path="/misHorarios"
             element={
-              isAuthenticated && !isLoading ? <ScheduleProvider /> : <Loading />
+              isAuthenticated && !isLoading ? <ScheduleProvider /> : <Loader />
             }
           />
           <Route
@@ -237,14 +241,14 @@ function App() {
               isAuthenticated && !isLoading ? (
                 <ScheduleProviderLogding />
               ) : (
-                <Loading />
+                <Loader />
               )
             }
           />
           <Route
             path="/compras-realizadas"
             element={
-              isAuthenticated && !isLoading ? <PurchasesMade /> : <Loading />
+              isAuthenticated && !isLoading ? <PurchasesMade /> : <Loader />
             }
           />
 

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../Home/Home.module.css";
 import NavBarShop from '../NavBar/NavBarShop'
@@ -17,7 +17,7 @@ const Home = () => {
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0
-});
+  });
 
 console.log("USUARIO",user)
 
@@ -52,34 +52,32 @@ useEffect(()=>{
     function (position) {
         console.log('getCurrentPosition: ', position.coords.latitude, position.coords.longitude);
         setLocation({
-            latitude: position.coords.latitude,
-            longitude: position.coords.longitude
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude
         })
-    },
-    function (error) {
+      },
+      function (error) {
         console.log(error);
-    },
-    {
+      },
+      {
         enableHighAccuracy: true // Cada vez que pueda extraerá desde el GPS info extra.
-    })
-},[])
-  useEffect(()=>{
+      })
+  }, []);
+
+  useEffect(() => {
     console.log("soy las cordinadas", location)
-    if(user && location.latitude !== 0){
-    let owner = {
-        email:user.email,
-        name:user.given_name,
+    if (user && location.latitude !== 0) {
+      let owner = {
+        email: user.email,
+        name: user.given_name,
         lastName: user.family_name,
-        latitude:location.latitude,
-        longitude:location.longitude,
+        latitude: location.latitude,
+        longitude: location.longitude
       }
       console.log("TA BANEAU", owner);
       axios.post('http://localhost:3001/owners', owner)
     }
-  
-  }, [user, location])
-
-  console.log(userData, "USERDATA")
+  }, [user, location]);
 
   return (
     <div className={styles.body}>
