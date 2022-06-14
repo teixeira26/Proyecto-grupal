@@ -20,29 +20,67 @@ export default function ScheduleProviderLogdifalseng() {
   const { user } = useAuth0();
   const navigate = useNavigate();
   const providerEmail = useParams().providerEmail;
+  const [startDate, setStartDate] = useState(null)
+  const [endDate, setEndDate] = useState(null)
+  const [workDays, setWorkDays] = useState([])
+
+
+  const onChangeDatePicker = (fecha)=>{
+    setStartDate(fecha[0]);
+    console.log('Fecha inicial: ', fecha[0].toLocaleString().split(' ')[0])
+
+    setEndDate(fecha[1]?fecha[1]:null)
+    console.log('fecha final: ', fecha[1]?fecha[1].toLocaleString().split(' ')[0]:null)
+
+    if(fecha[0] && fecha[1]){
+      var fechasSeleccionadas = [];
+      const diasTranscorridos = restarFechas(fecha[0].toLocaleString().split(' ')[0], fecha[1].toLocaleString().split(' ')[0]);
+      const fechaInicial = restarFechas(new Date().toLocaleString().split(' ')[0], fecha[0].toLocaleString().split(' ')[0])
+      console.log('diferencia entre la fecha inicial y la fecha actual', fechaInicial)
+      console.log('dias transcorridos entre la fecha final y inicial: ', diasTranscorridos);
+      for (var x = 0; x<diasTranscorridos+1; x++){
+        console.log('x : ',fechaInicial + x)
+        fechasSeleccionadas.push(sumarDias(new Date(),fechaInicial + x))
+      }
+    }
+    console.log(fechasSeleccionadas);
+    if(fechasSeleccionadas)setWorkDays([...workDays, fechasSeleccionadas])
+  }
+
+const restarFechas = function(f1,f2){
+  var aFecha1 = f1.split('/');
+  var aFecha2 = f2.split('/');
+  var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+  var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+  var dif = fFecha2 - fFecha1;
+  var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+  return dias;
+ }
+
+ function sumarDias(date, dias){
+  let newDate = date
+    newDate.setDate(newDate.getDate() + dias);
+  return newDate.toLocaleString().split(' ')[0];
+}
+
 
   
 
   const formik = useFormik({
     initialValues: {
-      lunes:false,
-      martes:false,
-      miercoles:false,
-      jueves:false,
-      viernes:false,
-      sabado:false,
-      domingo:false
+      schedule:[]
     },
     validationSchema: yup.object({
       // message: yup.string().required('Este es un campo requerido'),
     }),
 
     onSubmit: async(formData) => {
+      console.log(workDays)
       formData = {
         providerEmail:user.email,
-        schedule:{...formData},
-        
+        schedule:workDays.reduce((x,y)=>x.concat(y))
       };
+
       Swal.fire({
         title: 'Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
@@ -61,7 +99,7 @@ export default function ScheduleProviderLogdifalseng() {
      
       // await dispatch(putOwnerInfo(formData.email, formData));
     },
-  }); 
+   }); 
   const showInputs = (day, SetDay, stateDay)=>{
     return(<div>
 
@@ -85,6 +123,10 @@ export default function ScheduleProviderLogdifalseng() {
             }} value="+"/>
             </div>)
   }
+  const deleteRange = (range)=>{
+    let newWorkDays = workDays.filter(x=> x!== range);
+    setWorkDays(newWorkDays);
+  }
   return (
     <div>
       <NavBar />
@@ -101,98 +143,30 @@ export default function ScheduleProviderLogdifalseng() {
               error={formik.errors.message}
             ></Form.Input>
              */}
-            
+            <DatePicker
+              selected={startDate}
+              onChange={onChangeDatePicker}
+              startDate={startDate}
+              endDate={endDate}
+              minDate={new Date()}
+              showDisabledMonthNavigation
+              selectsRange
+              inline
+            />
           
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="lunes"
-              onChange={()=>{
-                if(formik.values.lunes === true){
-                  formik.values.lunes = false}
-                  else formik.values.lunes = true
-                console.log(formik.values)
-              }}
-              />
-              <label>Lunes</label>
-            </div>
+           
 
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="martes"
-              onChange={()=>{
-                if(formik.values.martes === true){
-                formik.values.martes = false}
-                else formik.values.martes = true
-              console.log(formik.values)
-              }}
-              />
-              <label>Martes</label>
-            </div>
+            {workDays?workDays.map(x=>{
+              if(x && x.length) return(
+              <div>
+                <p>{x[0]} - {x[x.length-1]}</p>
+                <input type='button' onClick={()=>deleteRange(x)} value='x'></input>
+              </div>
+              )
+              
+            }):null}
 
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="miercoles"
-              onChange={()=>{
-                if(formik.values.miercoles === true){
-                  formik.values.miercoles = false}
-                  else formik.values.miercoles = true
-                console.log(formik.values)
-              }}
-              />
-              <label>Miércoles</label>
-            </div>
-
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="jueves"
-              onChange={()=>{
-                if(formik.values.jueves === true){
-                  formik.values.jueves = false}
-                  else formik.values.jueves = true
-                console.log(formik.values)
-              }}
-              />
-              <label>Jueves</label>
-            </div>
-
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="viernes"
-              onChange={()=>{
-                if(formik.values.viernes === true){
-                  formik.values.viernes = false}
-                  else formik.values.viernes = true
-                console.log(formik.values)
-              }}
-              />
-              <label>Viernes</label>
-            </div>
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="sabado"
-              onChange={()=>{
-                if(formik.values.sabado === true){
-                  formik.values.sabado = false}
-                  else formik.values.sabado = true
-                console.log(formik.values)
-              }}
-              />
-              <label>Sábado</label>
-            </div>
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="domingo"
-              onChange={()=>{
-                if(formik.values.domingo === true){
-                  formik.values.domingo = false
-                }
-                  else {formik.values.domingo = true}
-                console.log(formik.values)
-              }}
-              />
-              <label>Domingo</label>
-            </div>
-            
+          
 
          
             <Button type="submit">Enviar</Button>

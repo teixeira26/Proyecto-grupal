@@ -104,11 +104,11 @@ export default function Profile() {
           </h4>
         </section>
         
-       {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
+       {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
           <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
           <br/>
           <br/>
-          {console.log(providerInfo)}
+          {/* {console.log(providerInfo)}
           <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.length>0 &&providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>martes</h3>{providerInfo.schedule.martes.length>0&&providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.length>0&&providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
@@ -116,10 +116,11 @@ export default function Profile() {
           <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
-          <NavLink to="/misHorarios">
+        
+        </section>} */}
+        <NavLink to="/misHorarios"> 
               <button>CAMBIAR HORARIOS</button>
-            </NavLink>
-        </section>}
+            </NavLink>  
 
 
         {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'hospedaje' &&<section className={style.mainInfoProfile}>

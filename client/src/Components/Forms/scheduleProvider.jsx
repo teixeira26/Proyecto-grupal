@@ -20,14 +20,11 @@ export default function ScheduleProvider() {
   // const dispatch = useDispatch();
   const { user } = useAuth0();
   const navigate = useNavigate();
-  const providerEmail = useParams().providerEmail
-  const [lunes, SetLunes] = useState([]);
-  const [martes, SetMartes] = useState([]);
-  const [miercoles, SetMiercoles] = useState([]);
-  const [jueves, SetJueves] = useState([]);
-  const [viernes, SetViernes] = useState([]);
-  const [sabado, SetSabado] = useState([]);
-  const [domingo, SetDomingo] = useState([]);
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [initialtime, setInitialTime] = useState(null);
+  const [time, setTime] = useState([]);
+  const [bookingDay, setBookingDays] = useState([]);
 
   
   
@@ -98,6 +95,51 @@ export default function ScheduleProvider() {
             }} value="+"/>
             </div>)
   }
+
+  const restarFechas = function(f1,f2){
+    var aFecha1 = f1.split('/');
+    var aFecha2 = f2.split('/');
+    var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+    var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+    var dif = fFecha2 - fFecha1;
+    var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+    return dias;
+   }
+
+   function sumarDias(fecha, dias){
+    console.log('fecha: ', fecha, 'dias: ', dias)
+    fecha.setDate(fecha.getDate() + dias);
+    return fecha;
+  }
+  const onChangeDatePickerInitialTime = (initialTime) =>{
+    setTime([...time, initialTime.toString().split(' ')[4]])
+    setInitialTime(initialTime)
+  }
+
+  const onChangeDatePicker = (fecha)=>{
+    console.log(fecha)
+    setStartDate(fecha[0]);
+    console.log('Fecha inicial: ', fecha[0].toLocaleString().split(' ')[0])
+
+    setEndDate(fecha[1]?fecha[1]:null)
+    console.log('fecha final: ', fecha[1]?fecha[1].toLocaleString().split(' ')[0]:null)
+
+    if(fecha[0] && fecha[1]){
+      var fechasSeleccionadas = [];
+      const diasTranscorridos = restarFechas(fecha[0].toLocaleString().split(' ')[0], fecha[1].toLocaleString().split(' ')[0]);
+      const fechaInicial = restarFechas(new Date().toLocaleString().split(' ')[0], fecha[0].toLocaleString().split(' ')[0])
+      console.log('diferencia entre la fecha inicial y la fecha actual', fechaInicial)
+      console.log('dias transcorridos entre la fecha final y inicial: ', diasTranscorridos);
+      for (var x = 0; x<diasTranscorridos+1; x++){
+        console.log('x : ',fechaInicial + x)
+        fechasSeleccionadas.push(sumarDias(new Date(),fechaInicial + x).toLocaleString().split(' ')[0])
+      }
+    }
+    console.log(fechasSeleccionadas);
+    if(fechasSeleccionadas)setBookingDays(fechasSeleccionadas)
+  }
+
+
   return (
     <div>
       <NavBar />
@@ -106,158 +148,46 @@ export default function ScheduleProvider() {
           <h2>Agregá un horario de trabajo</h2>
 
           <Form onSubmit={formik.handleSubmit}>
-            {/* <Form.Input
+            <Form.Input
               type="text"
               placeholder="Contanos un poco más"
               name="message"
               onChange={formik.handleChange}
               error={formik.errors.message}
             ></Form.Input>
-             */}
             
-          
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="lunes"
-              onChange={()=>{
-                SetLunes(['ojkioj'])
-              }}
-              />
-              <label>Lunes</label>
-            </div>
-
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="martes"
-              onChange={()=>{
-                SetMartes(['ojkioj'])
-              }}
-              />
-              <label>Martes</label>
-            </div>
-
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="miercoles"
-              onChange={()=>{
-                SetMiercoles(['ojkioj'])
-              }}
-              />
-              <label>Miércoles</label>
-            </div>
-
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="jueves"
-              onChange={()=>{
-                SetJueves(['ojkioj'])
-              }}
-              />
-              <label>Jueves</label>
-            </div>
-
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="viernes"
-              onChange={()=>{
-                SetViernes(['ojkioj'])
-              }}
-              />
-              <label>Viernes</label>
-            </div>
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="sabado"
-              onChange={()=>{
-                SetSabado(['ojkioj'])
-              }}
-              />
-              <label>Sabado</label>
-            </div>
-            <div class="ui checkbox">
-              <input type="checkbox"
-              name="domingo"
-              onChange={()=>{
-                SetDomingo(['ojkioj'])
-              }}
-              />
-              <label>Domingo</label>
-            </div>
-            {console.log(lunes.length)}
             
+            <DatePicker
+                        selected={startDate}
+                        onChange={onChangeDatePicker}
+                            // onChange()}}
+                        startDate={startDate}
+                        endDate={endDate}
+                        selectsRange
+                        inline
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                    />
 
-
-            {lunes.length>0?
-            <div>
-            <br/>
-            <br/>
-            <hr/>
-            <h3>Lunes</h3>
-            {showInputs('lunes', SetLunes, lunes)} 
-            </div>:null
-            } 
-
-            {martes.length>0?
-            <div>
-             <br/>
-             <br/>
-             <hr/>
-             <h3>Martes</h3>
-            {showInputs('martes', SetMartes, martes)}  
-            </div>:null
-            } 
-
-            {miercoles.length>0?
-            <div>
-             <br/>
-             <br/>
-             <hr/>
-             <h3>Miercoles</h3>
-           {showInputs('miercoles', SetMiercoles, miercoles)}
-           </div>:null
-            } 
-
-            {jueves.length>0?
-            <div>
-             <br/>
-             <br/>
-             <hr/>
-             <h3>Jueves</h3>
-            {showInputs('jueves', SetJueves, jueves)} 
-            </div>:null
-            } 
-
-            {viernes.length>0?
-            <div>
-             <br/>
-             <br/>
-             <hr/>
-             <h3>Viernes</h3>
-            {showInputs('viernes', SetViernes, viernes)} 
-            </div>:null
-            } 
-
-          
-            {sabado.length>0?
-            <div>
-             <br/>
-             <br/>
-             <hr/>
-             <h3>Sabado</h3>
-            {showInputs('sabado', SetSabado, sabado)}
-            </div>:null
-            } 
-
-            {domingo.length>0?
-            <div>
-             <br/>
-             <br/>
-             <hr/>
-             <h3>Domingo</h3>
-            {showInputs('domingo', SetDomingo, domingo)}
-            </div>:null
-            } 
-            
+                    <DatePicker
+                        selected={initialtime}
+                        onChange={onChangeDatePickerInitialTime}
+                        showTimeSelectOnly
+                        showTimeSelect
+                        inline
+                        timeIntervals={60}
+                    />
+                  
+                    {time&&time.length?time.map(x=>{
+                    return (
+                      <div>
+                        <p>{x}</p>
+                        <input type="button" onClick={()=>{setTime(time.filter(y=>y !== x))}} value="x"></input>
+                      </div>
+                    )
+                  }):null}
+                   
+           
 
          
             <Button type="submit">Enviar</Button>
