@@ -11,7 +11,6 @@ import {
   addTofavorites,
 } from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
-import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
 import { NavLink } from "react-router-dom";
 
@@ -24,9 +23,10 @@ const Shop = () => {
   const [favorites, setFavorites] = useState([]);
 
   let dispatch = useDispatch();
-  useEffect(()=>{
-    if(favorites){
-    dispatch(addTofavorites(favorites))}
+  useEffect(() => {
+    if (favorites) {
+      dispatch(addTofavorites(favorites))
+    }
   }, [favorites])
   useEffect(() => {
     if(user && user.email){
@@ -55,7 +55,6 @@ const Shop = () => {
         <h1 className={styles.shopTitle}>Pet Shop</h1>
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
-            <ShopSearchbar />
             <ShopFilters />
           </div>
           <br />
@@ -64,19 +63,19 @@ const Shop = () => {
               ? "LOADING"
               : products.map((p) => {
                 console.log(p)
-                  return p.stock > 0 && p.isActive ? (
-                    <ProductCard
-                      key={p.id}
-                      id={p.id}
-                      setFavorites={setFavorites}
-                      favorites={favorites}
-                      isFavorite={favorites && favorites.includes(p.id)}
-                      profilePicture={p.profilePicture}
-                      name={p.name}
-                      price={p.price}
-                    />
-                  ) : null;
-                })}
+                return p.stock > 0 && p.isActive ? (
+                  <ProductCard
+                    key={p.id}
+                    id={p.id}
+                    setFavorites={setFavorites}
+                    favorites={favorites}
+                    isFavorite={favorites && favorites.includes(p.id)}
+                    profilePicture={p.profilePicture}
+                    name={p.name}
+                    price={p.price}
+                  />
+                ) : null;
+              })}
           </section>
         </div>
       </div>
