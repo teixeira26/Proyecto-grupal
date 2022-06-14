@@ -19,6 +19,9 @@ module.exports = (sequelize) => {
       allowNull: false,
       defaultValue: 'pending'
     },
+    price: {
+      type: DataTypes.INTEGER,
+    },
     petName: {
       type: DataTypes.STRING
     },

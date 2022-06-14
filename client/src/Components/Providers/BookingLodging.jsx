@@ -4,7 +4,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { FieldArray, useFormik } from "formik";
 // import * as yup from "yup";
-import { getEvents, postEvent, getPets } from "../../redux/actions/ownProvActions";
+import { getEvents, postEvent, getPets, getProviderById } from "../../redux/actions/ownProvActions";
 import { Form, Button } from "semantic-ui-react";
 import inContainer from '../GlobalCss/InContainer.module.css';
 import NavBar from "../NavBar/NavBarShop";
@@ -29,19 +29,29 @@ export default function BookingLodging() {
     const navigate = useNavigate()
 
 
+
     useEffect(()=>{
       
         axios.get('http://localhost:3001/providers?filter=&order=ASC').then(info=>{
             let data = info.data.find(x=>x.email === providerEmail);
             formik.values.providerName = data.name + ' ' + data.lastName
+            formik.values.price = data.price
             let arr = [];
             for(let propiedad in data.schedule){
                 if(data.schedule[propiedad]) arr.push(propiedad)
             }
             setAbleDays(arr)
+            console.log(formik.values.price)
         })
         
     }, [providerEmail])
+
+    // useEffect(()=>{
+    //     dispatch(getProviderById(providerEmail))
+    // }, [dispatch])
+    // const provider = useSelector(state => state.providers)
+    // console.log("PRECIO",provider.price)
+    // console.log("PROVIDER", provider)
 
 
     const formik = useFormik({
@@ -59,6 +69,7 @@ export default function BookingLodging() {
             providerEmail:providerEmail,
             ownerName:user.name,
             providerName: '',
+            price: ''
         },
         validationSchema: yup.object({
             petName: yup.string().required('Debes seleccionar una mascota'),

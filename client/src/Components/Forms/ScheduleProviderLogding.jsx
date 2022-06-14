@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { putOwnerInfo } from "../../redux/actions/ownProvActions";
+import { getProviderById, putOwnerInfo } from "../../redux/actions/ownProvActions";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
@@ -20,6 +20,8 @@ export default function ScheduleProviderLogdifalseng() {
   const { user } = useAuth0();
   const navigate = useNavigate();
   const providerEmail = useParams().providerEmail;
+
+  
 
   const formik = useFormik({
     initialValues: {
@@ -38,7 +40,8 @@ export default function ScheduleProviderLogdifalseng() {
     onSubmit: async(formData) => {
       formData = {
         providerEmail:user.email,
-        schedule:{...formData}
+        schedule:{...formData},
+        
       };
       Swal.fire({
         title: 'Estás seguro que querés guardar los cambios?',
