@@ -92,7 +92,7 @@ router.post('/', async (req, res, next) => {
                 res.status(400).send('Este horario no esta disponible.');
             }}
         else if(typeOfService === "hospedaje"){
-            if(providerInfo.dataValues.schedule[date.day]){
+            if(providerInfo.dataValues.schedule.includes(date.day)){
 
                 let event = await Event.findAll({
                     where: {
@@ -134,7 +134,7 @@ router.post('/', async (req, res, next) => {
                 if (totalAllEvents >= providerInfo.dataValues.dogsPerWalk) {
                     providerUpdated = {
                         ...providerInfo,
-                        schedule: {...providerInfo.dataValues.schedule, [date.day]:false}
+                        schedule: providerInfo.dataValues.schedule.filter(x=>x!==date.day)
                     }
                     Provider.update(providerUpdated, {
                         where: {
@@ -192,7 +192,7 @@ router.put('/schedule', async (req, res, next) => {
                 email: providerEmail
             }
         })
-        return res.json('Horario de trabajo actualizados')
+        return res.json('Horarios de trabajo actualizados')
     } catch (error) {
         next(error)
     }

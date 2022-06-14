@@ -29,15 +29,17 @@ const Shop = () => {
     dispatch(addTofavorites(favorites))}
   }, [favorites])
   useEffect(() => {
+    if(user && user.email){
     axios
       .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
       .then((x) => {
         console.log(x.data);
         setFavorites(x.data);
       });
-    dispatch(getProducts());
+    // dispatch(getProducts());
     dispatch(chargeCart(user.email));
-  }, [dispatch, user.email]);
+  }
+  }, [dispatch, user]);
 
   return (
     <div className={styles.container}>

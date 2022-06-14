@@ -18,32 +18,34 @@ const ProductCard = ({
   const { user } = useAuth0();
   const dispatch = useDispatch();
   const addFavorite = async () => {
-    if (!isFavorite) {
-      const AllOwners = await axios.get("http://localhost:3001/owners");
-      const owner = AllOwners.data.find((x) => x.email === user.email);
-      console.log(owner);
-      let objToPut = {
-        ...owner,
-        favorites: owner.favorites[0] ? [...owner.favorites, id] : [id],
-      };
-      setFavorites([...favorites, id]);
+    if(user){
+      if (!isFavorite) {
+        const AllOwners = await axios.get("http://localhost:3001/owners");
+        const owner = AllOwners.data.find((x) => x.email === user.email);
+        console.log(owner);
+        let objToPut = {
+          ...owner,
+          favorites: owner.favorites[0] ? [...owner.favorites, id] : [id],
+        };
+        setFavorites([...favorites, id]);
 
-      await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
-    } else {
-      const AllOwners = await axios.get("http://localhost:3001/owners");
+        await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
+      } else {
+        const AllOwners = await axios.get("http://localhost:3001/owners");
 
-      const owner = AllOwners.data.find((x) => x.email === user.email);
-      console.log(owner);
-      let objToPut = {
-        ...owner,
-        favorites: owner.favorites[0]
-          ? owner.favorites.filter((x) => x !== id)
-          : [],
-      };
-      setFavorites(favorites.filter((x) => x !== id));
-      console.log(objToPut)
-      await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
-    }
+        const owner = AllOwners.data.find((x) => x.email === user.email);
+        console.log(owner);
+        let objToPut = {
+          ...owner,
+          favorites: owner.favorites[0]
+            ? owner.favorites.filter((x) => x !== id)
+            : [],
+        };
+        setFavorites(favorites.filter((x) => x !== id));
+        console.log(objToPut)
+        await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
+      }}
+      else{alert('Loggeate para agregar cosas a fovoritos man')}
   };
 
   return (

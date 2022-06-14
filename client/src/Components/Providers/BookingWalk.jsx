@@ -8,7 +8,6 @@ import { getEvents, postEvent, getPets } from "../../redux/actions/ownProvAction
 import { Form, Button } from "semantic-ui-react";
 import inContainer from '../GlobalCss/InContainer.module.css';
 import NavBar from "../NavBar/NavBarShop";
-
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, getDay} from 'date-fns';
@@ -27,6 +26,10 @@ export default function BookingWalk() {
     const [schedule, setSchedule] = useState();
     const [petOptions, setPetOptions] = useState([]);
     const [providerName, setProviderName] = useState();
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+    const [time, setTime] = useState(null);
+
     const navigate = useNavigate()
 
 
@@ -102,7 +105,50 @@ export default function BookingWalk() {
         }
     });
 
+    const restarFechas = function(f1,f2){
+      var aFecha1 = f1.split('/');
+      var aFecha2 = f2.split('/');
+      var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
+      var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+      var dif = fFecha2 - fFecha1;
+      var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
+      return dias;
+     }
 
+     function sumarDias(fecha, dias){
+      console.log('fecha: ', fecha, 'dias: ', dias)
+      fecha.setDate(fecha.getDate() + dias);
+      return fecha;
+    }
+    const onChangeDatePickerTime = (time) =>{
+      console.log(time);
+      console.log(bookingDay)
+      let newBookingDay = bookingDay.map(x=> {return{hour:time.toString().split(' ')[4], schedule:bookingDay}})
+      console.log(newBookingDay)
+      setTime(time)
+    }
+    const onChangeDatePicker = (fecha)=>{
+      console.log(fecha)
+      setStartDate(fecha[0]);
+      console.log('Fecha inicial: ', fecha[0].toLocaleString().split(' ')[0])
+  
+      setEndDate(fecha[1]?fecha[1]:null)
+      console.log('fecha final: ', fecha[1]?fecha[1].toLocaleString().split(' ')[0]:null)
+  
+      if(fecha[0] && fecha[1]){
+        var fechasSeleccionadas = [];
+        const diasTranscorridos = restarFechas(fecha[0].toLocaleString().split(' ')[0], fecha[1].toLocaleString().split(' ')[0]);
+        const fechaInicial = restarFechas(new Date().toLocaleString().split(' ')[0], fecha[0].toLocaleString().split(' ')[0])
+        console.log('diferencia entre la fecha inicial y la fecha actual', fechaInicial)
+        console.log('dias transcorridos entre la fecha final y inicial: ', diasTranscorridos);
+        for (var x = 0; x<diasTranscorridos+1; x++){
+          console.log('x : ',fechaInicial + x)
+          fechasSeleccionadas.push(sumarDias(new Date(),fechaInicial + x).toLocaleString().split(' ')[0])
+        }
+      }
+      console.log(fechasSeleccionadas);
+      if(fechasSeleccionadas)setBookingDays(fechasSeleccionadas)
+    }
   
 
     return (
@@ -137,7 +183,27 @@ export default function BookingWalk() {
                     <label htmlFor="">Elige un rango de fecha para el hospedaje de tu mascota</label>
                    
                     <h2>horas disponibles</h2>
-                    {schedule&& 
+                    <DatePicker
+                        selected={startDate}
+                        onChange={onChangeDatePicker}
+                            // onChange()}}
+                        startDate={startDate}
+                        endDate={endDate}
+                        selectsRange
+                        inline
+                        minDate={new Date()}
+                        showDisabledMonthNavigation
+                    />
+
+                    <DatePicker
+                        selected={time}
+                        onChange={onChangeDatePickerTime}
+                        showTimeSelectOnly
+                        showTimeSelect
+                        inline
+                        timeIntervals={60}
+                    />
+                    {/* {schedule&& 
                             <div>
                             <br/>
                             <br/>
@@ -234,7 +300,7 @@ export default function BookingWalk() {
                             )
                             })}</div>
                             </div>
-                        }
+                        } */}
                     <label htmlFor="">Comentarios adicionales</label>
                     <textarea
                     onChange={(e)=>{
