@@ -47,6 +47,7 @@ import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
 import PurchasesMade from "./Components/Shop/PurchasesMade";
+import AdminProfile from "./Views/Profile/AdminProfile";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -99,6 +100,10 @@ function App() {
           <Route path='/mi-perfil' element={
             isAuthenticated && !isLoading ? <Profile/> : <Loader/>
           }/>
+          <Route path='/admin' element={
+            isAuthenticated && !isLoading ? <AdminProfile/> : <Loader/>
+          }/>
+          
           <Route path='/servicio' element={
             isAuthenticated && !isLoading ? <InfoProvider/> : <Loader/>
           }/>

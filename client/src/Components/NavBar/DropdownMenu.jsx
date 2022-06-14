@@ -88,6 +88,14 @@ const DropdownMenu = () => {
           <li className="li-flex">
             <img src="../assets/img/person-outline.svg" alt="" className="person-outline"/>
             <NavLink to="/mi-perfil">Perfil</NavLink>
+
+            {/* Probar esta alternativa para rutear segun tipo de usuario al perfil de admin o usuario normal */}
+            {/* {
+              userData.isAdmin ?
+              <NavLink to="/admin">Perfil</NavLink>
+                : <NavLink to="/mi-perfil">Perfil</NavLink>
+            } */}
+            
           </li>
           {/* <li>
             <a href="">Editar Perfil</a>

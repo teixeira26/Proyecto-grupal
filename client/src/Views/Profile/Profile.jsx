@@ -118,7 +118,7 @@ export default function Profile() {
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
         
         </section>} */}
-        <NavLink to="/misHorarios"> 
+        <NavLink to="/misHorariosHospedaje"> 
               <button>CAMBIAR HORARIOS</button>
             </NavLink>  
 
