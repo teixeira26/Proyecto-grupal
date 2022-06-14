@@ -6,7 +6,7 @@ import Shop from "./Components/Shop/Shop";
 import AddOwner from "./Components/Forms/AddOwner";
 import NotRegistered from "./Components/Auth0/NotRegistered";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
-import Home from './Components/Home/Home';
+import Home from "./Components/Home/Home";
 import AddPet from "./Components/Forms/AddPet";
 import InfoProvider from "./Components/Forms/InfoProvider";
 import InfoOwner from "./Components/Forms/InfoOwner";
@@ -25,7 +25,7 @@ import RatingsOwner from "./Components/Providers/RatingsOwner";
 import PutReview from "./Components/Providers/PutReview";
 import ProductDetail from "./Components/Shop/ProductDetail";
 import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
-import Confirmation from "./Components/Providers/MercadoPago/Confirmation"
+import Confirmation from "./Components/Providers/MercadoPago/Confirmation";
 import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
@@ -48,20 +48,21 @@ import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
 import PurchasesMade from "./Components/Shop/PurchasesMade";
 
-
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isBanned, setIsBanned] = useState(false);
   const [finalizado, setFinalizado] = useState(false);
 
   useEffect(() => {
     const searchUser = () => {
       axios.get("http://localhost:3001/owners").then((res) => {
         let resp = res.data.find((x) => x.email === user.email);
-        console.log(resp)
-        if(resp){
-        setIsAdmin(resp.isAdmin);
-        setFinalizado(true);
+        console.log(resp);
+        if (resp) {
+          setIsAdmin(resp.isAdmin);
+          setIsBanned(resp.isBanned);
+          setFinalizado(true);
         }
       });
     };
@@ -74,87 +75,181 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Landing/>} />
-          <Route path="/mapview" element={<MapView/>} />
-          <Route path="/geolocprovider" element={<GeoLocProvider/>} />
-          <Route path='/inicio' element={
-            isAuthenticated && !isLoading ? <Home/> : <Loading/>
-          }/>
-          <Route path="/nosotros" element={<About/>} />
-          <Route path="/contacto" element={<Contact/>} />
-          <Route path='/shop' element={
-            !isLoading ? <Shop/> : <Loading/>}/>
-          <Route path='/shop/:id' element={
-            !isLoading ? <ProductDetail/> : <Loading/>
-          }/>
-          <Route path='/agregarusuario' element={
-            isAuthenticated && !isLoading ? <AddOwner/> : <Loading/>
-          }/>
-          <Route path='/agregarmascota' element={
-            isAuthenticated && !isLoading ? <AddPet/> : <Loading/>
-          }/>
-          <Route path='/tipo-usuario' element={
-            isAuthenticated && !isLoading ? <Quesos/> : <Loading/>
-          }/>
-          <Route path='/mi-perfil' element={
-            isAuthenticated && !isLoading ? <Profile/> : <Loading/>
-          }/>
-          <Route path='/servicio' element={
-            isAuthenticated && !isLoading ? <InfoProvider/> : <Loading/>
-          }/>
-          <Route path='/providers' element={
-            isAuthenticated && !isLoading ? <Providers/> : <Loading/>
-          }/>
-          <Route path='/providers/:name' element={
-            isAuthenticated && !isLoading ? <DetailProvider/> : <Loading/>
-          }/>
-          <Route path='/chat/:providerEmail/:ownerEmail' element={
-            isAuthenticated && !isLoading ? <Chat/> : <Loading />
-          } />
-          <Route path='/favoritos' element={
-            isAuthenticated && !isLoading ? <Favorites/> : <Loading />
-          }/>
-          <Route path='/mis-datos' element={
-            isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
-          }/>
-          <Route path='/review/:providerEmail' element={
-            isAuthenticated && !isLoading ? <Review/> : <Loading/>
-          }/>
-          <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
-          <Route path="/mi-carrito" element={<ShoppingCart/>}/>
-          <Route path="/confirmacion" element={
-          isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
-          <Route path="/confirmation" element={
-          isAuthenticated && !isLoading ? <Confirmation/> : <Loading/>}/>
-          <Route path="/purchaseConfirmation" element={
-          isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loading/>}/>
-          <Route path="/paseo" element={
-          isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
-          <Route path="/hospedaje" element={
-          isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
-          <Route path='/reservar-hospedaje/:providerEmail' element={
-          isAuthenticated && !isLoading ? <BookingLodging/> : <Loading/>}/>
-          <Route path='/reservar-paseo/:providerEmail' element={
-          isAuthenticated && !isLoading ? <BookingWalk/> : <Loading/>}/>
-          <Route path='/confirmar-reserva' element={
-          isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loading/>}/>
-          <Route path="/calificacionesProvider" element={
-            isAuthenticated && !isLoading ? <Ratings/> : <Loading/>}/>
-          <Route path="/calificacionesOwner" element={
-            isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
-          <Route path="/cambiarCalificacion/:id" element={
-            isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
-          <Route path="/misHorarios" element={
-            isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
-          <Route path="/misHorariosHospedaje" element={
-            isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
-          <Route path="/compras-realizadas" element={
-            isAuthenticated && !isLoading ? <PurchasesMade/> : <Loading/>}/>
+          <Route path="/" element={<Landing />} />
+          <Route path="/mapview" element={<MapView />} />
+          <Route path="/geolocprovider" element={<GeoLocProvider />} />
+          <Route
+            path="/inicio"
+            element={
+              isAuthenticated && isBanned ? (
+                <h1>baneado</h1>
+              ) : !isLoading ? (
+                <Home />
+              ) : (
+                <Loading />
+              )
+            }
+          />
 
+          <Route path="/nosotros" element={<About />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/shop" element={!isLoading ? <Shop /> : <Loading />} />
+          <Route
+            path="/shop/:id"
+            element={!isLoading ? <ProductDetail /> : <Loading />}
+          />
+          <Route
+            path="/agregarmascota"
+            element={
+              isAuthenticated && isBanned ? (
+                <h1>baneado</h1>
+              ) : !isLoading ? (
+                <AddPet />
+              ) : (
+                <Loading />
+              )
+            }
+          />
+          <Route
+            path="/tipo-usuario"
+            element={isAuthenticated && !isLoading ? <Quesos /> : <Loading />}
+          />
+          <Route
+            path="/mi-perfil"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>): !isLoading ? <Profile /> : <Loading />}
+          />
+          <Route
+            path="/servicio"
+            element={
+              isAuthenticated && isBanned ? (<h1>baneado</h1>): !isLoading ? <InfoProvider /> : <Loading />
+            }
+          />
+          <Route
+            path="/providers"
+            element={
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Providers /> : <Loading />
+            }
+          />
+          <Route
+            path="/providers/:name"
+            element={
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <DetailProvider /> : <Loading />
+            }
+          />
+          <Route
+            path="/chat/:providerEmail/:ownerEmail"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Chat /> : <Loading />}
+          />
+          <Route
+            path="/favoritos"
+            element={
+              isAuthenticated && !isLoading ? <Favorites /> : <Loading />
+            }
+          />
+          <Route
+            path="/mis-datos"
+            element={
+              isAuthenticated && !isLoading ? <InfoOwner /> : <Loading />
+            }
+          />
+          <Route
+            path="/review/:providerEmail"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Review /> : <Loading />}
+          />
+          <Route
+            path="/no-registrado"
+            element={<NotRegistered></NotRegistered>}
+          ></Route>
+          <Route path="/mi-carrito" element={<ShoppingCart />} />
+          <Route
+            path="/confirmacion"
+            element={
+              isAuthenticated && !isLoading ? <Confirmación /> : <Loading />
+            }
+          />
+          <Route
+            path="/confirmation"
+            element={
+              isAuthenticated && !isLoading ? <Confirmation /> : <Loading />
+            }
+          />
+          <Route
+            path="/purchaseConfirmation"
+            element={
+              isAuthenticated && !isLoading ? (
+                <PurchaseConfirmation />
+              ) : (
+                <Loading />
+              )
+            }
+          />
+          <Route
+            path="/paseo"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Walk /> : <Loading />}
+          />
+          <Route
+            path="/hospedaje"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Lodging /> : <Loading />}
+          />
+          <Route
+            path="/reservar-hospedaje/:providerEmail"
+            element={
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <BookingLodging /> : <Loading />
+            }
+          />
+          <Route
+            path="/reservar-paseo/:providerEmail"
+            element={
+              isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <BookingWalk /> : <Loading />
+            }
+          />
+          <Route
+            path="/confirmar-reserva"
+            element={
+              isAuthenticated && !isLoading ? <CheckoutBooking /> : <Loading />
+            }
+          />
+          <Route
+            path="/calificacionesProvider"
+            element={isAuthenticated && !isLoading ? <Ratings /> : <Loading />}
+          />
+          <Route
+            path="/calificacionesOwner"
+            element={
+              isAuthenticated && !isLoading ? <RatingsOwner /> : <Loading />
+            }
+          />
+          <Route
+            path="/cambiarCalificacion/:id"
+            element={
+              isAuthenticated && !isLoading ? <PutReview /> : <Loading />
+            }
+          />
+          <Route
+            path="/misHorarios"
+            element={
+              isAuthenticated && !isLoading ? <ScheduleProvider /> : <Loading />
+            }
+          />
+          <Route
+            path="/misHorariosHospedaje"
+            element={
+              isAuthenticated && !isLoading ? (
+                <ScheduleProviderLogding />
+              ) : (
+                <Loading />
+              )
+            }
+          />
+          <Route
+            path="/compras-realizadas"
+            element={
+              isAuthenticated && !isLoading ? <PurchasesMade /> : <Loading />
+            }
+          />
 
+          {/* -------------- RUTAS PRIVADAS -------------------- */}
 
-                      {/* -------------- RUTAS PRIVADAS -------------------- */}
-          
           <Route
             path="/admin/dashboard"
             element={
@@ -165,12 +260,9 @@ function App() {
                   <Navigate to="/home" />
                 )
               ) : null
-            } />
+            }
+          />
 
-          
-          
-          
-          
           <Route
             path="/admin/agregar-productos"
             element={
@@ -183,7 +275,6 @@ function App() {
               ) : null
             }
           />
-
 
           <Route
             path="/admin/sales-receipts"
@@ -236,13 +327,7 @@ function App() {
               ) : null
             }
           />
-
-          
-
         </Routes>
-
-
-
       </div>
     </BrowserRouter>
   );

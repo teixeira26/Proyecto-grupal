@@ -186,6 +186,7 @@ export function putEvent(id, modification) {
     }
 };
 
+
 export function selectedEvent(payload){
     return {
         type: 'SELECTED_EVENT',

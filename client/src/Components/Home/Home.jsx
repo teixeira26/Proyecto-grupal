@@ -7,15 +7,45 @@ import HomeCard from "./HomeCard";
 import Footer from "../Footer/Footer";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
 
 const Home = () => {
   const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [userData, setUserData] = useState({});
   const [location, setLocation] = useState({
     latitude: 0,
     longitude: 0
 });
 
+console.log("USUARIO",user)
+
+useEffect(() => {
+  if (user) {
+    axios.get("http://localhost:3001/owners").then((x) => {
+      const userdb = x.data.find((x) => x.email === user.email);
+      console.log('USUARIO ENTRA', userdb)
+      if (userdb) {
+        setUserData({
+          nombre: user.name,
+          picture:
+            userdb.profilePicture && userdb.profilePicture[0]
+              ? userdb.profilePicture[0]
+              : "/assets/img/notloged.png",
+          email: user.email,
+          pets: userdb.pets,
+          address: userdb.address,
+          isAdmin: userdb.isAdmin,
+          isBanned: userdb.isBanned
+        });
+      }
+    });
+  }
+
+  // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
+  //     setProductsFavNumber(x.data)})
+}, [dispatch, user]);
 
 useEffect(()=>{
   navigator.geolocation.getCurrentPosition(
@@ -41,15 +71,15 @@ useEffect(()=>{
         name:user.given_name,
         lastName: user.family_name,
         latitude:location.latitude,
-        longitude:location.longitude
+        longitude:location.longitude,
       }
-      console.log(owner);
+      console.log("TA BANEAU", owner);
       axios.post('http://localhost:3001/owners', owner)
     }
   
   }, [user, location])
 
-
+  console.log(userData, "USERDATA")
 
   return (
     <div className={styles.body}>
@@ -70,7 +100,7 @@ useEffect(()=>{
         <Footer />
       </div>
     </div>
-  );
+  )
 };
 
 export default Home;

@@ -36,6 +36,7 @@ const DropdownMenu = () => {
             email: user.email,
             pets: userdb.pets,
             address: userdb.address,
+            isAdmin: userdb.isAdmin
           });
         }
       });
@@ -87,7 +88,8 @@ const DropdownMenu = () => {
         <ul>
           <li className="li-flex">
             <img src="../assets/img/person-outline.svg" alt="" className="person-outline"/>
-            <NavLink to="/mi-perfil">Perfil</NavLink>
+            <NavLink to="/mi-perfil">Perfil</NavLink> 
+            
           </li>
           {/* <li>
             <a href="">Editar Perfil</a>
