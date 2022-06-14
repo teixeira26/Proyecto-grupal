@@ -7,12 +7,12 @@ const { mercadopago } = require("../utils/mercadoPago");
 
 const payService = async (req, res) => {
   // const id = req.params.id
-  const service = req.body.service;
+  const {id, eventType, price} = req.body;
   const user = req.body.user;
   //   const date = req.body.response;
 
-  console.log("USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", user);
-  console.log("SERVICIOOOOOOOOOOOOOOOOOOO", service);
+  // console.log("USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", user);
+  // console.log("SERVICIOOOOOOOOOOOOOOOOOOO", service);
   // const product = await Product.findByPk(id)
   //   let items = [];
 
@@ -31,19 +31,19 @@ const payService = async (req, res) => {
     surname: user.family_name,
     // client_id
     // id: body.client_id
-    //   email: user.email
+    email: user.email
   };
   // console.log("PAYEEEEEEEEEEEERR",payer)
 
   let preference = {
     payer_email: "test_user_41002316@testuser.com",
-    items: {
-      title: service.eventType,
-      id: service.id,
+    items: [{
+      title: eventType,
+      id: id,
       quantity: 1,
-      unit_price: 400,
+      unit_price: price,
       currency_id: "ARS",
-    },
+    }],
     payer: payer,
     back_urls: {
       failure: "/failure",

@@ -46,13 +46,6 @@ export default function BookingLodging() {
         
     }, [providerEmail])
 
-    // useEffect(()=>{
-    //     dispatch(getProviderById(providerEmail))
-    // }, [dispatch])
-    // const provider = useSelector(state => state.providers)
-    // console.log("PRECIO",provider.price)
-    // console.log("PROVIDER", provider)
-
 
     const formik = useFormik({
         initialValues: {

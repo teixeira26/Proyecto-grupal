@@ -1,15 +1,14 @@
 import React, { useEffect, useCallback } from "react";
-import { useSelector } from "react-redux";
-import { fetchCToken } from "./fetchmetod.js";
+import { fetchCTokenProvider } from "../MercadoPago/fetchmetodProvider";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const FORM_ID = "payment-form";
 
-export default function MercadoPago({ cart }) {
+export default function MercadoPagoProviders ({id,eventType, price}) {
   const {user } = useAuth0();
 
   const getPreference = useCallback(async () => {
-    const res = await fetchCToken(`events/checkout/`, { cart, user: user }, "POST");
+    const res = await fetchCTokenProvider(`events/checkout/`, {id, eventType, price,  user: user }, "POST");
    
     console.log('res MP', res);
 

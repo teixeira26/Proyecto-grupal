@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getPets } from "../../redux/actions/ownProvActions";
+import MercadoPagoProviders from "./MercadoPago/MercadoPagoProviders";
 
 export default function CheckoutBooking() {
   const [eventsOwner, setEventsOwner] = useState();
@@ -49,11 +50,13 @@ export default function CheckoutBooking() {
     <>
       <NavBar />
       <div className={inContainer.container}>
-        <h2>Checkout Page</h2>
         <section>
-          <h2>Mis reservas</h2>
+          <h2>RESERVAS AGENDADAS</h2>
+          <h3>Pago pendiente</h3>
+            <br />
           {eventsOwner && eventsOwner.length
             ? eventsOwner.map((x) => {
+                console.log(x)
                 return (
                   <div>
                     <h5>Día del evento: {x.date.day}</h5>
@@ -62,25 +65,9 @@ export default function CheckoutBooking() {
                     <p>{x.date.hour}</p>
                     <p>{x.eventType}</p>
                     <p>Mascota: {x.petName}</p>
-                  </div>
-                );
-              })
-            : null}
-          {isProvider && (
-            <div>
-              <h2>mis servicios acordados</h2>
-            </div>
-          )}
-          {isProvider && eventsProvider
-            ? eventsProvider.map((x) => {
-                return (
-                  <div>
-                    <h5>Día del evento: {x.date.day}</h5>
-                    <h4>Fecha del evento: {x.date.realDate}</h4>
-                    <p>Nombre del cliente: {x.ownerName}</p>
-                    <p>{x.date.hour}</p>
-                    <p>{x.eventType}</p>
-                    <p>Pet del cliente: {x.petName}</p>
+                    <MercadoPagoProviders id={x.id}
+                                          eventType={x.eventType}
+                                          price={x.price}/>
                   </div>
                 );
               })

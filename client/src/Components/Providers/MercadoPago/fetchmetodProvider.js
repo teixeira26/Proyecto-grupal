@@ -1,4 +1,4 @@
-export const fetchCToken = async (endpoint, data ) =>{
+export const fetchCTokenProvider = async (endpoint, data ) =>{
     const url=`http://localhost:3001/${endpoint}`;
     const token = localStorage.getItem('token') || '';
     console.log('token', token)
