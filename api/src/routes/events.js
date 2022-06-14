@@ -191,7 +191,7 @@ router.post("/", async (req, res, next) => {
         res.status(400).send("Este horario no esta disponible.");
       }
     } else if (typeOfService === "hospedaje") {
-      if (providerInfo.dataValues.schedule[date.day]) {
+      if (providerInfo.dataValues.schedule.includes(date.day)) {
         let event = await Event.findAll({
           where: {
             providerEmail,
@@ -342,11 +342,13 @@ router.post("/", async (req, res, next) => {
                 }
                 res.status(201).send('La reserva ha sido creada con exito');
             } else {
+                console.log('se ejecutó el else')
                 res.status(400).send('Este horario no esta disponible.');
             }
         }
         res.status(201).send("La reserva ha sido creada con exito");
       } else {
+        console.log('se ejecuto el otro else')
         res.status(400).send("Este horario no esta disponible.");
       }
     }
