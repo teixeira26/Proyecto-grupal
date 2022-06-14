@@ -1,15 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { getProducts, sortByPrice, filterByCategory, filterTargetAnimal } from "../../redux/actions/petshopActions";
+import {
+  getProducts,
+  sortByPrice,
+  filterByCategory,
+  filterTargetAnimal,
+  searchBarProducts
+} from "../../redux/actions/petshopActions";
 import styles from "./ShopFilters.module.css";
-import { useState } from "react";
 
 const ShopFilters = () => {
   let dispatch = useDispatch();
 
+  const [inputSearchBar, setInputSearchBar] = useState('');
   let [select, setSelect] = useState([]);
   let [petValue, setPetValue] = useState('todos');
   let [priceValue, setPriceValue] = useState('precio');
+  let [checkedOne, setCheckedOne] = useState(false);
+  let [checkedTwo, setCheckedTwo] = useState(false);
+  let [checkedThree, setCheckedThree] = useState(false);
+
+  // Hook search bar
+  useEffect(() => {
+    dispatch(searchBarProducts(inputSearchBar))
+  }, [dispatch, inputSearchBar]);
+
+  ///////////////////////////////////////////////
+  // Handles search bar
+  ///////////////////////////////////////////////
+  function onInputChangeSearchbar(e) {
+    e.preventDefault();
+    setInputSearchBar(e.target.value)
+  };
+  ///////////////////////////////////////////////
 
   function handleFilterTargetAnimal(e) {
     console.log(e.target.value);
@@ -26,26 +49,88 @@ const ShopFilters = () => {
   function handleRemove(e) {
     e.preventDefault();
     dispatch(getProducts());
+    setInputSearchBar('');
     setPetValue('todos');
     setPriceValue('precio');
-    dispatch(filterByCategory([]));
+    setSelect([]);
+    setCheckedOne(false);
+    setCheckedTwo(false);
+    setCheckedThree(false);
   };
 
-  function checkCategory(e) {
+  function checkCategoryOne(e) {
     let selection = e.target.value;
-    let alredy = select.includes(selection);
-    console.log("alredy", alredy);
-    if (!alredy) setSelect(select = [...select, e.target.value]);
-    if (alredy) {
+    let already = select.includes(selection);
+    console.log("already", already);
+
+    if (!already) {
+      setSelect(select = [...select, e.target.value]);
+      console.log('select:::', select)
+      setCheckedOne(!already);
+    }
+    if (already) {
       let aux = select.filter((el) => el !== selection);
-      setSelect(select = aux)
+      setSelect(select = aux);
+      console.log('aux:::', aux)
+      setCheckedOne(already);
     }
     dispatch(filterByCategory(select));
   }
 
+  function checkCategoryTwo(e) {
+    let selection = e.target.value;
+    let already = select.includes(selection);
+    console.log("already", already);
+
+    if (!already) {
+      setSelect(select = [...select, e.target.value]);
+      console.log('select:::', select)
+      setCheckedTwo(!already);
+    }
+    if (already) {
+      let aux = select.filter((el) => el !== selection);
+      setSelect(select = aux);
+      console.log('aux:::', aux)
+      setCheckedTwo(already);
+    }
+    dispatch(filterByCategory(select));
+  }
+
+  function checkCategoryThree(e) {
+    let selection = e.target.value;
+    let already = select.includes(selection);
+    console.log("already", already);
+
+    if (!already) {
+      setSelect(select = [...select, e.target.value]);
+      console.log('select:::', select)
+      setCheckedThree(!already);
+    }
+    if (already) {
+      let aux = select.filter((el) => el !== selection);
+      setSelect(select = aux);
+      console.log('aux:::', aux)
+      setCheckedThree(already);
+    }
+    dispatch(filterByCategory(select));
+  }
 
   return (
     <div className={styles.container}>
+
+      {/* Bloque seach bar*/}
+      <div className={styles.container}>
+        <section className={styles.selects} >
+          <p className={styles.filterTitle}>Buscar producto</p>
+          <input
+            type="text"
+            value={inputSearchBar}
+            placeholder="Ingresa tu búsqueda..."
+            className={styles.search}
+            onChange={onInputChangeSearchbar}
+          />
+        </section>
+      </div>
 
       <br />
       <section className={styles.selects}>
@@ -62,14 +147,14 @@ const ShopFilters = () => {
         </select>
       </section>
 
-
       <section className={styles.selects}>
         <div className={styles.checkbox}>
           <input
             type="checkbox"
             value="alimento"
-            onChange={checkCategory}
+            onChange={checkCategoryOne}
             className={styles.inputCheck}
+            checked={checkedOne}
           />
           <span className={styles.checkTitle}>Alimento</span>
         </div>
@@ -77,8 +162,9 @@ const ShopFilters = () => {
           <input
             type="checkbox"
             value="accesorios"
-            onChange={checkCategory}
+            onChange={checkCategoryTwo}
             className={styles.inputCheck}
+            checked={checkedTwo}
           />
           <span className={styles.checkTitle}>Accesorios</span>
         </div>
@@ -86,8 +172,9 @@ const ShopFilters = () => {
           <input
             type="checkbox"
             value="salud y bienestar"
-            onChange={checkCategory}
+            onChange={checkCategoryThree}
             className={styles.inputCheck}
+            checked={checkedThree}
           />
           <span className={styles.checkTitle}>Salud y bienestar</span>
         </div>
