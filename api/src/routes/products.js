@@ -14,7 +14,7 @@ const payProduct = async (req, res) => {
   const cart = req.body.cart;
   const user = req.body.user;
   const date = req.body.response;
-  console.log("USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", user);
+  // console.log("USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", user);
 
   console.log("CARRITOOOOOOOOOOOOOO", cart);
   // const product = await Product.findByPk(id)
