@@ -36,7 +36,7 @@ import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Profile from "./Views/Profile/Profile.jsx";
 import About from "./Views/Profile/About/About.jsx";
-import Contact from "./Views/Profile/Contact";
+import Contact from "./Views/Profile/Contact/Contact.jsx";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
 import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
 import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
