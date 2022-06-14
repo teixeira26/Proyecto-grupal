@@ -38,14 +38,19 @@ const Shop = () => {
     dispatch(chargeCart(user.email));
   }, [dispatch, user.email]);
 
-  const [currentPage, setCurrentPage] = useState(1);
-    const [productsPerPage, setproductsPerPage] = useState(9);
-    const indexOfLastProduct = currentPage * productsPerPage;
-    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-    const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
-    const paginated = (pageNumber) => {
-        setCurrentPage(pageNumber)
-    }
+  useEffect(() => {
+    setCurrentPage(1);
+}, [products]);
+
+const [currentPage, setCurrentPage] = useState(1);
+const initialStateProductsPerPage = 9;
+const [productsPerPage, setProductsPerPage] = useState(initialStateProductsPerPage);
+const indexOfLastProduct = currentPage * productsPerPage;
+const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
+const paginated = (pageNumber) => {
+    setCurrentPage(pageNumber);
+};
 
   return (
     <div className={styles.container}>
@@ -66,9 +71,9 @@ const Shop = () => {
           </div>
           <br />
           <section className={styles.shopGrid}>
-            {!products.length
+            {!currentProducts.length
               ? <NoResults />
-              : products.map((p) => {
+              : currentProducts.map((p) => {
                 console.log(p)
                 return p.stock > 0 && p.isActive ? (
                   <ProductCard
@@ -85,7 +90,7 @@ const Shop = () => {
               })}
           </section>
         </div>
-        <Paginated elementsPerPage={productsPerPage} elements={products.length} paginated={paginated} />
+        <Paginated itemsPerPage={productsPerPage} items={products.length} paginated={paginated} currentPage={currentPage}/>
       </div>
       <Footer />
     </div>

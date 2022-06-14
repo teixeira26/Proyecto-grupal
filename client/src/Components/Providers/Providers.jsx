@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from 'react-router-dom';
 import { filterByProviderService, getProviders, sortByProviderPrice } from "../../redux/actions/ownProvActions";
@@ -13,6 +13,7 @@ import NoResults from '../../Views/Profile/NoResultsProviders';
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Providers() {
+
     const dispatch = useDispatch();
     const [reviews, setReviews] = useState([]);
     const [valueService, setValueService] = useState('servicio');
@@ -26,13 +27,18 @@ export default function Providers() {
 
     const providers = useSelector(state => state.filteredProviders);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [providers])
+
     const [currentPage, setCurrentPage] = useState(1);
-    const [providersPerPage, setprovidersPerPage] = useState(9);
+    const initialStateProvidersPerPage = 9;
+    const [providersPerPage, setProvidersPerPage] = useState(initialStateProvidersPerPage);
     const indexOfLastProvider = currentPage * providersPerPage;
     const indexOfFirstProvider = indexOfLastProvider - providersPerPage;
-    const currentProviders = providers.slice(indexOfFirstProvider, indexOfLastProvider);
+    const currentProviders = providers?.slice(indexOfFirstProvider, indexOfLastProvider);
     const paginated = (pageNumber) => {
-        setCurrentPage(pageNumber)
+        setCurrentPage(pageNumber);
     };
 
     function handleFilterService(e) {
@@ -95,8 +101,8 @@ export default function Providers() {
                         <button onClick={handleRemove}>Limpiar filtros</button>
                     </div>
                     <div className={styles.providersGrid}>
-                        {!providers.length ? <NoResults /> :
-                            providers.map((p, g) => {
+                        {!currentProviders.length ? <NoResults /> :
+                            currentProviders.map((p, g) => {
                                 let stars = 5
                                 let providerEvaluations = reviews.filter(x => x.provider.email === p.email);
                                 providerEvaluations = providerEvaluations.map(x => x.review)
@@ -115,7 +121,7 @@ export default function Providers() {
                             })}
                     </div>
                 </div>
-                <Paginated elementsPerPage={providersPerPage} elements={providers.length} paginated={paginated} />
+                <Paginated itemsPerPage={providersPerPage} items={providers.length} paginated={paginated} currentPage={currentPage} />
             </section>
             <Footer />
         </div>

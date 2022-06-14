@@ -8,15 +8,7 @@ import Swal from "sweetalert2";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const ProductDetailCard = ({
-  profilePicture,
-  name,
-  price,
-  category,
-  stock,
-  description,
-  id,
-}) => {
+const ProductDetailCard = ({ profilePicture, name, price, category, stock, description, id }) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const { user } = useAuth0();
@@ -86,15 +78,12 @@ const ProductDetailCard = ({
     <div>
       <div className={styles.detailFlex}>
         <img src={profilePicture} alt="" className={styles.detailImg} />
-
         <div className={styles.detailRight}>
           <h3 className={styles.detailCategory}>{category}</h3>
           <h1 className={styles.detailTitle}>{name}</h1>
           <p className={styles.detailInfo}>{description}</p>
           <p className={styles.detailPrice}>${price}</p>
-
           <p className={styles.detailQuantity}>Cantidad</p>
-
           <div className={styles.productQuantity}>
             <button className={styles.button} onClick={delItem}>
               -
@@ -108,7 +97,6 @@ const ProductDetailCard = ({
           <p className={styles.cartQuantity}>
             Cantidad en el carrito: {cartItem?.quantity}
           </p>
-
           <div className={styles.detailAddCart}>
             <button className={styles.addButtonCart} onClick={agregaraCarrito}>
               Agregar al carrito
