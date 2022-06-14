@@ -230,11 +230,11 @@ router.post("/", async (req, res, next) => {
         totalAllEvents += 1;
 
         let typeOfService = providerInfo.dataValues.service[0]
-        // console.log(typeOfService)
+        console.log(typeOfService)
         // reviso si incluye el horario que necesito en el dia que quiero el servicio
-        if (typeOfService === 'paseo') {
-            if (providerInfo.dataValues.schedule[date.day].includes(date.hour)) {
-
+        if(typeOfService === 'paseo'){
+         if (providerInfo.dataValues.schedule[date.day].includes(date.hour)) {
+                
                 // guardo el evento asociado con el provider
                 let event = await Event.findAll({
                     where: {
@@ -242,6 +242,7 @@ router.post("/", async (req, res, next) => {
                     }
                 });
                 let allEvents = event.map(x => x.dataValues);
+
                 // filtro todos los eventos que coincidan con el provider, dia y fecha en cuestion
                 allEvents = allEvents.filter(x => x.providerEmail === providerEmail && x.date.day === date.day && x.date.hour === date.hour);
                 let totalAllEvents = allEvents.length;
@@ -268,16 +269,14 @@ router.post("/", async (req, res, next) => {
                 });
                 // actualizo la cantidad de allEvents
                 totalAllEvents += 1;
+
                 // si la cantidad de eventos es igual a la cantidad de mascotas que puede pasear,
                 // descartamos la opcion para reservar en ese horario filtrando el schedule del provider
                 if (totalAllEvents >= providerInfo.dataValues.dogsPerWalk) {
                     filteredSchedule = providerInfo.dataValues.schedule[date.day].filter(x => x !== date.hour)
                     providerUpdated = {
                         ...providerInfo,
-                        schedule: {
-                            ...providerInfo.dataValues.schedule,
-                            [date.day]: filteredSchedule
-                        }
+                        schedule: {...providerInfo.dataValues.schedule, [date.day]: filteredSchedule}
                     }
                     Provider.update(providerUpdated, {
                         where: {
@@ -298,9 +297,10 @@ router.post("/", async (req, res, next) => {
                     }
                 });
                 let allEvents = event.map(x => x.dataValues);
+                
                 // filtro todos los eventos que coincidan con el provider, dia y fecha en cuestion 
                 allEvents = allEvents.filter(x => x.providerEmail === providerEmail && x.date.day === date.day);
-                // console.log(`se ejecuto un evento post con el dia ${date.day}`);
+                console.log(`se ejecuto un evento post con el dia ${date.day}`);
                 let totalAllEvents = allEvents.length;
                 await Event.findOrCreate({
                     where: {
@@ -326,6 +326,7 @@ router.post("/", async (req, res, next) => {
                 });
                 // actualizo la cantidad de allEvents
                 totalAllEvents += 1;
+
                 // si la cantidad de eventos es igual a la cantidad de mascotas que puede pasear,
                 // descartamos la opcion para reservar en ese horario filtrando el schedule del provider
                 if (totalAllEvents >= providerInfo.dataValues.dogsPerWalk) {

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
@@ -42,20 +42,20 @@ export default function Lodging() {
 
     onSubmit: (formData) => {
       Swal.fire({
-        title: '¿Quieres Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
         confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
+        denyButtonText: `Cancelar`,
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           dispatch(putProvider(formData));
           console.log("formData", formData);
-          Swal.fire('Informaciones guardadas!', '', 'success')
+          Swal.fire('¡Tu informacion se guardó correctamente!', '', 'success')
           dispatch(putProvider(formData));
           navigate('/mi-perfil')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('Los cambios no fueron realizados.', '', 'info')
         }
       })
 
@@ -123,7 +123,8 @@ export default function Lodging() {
             />
             <br />
             <br />
-            <Button type="submit">Enviar</Button>
+            <Link to='/mi-perfil'><Button>Cancelar</Button></Link>
+            <Button type="submit">Confirmar</Button>
           </Form>
         </div>
       </Container>

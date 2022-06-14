@@ -5,7 +5,6 @@ import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getProducts, chargeCart, getFavoritesProducts, addTofavorites } from "../../redux/actions/petshopActions";
 import NavBarShop from "../NavBar/NavBarShop";
-import ShopSearchbar from "./ShopSearchbar";
 import ShopFilters from "./ShopFilters";
 import ProductCard from "./ProductCard";
 import Footer from "../Footer/Footer";

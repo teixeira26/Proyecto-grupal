@@ -25,7 +25,7 @@ const DropdownMenu = () => {
       dispatch(chargeCart(user.email));
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
-        console.log('isdjhidjsijjids', userdb)
+        console.log('USUARIO DB', userdb)
         if (userdb) {
           setUserData({
             nombre: user.name,
@@ -36,6 +36,7 @@ const DropdownMenu = () => {
             email: user.email,
             pets: userdb.pets,
             address: userdb.address,
+            isAdmin: userdb.isAdmin
           });
         }
       });
@@ -87,15 +88,11 @@ const DropdownMenu = () => {
         <ul>
           <li className="li-flex">
             <img src="../assets/img/person-outline.svg" alt="" className="person-outline"/>
-            <NavLink to="/mi-perfil">Perfil</NavLink>
-
-            {/* Probar esta alternativa para rutear segun tipo de usuario al perfil de admin o usuario normal */}
-            {/* {
+            {
               userData.isAdmin ?
               <NavLink to="/admin">Perfil</NavLink>
                 : <NavLink to="/mi-perfil">Perfil</NavLink>
-            } */}
-            
+            }
           </li>
           {/* <li>
             <a href="">Editar Perfil</a>

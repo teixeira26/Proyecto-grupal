@@ -72,6 +72,8 @@ export default function InfoOwner() {
               onChange={formik.handleChange}
               error={formik.errors.city}
             ></Form.Input>
+            <label htmlFor="">Seleccioná una foto para tu perfil</label>
+            <br />
             <Widget
               publicKey="269841dc43864e62c49d"
               id="file"
@@ -82,6 +84,8 @@ export default function InfoOwner() {
               }}
               perrito="profilePicture"
             />
+            <br />
+            <br />
             <Link to={`/mi-perfil`}>
               <Button>Cancelar cambios</Button>
             </Link>

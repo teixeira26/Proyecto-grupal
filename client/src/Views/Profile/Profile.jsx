@@ -58,8 +58,6 @@ export default function Profile() {
     dispatch(getPets());
   }
 
-  console.log('USERDATA', userData)
-
   return (
     <main>
       <NavBarShop />
@@ -69,25 +67,25 @@ export default function Profile() {
           <article className={style.profile}>
             <h1 className={style.name}>{user.name}</h1>
             <div>
-              <NavLink to="/mis-datos">
+              <Link to="/mis-datos">
                 <button className={style.data}>Editar perfil</button>
-              </NavLink>
+              </Link>
             </div>
           </article>
           {!isProvider && <div className={style.service}>
-            <NavLink to="/servicio">
+            <Link to="/servicio">
               <button>Ofrecer servicio</button>
-            </NavLink>
+            </Link>
           </div>}
           <div className={style.service}>
-            <NavLink to="/calificacionesOwner">
-              <button>MIS RESEÑAS</button>
-            </NavLink>
+            <Link to="/calificacionesOwner">
+              <button>Reseñas enviadas</button>
+            </Link>
           </div>
           {isProvider && <div className={style.service}>
-            <NavLink to="/calificacionesProvider">
-              <button>RESEÑAS RECIBIDAS</button>
-            </NavLink>
+            <Link to="/calificacionesProvider">
+              <button>Reseñas recibidas</button>
+            </Link>
           </div>}
         </section>
         <section className={style.mainInfoProfile}>
@@ -103,7 +101,7 @@ export default function Profile() {
             </span>{" "}
           </h4>
         </section>
-        
+
         {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
           <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
           <br/>
@@ -116,12 +114,8 @@ export default function Profile() {
           <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
-        
+      
         </section>} */}
-        <NavLink to="/misHorariosHospedaje"> 
-              <button>CAMBIAR HORARIOS</button>
-            </NavLink>  
-
         {providerInfo && providerInfo.schedule && providerInfo.service[0] === 'hospedaje' && <section className={style.mainInfoProfile}>
           <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
           <br />
@@ -134,27 +128,19 @@ export default function Profile() {
           <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
           <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
           <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
-          <NavLink to="/misHorariosHospedaje">
-            <button>Cambiar horarios</button>
-          </NavLink>
+          <Link to="/misHorariosHospedaje">
+            <button>Editar horarios</button>
+          </Link>
         </section>}
         <section>
           <h2 className={style.boxLabel}>Mis mascotas</h2>
           <div className={style.addPet}>
-            <NavLink to="/agregarmascota">
+            <Link to="/agregarmascota">
               <button>Agregar mascota</button>
-            </NavLink>
-            {
-              userData.isAdmin ?
-                <Link to='/admin/dashboard'>
-                  <button>Herramientas de Admin</button>
-                </Link>
-                : null
-            }
+            </Link>
             <Link to='/compras-realizadas'>
               <button>Mis compras</button>
             </Link>
-
           </div>
           <article className={style.petsProfile}>
             {userData.pets && userData.pets.length > 0
@@ -176,7 +162,6 @@ export default function Profile() {
                             confirmButtonText: 'Eliminar',
                             denyButtonText: `Cancelar`,
                           }).then(async (result) => {
-                            /* Read more about isConfirmed, isDenied below */
                             if (result.isConfirmed) {
                               Swal.fire('¡La mascota fue eliminada!', '', 'success')
                               byePet(x.id)
