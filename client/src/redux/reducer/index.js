@@ -41,6 +41,7 @@ const initialState = {
     filteredProviders:[],
     events: [],
     selectedProduct: null,
+    selectedEvent: null,
     solds: [],
     reviews: []
 };
@@ -287,6 +288,11 @@ function rootReducer(state = initialState, action) {
                 selectedProduct: action.payload
             }
 
+            case 'SELECTED_EVENT':
+            return {
+                ...state,
+                selectedEvent: action.payload
+            }
 
         case GET_REVIEWS:
             return {

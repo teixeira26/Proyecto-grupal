@@ -48,7 +48,7 @@ const payService = async (req, res) => {
     back_urls: {
       failure: "/failure",
       pending: "/pending",
-      success: "http://localhost:3000/confirmacion",
+      success: "http://localhost:3000/confirmation",
     },
     notification_url:
       "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
@@ -72,6 +72,21 @@ const payService = async (req, res) => {
     .catch((err) => console.log(err));
 };
 router.post("/checkout", payService);
+
+router.get("/confirmation", async(req,res,next) => {
+  const id = req.body.data.id
+  try {
+    if(id){
+      let res = await axios.get(`https://api.mercadopago.com/v1/payments/${id}?access_token=${ACCESS_TOKEN}`)
+      console.log("RESPUESTA COMPRAAAAAAAAAAA", res);
+      res.send("informacion zarpada loco")
+    }
+    console.log("NO ENTRO")
+    res.send("volver a empezar que no termina el juego")
+  } catch (err) {
+    console.log("ERR", err)
+  }
+})
 
 router.get("/", async (req, res, next) => {
   try {
@@ -281,6 +296,21 @@ router.put("/schedule", async (req, res, next) => {
     return res.json("Horario de trabajo actualizados");
   } catch (error) {
     next(error);
+  }
+});
+
+router.put("/:id", async (req, res, next) => {
+  const id = req.params.id;
+  const event = req.body;
+  try {
+    await Event.update(event, {
+      where: {
+        id: id,
+      },
+    });
+    return res.json("Evento modificado");
+  } catch (err) {
+    next(err);
   }
 });
 

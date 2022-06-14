@@ -57,7 +57,8 @@ export default function CheckoutBooking() {
           {eventsOwner && eventsOwner.length
             ? eventsOwner.map((x) => {
                 console.log(x)
-                return (
+               
+                return x.payment === 'pending' ? (
                   <div>
                     <h5>Día del evento: {x.date.day}</h5>
                     <h4>Fecha del evento: {x.date.realDate}</h4>
@@ -69,8 +70,10 @@ export default function CheckoutBooking() {
                                           eventType={x.eventType}
                                           price={x.price}/>
                   </div>
-                );
-              })
+                ):null
+                
+     
+              }) 
             : null}
         </section>
       </div>

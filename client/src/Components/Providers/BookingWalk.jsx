@@ -5,7 +5,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { FieldArray, useFormik } from "formik";
 // import * as yup from "yup";
 import { getEvents, postEvent, getPets } from "../../redux/actions/ownProvActions";
-import { Form, Button } from "semantic-ui-react";
+import { Form, Button, FormField } from "semantic-ui-react";
 import inContainer from '../GlobalCss/InContainer.module.css';
 import NavBar from "../NavBar/NavBarShop";
 
@@ -35,7 +35,9 @@ export default function BookingWalk() {
         axios.get('http://localhost:3001/providers?filter=&order=ASC').then(info=>{
             let data = info.data.find(x=>x.email === providerEmail);
             formik.values.providerName = data.name + ' ' + data.lastName
+            formik.values.price = data.price
             setSchedule(data.schedule)
+            console.log("PRECIOOOO", formik.values.price)
         })
         
     }, [providerEmail])
@@ -74,6 +76,7 @@ export default function BookingWalk() {
             providerEmail:providerEmail,
             ownerName:user.name,
             providerName: '',
+            price: ''
         },
         validationSchema: yup.object({
             petName: yup.string().required('Debes seleccionar una mascota'),

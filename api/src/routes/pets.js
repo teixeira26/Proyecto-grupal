@@ -52,7 +52,7 @@ router.post('/', async (req, res, next) => {
 
         console.log('nombre', found)
         console.log('nombre', ownerEmail)
-
+        
         await found.addPet(newPet)
         // await newPet.addOwner(1)
         res.status(201).send('Usuario creado con éxito')

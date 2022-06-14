@@ -1,17 +1,27 @@
 import React, { useEffect, useCallback } from "react";
 import { fetchCTokenProvider } from "../MercadoPago/fetchmetodProvider";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useDispatch } from "react-redux";
+import { selectedEvent } from "../../../redux/actions/ownProvActions";
 
 const FORM_ID = "payment-form";
 
 export default function MercadoPagoProviders ({id,eventType, price}) {
   const {user } = useAuth0();
+  const dispatch = useDispatch()
 
+  console.log("ID FUERA PREF", id)
+  localStorage.setItem("id", id)
   const getPreference = useCallback(async () => {
     const res = await fetchCTokenProvider(`events/checkout/`, {id, eventType, price,  user: user }, "POST");
    
     console.log('res MP', res);
-
+    // function submit(id){
+    //   console.log("IDDDDDDDDDDDD",id)
+    //   // dispatch(selectedEvent(id))
+      
+    // }
+    
     if(res.global){
     
       const script = document.createElement("script");
@@ -22,6 +32,8 @@ export default function MercadoPagoProviders ({id,eventType, price}) {
       script.setAttribute("data-preference-id", res.global);
       const form = document.getElementById(FORM_ID);
       form.appendChild(script);
+
+      
       }
     
   }, []);
@@ -30,6 +42,8 @@ export default function MercadoPagoProviders ({id,eventType, price}) {
     getPreference();
   }, [getPreference]);
   
+  
+
   return(
       <form id={FORM_ID} method="GET" />
   )
