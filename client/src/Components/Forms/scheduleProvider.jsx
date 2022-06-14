@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Form, Button } from "semantic-ui-react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { putOwnerInfo } from "../../redux/actions/ownProvActions";
+import { getProviderById, getProviders, putOwnerInfo } from "../../redux/actions/ownProvActions";
 import { useNavigate, useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
@@ -15,8 +15,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 
+
 export default function ScheduleProvider() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { user } = useAuth0();
   const navigate = useNavigate();
   const [startDate, setStartDate] = useState(null);
@@ -24,6 +25,9 @@ export default function ScheduleProvider() {
   const [initialtime, setInitialTime] = useState(null);
   const [time, setTime] = useState([]);
   const [bookingDay, setBookingDays] = useState([]);
+
+  
+  
 
 
   const formik = useFormik({
@@ -34,16 +38,20 @@ export default function ScheduleProvider() {
       jueves:[],
       viernes:[],
       sabado:[],
-      domingo:[]
+      domingo:[],
+
     },
     validationSchema: yup.object({
       // message: yup.string().required('Este es un campo requerido'),
     }),
 
+    
+
     onSubmit: async(formData) => {
       formData = {
         providerEmail:user.email,
-        schedule:{...formData}
+        schedule:{...formData},
+       
       };
       Swal.fire({
         title: 'Estás seguro que querés guardar los cambios?',
