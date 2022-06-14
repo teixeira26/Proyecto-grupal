@@ -16,27 +16,20 @@ import Loader from "../Loading/Loader";
 const ProductDetail = () => {
   const { user } = useAuth0();
   let { id } = useParams();
-
-  let dispatch = useDispatch()
-
-  let product = useSelector(state => state.productDetail)
-
+  let dispatch = useDispatch();
+  let product = useSelector(state => state.productDetail);
 
   useEffect( () => {
     dispatch(getById(id))
     dispatch(getOwners())
   }, [dispatch, id]);
 
-
   useEffect( () => {
       return dispatch(cleanDetail())
   }, [dispatch]);
 
-
-
-  const allUsers = useSelector(state => state.owners)
-  const userDb = allUsers.find(us => us.email === user.email)
-
+  const allUsers = useSelector(state => state.owners);
+  const userDb = allUsers.find(us => us.email === user.email);
 
   return (
     <div className={styles.container}>

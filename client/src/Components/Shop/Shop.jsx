@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from "react";
-import NavBarShop from "../NavBar/NavBarShop";
-import Footer from "../Footer/Footer";
-import styles from "../Shop/Shop.module.css";
-import inContainer from "../GlobalCss/InContainer.module.css";
-import ProductCard from "./ProductCard";
-import {
-  getProducts,
-  chargeCart,
-  getFavoritesProducts,
-  addTofavorites,
-} from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
-import ShopSearchbar from "./ShopSearchbar";
-import ShopFilters from "./ShopFilters";
 import { NavLink } from "react-router-dom";
-
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getProducts, chargeCart, getFavoritesProducts, addTofavorites } from "../../redux/actions/petshopActions";
+import NavBarShop from "../NavBar/NavBarShop";
+import ShopSearchbar from "./ShopSearchbar";
+import ShopFilters from "./ShopFilters";
+import ProductCard from "./ProductCard";
+import Footer from "../Footer/Footer";
+import inContainer from "../GlobalCss/InContainer.module.css";
+import styles from "../Shop/Shop.module.css";
 import NoResults from "../../Views/Profile/NoResultsShop";
+import Paginated from "../Paginated";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
@@ -25,10 +20,13 @@ const Shop = () => {
   const [favorites, setFavorites] = useState([]);
 
   let dispatch = useDispatch();
-  useEffect(()=>{
-    if(favorites){
-    dispatch(addTofavorites(favorites))}
-  }, [favorites])
+
+  useEffect(() => {
+    if (favorites) {
+      dispatch(addTofavorites(favorites))
+    }
+  }, [favorites]);
+
   useEffect(() => {
     axios
       .get(`http://localhost:3001/owners/getFavorites/${user.email}`)
@@ -39,6 +37,15 @@ const Shop = () => {
     dispatch(getProducts());
     dispatch(chargeCart(user.email));
   }, [dispatch, user.email]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+    const [productsPerPage, setproductsPerPage] = useState(9);
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+    const currentProduct = products.slice(indexOfFirstProduct, indexOfLastProduct);
+    const paginated = (pageNumber) => {
+        setCurrentPage(pageNumber)
+    }
 
   return (
     <div className={styles.container}>
@@ -60,24 +67,25 @@ const Shop = () => {
           <br />
           <section className={styles.shopGrid}>
             {!products.length
-              ? <NoResults/>
+              ? <NoResults />
               : products.map((p) => {
                 console.log(p)
-                  return p.stock > 0 && p.isActive ? (
-                    <ProductCard
-                      key={p.id}
-                      id={p.id}
-                      setFavorites={setFavorites}
-                      favorites={favorites}
-                      isFavorite={favorites && favorites.includes(p.id)}
-                      profilePicture={p.profilePicture}
-                      name={p.name}
-                      price={p.price}
-                    />
-                  ) : null;
-                })}
+                return p.stock > 0 && p.isActive ? (
+                  <ProductCard
+                    key={p.id}
+                    id={p.id}
+                    setFavorites={setFavorites}
+                    favorites={favorites}
+                    isFavorite={favorites && favorites.includes(p.id)}
+                    profilePicture={p.profilePicture}
+                    name={p.name}
+                    price={p.price}
+                  />
+                ) : null;
+              })}
           </section>
         </div>
+        <Paginated elementsPerPage={productsPerPage} elements={products.length} paginated={paginated} />
       </div>
       <Footer />
     </div>
