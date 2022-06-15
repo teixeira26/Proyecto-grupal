@@ -48,6 +48,7 @@ export default function ScheduleProviderLogdifalseng() {
   }
 
 const restarFechas = function(f1,f2){
+  console.log(f1, f2)
   var aFecha1 = f1.split('/');
   var aFecha2 = f2.split('/');
   var fFecha1 = Date.UTC(aFecha1[2].slice(0,4),aFecha1[1]-1,aFecha1[0]);

@@ -29,7 +29,7 @@ const ProductDetail = () => {
   }, [dispatch]);
 
   const allUsers = useSelector(state => state.owners);
-  const userDb = allUsers.find(us => us.email === user.email);
+  const userDb = user&&allUsers.length?allUsers.find(us => us.email === user.email):null;
 
   return (
     <div className={styles.container}>

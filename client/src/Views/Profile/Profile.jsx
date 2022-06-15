@@ -20,16 +20,10 @@ export default function Profile() {
   const [providerInfo, setProviderInfo] = useState();
   const [eventsProvider, setEventsProvider] = useState();
   const [eventsOwner, setEventsOwner] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated) {
-      axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
-        const providerCheck = x.data.find((x) => x.email === user.email);
-        if (providerCheck) {
-          setIsProvider(true);
-          setProviderInfo(providerCheck);
-        }
-      })
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
         console.log(userdb);
@@ -53,6 +47,18 @@ export default function Profile() {
       })
     }
   }, [user, isAuthenticated, pets, dispatch]);
+
+
+  useEffect(()=>{
+    if(user){
+    axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+        const providerCheck = x.data.find((x) => x.email === user.email);
+        if (providerCheck) {
+          setIsProvider(true);
+          setProviderInfo(providerCheck);
+        }
+      })}
+  }, [user])
 
   async function byePet(id) {
     await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });
@@ -209,6 +215,17 @@ export default function Profile() {
               </div>)
             })
             : null}
+          {providerInfo && providerInfo.service[0] === 'hospedaje' &&
+          <div>
+            <h2>Mi Dulce hogar</h2>
+            {providerInfo.housingPhotos && providerInfo.housingPhotos.map((x,y)=>{
+              return(
+                <img src={x} key={y} alt={y}></img>
+              )
+            })}
+            <input type='button' value="Agregar Foto" onClick={()=>navigate('/agregar-foto')}/>
+          </div>
+          }
         </section>
       </div>
       <Footer />

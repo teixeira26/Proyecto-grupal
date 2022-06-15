@@ -31,7 +31,6 @@ export default function Lodging() {
       typeOfHousing: "",
       price: "",
       dogsPerWalk: "",
-      housingPhotos: [],
       description: "",
     },
     //   validationSchema:yup.object({
@@ -110,17 +109,6 @@ export default function Lodging() {
               onChange={formik.handleChange}
             //   error={formik.errors.state}
             ></Form.Input>
-            <p>Mostranos fotos del lugar</p>
-            <Widget
-              publicKey="269841dc43864e62c49d"
-              id="file"
-              name="photos"
-              onChange={(e) => {
-                formik.values.photos.push(e.originalUrl);
-                console.log(formik);
-              }}
-              perrito="profilePicture"
-            />
             <br />
             <br />
             <Link to='/mi-perfil'><Button>Cancelar</Button></Link>
