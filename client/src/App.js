@@ -48,6 +48,7 @@ import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
 import PurchasesMade from "./Components/Shop/PurchasesMade";
 import AdminProfile from "./Views/Profile/AdminProfile";
+import AddHousingPhoto from "./Components/Forms/AddHousingPhoto";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -208,7 +209,7 @@ function App() {
             }
           />
           <Route
-            path="/confirmar-reserva"
+            path="/mis-servicios"
             element={
               isAuthenticated && !isLoading ? <CheckoutBooking /> : <Loader />
             }

@@ -45,7 +45,7 @@ export default function ProductsList() {
 console.log(reviews)
 
 
-  function ban() {
+  function ban(useremail) {
     Swal.fire({
       title: '¿Banear al usuario? Esto le impedirá el acceso a la plataforma y a toda la información que en ella se encuentra.',
       showDenyButton: true,
@@ -54,7 +54,7 @@ console.log(reviews)
     }).then(async(result) => {
       if (result.isConfirmed) {
         Swal.fire('Usuario baneado', '', 'success')
-        dispatch(putOwnerInfo(user.email,{isBanned: true}))
+        dispatch(putOwnerInfo(useremail,{isBanned: true}))
         dispatch(getOwners())
       } else if (result.isDenied) {
         Swal.fire('El usuario continúa ACTIVO', '', 'info')
@@ -63,7 +63,7 @@ console.log(reviews)
 
   }
 
-  function unBan() {
+  function unBan(useremail) {
     Swal.fire({
       title: '¿Habilitar usuario? Esto le dará acceso a la plataforma y a toda la información que en ella se encuentra.',
       showDenyButton: true,
@@ -72,7 +72,7 @@ console.log(reviews)
     }).then(async(result) => {
       if (result.isConfirmed) {
         Swal.fire('Usuario habiliado', '', 'success')
-        dispatch(putOwnerInfo(user.email,{isBanned: false}))
+        dispatch(putOwnerInfo(useremail,{isBanned: false}))
         dispatch(getOwners())
       } else if (result.isDenied) {
         Swal.fire('El usuario continúa baneado', '', 'info')
@@ -118,8 +118,8 @@ console.log(reviews)
       renderCell: (cellValues) => {
         console.log('cellValues',cellValues)
         return cellValues.row.ban === 'BANEADO'?  
-         <Button onClick={unBan}>HABILITAR</Button> :
-         <Button onClick={ban}>BANEAR</Button>;
+         <Button onClick={()=>unBan(cellValues.row.email)}>HABILITAR</Button> :
+         <Button onClick={()=>ban(cellValues.row.email)}>BANEAR</Button>;
       },
     },
   ];

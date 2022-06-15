@@ -5,35 +5,76 @@ const { ACCESS_TOKEN } = process.env;
 
 const { mercadopago } = require("../utils/mercadoPago");
 
+
+
+
+// const payServiceSubscription = async (req, res) => {
+//   const {id, eventType, price} = req.body;
+//   const user = req.body.user;
+//   let neto = price*4
+//   let payer = {
+//     name: user.given_name,
+//     surname: user.family_name,
+//     email: user.email
+//   };
+
+//   let preference = {
+//  payer_email: "test_user_41002316@testuser.com",
+//  reason: eventType,
+//  auto_recurring: {
+//    frequency: 1,
+//    frequency_type: "months",
+//    transaction_amount: neto,
+//    currency_id: "ARS"
+//  },
+//     // payer: payer,
+//     back_urls: {
+//       failure: "/failure",
+//       pending: "/pending",
+//       success: "http://localhost:3000/confirmation",
+//     },
+// notification_url:
+//       "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
+//     auto_return: "approved",
+//   };
+//   mercadopago.preferences
+//     .create(preference)
+//     .then((response) => {
+//       console.log("RESPONSEEEEEEEEEEEEEEEE", response);
+//       res.set("Access-Control-Allow-Origin", "*");
+//       res.set("Access-Control-Allow-Methods", "POST");
+//       res.set("Access-Control-Allow-Headers", "Content-Type");
+//       res.set("Access-Control-Max-Age", "3600");
+//       res.set("Access-Control-Allow-Credentials", true);
+//       console.log("URL: ", response.body.init_point);
+//       res.json({
+//         global: response.body.id,
+
+//       });
+//     })
+//     .catch((err) => console.log(err));
+// };
+// router.post("/checkout", payServiceSubscription);
+
+
+
+
+
+
+
+
+
+
+
 const payService = async (req, res) => {
-  // const id = req.params.id
   const {id, eventType, price} = req.body;
   const user = req.body.user;
-  //   const date = req.body.response;
-
-  // console.log("USUARIOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO", user);
-  // console.log("SERVICIOOOOOOOOOOOOOOOOOOO", service);
-  // const product = await Product.findByPk(id)
-  //   let items = [];
-
-  //   cart.forEach((i) =>
-  //     items.push({
-  //       service: i.name,
-  //       id: i.id,
-  //       quantity: i.quantity,
-  //       unit_price: i.price,
-  //       currency_id: "ARS",
-  //     })
-  //   );
 
   let payer = {
     name: user.given_name,
     surname: user.family_name,
-    // client_id
-    // id: body.client_id
     email: user.email
   };
-  // console.log("PAYEEEEEEEEEEEERR",payer)
 
   let preference = {
     payer_email: "test_user_41002316@testuser.com",
@@ -66,12 +107,13 @@ const payService = async (req, res) => {
       console.log("URL: ", response.body.init_point);
       res.json({
         global: response.body.id,
-        // response
+
       });
     })
     .catch((err) => console.log(err));
 };
 router.post("/checkout", payService);
+
 
 router.get("/confirmation", async(req,res,next) => {
   const id = req.body.data.id
@@ -88,6 +130,20 @@ router.get("/confirmation", async(req,res,next) => {
   }
 })
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 router.get("/", async (req, res, next) => {
   try {
     let allEvents = await Event.findAll({
@@ -101,6 +157,12 @@ router.get("/", async (req, res, next) => {
   }
 });
 
+
+
+
+
+
+
 router.post("/", async (req, res, next) => {
   const {
     date,
@@ -112,7 +174,8 @@ router.post("/", async (req, res, next) => {
     petName,
     ownerName,
     providerName,
-    price
+    price,
+    numberOfBooking
   } = req.body;
 
   try {
@@ -161,7 +224,8 @@ router.post("/", async (req, res, next) => {
             petName,
             ownerName,
             providerName,
-            price
+            price,
+            numberOfBooking
           },
         });
         // actualizo la cantidad de allEvents
@@ -223,7 +287,8 @@ router.post("/", async (req, res, next) => {
             petName,
             ownerName,
             providerName,
-            price
+            price,
+            numberOfBooking
           },
         });
         // actualizo la cantidad de allEvents
@@ -263,7 +328,8 @@ router.post("/", async (req, res, next) => {
                         petName,
                         ownerName,
                         providerName,
-                        price
+                        price,
+                        numberOfBooking
                         
                     }
                 });
@@ -320,7 +386,8 @@ router.post("/", async (req, res, next) => {
                         petName,
                         ownerName,
                         providerName,
-                        price
+                        price,
+                        numberOfBooking
                         
                     }
                 });

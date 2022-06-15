@@ -21,8 +21,9 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(chargeCart(user.email));
-  }, [dispatch, user.email]);
+   dispatch(chargeCart('cart'));
+ 
+  }, [dispatch, user]);
 
   const addItem = () => {
     console.log(cartItem);
@@ -66,7 +67,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
       dispatch({
         type: TYPES.ADD_TO_CART,
         payload: id,
-        email: user.email,
+        email: 'cart',
         quantity: count,
       });
     } else {
@@ -85,20 +86,22 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
           <p className={styles.detailPrice}>${price}</p>
           <p className={styles.detailQuantity}>Cantidad</p>
           <div className={styles.productQuantity}>
-            <button className={styles.button} onClick={delItem}>
+            <span className={styles.button} onClick={delItem}>
               -
-            </button>
+            </span>
             <div className={styles.count}>{count}</div>
-            <button className={styles.button} onClick={addItem}>
+            <span className={styles.button} onClick={addItem}>
               +
-            </button>
+            </span>
           </div>
-          <p className={styles.stock}>Stock disponible: {stock}</p>
+          
           
           <div className={styles.detailAddCart}>
+          
           <p className={styles.cartQuantity}>
             Unidades en el carrito: {cartItem?.quantity}
           </p>
+          <p className={styles.stock}>Stock disponible: {stock}</p>
             <button className="primaryButton" onClick={agregaraCarrito}>
               Agregar al carrito
             </button>

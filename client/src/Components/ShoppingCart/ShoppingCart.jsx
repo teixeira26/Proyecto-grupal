@@ -6,10 +6,11 @@ import Footer from "../Footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { chargeCart, clearAllCart } from "../../redux/actions/petshopActions";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import MercadoPago from "../Shop/MercadoPago/MercadoPago";
 import styles from "../ShoppingCart/ShoppingCart.module.css";
 import InContainer from "../GlobalCss/InContainer.module.css";
+import Swal from "sweetalert2";
 
 const ShoppingCart = () => {
   const dispatch = useDispatch();
@@ -17,10 +18,11 @@ const ShoppingCart = () => {
   const cart = useSelector((state) => state.cart);
   console.log("CARRITO: ", cart);
   const [total, setTotal] = useState(0);
+  const navigate = useNavigate()
 
   useEffect(() => {
     if (user) {
-      dispatch(chargeCart(user.email));
+      dispatch(chargeCart("cart"));
     }
   }, [user, dispatch]);
 
@@ -38,7 +40,7 @@ const ShoppingCart = () => {
   }, [cart]);
 
   const clearCart = () => {
-    dispatch(clearAllCart(user.email));
+    dispatch(clearAllCart('cart'));
     setTotal(0);
   };
 
@@ -46,7 +48,7 @@ const ShoppingCart = () => {
     <div>
       <NavBarShop />
       <div className={InContainer.container}>
-        <NavLink to="/shop">
+        <NavLink to={user?"/shop":'/'}>
           <img src="./assets/img/arrow-left.svg" alt="" />
         </NavLink>
 
@@ -59,7 +61,7 @@ const ShoppingCart = () => {
             <thead>
               <tr className={styles.tr}>
                 <th className={styles.th}>
-                  <p>Imagen</p>
+                  <p className={styles.imagen}>Imagen</p>
                 </th>
                 <th className={styles.th}>
                   <p className={styles.product}>Producto</p>
@@ -100,14 +102,17 @@ const ShoppingCart = () => {
         <div className={styles.cartBottom}>
           <div>
             <div className={styles.totalFlex}>
-              <h3>Total: ${total}</h3>
+              <h3 className={styles.total}>Total: <span className={styles.totalNum}>${total}</span> </h3>
             </div>
 
             <div className={styles.purchase}>
               {cart && cart.length > 0 ? (
-                <Link to="/purchaseConfirmation">
-                  <button className="primaryButton">Continuar al pago</button>
-                </Link>
+               
+                  <button className="primaryButton" onClick={()=>{
+                    if(user&&user.email)navigate('/purchaseConfirmation')
+                    else(Swal.fire('Debés ingresar a la página para efectuar una compra'))
+                  }}>Continuar al pago</button>
+         
               ) : (
                 <div></div>
               )}

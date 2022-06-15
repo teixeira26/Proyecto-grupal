@@ -35,7 +35,7 @@ export default function DetailProvider() {
                                 email={email}
                                 name={p.name}
                                 lastName={p.lastName}
-                                profilePicture={p.profilePicture}
+                                profilePicture={p.profilePicture&&p.profilePicture.length?p.profilePicture: "/assets/img/notloged.png"}
                                 address={p.address}
                                 city={p.city}
                                 state={p.state}

@@ -20,14 +20,14 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
   const cartItem = cart.find((x) => x.id === id);
 
   const delFromCart = (id) => {
-    dispatch(removeFromCart(id, user.email));
+    dispatch(removeFromCart(id, 'cart'));
   };
   const addItem = () => {
     if(cartItem.stock > cartItem.quantity)
     {dispatch({
       type: ADD_ITEM,
       payload: id,
-      email: user.email,
+      email: 'cart',
       stock: stock,
     });}
     else Swal.fire(`La cantidad deseada excede al limite en stock`);
@@ -37,7 +37,7 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
     dispatch({
       type: DELETE_ITEM,
       payload: id,
-      email: user.email,
+      email: 'cart',
     });
   };
 
@@ -74,15 +74,15 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
               <th className={styles.th}>
                 <div className={styles.centerButton}>
                   <div className={styles.addOneItem}>
-                    <button className={styles.button} onClick={delItem}>
+                    <span className={styles.button} onClick={delItem}>
                       -
-                    </button>
+                    </span>
 
                     <div className={styles.count}>{quantity}</div>
 
-                    <button className={styles.button} onClick={addItem}>
+                    <span className={styles.button} onClick={addItem}>
                       +
-                    </button>
+                    </span>
                   </div>
                 </div>
               </th>

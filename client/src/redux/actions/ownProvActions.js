@@ -195,3 +195,8 @@ export function selectedEvent(payload){
 }
 
 
+export function groupEvents(){
+    return{
+        type: 'GROUP_EVENTS'
+    }
+}

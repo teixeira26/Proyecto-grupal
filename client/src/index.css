@@ -87,6 +87,10 @@ ion-icon{
   --margin64: 64px;
 }
 
+button{
+  border: none;
+}
+
 .primaryButton{
   width: auto;
   padding: 16px;
@@ -98,6 +102,7 @@ ion-icon{
   font-weight: 600;
   transition: ease-in-out 200ms;
   background-color: var(--shadowColor);
+  margin: 0;
 }
 .primaryButton:hover{
   background-color: var(--tintColor);
@@ -121,5 +126,10 @@ ion-icon{
 .secondaryButton:hover{
   background-color: var(--tintColor);
   color: var(--shadowColor);
+  border-color: var(--tintColor);
+}
+
+.buttonNoBorde{
+  border: none;
 }
 

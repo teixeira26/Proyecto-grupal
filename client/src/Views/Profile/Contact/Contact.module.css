@@ -12,3 +12,7 @@ h1{
 .buttonFlex{
     display: flex;
 }
+
+.margin{
+    margin-right: 16px;
+}

@@ -5,6 +5,7 @@ import styles from "../Shop/ProductCard.module.css";
 import { Link } from "react-router-dom";
 import { addTofavorites } from "../../redux/actions/petshopActions";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const ProductCard = ({
   profilePicture,
@@ -44,9 +45,15 @@ const ProductCard = ({
         setFavorites(favorites.filter((x) => x !== id));
         console.log(objToPut)
         await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
+<<<<<<< HEAD
       }
     }
     else { alert('Loggeate para agregar cosas a fovoritos man') }
+=======
+      }}
+      else{ 
+        Swal.fire('Debés registrarte a la página para agregar productos a favoritos')}
+>>>>>>> 3d57615c7470ffcc38dfb43636887c9d8b34e506
   };
 
   return (

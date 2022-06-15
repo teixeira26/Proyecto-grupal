@@ -7,16 +7,19 @@ import axios from "axios";
 import { Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
 import CircleMarker from "../Map/CircleMarker";
 
-export default function DetailProviderCard({ name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule }) {
-    console.log(latitude, longitude);
-    const { user } = useAuth0();
-    const [stars, setStars] = useState(0);
-    const [quantityReviews, setquantityReviews] = useState(0);
-    const [reviews, setReviews] = useState();
-
-    useEffect(() => {
-        axios.get('http://localhost:3001/reviews').then(x => {
-            let providerEvaluations = x.data.filter(x => x.provider.email === email);
+export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule}) {
+    // console.log(email)
+    // console.log(city)
+    // console.log(state)
+    console.log(latitude, longitude)
+    const {user} = useAuth0()
+    const [stars, setStars] = useState(0)
+    const [quantityReviews, setquantityReviews] = useState(0)
+    const [reviews, setReviews] = useState()
+    const [providerInfo, setProviderInfo] = useState()
+    useEffect(()=>{
+        axios.get('http://localhost:3001/reviews').then(x=>{
+            let providerEvaluations = x.data.filter(x=>x.provider.email === email);
             setReviews(providerEvaluations);
             console.log(providerEvaluations)
             providerEvaluations = providerEvaluations.map(x => x.review)
@@ -25,9 +28,17 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
             setStars(providerEvaluations / numberEvaluations);
             if (providerEvaluations) setquantityReviews(numberEvaluations)
         })
-    }, []);
+    },[])
 
-    return (
+    useEffect(()=>{
+        if(user){
+        axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+            const providerCheck = x.data.find((x) => x.email === email);
+            console.log(providerCheck)
+            setProviderInfo(providerCheck);
+            })
+    }}, [user])
+    return(
         <>
             <section className={inContainer.container}>
                 <div className={style.topinfo}>
@@ -51,6 +62,16 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                     <p>{description}</p>
                     <span>Costo por {service}: <strong>${price}</strong></span>
                 </div>
+                {providerInfo && providerInfo.service[0] === 'hospedaje' &&
+                    <div>
+                        <h2>Mi hogar</h2>
+                        {providerInfo.housingPhotos && providerInfo.housingPhotos.map((x,y)=>{
+                            return(
+                                <img src={x} key={y} alt={y}></img>
+                            )
+                        })}
+                    </div>
+                }
                 <div>
                     <h3>Disponibilidad de {name}</h3>
                     {Object.keys(schedule).map((key) => {
