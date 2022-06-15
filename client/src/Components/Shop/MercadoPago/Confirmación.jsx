@@ -29,11 +29,11 @@ const Confirmación = () => {
   const idCliente = localStorage.getItem("IdCliente");
 
   useEffect(() => {
-    dispatch(chargeCart(user.email));
+    dispatch(chargeCart("cart"));
   }, [dispatch]);
 
   const clearCart = () => {
-    dispatch(clearAllCart(user.email));
+    dispatch(clearAllCart("cart"));
   };
 
   let neto = () => {
