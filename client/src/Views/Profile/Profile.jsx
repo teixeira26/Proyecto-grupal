@@ -225,11 +225,12 @@ export default function Profile() {
               </Link>
             </article>
           </section>
+          <Link to="/compras-realizadas">
+          <button className="secondaryButton">Mis compras</button>
+        </Link>
         </div>
 
-        <Link to="/compras-realizadas">
-          <button>Mis compras</button>
-        </Link>
+        
         <section>
           {<button onClick={myServices}>Servicios contratados</button>}
 
