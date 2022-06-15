@@ -8,10 +8,68 @@ const { mercadopago } = require("../utils/mercadoPago");
 
 
 
-const payServiceSubscription = async (req, res) => {
+// const payServiceSubscription = async (req, res) => {
+//   const {id, eventType, price} = req.body;
+//   const user = req.body.user;
+//   let neto = price*4
+//   let payer = {
+//     name: user.given_name,
+//     surname: user.family_name,
+//     email: user.email
+//   };
+
+//   let preference = {
+//  payer_email: "test_user_41002316@testuser.com",
+//  reason: eventType,
+//  auto_recurring: {
+//    frequency: 1,
+//    frequency_type: "months",
+//    transaction_amount: neto,
+//    currency_id: "ARS"
+//  },
+//     // payer: payer,
+//     back_urls: {
+//       failure: "/failure",
+//       pending: "/pending",
+//       success: "http://localhost:3000/confirmation",
+//     },
+// notification_url:
+//       "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
+//     auto_return: "approved",
+//   };
+//   mercadopago.preferences
+//     .create(preference)
+//     .then((response) => {
+//       console.log("RESPONSEEEEEEEEEEEEEEEE", response);
+//       res.set("Access-Control-Allow-Origin", "*");
+//       res.set("Access-Control-Allow-Methods", "POST");
+//       res.set("Access-Control-Allow-Headers", "Content-Type");
+//       res.set("Access-Control-Max-Age", "3600");
+//       res.set("Access-Control-Allow-Credentials", true);
+//       console.log("URL: ", response.body.init_point);
+//       res.json({
+//         global: response.body.id,
+
+//       });
+//     })
+//     .catch((err) => console.log(err));
+// };
+// router.post("/checkout", payServiceSubscription);
+
+
+
+
+
+
+
+
+
+
+
+const payService = async (req, res) => {
   const {id, eventType, price} = req.body;
   const user = req.body.user;
-  let neto = price*4
+
   let payer = {
     name: user.given_name,
     surname: user.family_name,
@@ -19,16 +77,20 @@ const payServiceSubscription = async (req, res) => {
   };
 
   let preference = {
- payer_email: "test_user_41002316@testuser.com",
- reason: eventType,
- auto_recurring: {
-   frequency: 1,
-   frequency_type: "months",
-   transaction_amount: neto,
-   currency_id: "ARS"
- },
+    payer_email: "test_user_41002316@testuser.com",
+    items: [{
+      title: eventType,
+      id: id,
+      quantity: 1,
+      unit_price: price,
+      currency_id: "ARS",
+    }],
     payer: payer,
-    back_url: "http://localhost:3000/confirmation",
+    back_urls: {
+      failure: "/failure",
+      pending: "/pending",
+      success: "http://localhost:3000/confirmation",
+    },
     notification_url:
       "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
     auto_return: "approved",
@@ -50,81 +112,23 @@ const payServiceSubscription = async (req, res) => {
     })
     .catch((err) => console.log(err));
 };
-router.post("/checkout", payServiceSubscription);
+router.post("/checkout", payService);
 
 
-
-
-
-
-
-
-
-
-
-// const payService = async (req, res) => {
-//   const {id, eventType, price} = req.body;
-//   const user = req.body.user;
-
-//   let payer = {
-//     name: user.given_name,
-//     surname: user.family_name,
-//     email: user.email
-//   };
-
-//   let preference = {
-//     payer_email: "test_user_41002316@testuser.com",
-//     items: [{
-//       title: eventType,
-//       id: id,
-//       quantity: 1,
-//       unit_price: price,
-//       currency_id: "ARS",
-//     }],
-//     payer: payer,
-//     back_urls: {
-//       failure: "/failure",
-//       pending: "/pending",
-//       success: "http://localhost:3000/confirmation",
-//     },
-//     notification_url:
-//       "https://1bbb-181-168-161-231.sa.ngrok.io/products/notificacion",
-//     auto_return: "approved",
-//   };
-//   mercadopago.preferences
-//     .create(preference)
-//     .then((response) => {
-//       console.log("RESPONSEEEEEEEEEEEEEEEE", response);
-//       res.set("Access-Control-Allow-Origin", "*");
-//       res.set("Access-Control-Allow-Methods", "POST");
-//       res.set("Access-Control-Allow-Headers", "Content-Type");
-//       res.set("Access-Control-Max-Age", "3600");
-//       res.set("Access-Control-Allow-Credentials", true);
-//       console.log("URL: ", response.body.init_point);
-//       res.json({
-//         global: response.body.id,
-
-//       });
-//     })
-//     .catch((err) => console.log(err));
-// };
-// router.post("/checkout", payService);
-
-
-// router.get("/confirmation", async(req,res,next) => {
-//   const id = req.body.data.id
-//   try {
-//     if(id){
-//       let res = await axios.get(`https://api.mercadopago.com/v1/payments/${id}?access_token=${ACCESS_TOKEN}`)
-//       console.log("RESPUESTA COMPRAAAAAAAAAAA", res);
-//       res.send("informacion zarpada loco")
-//     }
-//     console.log("NO ENTRO")
-//     res.send("volver a empezar que no termina el juego")
-//   } catch (err) {
-//     console.log("ERR", err)
-//   }
-// })
+router.get("/confirmation", async(req,res,next) => {
+  const id = req.body.data.id
+  try {
+    if(id){
+      let res = await axios.get(`https://api.mercadopago.com/v1/payments/${id}?access_token=${ACCESS_TOKEN}`)
+      console.log("RESPUESTA COMPRAAAAAAAAAAA", res);
+      res.send("informacion zarpada loco")
+    }
+    console.log("NO ENTRO")
+    res.send("volver a empezar que no termina el juego")
+  } catch (err) {
+    console.log("ERR", err)
+  }
+})
 
 
 

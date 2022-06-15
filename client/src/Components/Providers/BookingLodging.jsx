@@ -91,12 +91,13 @@ export default function BookingLodging() {
                                 day: bookingDays[x],
                               },
                             };
+                            console.log('formdata', formData)
                             await axios.post("http://localhost:3001/events", formData);
                         }
                         axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
                         console.log(formData);
                         Swal.fire('Evento confirmado!', '', 'success')
-                        navigate('/confirmar-reserva')
+                         navigate('/confirmar-reserva')
                     } else if (result.isDenied) {
                       Swal.fire('Los cambios no fueron guardados', '', 'info')
                     }
@@ -142,8 +143,8 @@ export default function BookingLodging() {
     const restarFechas = function(f1,f2){
         var aFecha1 = f1.split('/');
         var aFecha2 = f2.split('/');
-        var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
-        var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+        var fFecha1 = Date.UTC(aFecha1[2].slice(0,4),aFecha1[1]-1,aFecha1[0]);
+        var fFecha2 = Date.UTC(aFecha2[2].slice(0,4),aFecha2[1]-1,aFecha2[0]);
         var dif = fFecha2 - fFecha1;
         var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
         return dias;
