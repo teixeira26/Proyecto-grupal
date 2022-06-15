@@ -1,5 +1,22 @@
 .topinfo {
     display: flex;
+    align-items: center;
+    gap: 64px;
+    margin-top: 24px;
+}
+
+.data {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.userService {
+    color: var(--darkGray);
+    font-weight: 400;
+    font-size: var(--p);
+    text-transform: uppercase;
 }
 
 .stars {
@@ -7,69 +24,112 @@
     height: 40px;
     width: 100%;
     justify-content: flex-start;
-    align-content: center;
 }
 
 .star{
     color: var(--primaryColor);
-    display: inline;
     font-size: 40px;
 }
 
-.topinfo h1 {
-    color: #0f0b02;
-    font-weight: 800;
+.starQuantity{
+    color: var(--primaryColor);
+    font-size: 16px;
 }
 
-.topinfo p {
-    color: #bbb7ae;
-    font-weight: 400;
-    font-size: medium;
+.topinfo h1 {
+    color: var(--black);
     text-transform: uppercase;
+    font-size: var(--mediumFont);
+    font-weight: 700;
 }
 
 .detailImg{
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 120px;
-    height: 120px;
-    margin-right: 4rem;
+    width: 240px;
+    height: 280px;
     object-fit: cover;
     object-position: center;
-    border: 1px solid #bbb7ae;
+    border: 1px solid var(--gray);
     border-radius: 8px;
 }
 
-.data {
+.divButton {
     display: flex;
-    flex-wrap: wrap;
-    flex-direction: column;
-    gap: -16px;
+    justify-content: flex-start;
+    gap: 40px;
 }
 
 .description {
     display: flex;
     flex-direction: column;
-    margin-top: 2rem;
-    gap: 0px;
+    margin: 40px 0px;
 }
 
-.description h2 {
-    color: #bbb7ae;
-    font-weight: 600;
-    font-size: small;
+.about {
+    color: var(--darkGray);
+    font-weight: 800;
+    font-size: var(--p);
     text-transform: uppercase;
 }
 
-.description p {
-    color: #0f0b02;
-    font-size: medium;
-    font-weight: 600;
+.paragraphDescription {
+    color: var(--black);
+    font-size: var(--regularFont);
+    font-weight: 400;
 }
 
-.contact {
+.gridSchedule {
     display: flex;
-    margin-top: 4rem;
-    margin-bottom: 8rem;
+    justify-content: space-between;
+}
+
+.housingGrid {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.housePhoto {
+    width: 680px;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.reviews {
+    display: flex;
+    flex-direction: column;
+    margin: 40px 0px;
+}
+
+.review {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 4px 8px 16px;
+    border: 2px solid;
+    border-radius: 8px;
+    background-color: transparent;
+    border-color: var(--primaryColor);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.comment {
+    color: var(--darkGray);
+    font-size: var(--p);
+}
+
+.gridReview {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.map {
+    width: 100%;
+    margin-bottom: var(--margin64);
 }

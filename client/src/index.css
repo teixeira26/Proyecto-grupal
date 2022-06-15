@@ -129,7 +129,17 @@ button{
   border-color: var(--tintColor);
 }
 
-.buttonNoBorde{
+.terciaryButton{
+  width: auto;
   border: none;
+  cursor: pointer;
+  color: var(--tintColor);
+  font-weight: 600;
+  transition: ease-in-out 200ms;
+  background-color: transparent;
+  font-size: var(--p);
 }
 
+.terciaryButton:hover{
+  color: var(--tintColor);
+}
