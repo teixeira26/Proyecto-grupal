@@ -34,7 +34,7 @@ const Shop = () => {
         setFavorites(x.data);
       });
     // dispatch(getProducts());
-    dispatch(chargeCart(user.email));
+    dispatch(chargeCart('cart'));
   }
   }, [dispatch, user]);
 

@@ -109,12 +109,13 @@ export default function Providers() {
                                 let numberEvaluations = providerEvaluations.length
                                 providerEvaluations = providerEvaluations.reduce((x, y) => x + y, 0)
                                 stars = (providerEvaluations / numberEvaluations);
+                                console.log(p)
                                 return p.email === user.email ? null :
                                     <ProvidersCard key={p.id}
                                         name={p.name}
                                         lastName={p.lastName}
                                         email={p.email}
-                                        profilePicture={p.profilePicture}
+                                        profilePicture={p.profilePicture?p.profilePicture: "/assets/img/notloged.png"}
                                         price={p.price}
                                         service={p.service}
                                         stars={stars ? stars : 0} />

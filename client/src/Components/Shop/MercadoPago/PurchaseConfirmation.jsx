@@ -19,7 +19,7 @@ export default function PurchaseConfirmation() {
 
   useEffect(() => {
     if (user) {
-      dispatch(chargeCart(user.email));
+      dispatch(chargeCart("cart"));
     }
   }, [dispatch, user]);
 

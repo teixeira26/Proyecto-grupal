@@ -43,7 +43,8 @@ const initialState = {
     selectedProduct: null,
     selectedEvent: null,
     solds: [],
-    reviews: []
+    reviews: [],
+    groupEvents: []
 };
 
 function rootReducer(state = initialState, action) {
@@ -305,6 +306,22 @@ function rootReducer(state = initialState, action) {
                     ...state,
                     productDetail: []
                 }
+        case 'GROUP_EVENTS':
+            let agrupacion = []
+            while(state.groupEvents.length > 0){
+            let newArray = state.groupEvents.filter(x =>{
+                if(x.numberOfBooking === state.groupEvents[0].numberOfBooking){     
+            return x 
+                }
+            })
+            agrupacion.push(newArray)
+            let newEvents = state.groupEvents.filter(el => el.numberOfBooking !== state.groupEvents[0].numberOfBooking)        
+            state.groupEvents = newEvents
+                }
+            return{
+                ...state,
+                groupEvents: agrupacion
+            }
     
         default:
             return state;

@@ -25,6 +25,11 @@ const ShopFilters = () => {
     dispatch(searchBarProducts(inputSearchBar))
   }, [dispatch, inputSearchBar]);
 
+  useEffect(() => {
+    dispatch(getProducts())
+  }, [dispatch]);
+
+
   ///////////////////////////////////////////////
   // Handles search bar
   ///////////////////////////////////////////////
@@ -32,7 +37,7 @@ const ShopFilters = () => {
     e.preventDefault();
     setInputSearchBar(e.target.value)
   };
-  ///////////////////////////////////////////////
+  /////////////////////////////////////////////// 
 
   function handleFilterTargetAnimal(e) {
     console.log(e.target.value);

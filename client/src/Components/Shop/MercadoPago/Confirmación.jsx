@@ -29,11 +29,11 @@ const Confirmación = () => {
   const idCliente = localStorage.getItem("IdCliente");
 
   useEffect(() => {
-    dispatch(chargeCart(user.email));
+    dispatch(chargeCart("cart"));
   }, [dispatch]);
 
   const clearCart = () => {
-    dispatch(clearAllCart(user.email));
+    dispatch(clearAllCart("cart"));
   };
 
   let neto = () => {
@@ -53,7 +53,7 @@ const Confirmación = () => {
         setCompraExitosa("comprado");
 
         let res = await axios.get(
-          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-4783805575671292-060110-72df5a736628c312ca3e8aa446573977-1134512866`
+          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-7012537343723443-053123-5facd15f88649bf31385f5ab06f47cb9-1134140317`
         );
 
         console.log('REEEESSS', res.data)
