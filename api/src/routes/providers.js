@@ -10,7 +10,6 @@ router.get('/', async (req, res, next) => {
         name
     } = req.query
     let allProviders;
-
     try {
         if (name) {
             allProviders = await Provider.findAll({
@@ -23,20 +22,16 @@ router.get('/', async (req, res, next) => {
         } else {
             allProviders = await Provider.findAll({})
         }
-
         allProviders.length ?
             res.status(200).send(allProviders) :
             res.status(400).send('No hay usuarios cargados')
-
     } catch (err) {
         next(err)
     }
 });
 
 router.get('/:email', async (req, res, next) => {
-    const {
-        email
-    } = req.params;
+    const { email } = req.params;
     try {
         let providerId = await Provider.findByPk(email);
         res.send(providerId);
@@ -64,7 +59,6 @@ router.post('/', async (req, res, next) => {
     } = req.body;
     let auxName = name.toLowerCase()
     let auxLastName = lastName.toLowerCase()
-
     try {
         await Provider.findOrCreate({
             where: {
@@ -92,9 +86,7 @@ router.post('/', async (req, res, next) => {
                 longitude,
             }
         })
-
         res.status(201).send('Usuario creado con éxito')
-
     } catch (err) {
         next(err)
     }
@@ -102,34 +94,28 @@ router.post('/', async (req, res, next) => {
 
 router.put('/', async (req, res, next) => {
     const provider = req.body;
-    console.log(provider)
-
+    // console.log(provider)
     try {
         await Provider.update(provider, {
             where: {
                 email: provider.email
             }
         })
-
         return res.json('Usuario modificado')
-
     } catch (err) {
         next(err)
     }
 });
 
 router.delete('/:id', async (req, res, next) => {
-    const id = req.params.id
-
+    const id = req.params.id;
     try {
         await Provider.destroy({
             where: {
                 id: id
             }
         })
-
         return res.json('Usuario desvinculado')
-
     } catch (err) {
         next(err)
     }

@@ -53,9 +53,9 @@ const Confirmación = () => {
         setCompraExitosa("comprado");
 
         let res = await axios.get(
-          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-2420739168238379-060913-b26faddf6d640dd5510456dca90bd65c-1139786546`
+          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-4783805575671292-060110-72df5a736628c312ca3e8aa446573977-1134512866`
         );
- 
+
         console.log('REEEESSS', res.data)
         let resp = {
           id: res.data.id,
@@ -66,13 +66,13 @@ const Confirmación = () => {
           date_created: res.data.date_created,
           transaction_amount: res.data.transaction_amount,
           email: user.email
-         }
+        }
 
-         console.log('REEEESSSpp', resp)
+        console.log('REEEESSSpp', resp)
 
 
         dispatch(postSold(resp))
-       
+
         setTimeout(() => {
           clearCart();
         }, 3000);

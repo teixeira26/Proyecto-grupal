@@ -53,7 +53,6 @@ function NavBar() {
         }
       });
     }
-
     // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
   }, [dispatch, user]);
@@ -69,9 +68,6 @@ function NavBar() {
   useEffect(() => {
     setProductsFavNumber(state.favorites ? state.favorites.length : 0);
   }, [state.favorites]);
-
-  // Perfil desplegable
-
 
   return (
     <div className={OutContainer.container}>
@@ -91,8 +87,12 @@ function NavBar() {
             Contacto
           </NavLink>
 
+          <NavLink to="/providers" className={styles.navLink}>
+            Yumpys
+          </NavLink>
+
           <NavLink to="/shop" className={styles.navLink}>
-            Shop
+            PetShop
           </NavLink>
         </div>
 
@@ -113,8 +113,6 @@ function NavBar() {
               <div className={styles.circle}>{productsFavNumber}</div>
             </div>
           </div>
-
-          
 
           {/* <div>
             {!isAuthenticated && <img src="" alt=""></img>}

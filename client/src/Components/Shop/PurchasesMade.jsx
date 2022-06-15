@@ -7,51 +7,44 @@ import EachPurchase from "./EachPurchase";
 import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 
+export default function PurchasesMade() {
 
+  const { user } = useAuth0();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-export default function PurchasesMade(){
-
-const { user } = useAuth0();
-
-
-const dispatch = useDispatch();
-const navigate = useNavigate()
-
-useEffect(() => {
+  useEffect(() => {
     dispatch(getOwners())
-}, [dispatch]);
+  }, [dispatch]);
 
-const users = useSelector((state) => state.owners);
+  const users = useSelector((state) => state.owners);
 
-let userDB = users.find(us => us.email === user.email)
+  let userDB = users.find(us => us.email === user.email);
 
-console.log(userDB)
-  function goToShop(){
+  console.log(userDB)
+  function goToShop() {
     navigate('/shop')
   }
 
-    return(
-
+  return (
     <>
-    <NavBar />
-
-    <div>
-        {userDB?.solds.length? userDB?.solds.map(s => {
-            return <EachPurchase id={s.id}
-                                 state={s.status}
-                                 date={s.date_created}
-                                 price={s.transaction_amount}
-                                 items={s.items}/>
+      <NavBar />
+      <div>
+        {userDB?.solds.length ? userDB?.solds.map(s => {
+          return <EachPurchase id={s.id}
+            state={s.status}
+            date={s.date_created}
+            price={s.transaction_amount}
+            items={s.items} />
         })
-        : 
-        
-        <div>
-        <h2>AÚN NO REALIZASTE COMPRAS</h2> 
-        </div>}
-    </div>
-    <button onClick={goToShop}>¡IR AL YUMPAWI-SHOP!</button>
-    <br/>
-    <Footer />
+          :
+          <div>
+            <h2>AÚN NO REALIZASTE COMPRAS</h2>
+          </div>}
+      </div>
+      <button onClick={goToShop}>¡IR AL YUMPAWI-SHOP!</button>
+      <br />
+      <Footer />
     </>
-    )
+  )
 }

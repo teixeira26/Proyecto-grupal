@@ -32,12 +32,12 @@ import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
 import Booking from "./Components/Providers/BookingLodging";
 import CheckoutBooking from "./Components/Providers/CheckoutBooking";
-import Loading from "./Components/Loading/loading";
+import Loader from "./Components/Loading/Loader";
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
 import Profile from "./Views/Profile/Profile.jsx";
-import About from "./Views/Profile/About";
-import Contact from "./Views/Profile/Contact";
+import About from "./Views/Profile/About/About.jsx";
+import Contact from "./Views/Profile/Contact/Contact.jsx";
 import ScheduleProvider from "./Components/Forms/scheduleProvider";
 import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
 import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
@@ -47,7 +47,7 @@ import UsersTable from "./Components/Admin/UsersTable";
 import ProductsList from "./Components/Admin/ProductsList";
 import PutProduct from "./Components/Admin/PutProduct";
 import PurchasesMade from "./Components/Shop/PurchasesMade";
-
+import AdminProfile from "./Views/Profile/AdminProfile";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -78,80 +78,83 @@ function App() {
           <Route path="/mapview" element={<MapView/>} />
           <Route path="/geolocprovider" element={<GeoLocProvider/>} />
           <Route path='/inicio' element={
-            isAuthenticated && !isLoading ? <Home/> : <Loading/>
+            isAuthenticated && !isLoading ? <Home/> : <Loader/>
           }/>
           <Route path="/nosotros" element={<About/>} />
           <Route path="/contacto" element={<Contact/>} />
           <Route path='/shop' element={
-            !isLoading ? <Shop/> : <Loading/>}/>
+            !isLoading ? <Shop/> : <Loader/>}/>
           <Route path='/shop/:id' element={
-            !isLoading ? <ProductDetail/> : <Loading/>
+            !isLoading ? <ProductDetail/> : <Loader/>
           }/>
+          {/* <Route path='/shop/:id' element={<ProductDetail/>}/> */}
           <Route path='/agregarusuario' element={
-            isAuthenticated && !isLoading ? <AddOwner/> : <Loading/>
+            isAuthenticated && !isLoading ? <AddOwner/> : <Loader/>
           }/>
           <Route path='/agregarmascota' element={
-            isAuthenticated && !isLoading ? <AddPet/> : <Loading/>
+            isAuthenticated && !isLoading ? <AddPet/> : <Loader/>
           }/>
           <Route path='/tipo-usuario' element={
-            isAuthenticated && !isLoading ? <Quesos/> : <Loading/>
+            isAuthenticated && !isLoading ? <Quesos/> : <Loader/>
           }/>
           <Route path='/mi-perfil' element={
-            isAuthenticated && !isLoading ? <Profile/> : <Loading/>
+            isAuthenticated && !isLoading ? <Profile/> : <Loader/>
           }/>
+          <Route path='/admin' element={
+            isAuthenticated && !isLoading ? <AdminProfile/> : <Loader/>
+          }/>
+          
           <Route path='/servicio' element={
-            isAuthenticated && !isLoading ? <InfoProvider/> : <Loading/>
+            isAuthenticated && !isLoading ? <InfoProvider/> : <Loader/>
           }/>
           <Route path='/providers' element={
-            isAuthenticated && !isLoading ? <Providers/> : <Loading/>
+            isAuthenticated && !isLoading ? <Providers/> : <Loader/>
           }/>
           <Route path='/providers/:name' element={
-            isAuthenticated && !isLoading ? <DetailProvider/> : <Loading/>
+            isAuthenticated && !isLoading ? <DetailProvider/> : <Loader/>
           }/>
           <Route path='/chat/:providerEmail/:ownerEmail' element={
-            isAuthenticated && !isLoading ? <Chat/> : <Loading />
+            isAuthenticated && !isLoading ? <Chat/> : <Loader />
           } />
           <Route path='/favoritos' element={
-            isAuthenticated && !isLoading ? <Favorites/> : <Loading />
+            isAuthenticated && !isLoading ? <Favorites/> : <Loader />
           }/>
           <Route path='/mis-datos' element={
-            isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
+            isAuthenticated && !isLoading ? <InfoOwner/> : <Loader/>
           }/>
           <Route path='/review/:providerEmail' element={
-            isAuthenticated && !isLoading ? <Review/> : <Loading/>
+            isAuthenticated && !isLoading ? <Review/> : <Loader/>
           }/>
           <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
           <Route path="/mi-carrito" element={<ShoppingCart/>}/>
           <Route path="/confirmacion" element={
-          isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <Confirmación/> : <Loader/>}/>
           <Route path="/confirmation" element={
-          isAuthenticated && !isLoading ? <Confirmation/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <Confirmation/> : <Loader/>}/>
           <Route path="/purchaseConfirmation" element={
-          isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loader/>}/>
           <Route path="/paseo" element={
-          isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <Walk/> : <Loader/>}/>
           <Route path="/hospedaje" element={
-          isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <Lodging/> : <Loader/>}/>
           <Route path='/reservar-hospedaje/:providerEmail' element={
-          isAuthenticated && !isLoading ? <BookingLodging/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <BookingLodging/> : <Loader/>}/>
           <Route path='/reservar-paseo/:providerEmail' element={
-          isAuthenticated && !isLoading ? <BookingWalk/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <BookingWalk/> : <Loader/>}/>
           <Route path='/confirmar-reserva' element={
-          isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loading/>}/>
+          isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loader/>}/>
           <Route path="/calificacionesProvider" element={
-            isAuthenticated && !isLoading ? <Ratings/> : <Loading/>}/>
+            isAuthenticated && !isLoading ? <Ratings/> : <Loader/>}/>
           <Route path="/calificacionesOwner" element={
-            isAuthenticated && !isLoading ? <RatingsOwner/> : <Loading/>}/>
+            isAuthenticated && !isLoading ? <RatingsOwner/> : <Loader/>}/>
           <Route path="/cambiarCalificacion/:id" element={
-            isAuthenticated && !isLoading ? <PutReview/> : <Loading/>}/>
+            isAuthenticated && !isLoading ? <PutReview/> : <Loader/>}/>
           <Route path="/misHorarios" element={
-            isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loading/>}/>
+            isAuthenticated && !isLoading ? <ScheduleProvider/> : <Loader/>}/>
           <Route path="/misHorariosHospedaje" element={
-            isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loading/>}/>
+            isAuthenticated && !isLoading ? <ScheduleProviderLogding/> : <Loader/>}/>
           <Route path="/compras-realizadas" element={
-            isAuthenticated && !isLoading ? <PurchasesMade/> : <Loading/>}/>
-
-
+            isAuthenticated && !isLoading ? <PurchasesMade/> : <Loader/>}/>
 
                       {/* -------------- RUTAS PRIVADAS -------------------- */}
           
@@ -167,10 +170,6 @@ function App() {
               ) : null
             } />
 
-          
-          
-          
-          
           <Route
             path="/admin/agregar-productos"
             element={
@@ -183,7 +182,6 @@ function App() {
               ) : null
             }
           />
-
 
           <Route
             path="/admin/sales-receipts"
@@ -236,12 +234,7 @@ function App() {
               ) : null
             }
           />
-
-          
-
         </Routes>
-
-
 
       </div>
     </BrowserRouter>
