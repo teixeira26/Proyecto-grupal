@@ -2,8 +2,9 @@ import styles from '../Providers/ProvidersCard.module.css';
 import { Link } from 'react-router-dom';
 
 export default function ProvidersCard({name, lastName, email, profilePicture, price, service, stars}){
-
+  console.log(profilePicture)
     return (
+
         <div className={styles.container}>
           <div className={styles.card}>
             {/* <ion-icon name="heart-outline"></ion-icon> */}

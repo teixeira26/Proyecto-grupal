@@ -23,13 +23,6 @@ export default function Profile() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
-        const providerCheck = x.data.find((x) => x.email === user.email);
-        if (providerCheck) {
-          setIsProvider(true);
-          setProviderInfo(providerCheck);
-        }
-      })
       axios.get("http://localhost:3001/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
         console.log(userdb);
@@ -53,6 +46,18 @@ export default function Profile() {
       })
     }
   }, [user, isAuthenticated, pets, dispatch]);
+
+
+  useEffect(()=>{
+    if(user){
+    axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+        const providerCheck = x.data.find((x) => x.email === user.email);
+        if (providerCheck) {
+          setIsProvider(true);
+          setProviderInfo(providerCheck);
+        }
+      })}
+  }, [user])
 
   async function byePet(id) {
     await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });

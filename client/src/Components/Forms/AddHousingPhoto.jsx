@@ -18,13 +18,14 @@ export default function AddHousingPhoto(){
         if(user){
             axios.get('http://localhost:3001/providers?filter=&order=ASC').then(x=>{
                 setInfoUser(x.data.find(x=>x.email === user.email))
+                console.log(x.data.find(x=>x.email === user.email))
             })
         }
     },[user])
     const submitPhoto = ()=>{
         let newInfoUser = {
             ...infoUser,
-            housingPhotos:[...infoUser.housingPhotos, photo],
+            housingPhotos:infoUser.housingPhotos && infoUser.housingPhotos.length?[...infoUser.housingPhotos, photo]:[photo],
         }
         Swal.fire({
             title: '¿Estás seguro que querés agregar esta foto ?',
