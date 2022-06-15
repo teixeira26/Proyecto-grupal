@@ -21,8 +21,9 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
 
   useEffect(() => {
     dispatch(getProducts());
-    dispatch(chargeCart(user.email));
-  }, [dispatch, user.email]);
+   dispatch(chargeCart('cart'));
+ 
+  }, [dispatch, user]);
 
   const addItem = () => {
     console.log(cartItem);
@@ -66,7 +67,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
       dispatch({
         type: TYPES.ADD_TO_CART,
         payload: id,
-        email: user.email,
+        email: 'cart',
         quantity: count,
       });
     } else {
