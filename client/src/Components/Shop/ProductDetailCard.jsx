@@ -94,11 +94,12 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
             </button>
           </div>
           <p className={styles.stock}>Stock disponible: {stock}</p>
-          <p className={styles.cartQuantity}>
-            Cantidad en el carrito: {cartItem?.quantity}
-          </p>
+          
           <div className={styles.detailAddCart}>
-            <button className={styles.addButtonCart} onClick={agregaraCarrito}>
+          <p className={styles.cartQuantity}>
+            Unidades en el carrito: {cartItem?.quantity}
+          </p>
+            <button className="primaryButton" onClick={agregaraCarrito}>
               Agregar al carrito
             </button>
             <ToastContainer

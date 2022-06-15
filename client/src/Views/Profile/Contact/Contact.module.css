@@ -1,0 +1,18 @@
+.container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 60vh;
+}
+
+h1{
+    font-size: var(--mediumFont);
+}
+
+button:first-child{
+    margin-right: 16px;
+}
+
+.buttonFlex{
+    display: flex;
+}

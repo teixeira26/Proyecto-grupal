@@ -5,7 +5,7 @@
 .menu {
   background: #ffffff;
   position: absolute;
-  top: 77px;
+  top: 71px;
   right: 0;
   width: 200px;
   border: 1px solid #bbb7ae;
@@ -22,7 +22,7 @@
   right: 17px;
   width: 20px;
   height: 20px;
-  background-color: #7e52a0;
+  background-color: var(--primaryColor);
   transform: rotate(45deg);
   z-index: -1;
 }
@@ -46,13 +46,14 @@
 
 .menu li a {
   text-decoration: none;
-  color: #333333;
+  color: var(--darkGray);
   padding: 15px 15px;
   display: block;
+  text-transform: uppercase;
 }
 
 .menu li a:hover {
-  color: #7e52a0;
+  color: var(--primaryColor);
 }
 
 .menu-trigger {
@@ -86,7 +87,7 @@
 }
 
 .profilePicture {
-  width: 47px;
+  width: 48px;
   height: auto;
   /* border: 3px solid #7e52a0; */
 }
@@ -105,18 +106,17 @@
 
 .button {
   background-color: transparent;
-  color: #333333;
+  color: var(--darkGray);
   padding: 15px 15px;
   text-transform: uppercase;
 }
 
 .button:hover {
-  color: #7e52a0;
+  color: var(--primaryColor);
 }
 
 .li-flex {
   display: flex;
-
   align-items: center;
 }
 

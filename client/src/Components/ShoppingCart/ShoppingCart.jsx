@@ -106,7 +106,7 @@ const ShoppingCart = () => {
             <div className={styles.purchase}>
               {cart && cart.length > 0 ? (
                 <Link to="/purchaseConfirmation">
-                  <button>Continuar al pago</button>
+                  <button className="primaryButton">Continuar al pago</button>
                 </Link>
               ) : (
                 <div></div>
@@ -116,7 +116,7 @@ const ShoppingCart = () => {
 
           {cart && cart.length > 0 ? (
             <article>
-              <button onClick={clearCart}>Limpiar Carrito</button>
+              <button className="secondaryButton" onClick={clearCart}>Limpiar Carrito</button>
             </article>
           ) : (
             <div></div>

@@ -2,10 +2,10 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    height: 100px;
-    padding: 0 3rem;
+    height: 88px;
+    padding: 0 80px;
     border-bottom: 1px solid #bbb7ae;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
     background-color: white;
 }
 
@@ -27,14 +27,16 @@
 }
 
 .logoLink{
-    font-size: 2.2rem;
+    font-size: 32px;
     font-weight: 800;
     text-transform: unset;
-    color: #0f0b02;
+    color: var(--shadowColor);
+    transition: all ease-in-out 300ms;
 }
 
 .logoLink:hover{
-    color: #0F0B02;
+    color: var(--primaryColor);
+    
 }
 
 .profile{
@@ -53,19 +55,25 @@
 }
 
 .navLink{
-    padding: 0 0.5rem;
+    padding: 0 8px;
     font-weight: 600;
-    margin: 0 1rem;
-    color: #0F0B02;
+    margin: 0 16px;
+    color: var(--black);
     font-weight: 600;
+    text-transform: uppercase;
 }
 
+.navLink:active{
+    font-weight: 800;
+    color: var(--shadowColor);
+}
 
 .navLink:hover{
-    color: #7e52a0;
-    transition: all ease-in 100ms;
+    color: var(--primaryColor);
+    transition: all ease-in-out 300ms;
 }
 
+/* ICON LINKEDIN GITHUB */
 ion-icon{
     font-size: 2rem;   
     color: #BBB7AE;
@@ -90,18 +98,19 @@ ion-icon{
 }
 
 .icon:not(:last-child){
-    margin-right: 2rem;
+    margin-right: 40px;
 }
 
 .circle{
-    width: 22px;
-    height: 22px;
+    width: 26px;
+    height: 26px;
     background-color: #7e52a0;
     color: white;
     border-radius: 50px;
+    border: 3px solid white;
     position: absolute;
-    top: -7px;
-    right: -13px;
+    top: -6px;
+    right: -12px;
     display: flex;
     align-items: center;
     justify-content: center;

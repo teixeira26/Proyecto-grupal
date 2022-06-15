@@ -80,7 +80,7 @@ function NavBar() {
 
         <div className={styles.item}>
           <NavLink to="/nosotros" className={styles.navLink}>
-            Acerca de
+            Nosotros
           </NavLink>
 
           <NavLink to="/contacto" className={styles.navLink}>
@@ -88,7 +88,7 @@ function NavBar() {
           </NavLink>
 
           <NavLink to="/providers" className={styles.navLink}>
-            Yumpys
+            Yumpis
           </NavLink>
 
           <NavLink to="/shop" className={styles.navLink}>
