@@ -134,10 +134,10 @@ export const Chat = () => {
         </div>
         <form className={styles.form} onSubmit={submitMessage}>
           <input type="text" value={mensaje.mensaje} placeholder="Tu mensaje" name="message" onChange={setMessage}></input>
-          <button type="submit" value="Enviar">Enviar mensaje</button>
+          <button type="submit" value="Enviar" className="primaryButton">Enviar mensaje</button>
         </form>
-        {service == 'hospedaje' ? <NavLink to={`/reservar-hospedaje/${providerEmail}`}><button>Reservar servicio</button></NavLink> : null}
-        {service == 'paseo' ? <NavLink to={`/reservar-paseo/${providerEmail}`}><button>Reservar servicio</button></NavLink> : null}
+        {service == 'hospedaje' ? <NavLink to={`/reservar-hospedaje/${providerEmail}`}><button className="secondaryButton">Reservar servicio</button></NavLink> : null}
+        {service == 'paseo' ? <NavLink to={`/reservar-paseo/${providerEmail}`}><button className="secondaryButton">Reservar servicio</button></NavLink> : null}
       </div>
     </div>
   );

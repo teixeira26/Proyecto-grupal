@@ -64,7 +64,6 @@ export default function PutProduct() {
       <Container>
         <div >
           <h2>AGREGAR NUEVO PRODUCTO AL PETSHOP</h2>
-
           <Form onSubmit={formik.handleSubmit}>
             <div >
               <Form.Input
