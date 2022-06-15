@@ -8,9 +8,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  
 }
-
 
 body {
   background-color: #fcfaf9;
@@ -25,7 +23,6 @@ html{
   scroll-behavior: smooth;
   font-size: 14px;
 }
-
 
 ul{
   list-style: none;
@@ -79,10 +76,10 @@ ion-icon{
   --mediumFont: 40px;
   --regularFont: 32px;
   --p: 18px;
+  --h4: 14px;
   
   /* --h2: 
-  --h3:
-  --h4:
+  --h3: 
   --h5:
   --h6: */
 

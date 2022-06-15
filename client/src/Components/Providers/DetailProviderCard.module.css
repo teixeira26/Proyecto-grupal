@@ -1,10 +1,19 @@
 .topinfo {
     display: flex;
 }
+
+.stars {
+    display: flex;
+    height: 40px;
+    width: 100%;
+    justify-content: flex-start;
+    align-content: center;
+}
+
 .star{
-    display:inline;
-    font-size: 3rem;
-    color: purple;
+    color: var(--primaryColor);
+    display: inline;
+    font-size: 40px;
 }
 
 .topinfo h1 {
