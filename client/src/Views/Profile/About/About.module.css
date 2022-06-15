@@ -1,3 +1,11 @@
+.container{
+    margin-top: var(--margin64);
+}
+
+.title{
+    font-size: var(--mediumFont);
+}
+
 .start {
     display: flex;
     align-items: center;
@@ -5,7 +13,7 @@
 }
 
 .start img {
-    height: 50vh;
+    height: 40vh;
 }
 
 .end {
@@ -15,5 +23,18 @@
 }
 
 .end img {
-    height: 50vh;
+    height: 40vh;
+}
+
+p{
+    font-size: var(--p);
+    color: var(--black);
+}
+
+strong{
+    color: var(--shadowColor);
+}
+
+h3{
+    font-size: 24px;
 }

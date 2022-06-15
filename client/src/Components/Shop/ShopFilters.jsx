@@ -200,7 +200,7 @@ const ShopFilters = () => {
           <option value="DESC">Mayor a menor</option>
         </select>
       </section>
-      <button onClick={handleRemove}>Limpiar filtros</button>
+      <button className="secondaryButton" onClick={handleRemove}>Limpiar filtros</button>
     </div>
   );
 };

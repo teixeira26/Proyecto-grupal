@@ -10,7 +10,6 @@ import { Widget } from "@uploadcare/react-widget";
 import { getPets, postPet } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import inContainer from "../GlobalCss/InContainer.module.css";
-import global from "../GlobalCss/Button.module.css";
 import style from "./Form.module.css";
 import axios from "axios";
 

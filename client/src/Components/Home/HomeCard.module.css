@@ -7,7 +7,7 @@
 }
 
 .cardImg {
-  height: 25rem;
+  height: 340px;
   width: 100%;
   object-fit: contain;
   object-position: bottom;
@@ -20,11 +20,11 @@
 
 .cardTitle {
   width: 100%;
-  margin-top: 3rem;
+  margin-top: 32px;
   display: flex;
   justify-content: center;
   text-transform: uppercase;
-  font-size: 1.5rem;
-  font-weight: 400;
-  color: black;
+  font-size: var(--p);
+  font-weight: 600;
+  color: var(--black);
 }

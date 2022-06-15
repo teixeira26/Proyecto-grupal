@@ -63,7 +63,7 @@ const paginated = (pageNumber) => {
             className={styles.leftArrow}
           />
         </NavLink>
-        <h1 className={styles.shopTitle}>Pet Shop</h1>
+        <h1 className={styles.shopTitle}>¡Encontrá lo mejor para tus mascotas!</h1>
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
             <ShopFilters />

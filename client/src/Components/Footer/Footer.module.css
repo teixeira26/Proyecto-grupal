@@ -8,15 +8,15 @@
 .footerFlex{
     display: flex;
     justify-content: space-between; 
-    padding: 1rem 3rem;
+    padding: 15px 80px;
 }
 
-.footerSign{
-    font-size: 2.5rem;
+/* .footerSign{
+    font-size: 30px;
 }
 
 .newsletter{
-    font-size: 1.6rem;
+    font-size: 20px;
 }
 
 .email{
@@ -27,27 +27,27 @@
     padding: 1rem;
     border-radius: 6px;
     margin: 2rem 0 1.5rem;
-}
+} */
 
-.submit{
+/* .submit{
     border: none;
     outline: none;
     cursor: pointer;
-}
+} */
 
-.navItem{
+/* .navItem{
     padding: 0.5rem 0;
-}
+} */
 
-.navLink{
+/* .navLink{
     color: black;
-}
+} */
 
 .footerBottom{
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    padding: 1rem 3rem;
+    padding: 0px 80px;
 }
 
 .copyright{
@@ -56,7 +56,7 @@
 }
 
 .social:not(:last-child){
-    margin: 1rem;
+    margin: 16px;
 }
 
 ion-icon{

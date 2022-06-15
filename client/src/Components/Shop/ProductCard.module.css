@@ -4,21 +4,20 @@
   flex-direction: column;
   justify-content: space-between;
   position: relative;
-  padding: 1rem;
+  padding: 16px;
   transition: all 300ms ease-in-out;
-  box-shadow: 0px 3px 3px rgba(34, 34, 34, 0.692);
-  height: 30rem;
+  box-shadow: 0px 3px 3px rgba(34, 34, 34, 0.281);
+  height: 440px;
+  border-radius: 8px;
 }
 
 .card:hover{
   transform: scale(1.01);
-  box-shadow: 0px 8px 30px rgba(34, 34, 34, 0.692);
-  
+  box-shadow: 0px 8px 30px rgba(34, 34, 34, 0.151);
 }
 
-
 .cardImg {
-  height: 20rem;
+  height: 280px;
   width: 100%;
   object-fit: cover;
   object-position: center;
@@ -29,7 +28,8 @@
   width: 30px;
   height: 30px;
   right: 0;
-  margin: 1rem;
+  top: 0;
+  margin: 16px;
   cursor: pointer;
 }
 
@@ -40,40 +40,22 @@
 }
 
 .cardTitle {
-  
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  text-transform: uppercase;
-  color: black;
-  font-weight: 700;
-  font-size: 1.4rem;
+  width: auto;
+  color: var(--black);
+  font-weight: 600;
+  font-size: var(-p);
   margin: 0;
+  text-transform: uppercase;
 }
 
 .price{
   border-top: 1px solid rgb(192, 192, 192);
-  color: gray;
-  font-size: 1.5rem;
-  font-weight: 500;
+  color: var(--darkGray);
+  font-size: 20px;
+  font-weight: 600;
   margin: 0;
-  margin-top: 1rem;
-  padding: 0.5rem 0;
-}
-
-.addButton {
-  margin-top: 1rem;
-}
-
-.addButton:hover {
-  color: red;
-}
-
-.cardInfo {
-  bottom: 0px;
-  width: 100%;
-  height: auto;
+  padding: 8px 0;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  width: 100%;
+  justify-content: flex-end;
 }

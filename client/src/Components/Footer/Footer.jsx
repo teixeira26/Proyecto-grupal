@@ -8,7 +8,7 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           <h2>
             {/* Enterate de todas <br /> nuestras novedades! */}
-            yumpaw
+            yumPaw
           </h2>
           <p className={styles.newsletter}>
             {/* ¡Suscribite a nuestro Newsletter! */}

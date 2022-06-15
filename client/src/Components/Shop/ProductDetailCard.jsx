@@ -86,20 +86,23 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
           <p className={styles.detailPrice}>${price}</p>
           <p className={styles.detailQuantity}>Cantidad</p>
           <div className={styles.productQuantity}>
-            <button className={styles.button} onClick={delItem}>
+            <span className={styles.button} onClick={delItem}>
               -
-            </button>
+            </span>
             <div className={styles.count}>{count}</div>
-            <button className={styles.button} onClick={addItem}>
+            <span className={styles.button} onClick={addItem}>
               +
-            </button>
+            </span>
           </div>
-          <p className={styles.stock}>Stock disponible: {stock}</p>
-          <p className={styles.cartQuantity}>
-            Cantidad en el carrito: {cartItem?.quantity}
-          </p>
+          
+          
           <div className={styles.detailAddCart}>
-            <button className={styles.addButtonCart} onClick={agregaraCarrito}>
+          
+          <p className={styles.cartQuantity}>
+            Unidades en el carrito: {cartItem?.quantity}
+          </p>
+          <p className={styles.stock}>Stock disponible: {stock}</p>
+            <button className="primaryButton" onClick={agregaraCarrito}>
               Agregar al carrito
             </button>
             <ToastContainer
