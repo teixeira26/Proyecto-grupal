@@ -20,8 +20,8 @@ export default function Profile() {
   const [providerInfo, setProviderInfo] = useState();
   const [eventsProvider, setEventsProvider] = useState();
   const [eventsOwner, setEventsOwner] = useState();
-  const navigate = useNavigate();
 
+  
   useEffect(() => {
     if (isAuthenticated) {
       axios.get("http://localhost:3001/owners").then((x) => {
