@@ -10,7 +10,7 @@ export default function PurchaseDetail({ name, quantity, price, image }) {
         <h3 className={styles.product}><span className={styles.primary}>{quantity}</span>  x  <span className={styles.primary}>{name}</span></h3>
       </div>
 
-      <h4>Subtotal: {price * quantity}</h4>
+      <h4 className={styles.subtotal}>Subtotal: ${price * quantity}</h4>
     </div>
   );
 }

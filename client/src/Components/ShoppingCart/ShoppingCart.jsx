@@ -107,18 +107,12 @@ const ShoppingCart = () => {
 
             <div className={styles.purchase}>
               {cart && cart.length > 0 ? (
-<<<<<<< HEAD
-                <Link to="/purchaseConfirmation">
-                  <button className="primaryButton">Continuar al pago</button>
-                </Link>
-=======
                
-                  <button onClick={()=>{
+                  <button className="primaryButton" onClick={()=>{
                     if(user&&user.email)navigate('/purchaseConfirmation')
                     else(Swal.fire('Debés ingresar a la página para efectuar una compra'))
                   }}>Continuar al pago</button>
          
->>>>>>> 73d59e203c77279d04f4201d46028daa44a2ac6e
               ) : (
                 <div></div>
               )}

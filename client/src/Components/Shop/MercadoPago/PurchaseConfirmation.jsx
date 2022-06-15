@@ -59,14 +59,21 @@ export default function PurchaseConfirmation() {
             <h1>No hay ningún producto en el carrito</h1>
           )}
 
-          <h4>TOTAL COMPRA: {total}</h4>
+          <div className={styles.compra}>
+            <h4 className={styles.total}>TOTAL COMPRA: ${total}</h4>
+          </div>
 
-          <h2>Continuá con el pago</h2>
-          <MercadoPago cart={cart} />
+          <h2 className={styles.continuar}>Continuá con el pago</h2>
+          <div className={styles.buttonFlex}>
+            <div className={styles.pagar}>
+            <MercadoPago cart={cart} />
+            </div>
+            
 
-          <Link to="/mi-carrito">
-            <button>Volver al carrito</button>
-          </Link>
+            <Link to="/mi-carrito">
+              <button className="secondaryButton">Volver al carrito</button>
+            </Link>
+          </div>
         </div>
       </div>
 
