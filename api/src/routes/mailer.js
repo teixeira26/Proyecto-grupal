@@ -1,12 +1,12 @@
 
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 const { Router } = require('express');
 
 const router = Router();
 
 router.post('/',(req, res)=>{
     const {email, subject, text} = req.body
-    console.log(req.params.email)
+    // console.log(req.params.email)
     var transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         post:465,
@@ -22,8 +22,6 @@ router.post('/',(req, res)=>{
         subject:subject,
         text:text
     }
-
-
     transporter.sendMail(mailOptions, (error, info)=>{
         if(error){
             res.status(402).send(error.message);
@@ -35,5 +33,4 @@ router.post('/',(req, res)=>{
     })
 })
 
-
-module.exports = router
+module.exports = router;

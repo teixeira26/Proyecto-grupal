@@ -5,6 +5,7 @@ import styles from "../Shop/ProductCard.module.css";
 import { Link } from "react-router-dom";
 import { addTofavorites } from "../../redux/actions/petshopActions";
 import axios from "axios";
+import Swal from 'sweetalert2'
 
 const ProductCard = ({
   profilePicture,
@@ -45,7 +46,8 @@ const ProductCard = ({
         console.log(objToPut)
         await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
       }}
-      else{alert('Loggeate para agregar cosas a fovoritos man')}
+      else{ 
+        Swal.fire('Debés registrarte a la página para agregar productos a favoritos')}
   };
 
   return (
@@ -65,9 +67,6 @@ const ProductCard = ({
           <div className={styles.cardBottom}>
           <p className={styles.price}>${price}</p>
             <h2 className={styles.cardTitle}>{name}</h2>
-
-            
-              
               {/* <button className={styles.addButton} onClick={()=>{
               dispatch({
               type:TYPES.ADD_TO_CART,

@@ -1,21 +1,17 @@
 import React, { useEffect, useState } from "react";
-import NavBarShop from "../NavBar/NavBarShop";
-import Footer from "../Footer/Footer";
-import styles from "../Shop/Shop.module.css";
-import inContainer from "../GlobalCss/InContainer.module.css";
-import ProductCard from "./ProductCard";
-import {
-  getProducts,
-  chargeCart,
-  getFavoritesProducts,
-  addTofavorites,
-} from "../../redux/actions/petshopActions";
 import { useDispatch, useSelector } from "react-redux";
-import ShopFilters from "./ShopFilters";
 import { NavLink } from "react-router-dom";
-
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getProducts, chargeCart, getFavoritesProducts, addTofavorites } from "../../redux/actions/petshopActions";
+import NavBarShop from "../NavBar/NavBarShop";
+import ShopFilters from "./ShopFilters";
+import ProductCard from "./ProductCard";
+import Footer from "../Footer/Footer";
+import inContainer from "../GlobalCss/InContainer.module.css";
+import styles from "../Shop/Shop.module.css";
+import NoResults from "../../Views/Profile/NoResultsShop";
+import Paginated from "../Paginated";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
@@ -27,7 +23,8 @@ const Shop = () => {
     if (favorites) {
       dispatch(addTofavorites(favorites))
     }
-  }, [favorites])
+  }, [favorites]);
+
   useEffect(() => {
     if(user && user.email){
     axios
@@ -37,9 +34,23 @@ const Shop = () => {
         setFavorites(x.data);
       });
     // dispatch(getProducts());
-    dispatch(chargeCart(user.email));
+    dispatch(chargeCart('cart'));
   }
   }, [dispatch, user]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+}, [products]);
+
+const [currentPage, setCurrentPage] = useState(1);
+const initialStateProductsPerPage = 9;
+const [productsPerPage, setProductsPerPage] = useState(initialStateProductsPerPage);
+const indexOfLastProduct = currentPage * productsPerPage;
+const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+const currentProducts = products?.slice(indexOfFirstProduct, indexOfLastProduct);
+const paginated = (pageNumber) => {
+    setCurrentPage(pageNumber);
+};
 
   return (
     <div className={styles.container}>
@@ -59,9 +70,9 @@ const Shop = () => {
           </div>
           <br />
           <section className={styles.shopGrid}>
-            {!products.length
+            {!currentProducts.length
               ? 'No existe mascota.'
-              : products.map((p) => {
+              : currentProducts.map((p) => {
                 console.log(p)
                 return p.stock > 0 && p.isActive ? (
                   <ProductCard
@@ -78,6 +89,7 @@ const Shop = () => {
               })}
           </section>
         </div>
+        <Paginated itemsPerPage={productsPerPage} items={products.length} paginated={paginated} currentPage={currentPage}/>
       </div>
       <Footer />
     </div>

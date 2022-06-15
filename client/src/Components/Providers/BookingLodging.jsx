@@ -25,8 +25,31 @@ export default function BookingLodging() {
     const [myInfo, setMyinfo] = useState();
     const [bookingDays, setBookingDays] = useState([])
     const [bookingRealDays, setBookingRealDays] = useState([])
-    const [ableDays, setAbleDays] = useState();
+    const [ableDays, setAbleDays] = useState([]);
+    const [maxId, setMaxId] =useState(0)
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        dispatch(getEvents())
+    }, [])
+
+    const events = useSelector(state => state.events)
+
+    useEffect(()=>{
+        if(events.length){
+            events.forEach(ev =>{
+                
+                console.log('ev', ev)
+                if(ev.numberOfBooking > maxId) setMaxId(ev.numberOfBooking+1) 
+                else setMaxId(maxId+1)              
+            })
+        }
+    }, [events])
+
+
+    
+    console.log('eventsAfuera', events)
+    console.log('maxId', maxId)
 
 
 
@@ -55,7 +78,8 @@ export default function BookingLodging() {
             providerEmail:providerEmail,
             ownerName:user.name,
             providerName: '',
-            price: ''
+            price: '',
+            numberOfBooking: 0
         },
         validationSchema: yup.object({
             petName: yup.string().required('Debes seleccionar una mascota'),
@@ -90,13 +114,15 @@ export default function BookingLodging() {
                               date: {
                                 day: bookingDays[x],
                               },
+                              numberOfBooking: maxId
                             };
+                            console.log('formdata', formData)
                             await axios.post("http://localhost:3001/events", formData);
                         }
                         axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
                         console.log(formData);
                         Swal.fire('Evento confirmado!', '', 'success')
-                        navigate('/confirmar-reserva')
+                         navigate('/mis-servicios')
                     } else if (result.isDenied) {
                       Swal.fire('Los cambios no fueron guardados', '', 'info')
                     }
@@ -142,8 +168,8 @@ export default function BookingLodging() {
     const restarFechas = function(f1,f2){
         var aFecha1 = f1.split('/');
         var aFecha2 = f2.split('/');
-        var fFecha1 = Date.UTC(aFecha1[2],aFecha1[1]-1,aFecha1[0]);
-        var fFecha2 = Date.UTC(aFecha2[2],aFecha2[1]-1,aFecha2[0]);
+        var fFecha1 = Date.UTC(aFecha1[2].slice(0,4),aFecha1[1]-1,aFecha1[0]);
+        var fFecha2 = Date.UTC(aFecha2[2].slice(0,4),aFecha2[1]-1,aFecha2[0]);
         var dif = fFecha2 - fFecha1;
         var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
         return dias;
@@ -230,14 +256,14 @@ export default function BookingLodging() {
                         endDate={endDate}
                         selectsRange
                         // filterDate={disableDates}
-                        includeDates={ableDays&&ableDays.map(x=>{
+                        includeDates={ableDays && ableDays.length ? ableDays.map(x=>{
                             const dayTemp = x.split('/')[0]
                             const monthTemp = x.split('/')[1]
                             let newDate = x.split('/');
                             newDate[0] = monthTemp;
                             newDate[1] = dayTemp
                             return (addDays(new Date(newDate.join('/')), 0))
-                        })}//'06/31/2022'
+                        }): [] }//'06/31/2022'
                         inline
                     />
                     <h2>días disponibles</h2>

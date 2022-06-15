@@ -34,7 +34,6 @@ export default function InfoProvider() {
         email: user.email,
         name: user.given_name,
         lastName: user.family_name,
-        profilePicture: user.picture,
         service: ["paseo"],
         latitude: userInfo.latitude,
         longitude: userInfo.longitude,
@@ -48,7 +47,6 @@ export default function InfoProvider() {
       postProvider({
         email: user.email,
         name: user.given_name,
-        profilePicture: user.picture,
         lastName: user.family_name,
         service: ["hospedaje"],
         latitude: userInfo.latitude,

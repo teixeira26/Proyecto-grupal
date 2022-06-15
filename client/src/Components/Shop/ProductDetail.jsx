@@ -11,44 +11,35 @@ import { getById, cleanDetail } from "../../redux/actions/petshopActions";
 import { Button } from "@material-ui/core";
 import { getOwners } from "../../redux/actions/ownProvActions";
 import { useAuth0 } from "@auth0/auth0-react";
-
+import Loader from "../Loading/Loader";
 
 const ProductDetail = () => {
   const { user } = useAuth0();
   let { id } = useParams();
-
-  let dispatch = useDispatch()
-
-  let product = useSelector(state => state.productDetail)
-
+  let dispatch = useDispatch();
+  let product = useSelector(state => state.productDetail);
 
   useEffect( () => {
     dispatch(getById(id))
     dispatch(getOwners())
   }, [dispatch, id]);
 
-
   useEffect( () => {
       return dispatch(cleanDetail())
   }, [dispatch]);
 
-
-
-  const allUsers = useSelector(state => state.owners)
-  const userDb = allUsers.find(us => us.email === user.email)
-
+  const allUsers = useSelector(state => state.owners);
+  const userDb = user&&allUsers.length?allUsers.find(us => us.email === user.email):null;
 
   return (
     <div className={styles.container}>
       <NavBarShop />
-
       <div className={inContainer.container}>
       <NavLink to="/shop">
           <img src="/assets/img/arrow-left.svg" alt="" className={styles.leftArrow}/>
         </NavLink>
-
         {!product.length
-          ? "LOADING"
+          ? <Loader/>
           : product.map((p) => {
               return (
                 <ProductDetailCard
@@ -64,7 +55,6 @@ const ProductDetail = () => {
               );
             })}
             {userDb?.isAdmin? <Link to='/admin/listado-productos'><Button>VOLVER AL LISTADO</Button></Link> : null}
-
       </div>
       <Footer />
     </div>

@@ -66,8 +66,6 @@ Chat.belongsTo(Provider);
 Provider.hasMany(Review);
 Review.belongsTo(Provider);
 
-
-
 module.exports = {
   ...sequelize.models,
   conn: sequelize,

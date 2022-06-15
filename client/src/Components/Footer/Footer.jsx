@@ -51,7 +51,7 @@ const Footer = () => {
       <div className={styles.footerBottom}>
         <p className={styles.copyright}>Copyright @yumPaw - 2022</p>
         <div className={styles.social}>
-          <ion-icon name="logo-github"></ion-icon>
+          <a href="https://github.com/teixeira26/Proyecto-grupal"><ion-icon name="logo-github"></ion-icon></a>
         </div>
         <div className={styles.social}>
           <ion-icon name="logo-instagram" className={styles.social}></ion-icon>

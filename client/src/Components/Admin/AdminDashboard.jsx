@@ -1,11 +1,9 @@
-import { Link } from 'react-router-dom'
-import NavBar from '../NavBar/NavBarShop'
-import Footer from '../Footer/Footer'
-import styles from './AdminDashboard.module.css'
-
+import { Link } from 'react-router-dom';
+import NavBar from '../NavBar/NavBarShop';
+import Footer from '../Footer/Footer';
+import styles from './AdminDashboard.module.css';
 
 export default function AdminDashboard (){
-
     return(
         <div>
             <NavBar />
@@ -17,8 +15,4 @@ export default function AdminDashboard (){
             <Footer />
         </div>
     )
-
 }
-
-
-
