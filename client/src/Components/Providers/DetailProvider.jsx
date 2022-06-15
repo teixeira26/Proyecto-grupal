@@ -19,7 +19,7 @@ export default function DetailProvider() {
     }, [dispatch, email]);
 
     return (
-        <div className={styles.container}>
+        <div>
             <NavBarShop />
             <div className={inContainer.container}>
                 <NavLink to="/providers">
