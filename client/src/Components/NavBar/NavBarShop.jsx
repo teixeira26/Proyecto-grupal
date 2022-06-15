@@ -89,7 +89,7 @@ function NavBar() {
           <NavLink to="/contacto" className={styles.navLink}>
             Contacto
           </NavLink>
-          <NavLink to={user ? '/providers' : '/'} className={styles.navLink} onClick={() => { if (!user) Swal.fire('necesitás ingresar a la página para ver a los yumpys') }}>
+          <NavLink to={user?'/providers':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para ver a los yumpys')}}>
             Yumpis
           </NavLink>
           <NavLink to="/shop" className={styles.navLink}>

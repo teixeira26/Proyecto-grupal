@@ -12,6 +12,7 @@ import NavBar from "../NavBar/NavBarShop";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import style from "./Form.module.css";
 import axios from "axios";
+import Footer from "../Footer/Footer";
 
 export default function InfoProvider() {
   const dispatch = useDispatch();
@@ -64,7 +65,7 @@ export default function InfoProvider() {
       <NavBar />
       <div className={inContainer.container}>
         <div className={style.container}>
-          <h2>Agrega una mascota</h2>
+          <h2>Agregá una mascota</h2>
           <p>Ingresa información como su nombre, raza y tamaño. También podrás agregar una foto para que podamos verla!</p>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Input
@@ -132,6 +133,7 @@ export default function InfoProvider() {
           </Form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }
