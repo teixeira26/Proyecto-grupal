@@ -14,7 +14,6 @@ function Landing() {
   const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
 
-
   const buscarUser = async () => {
     try {
       let dbOwner = await axios.get("http://localhost:3001/owners");
@@ -32,6 +31,7 @@ function Landing() {
       console.log('se ejecutó catch')
       navigate("/inicio");
     }
+    
   };
 
   useEffect(() => {

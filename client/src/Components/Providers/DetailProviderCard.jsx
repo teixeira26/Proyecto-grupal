@@ -22,11 +22,11 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
             let providerEvaluations = x.data.filter(x=>x.provider.email === email);
             setReviews(providerEvaluations);
             console.log(providerEvaluations)
-            providerEvaluations = providerEvaluations.map(x=> x.review)
+            providerEvaluations = providerEvaluations.map(x => x.review)
             let numberEvaluations = providerEvaluations.length
-            providerEvaluations = providerEvaluations.reduce((x,y)=>x+y, 0)
-            setStars(providerEvaluations/numberEvaluations);
-            if(providerEvaluations)setquantityReviews(numberEvaluations)
+            providerEvaluations = providerEvaluations.reduce((x, y) => x + y, 0)
+            setStars(providerEvaluations / numberEvaluations);
+            if (providerEvaluations) setquantityReviews(numberEvaluations)
         })
     },[])
 
@@ -35,24 +35,11 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
         axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
             const providerCheck = x.data.find((x) => x.email === email);
             console.log(providerCheck)
-              setProviderInfo(providerCheck);
+            setProviderInfo(providerCheck);
             })
     }}, [user])
     return(
         <>
-            <Map
-            center={{lat: latitude,
-            lng: longitude}}
-            zoom={14}
-            >
-            <TileLayer
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            />
-            {/* <Markers data={currentLocationProvider} /> */}
-            <CircleMarker data={{lat: latitude,
-            lng: longitude}} />
-            </Map>
             <section className={inContainer.container}>
                 <div className={style.topinfo}>
                     <img className={style.detailImg} src={profilePicture} alt="profile img" />
@@ -62,14 +49,14 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                         <p>{address}</p>
                     </div>
                 </div>
-                <div>
-                    <p className={style.star}>{stars>=1?'★':'☆'}</p>
-                    <p className={style.star}>{stars>=2?'★':'☆'}</p>
-                    <p className={style.star}>{stars>=3?'★':'☆'}</p>
-                    <p className={style.star}>{stars>=4?'★':'☆'}</p>
-                    <p className={style.star}>{stars===5?'★':'☆'}</p>
+                <div className={style.stars}>
+                    <p className={style.star}>{stars >= 1 ? '★' : '☆'}</p>
+                    <p className={style.star}>{stars >= 2 ? '★' : '☆'}</p>
+                    <p className={style.star}>{stars >= 3 ? '★' : '☆'}</p>
+                    <p className={style.star}>{stars >= 4 ? '★' : '☆'}</p>
+                    <p className={style.star}>{stars === 5 ? '★' : '☆'}</p>
+                    <p>({quantityReviews})</p>
                 </div>
-                <p>({quantityReviews})</p>
                 <div className={style.description}>
                     <h2>Sobre {name}</h2>
                     <p>{description}</p>
@@ -88,32 +75,32 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                 <div>
                     <h3>Disponibilidad de {name}</h3>
                     {Object.keys(schedule).map((key) => {
-                    return [key, schedule[key]]
-                })}
+                        return [key, schedule[key]]
+                    })}
                 </div>
                 <div className={style.contact}>
-                    <NavLink to={`/chat/${email}/${user.email}`}><button>Contactarme con {name}</button></NavLink>
-                    {service == 'hospedaje'?<NavLink to={`/reservar-hospedaje/${email}`}><button>Reservar servicio</button></NavLink>:null}
-                    {service == 'paseo'?<NavLink to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></NavLink>:null}
-                    <NavLink to={`/review/${email}`}><button>Calificar a {name}</button></NavLink>
+                    <NavLink to={`/chat/${email}/${user.email}`}><button className="primaryButton">Contactarme con {name}</button></NavLink>
+                    {service == 'hospedaje' ? <NavLink to={`/reservar-hospedaje/${email}`}><button className="primaryButton">Reservar servicio</button></NavLink> : null}
+                    {service == 'paseo' ? <NavLink to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></NavLink> : null}
+                    <NavLink to={`/review/${email}`}><button className="primaryButton">Calificar a {name}</button></NavLink>
                 </div>
                 <h2>Calificaciones</h2>
                 <div>
-                    {reviews&&reviews.map((x,y)=>{
-                        if(y<5){
-                            return(
+                    {reviews && reviews.map((x, y) => {
+                        if (y < 5) {
+                            return (
                                 <div key={y}>
-                                <hr/>  
-                                <div>
-                                <p className={style.star}>{x.review>=1?'★':'☆'}</p>
-                                <p className={style.star}>{x.review>=2?'★':'☆'}</p>
-                                <p className={style.star}>{x.review>=3?'★':'☆'}</p>
-                                <p className={style.star}>{x.review>=4?'★':'☆'}</p>
-                                <p className={style.star}>{x.review===5?'★':'☆'}</p>
+                                    <hr />
+                                    <div>
+                                        <p className={style.star}>{x.review >= 1 ? '★' : '☆'}</p>
+                                        <p className={style.star}>{x.review >= 2 ? '★' : '☆'}</p>
+                                        <p className={style.star}>{x.review >= 3 ? '★' : '☆'}</p>
+                                        <p className={style.star}>{x.review >= 4 ? '★' : '☆'}</p>
+                                        <p className={style.star}>{x.review === 5 ? '★' : '☆'}</p>
+                                    </div>
+                                    <h4 style={{ display: 'inline' }}>{x.owner.name} {x.owner.lastName}:</h4>
+                                    <p style={{ display: "inline", color: 'blue' }}> {x.message}</p>
                                 </div>
-                                <h4 style={{display:'inline'}}>{x.owner.name} {x.owner.lastName}:</h4>
-                                <p style={{display:"inline", color:'blue'}}> {x.message}</p>
-                            </div>
                             )
                         }
                     })}
@@ -138,6 +125,23 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
                     </div>
                 </div> */}
             </section>
+            <Map
+                center={{
+                    lat: latitude,
+                    lng: longitude
+                }}
+                zoom={14}
+            >
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {/* <Markers data={currentLocationProvider} /> */}
+                <CircleMarker data={{
+                    lat: latitude,
+                    lng: longitude
+                }} />
+            </Map>
         </>
     )
 };

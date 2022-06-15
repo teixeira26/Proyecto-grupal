@@ -19,7 +19,7 @@ const ProductCard = ({
   const { user } = useAuth0();
   const dispatch = useDispatch();
   const addFavorite = async () => {
-    if(user){
+    if (user) {
       if (!isFavorite) {
         const AllOwners = await axios.get("http://localhost:3001/owners");
         const owner = AllOwners.data.find((x) => x.email === user.email);
@@ -60,13 +60,13 @@ const ProductCard = ({
               ? <img src="../assets/img/favorite-item.svg" alt="" />
               : <img src="../assets/img/favorite-fill.svg" alt="" />
           }
-          </div>
+        </div>
         <Link to={`/shop/${id}`}>
           <img src={profilePicture} alt="" className={styles.cardImg} />
           <div className={styles.cardInfo}>
-          <div className={styles.cardBottom}>
-          <p className={styles.price}>${price}</p>
-            <h2 className={styles.cardTitle}>{name}</h2>
+            <div className={styles.cardBottom}>
+              <p className={styles.price}>${price}</p>
+              <h2 className={styles.cardTitle}>{name}</h2>
               {/* <button className={styles.addButton} onClick={()=>{
               dispatch({
               type:TYPES.ADD_TO_CART,

@@ -4,14 +4,32 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap%22");
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-color: #fcfaf9;
   margin: 0;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   font-family: "Nunito", sans-serif;
-  
+}
+
+
+html{
+  scroll-behavior: smooth;
+  font-size: 14px;
+}
+
+ul{
+  list-style: none;
+}
+
+a{
+  text-decoration: none;
 }
 
 h1,
@@ -22,7 +40,6 @@ h5,
 h6,
 a {
   font-family: "Nunito", sans-serif;
-  text-transform: uppercase;
 }
 
 ion-icon{
@@ -40,3 +57,79 @@ ion-icon{
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
+
+:root{
+  /* Colors */
+  --primaryColor: #7e52a0;
+  --shadowColor: #593a71;
+  --tintColor: #a380bd;
+  --black: #0f0b02;
+  --gray: #bbb7ae;
+  --darkGray: #74716d;
+  --white: #fcfaf9;
+  --error: #642534;
+  --success: #599e51;
+  --warning: #f6ae2d;
+
+  /* Font sizes */
+  --bigFont: 72px;
+  --mediumFont: 40px;
+  --regularFont: 32px;
+  --p: 18px;
+  --h4: 14px;
+  
+  /* --h2: 
+  --h3: 
+  --h5:
+  --h6: */
+
+  --margin80: 80px;
+  --margin64: 64px;
+}
+
+button{
+  border: none;
+}
+
+.primaryButton{
+  width: auto;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #7e52a0;
+  color: var(--white);
+  font-weight: 600;
+  transition: ease-in-out 200ms;
+  background-color: var(--shadowColor);
+  margin: 0;
+}
+.primaryButton:hover{
+  background-color: var(--tintColor);
+  color: var(--shadowColor);
+  border-color: var(--tintColor);
+}
+
+.secondaryButton{
+  width: auto;
+  padding: 16px;
+  border: none;
+  cursor: pointer;
+  border: 1px solid #7e52a0;
+  border-radius: 6px;
+  color: var(--shadowColor);
+  font-weight: 600;
+  transition: ease-in-out 200ms;
+  background-color: transparent;
+}
+
+.secondaryButton:hover{
+  background-color: var(--tintColor);
+  color: var(--shadowColor);
+  border-color: var(--tintColor);
+}
+
+.buttonNoBorde{
+  border: none;
+}
+

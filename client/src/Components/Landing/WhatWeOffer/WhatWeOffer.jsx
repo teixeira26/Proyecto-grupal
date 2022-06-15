@@ -16,7 +16,7 @@ const WhatWeOffer = (props) => {
           </div>
 
           <p className={styles.wwoText}>
-            Consigue paseadores calificados y de confianza. Tendrás la posibilidad de buscarlos cerca de tu casa de una forma sencilla y rápida.
+            Conseguí paseadores calificados y de confianza. Vas a tener la posibilidad de buscarlos cerca de tu casa de una forma sencilla y rápida.
           </p>
         </div>
 
@@ -26,7 +26,7 @@ const WhatWeOffer = (props) => {
           </div>
 
           <p className={styles.wwoText}>
-            Si no tienes con quien dejar a tu mascota, te damos la seguridad de que nuestros hosts la cuidarán muy bien en sus hogares.
+            Si no tenés con quien dejar a tu mascota, te damos la seguridad de que nuestros yumpis la cuidarán muy bien en sus hogares.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ const WhatWeOffer = (props) => {
           </div>
 
           <p className={styles.wwoText}>
-            ¿Necesitas hacer algunas compras? En nuestro petshop conseguirás de todo: alimentos, accesorios y cuidados para la salud.
+            ¿Necesitás hacer alguna compra? En nuestro Petshop conseguirás de todo: alimentos, accesorios y cuidados para la salud.
           </p>
         </div>
       </section>

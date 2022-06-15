@@ -1,5 +1,5 @@
 .container{
-    margin-bottom: 4rem;
+    margin-bottom: 60px;
 }
 
 .table{
@@ -44,8 +44,8 @@
     flex-direction: row;
     width: fit-content;
     border: 1px solid #bbb7ae;
-    border-radius: 25px;
-    padding: 0.4rem;
+    border-radius: 8px;
+    padding: 6px;
     height: 34px;
     background-color: white;
 }
@@ -59,16 +59,17 @@
 .button{
     background-color: transparent;
     padding: 0;
-    font-size: 1.6rem;
+    font-size: var(--p);
     width: 30px;
     height: 25px;
     max-height: fit-content;
-    color: #0f0b02;
+    color: var(--black);
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 0;
     font-weight: bold;
+    cursor: pointer;
 }
 
 .button:not(:last-child){
@@ -80,17 +81,18 @@
 }
 
 .count{
-    margin: 0 0.7rem;
-    font-size: 1.3rem;
+    margin: 0 10px;
+    font-size: var(--p);
 }
 
 .buttonDelete{
     height: auto;
     display: flex;
     background-color: transparent;
-    color: #7e52a0;
+    color: var(--primaryColor);
     padding: 0;
-    margin-top: 1rem;
+    margin-top: 10px;
+    cursor: pointer;
 }
 
 .item{

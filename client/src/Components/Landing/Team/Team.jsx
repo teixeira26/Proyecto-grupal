@@ -12,31 +12,31 @@ const Team = () => {
         <TeamCard
           name="Leo"
           location="La Plata, Buenos Aires"
-          contact="012345678"
+          contact="+54 9 221 558-7947"
           img="/assets/img/leo.png"
         />
         <TeamCard
           name="Mathe"
           location="La Matanza, Buenos Aires"
-          contact="012345678"
+          contact="+54 9 11 6569-3049"
           img="/assets/img/mate.png"
         />
         <TeamCard
           name="Sabri"
           location="Villa Ballester, Buenos Aires"
-          contact="012345678"
+          contact="+54 9 11 7361-4364"
           img="/assets/img/sabri.png"
         />
         <TeamCard
           name="Alan"
           location="La Plata, Buenos Aires"
-          contact="012345678"
+          contact="+54 9 221 6176-057"
           img="/assets/img/alan.png"
         />
         <TeamCard
           name="Frano"
           location="Baradero, Buenos Aires"
-          contact="012345678"
+          contact="+54 9 11 2285-7609"
           img="/assets/img/fran.png"
         />
       </div>

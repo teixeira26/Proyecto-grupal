@@ -71,10 +71,10 @@ const Favorites = () => {
                     <p>Stock disponible: {x.stock} unidades</p>
                   </div>
                 </div>
-                <button onClick={() => deleteFav(x.id)}>Quitar de favoritos</button>
+                <button className="secondaryButton" onClick={() => deleteFav(x.id)}>Eliminar de favoritos</button>
               </div>
             )
-          }) : <h1>NO hay favoritos</h1>}
+          }) : <h1>Todavía no agregaste productos a tu lista de favoritos</h1>}
         </div>
       </div>
       <Footer />

@@ -1,15 +1,15 @@
 .wwoTitle{
-    font-size: clamp(4rem, 2.8vw, 6vw);
+    font-size: var(--mediumFont);
     display: flex;
     justify-content: center;
 }
 
 .wwoFlex{
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
-    gap: 3rem 0.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(200px, auto));
+    gap: 60px 24px;
     justify-content: space-evenly;
-    margin-top: 10rem;
+    margin-top: var(--margin80);
 }
 
 /* MODIFICAR */
@@ -38,5 +38,5 @@
 
 .wwoText{
     text-align: center;
-    font-size: 1.4rem;
+    font-size: var(--p);
 }
