@@ -13,6 +13,7 @@ router.get('/', async (req, res, next) => {
     try {
         if (name) {
             allProviders = await Provider.findAll({
+                include: Review,
                 where: {
                     name: {
                         [Op.iLike]: '%' + name + '%'

@@ -142,7 +142,7 @@ function App() {
           isAuthenticated && !isLoading ? <BookingLodging/> : <Loader/>}/>
           <Route path='/reservar-paseo/:providerEmail' element={
           isAuthenticated && !isLoading ? <BookingWalk/> : <Loader/>}/>
-          <Route path='/confirmar-reserva' element={
+          <Route path='/mis-servicios' element={
           isAuthenticated && !isLoading ? <CheckoutBooking/> : <Loader/>}/>
           <Route path="/calificacionesProvider" element={
             isAuthenticated && !isLoading ? <Ratings/> : <Loader/>}/>
