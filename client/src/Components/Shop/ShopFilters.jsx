@@ -20,6 +20,9 @@ const ShopFilters = () => {
   let [checkedTwo, setCheckedTwo] = useState(false);
   let [checkedThree, setCheckedThree] = useState(false);
 
+  useEffect(()=> {
+    dispatch(getProducts());
+  }, [])
   // Hook search bar
   useEffect(() => {
     dispatch(searchBarProducts(inputSearchBar))
@@ -69,15 +72,16 @@ const ShopFilters = () => {
     console.log("already", already);
 
     if (!already) {
+      setCheckedOne(!already);
       setSelect(select = [...select, e.target.value]);
       console.log('select:::', select)
-      setCheckedOne(!already);
+
     }
     if (already) {
+      setCheckedOne(already);
       let aux = select.filter((el) => el !== selection);
       setSelect(select = aux);
       console.log('aux:::', aux)
-      setCheckedOne(already);
     }
     dispatch(filterByCategory(select));
   }
@@ -88,15 +92,15 @@ const ShopFilters = () => {
     console.log("already", already);
 
     if (!already) {
+      setCheckedTwo(!already);
       setSelect(select = [...select, e.target.value]);
       console.log('select:::', select)
-      setCheckedTwo(!already);
     }
     if (already) {
+      setCheckedTwo(already);
       let aux = select.filter((el) => el !== selection);
       setSelect(select = aux);
       console.log('aux:::', aux)
-      setCheckedTwo(already);
     }
     dispatch(filterByCategory(select));
   }
@@ -107,15 +111,15 @@ const ShopFilters = () => {
     console.log("already", already);
 
     if (!already) {
+      setCheckedThree(!already);
       setSelect(select = [...select, e.target.value]);
       console.log('select:::', select)
-      setCheckedThree(!already);
     }
     if (already) {
+      setCheckedThree(already);
       let aux = select.filter((el) => el !== selection);
       setSelect(select = aux);
       console.log('aux:::', aux)
-      setCheckedThree(already);
     }
     dispatch(filterByCategory(select));
   }

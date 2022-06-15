@@ -71,7 +71,7 @@ const paginated = (pageNumber) => {
           <br />
           <section className={styles.shopGrid}>
             {!currentProducts.length
-              ? <NoResults />
+              ? 'No existe mascota.'
               : currentProducts.map((p) => {
                 console.log(p)
                 return p.stock > 0 && p.isActive ? (
