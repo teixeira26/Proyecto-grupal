@@ -143,7 +143,6 @@ const ShopFilters = () => {
           <option value="conejo">Conejo</option>
           <option value="pez">Peces</option>
           <option value="pajaro">Aves</option>
-
         </select>
       </section>
 
@@ -178,7 +177,6 @@ const ShopFilters = () => {
           />
           <span className={styles.checkTitle}>Salud y bienestar</span>
         </div>
-
       </section>
 
       <section className={styles.selects} onChange={(e) => handleOrder(e)}>

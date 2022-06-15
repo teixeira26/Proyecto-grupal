@@ -76,8 +76,7 @@ export default function Providers() {
                         className={styles.leftArrow}
                     />
                 </NavLink>
-                <h1 className={styles.providersTitle}>¡Conoce a nuestros yumpys!</h1>
-                <p>Encuentra la mejor opción para el paseo u hospedaje que estás necesitando</p>
+                <h1 className={styles.providersTitle}>¡Conoce a nuestros yumpis!</h1>
                 <div className={styles.providersFlex}>
                     <div className={styles.providersFilters}>
                         <section className={styles.selects}>
@@ -98,7 +97,7 @@ export default function Providers() {
                             </select>
                         </section>
                         <br />
-                        <button onClick={handleRemove}>Limpiar filtros</button>
+                        <button className='secondaryButton' onClick={handleRemove}>Limpiar filtros</button>
                     </div>
                     <div className={styles.providersGrid}>
                         {!currentProviders.length ? <NoResults /> :
