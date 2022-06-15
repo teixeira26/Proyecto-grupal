@@ -125,8 +125,23 @@ button{
 
 .secondaryButton:hover{
   background-color: var(--tintColor);
-  color: var(--shadowColor);
+  color: var(--white);
   border-color: var(--tintColor);
+}
+
+.terciaryButton{
+  width: auto;
+  border: none;
+  cursor: pointer;
+  color: var(--tintColor);
+  font-weight: 600;
+  transition: ease-in-out 200ms;
+  background-color: transparent;
+  font-size: var(--p);
+}
+
+.terciaryButton:hover{
+  color: var(--tintColor);
 }
 
 .buttonNoBorde{
