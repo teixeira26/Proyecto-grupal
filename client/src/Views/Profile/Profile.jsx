@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import NavBarShop from "../../Components/NavBar/NavBarShop";
 import { useAuth0 } from "@auth0/auth0-react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import Footer from "../../Components/Footer/Footer";
 import axios from "axios";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,6 +19,7 @@ export default function Profile() {
   const [providerInfo, setProviderInfo] = useState();
   const [eventsProvider, setEventsProvider] = useState();
   const [eventsOwner, setEventsOwner] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -201,6 +202,17 @@ export default function Profile() {
               </div>)
             })
             : null}
+          {providerInfo && providerInfo.service[0] === 'hospedaje' &&
+          <div>
+            <h2>Mi Dulce hogar</h2>
+            {providerInfo.housingPhotos && providerInfo.housingPhotos.map((x,y)=>{
+              return(
+                <img src={x} key={y} alt={y}></img>
+              )
+            })}
+            <input type='button' value="Agregar Foto" onClick={()=>navigate('/agregar-foto')}/>
+          </div>
+          }
         </section>
       </div>
       <Footer />
