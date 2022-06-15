@@ -59,7 +59,7 @@ const ShoppingCart = () => {
             <thead>
               <tr className={styles.tr}>
                 <th className={styles.th}>
-                  <p>Imagen</p>
+                  <p className={styles.imagen}>Imagen</p>
                 </th>
                 <th className={styles.th}>
                   <p className={styles.product}>Producto</p>
@@ -100,7 +100,7 @@ const ShoppingCart = () => {
         <div className={styles.cartBottom}>
           <div>
             <div className={styles.totalFlex}>
-              <h3>Total: ${total}</h3>
+              <h3 className={styles.total}>Total: <span className={styles.totalNum}>${total}</span> </h3>
             </div>
 
             <div className={styles.purchase}>

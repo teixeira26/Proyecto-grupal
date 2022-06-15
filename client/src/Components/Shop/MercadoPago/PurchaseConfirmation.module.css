@@ -1,0 +1,15 @@
+.container{
+    margin: var(--margin64) auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 50%;
+    border: 1px solid var(--gray);
+    padding: 10px;
+    background-color: white;
+}
+
+.title{
+    text-transform: uppercase;
+}

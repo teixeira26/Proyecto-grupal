@@ -101,16 +101,18 @@ function NavBar() {
             <div className={styles.icon}>
               <NavLink to="/mi-carrito" className={styles.navLinkIcon}>
                 <img src="../../assets/img/shopping-bag.svg" alt="" />
+                <div className={styles.circle}>{total}</div>
               </NavLink>
 
-              <div className={styles.circle}>{total}</div>
+             
             </div>
 
             <div className={styles.icon}>
               <NavLink to="/favoritos" className={styles.navLinkIcon}>
                 <img src="../../assets/img/favorite.svg" alt="" />
+                <div className={styles.circle}>{productsFavNumber}</div>
               </NavLink>
-              <div className={styles.circle}>{productsFavNumber}</div>
+              
             </div>
           </div>
 

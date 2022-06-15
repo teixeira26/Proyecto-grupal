@@ -4,6 +4,8 @@
     font-weight: 500;
     border: 2px solid #7e52a0;
     border-radius: 25px;
+    border: none;
+    margin: 0;
 }
 
 .button:hover{

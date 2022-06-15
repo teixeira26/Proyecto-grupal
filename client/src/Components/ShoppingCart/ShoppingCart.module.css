@@ -5,30 +5,49 @@
 
 .cartTitle{
     width: 100%;
-    background-color: #7e52a0;
-    padding: 1rem;
+    background-color: var(--primaryColor);
+    padding: 12px;
     color: white;
+    text-transform: uppercase;
 }
 
 .price{
     width: 100%;
     display: flex;
     justify-content: center;
+    text-transform: uppercase;
 }
 
 .product{
     display: flex;
     width: 200px;
+    text-transform: uppercase;
 }
+
+.imagen{
+    text-transform: uppercase;
+}
+
+.total{
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.totalNum{
+    color: var(--black);
+    font-weight: 700;
+}
+
 .cartProducts{
-    padding: 1rem;
+    padding: 12px;
     background-color: white;
-    margin: 1rem 0;
+    margin: 10px 0;
+    text-transform: uppercase;
 }
 
 .table{
     width: 100%;
-    margin: 2rem 0;
+    margin: 30px 0;
 }
 
 .tr{
@@ -43,9 +62,11 @@
 }
 
 .noProducts{
-    margin-top: 1rem;
-    font-size: 1.8rem;
+    margin-top: 10px;
+    font-size: 20px;
     font-weight: 800;
+    text-transform: uppercase;
+    color: var(--primaryColor);
 }
 
 .cartBottom{
@@ -53,7 +74,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    margin-bottom: 4rem;
+    margin-bottom: var(--margin64);
 }
 
 .totalFlex{
@@ -61,7 +82,7 @@
     width: 100%;
     justify-content: flex-end;
     margin-right: 20px;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
 }
 
 .purchase{

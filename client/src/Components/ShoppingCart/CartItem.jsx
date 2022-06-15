@@ -74,15 +74,15 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
               <th className={styles.th}>
                 <div className={styles.centerButton}>
                   <div className={styles.addOneItem}>
-                    <button className={styles.button} onClick={delItem}>
+                    <span className={styles.button} onClick={delItem}>
                       -
-                    </button>
+                    </span>
 
                     <div className={styles.count}>{quantity}</div>
 
-                    <button className={styles.button} onClick={addItem}>
+                    <span className={styles.button} onClick={addItem}>
                       +
-                    </button>
+                    </span>
                   </div>
                 </div>
               </th>
