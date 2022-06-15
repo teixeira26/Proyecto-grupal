@@ -144,11 +144,8 @@ button{
   color: var(--tintColor);
 }
 
-.buttonNoBorde{
-  border: none;
-}
-
 .border-right{
   border-right: 10px;
 }
+
 
