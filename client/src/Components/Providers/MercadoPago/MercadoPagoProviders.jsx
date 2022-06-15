@@ -10,17 +10,12 @@ export default function MercadoPagoProviders ({id,eventType, price}) {
   const {user } = useAuth0();
   const dispatch = useDispatch()
 
-  console.log("ID FUERA PREF", id)
+  // console.log("ID FUERA PREF", id)
   localStorage.setItem("id", id)
   const getPreference = useCallback(async () => {
     const res = await fetchCTokenProvider(`events/checkout/`, {id, eventType, price,  user: user }, "POST");
    
-    console.log('res MP', res);
-    // function submit(id){
-    //   console.log("IDDDDDDDDDDDD",id)
-    //   // dispatch(selectedEvent(id))
-      
-    // }
+    // console.log('res MP', res);
     
     if(res.global){
     

@@ -174,7 +174,8 @@ router.post("/", async (req, res, next) => {
     petName,
     ownerName,
     providerName,
-    price
+    price,
+    numberOfBooking
   } = req.body;
 
   try {
@@ -223,7 +224,8 @@ router.post("/", async (req, res, next) => {
             petName,
             ownerName,
             providerName,
-            price
+            price,
+            numberOfBooking
           },
         });
         // actualizo la cantidad de allEvents
@@ -285,7 +287,8 @@ router.post("/", async (req, res, next) => {
             petName,
             ownerName,
             providerName,
-            price
+            price,
+            numberOfBooking
           },
         });
         // actualizo la cantidad de allEvents
@@ -325,7 +328,8 @@ router.post("/", async (req, res, next) => {
                         petName,
                         ownerName,
                         providerName,
-                        price
+                        price,
+                        numberOfBooking
                         
                     }
                 });
@@ -382,7 +386,8 @@ router.post("/", async (req, res, next) => {
                         petName,
                         ownerName,
                         providerName,
-                        price
+                        price,
+                        numberOfBooking
                         
                     }
                 });

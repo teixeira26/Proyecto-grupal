@@ -26,7 +26,30 @@ export default function BookingLodging() {
     const [bookingDays, setBookingDays] = useState([])
     const [bookingRealDays, setBookingRealDays] = useState([])
     const [ableDays, setAbleDays] = useState([]);
+    const [maxId, setMaxId] =useState(0)
     const navigate = useNavigate()
+
+    useEffect(()=>{
+        dispatch(getEvents())
+    }, [])
+
+    const events = useSelector(state => state.events)
+
+    useEffect(()=>{
+        if(events.length){
+            events.forEach(ev =>{
+                
+                console.log('ev', ev)
+                if(ev.numberOfBooking > maxId) setMaxId(ev.numberOfBooking+1) 
+                else setMaxId(maxId+1)              
+            })
+        }
+    }, [events])
+
+
+    
+    console.log('eventsAfuera', events)
+    console.log('maxId', maxId)
 
 
 
@@ -55,7 +78,8 @@ export default function BookingLodging() {
             providerEmail:providerEmail,
             ownerName:user.name,
             providerName: '',
-            price: ''
+            price: '',
+            numberOfBooking: 0
         },
         validationSchema: yup.object({
             petName: yup.string().required('Debes seleccionar una mascota'),
@@ -90,6 +114,7 @@ export default function BookingLodging() {
                               date: {
                                 day: bookingDays[x],
                               },
+                              numberOfBooking: maxId
                             };
                             console.log('formdata', formData)
                             await axios.post("http://localhost:3001/events", formData);
@@ -97,7 +122,7 @@ export default function BookingLodging() {
                         axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
                         console.log(formData);
                         Swal.fire('Evento confirmado!', '', 'success')
-                         navigate('/confirmar-reserva')
+                         navigate('/mis-servicios')
                     } else if (result.isDenied) {
                       Swal.fire('Los cambios no fueron guardados', '', 'info')
                     }
