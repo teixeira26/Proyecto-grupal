@@ -136,3 +136,7 @@ button{
   border: none;
 }
 
+.border-right{
+  border-right: 10px;
+}
+

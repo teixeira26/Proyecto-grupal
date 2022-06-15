@@ -93,7 +93,7 @@ function NavBar() {
           </NavLink>
 
           <NavLink to={user?'/providers':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para ver a los yumpys')}}>
-            Yumpys
+            Yumpis
           </NavLink>
 
           <NavLink to="/shop" className={styles.navLink}>

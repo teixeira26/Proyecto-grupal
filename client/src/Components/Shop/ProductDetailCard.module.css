@@ -76,7 +76,6 @@
 .stock{
     color: #bbb7ae;
     font-weight: 600;
-    margin-bottom: 1rem;
     text-transform: uppercase;
     font-size: 14px;
 }
@@ -85,10 +84,10 @@
 .button{
     background-color: white;
     padding: 0;
-    font-size: 1.6rem;
+    font-size: var(--p);
     width: 30px;
     max-height: fit-content;
-    color: #0f0b02;
+    color: var(--black);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -108,8 +107,8 @@
 }
 
 .count{
-    margin: 0 1.5rem;
-    font-size: 1.8rem;
+    margin: 0 14px;
+    font-size: 18px;
 }
 
 .detailAddCart{
@@ -119,21 +118,6 @@
     margin-top: 10px;
 }
 
-
-.addButtonCart{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 4rem;
-    width: 70%;
-    margin-top: 1rem;
-    border-radius: 25px;
-    text-transform: uppercase;
-    background-color: #7e52a0;
-    color: #ffffff;
-    font-weight: 600;
-}
-
 .profile{
     display: flex;
     align-items: center;
@@ -141,7 +125,7 @@
 }
 
 .cartQuantity{
-    color: #7e52a0;
+    color: var(--primaryColor);
     margin: 10px 0px;
     margin-top: 10px;
 }

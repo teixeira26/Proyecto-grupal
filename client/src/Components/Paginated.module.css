@@ -1,0 +1,8 @@
+.flex{
+    display: flex;
+    margin-top: 20px;
+}
+
+.marginButton{
+    margin: 0 8px;
+}

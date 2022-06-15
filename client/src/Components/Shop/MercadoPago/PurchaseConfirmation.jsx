@@ -70,11 +70,12 @@ export default function PurchaseConfirmation() {
             </div>
             
 
-            <Link to="/mi-carrito">
-              <button className="secondaryButton">Volver al carrito</button>
-            </Link>
+            
           </div>
         </div>
+        <Link to="/mi-carrito">
+              <button className="secondaryButton">Volver al carrito</button>
+            </Link>
       </div>
 
       <Footer />
