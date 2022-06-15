@@ -40,14 +40,14 @@ export default function PutReview() {
       console.log(formData);
       // await dispatch(putOwnerInfo(formData.email, formData));
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés modificar tu reseña?',
         showDenyButton: true,
-        confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
+        confirmButtonText: 'Modificar',
+        denyButtonText: `Cancelar`,
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Informaciones guardadas!', '', 'success')
+          Swal.fire('¡Tu reseña fue modificada con éxito!', '', 'success')
           await axios.put('http://localhost:3001/reviews', formData)
           navigate('/inicio')
         } else if (result.isDenied) {
@@ -74,8 +74,6 @@ export default function PutReview() {
               error={formik.errors.message}
             ></Form.Input>
             
-            
-            
             <button className={style.star}
             onClick={()=>{formik.values.review = 1} }
             value='1'name="review">{formik.values.review>=1?'★':'☆'}</button>
@@ -92,8 +90,6 @@ export default function PutReview() {
             onClick={()=>{formik.values.review = 5} }
             value='5'>{formik.values.review===5?'★':'☆'}</button>
             
-
-         
             <Button type="submit">Enviar</Button>
           </Form>
         </div>

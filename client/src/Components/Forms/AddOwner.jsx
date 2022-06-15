@@ -73,7 +73,7 @@ export default function AddOwner() {
                         value={owner.email} />
                 </div>
                 <br />
-                <button type='submit'> Crear perfil </button>
+                <button type='submit'>Crear perfil</button>
             </form>
         </div>
     )

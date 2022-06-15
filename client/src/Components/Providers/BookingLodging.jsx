@@ -25,7 +25,7 @@ export default function BookingLodging() {
     const [myInfo, setMyinfo] = useState();
     const [bookingDays, setBookingDays] = useState([])
     const [bookingRealDays, setBookingRealDays] = useState([])
-    const [ableDays, setAbleDays] = useState();
+    const [ableDays, setAbleDays] = useState([]);
     const navigate = useNavigate()
 
 
@@ -231,14 +231,14 @@ export default function BookingLodging() {
                         endDate={endDate}
                         selectsRange
                         // filterDate={disableDates}
-                        includeDates={ableDays&&ableDays.map(x=>{
+                        includeDates={ableDays && ableDays.length ? ableDays.map(x=>{
                             const dayTemp = x.split('/')[0]
                             const monthTemp = x.split('/')[1]
                             let newDate = x.split('/');
                             newDate[0] = monthTemp;
                             newDate[1] = dayTemp
                             return (addDays(new Date(newDate.join('/')), 0))
-                        })}//'06/31/2022'
+                        }): [] }//'06/31/2022'
                         inline
                     />
                     <h2>días disponibles</h2>

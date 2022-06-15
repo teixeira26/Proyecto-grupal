@@ -1,0 +1,19 @@
+.start {
+    display: flex;
+    align-items: center;
+    padding: 4em;
+}
+
+.start img {
+    height: 50vh;
+}
+
+.end {
+    display: flex;
+    align-items: center;
+    padding: 4em;
+}
+
+.end img {
+    height: 50vh;
+}

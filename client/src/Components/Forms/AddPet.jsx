@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { Form } from "semantic-ui-react";
+import { Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
@@ -32,11 +32,11 @@ export default function InfoProvider() {
       photos: [],
     },
     validationSchema: yup.object({
-      name: yup.string().required(),
-      race: yup.string().required(),
-      size: yup.string().required(),
-      type: yup.string().required(),
-      description: yup.string().required(),
+      name: yup.string().required('Ponle un nombre a tu mascota'),
+      race: yup.string().required('Indícanos de qué raza es tu mascota'),
+      size: yup.string().required('Indícanos de qué tamaño es tu mascota'),
+      type: yup.string().required('Indícanos qué tipo de animal es tu mascota'),
+      description: yup.string().required('Dejanos una breve descripción de tu mascota')
     }),
 
     onSubmit: async (formData) => {
@@ -66,6 +66,7 @@ export default function InfoProvider() {
       <div className={inContainer.container}>
         <div className={style.container}>
           <h2>Agrega una mascota</h2>
+          <p>Ingresa información como su nombre, raza y tamaño. También podrás agregar una foto para que podamos verla!</p>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Input
               type="text"
@@ -74,17 +75,21 @@ export default function InfoProvider() {
               onChange={formik.handleChange}
               error={formik.errors.name}
             ></Form.Input>
+            <Form.Dropdown
+              placeholder="Tipo de mascota"
+              options={categoriesOptionsType}
+              onChange={(e) => {
+                e.target.value = e.target.firstChild.textContent;
+                e.target.name = "type";
+                formik.handleChange(e);
+              }}
+              selection={true}
+              error={formik.errors.type}
+            ></Form.Dropdown>
             <Form.Input
               type="text"
               placeholder="Raza"
               name="race"
-              onChange={formik.handleChange}
-              error={formik.errors.race}
-            ></Form.Input>
-            <Form.Input
-              type="text"
-              placeholder="Descripción"
-              name="description"
               onChange={formik.handleChange}
               error={formik.errors.race}
             ></Form.Input>
@@ -102,17 +107,15 @@ export default function InfoProvider() {
               selection={true}
               error={formik.errors.size}
             ></Form.Dropdown>
-            <Form.Dropdown
-              placeholder="Tipo de animal"
-              options={categoriesOptionsType}
-              onChange={(e) => {
-                e.target.value = e.target.firstChild.textContent;
-                e.target.name = "type";
-                formik.handleChange(e);
-              }}
-              selection={true}
-              error={formik.errors.type}
-            ></Form.Dropdown>
+            <Form.Input
+              type="text"
+              placeholder="Descripción"
+              name="description"
+              onChange={formik.handleChange}
+              error={formik.errors.race}
+            ></Form.Input>
+            <label htmlFor="">Selecciona una foto de tu mascota</label>
+            <br />
             <Widget
               publicKey="269841dc43864e62c49d"
               id="file"
@@ -124,10 +127,8 @@ export default function InfoProvider() {
               perrito="profilePicture"
             />
             <div className={style.buttons}>
-              <Link to="/profile">
-                <button className={global.buttonSec}>Cancelar</button>
-              </Link>
-              <button type="submit">Confirmar</button>
+              <Link to="/mi-perfil"><Button>Cancelar</Button></Link>
+              <Button type="submit">Agregar mascota</Button>
             </div>
           </Form>
         </div>
