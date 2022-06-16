@@ -2,7 +2,7 @@
     display: flex;
     align-items: center;
     gap: 64px;
-    margin-top: 24px;
+    margin: 40px 0px;
 }
 
 .data {
@@ -80,9 +80,29 @@
     font-weight: 400;
 }
 
+.sched {
+    margin: 40px 0px;
+}
+
 .gridSchedule {
     display: flex;
+    width: 80%;
+    flex-wrap: wrap;
+    margin: 16px 0px;
+}
+
+.titleSchedule {
+    display: flex;
     justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.scheduleDate{
+    color: var(--black);
+    font-size: var(--p);
+    font-weight: 600;
+    margin-right: 16px;
 }
 
 .housingGrid {

@@ -64,18 +64,20 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                     <h2 className={style.about}>Sobre {name}</h2>
                     <p className={style.paragraphDescription}>{description}</p>
                 </div>
-                <div>
-                    <h2 className={style.about}>Chequeá su disponibilidad</h2>
-                    <div className={style.gridSchedule}>
-                        {Object.keys(schedule).map((key) => {
-                            return [key, schedule[key]]
-                        })}
+                <div className={style.sched}>
+                    <div className={style.titleSchedule}>
+                        <h2 className={style.about}>Chequeá su disponibilidad</h2>
                         {service == 'hospedaje' ? <Link to={`/reservar-hospedaje/${email}`}><button className="primaryButton">Reservar servicio</button></Link> : null}
                         {service == 'paseo' ? <Link to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></Link> : null}
                     </div>
+                    <div className={style.gridSchedule}>
+                        {Object.keys(schedule).map((key) => {
+                            return <p className={style.scheduleDate}>{[schedule[key]]}</p>
+                        })}
+                    </div>
                 </div>
                 {(providerInfo && providerInfo.service[0] === 'hospedaje') ?
-                    <div>
+                    <div className={style.sched}>
                         <h2 className={style.about}>Este es el hogar de {name}</h2>
                         <div className={style.housingGrid}>
                             {providerInfo.housingPhotos && providerInfo.housingPhotos.map((x, y) => {
@@ -89,7 +91,7 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                 <div className={style.reviews}>
                     <div className={style.gridReview}>
                         <h2 className={style.about}>Reseñas que recibió</h2>
-                        <Link to={`/reseña/${email}`}><button className="primaryButton">Calificar</button></Link>
+                        <Link to={`/resena/${email}`}><button className="primaryButton">Calificar</button></Link>
                     </div>
                     {reviews && reviews.map((x, y) => {
                         if (y < 5) {
@@ -108,7 +110,7 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                         }
                     })}
                 </div>
-                <div>
+                <div className={style.sched}>
                     <h2 className={style.about}>Mirá el rango donde trabaja {name}</h2>
                     <Map className={style.map}
                         center={{
