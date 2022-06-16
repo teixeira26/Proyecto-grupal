@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getOwners, getProviders, putOwnerInfo, getReviews } from "../../redux/actions/ownProvActions";
 import { useEffect } from "react";
 import Button from "@material-ui/core/Button";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import TableCell from "@mui/material/TableCell";
@@ -42,7 +42,18 @@ export default function ProductsList() {
 
   const providers = useSelector((state) => state.providers);
 
-console.log(reviews)
+  function hired(id) {
+    localStorage.setItem("idUser", id)
+    navigate(`/admin/servicios-contratados/`)
+  }
+
+  function offer(id) {
+    localStorage.setItem("idUser", id)
+    navigate(`/admin/prestación-servicios/`)
+  }
+
+
+
 
 
   function ban(useremail) {
@@ -86,15 +97,10 @@ console.log(reviews)
     { field: "email", headerName: "Email", minWidth: 200 },
     { field: "name", headerName: "Nombre", minWidth: 150 },
     { field: "lastName", headerName: "Apellido", minWidth: 150 },
-    { field: "service", headerName: "Ofrece Servicio", minWidth: 150 },
+    // { field: "service", headerName: "Ofrece Servicio", minWidth: 150 },
     { field: "raiting", 
       renderCell:(cellValues) =>{
-        let rev = reviews?.find((el) => el.providerEmail === cellValues.id)
-        console.log('reviews', reviews)
-        console.log('rev',rev)
-        console.log('cellValues',cellValues)
-   
-       
+        let rev = reviews?.find((el) => el.providerEmail === cellValues.id)       
        if (rev) 
         return <div style={{display:'inline'}}>
         <p className={style.star}>{rev.review>=1?'★':'☆'}</p>
@@ -110,22 +116,35 @@ console.log(reviews)
     },
 { field: '', headerName: '', maxWidth: 80 },
 
-    { field: "state", headerName: "Estado", minWidth: 150 },
+    // { field: "state", headerName: "Estado", minWidth: 150 },
+    {
+      field: 'Servicios contratados',
+      renderCell: (cellValues) => {
+        return <Button onClick={() => hired(cellValues.id)}>VER</Button>;
+      }, minWidth: 150
+    },
+    {
+      field: 'Servicios ofrecidos',
+      renderCell: (cellValues) => {
+        return <Button onClick={() => offer(cellValues.id)}>VER</Button>;
+      }, minWidth: 150
+    },
+
     { field: "ban", headerName: "Baneado", minWidth: 150 },
 
     {
       field: ban, 
       renderCell: (cellValues) => {
-        console.log('cellValues',cellValues)
         return cellValues.row.ban === 'BANEADO'?  
          <Button onClick={()=>unBan(cellValues.row.email)}>HABILITAR</Button> :
          <Button onClick={()=>ban(cellValues.row.email)}>BANEAR</Button>;
       },
     },
+
+
   ];
 
   const rows = users.map((us) => {
-    console.log('reviews', reviews)
 
     return {
       id: us.email,
@@ -133,10 +152,10 @@ console.log(reviews)
       email: us.email,
       name: us.name,
       lastName: us.lastName,
-      service: providers.find((el) => el.email === us.email) ? "SÍ" : "NO",
+      // service: providers.find((el) => el.email === us.email) ? "SÍ" : "NO",
       '': (() => {let rev = reviews?.find((el) => el.providerEmail === us.email )
                           return rev? rev.review : null })(),
-      state: us.isActive ? "ACTIVO" : "INACTIVO",
+      // state: us.isActive ? "ACTIVO" : "INACTIVO",
       ban: us.isBanned ? "BANEADO" : null,
     };
   });

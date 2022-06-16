@@ -26,7 +26,6 @@ const Confirmation = () => {
   let collection_id = query.get("collection_id");
   console.log("COLLECIOOOOOOOOOOOOOOOOON", collection_id);
   let status = query.get("status");
-//   const idCliente = localStorage.getItem("IdCliente");
   const eventID = useSelector(state => state.selectedEvent)
 
   useEffect(() => {
@@ -39,7 +38,6 @@ const Confirmation = () => {
     (async () => {
       if (payment_id !== null && status === "approved") {
         setCompraExitosa("comprado");
-        // dispatch(getEvents())
 
         let res = await axios.get(
           `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-7012537343723443-053123-5facd15f88649bf31385f5ab06f47cb9-1134140317`

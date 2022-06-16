@@ -72,7 +72,7 @@ export default function Profile() {
                         userData.isAdmin ?
                             <div>
                                 <Link to='/admin/listado-productos'><button>Ver listado de productos en Petshop</button></Link>
-                                <Link to='/admin/sales-receipts'><button>Ver listado de comprobantes de compra</button></Link>
+                                <Link to='/admin/ventas-petshop'><button>Ver listado de comprobantes de compra</button></Link>
                                 <Link to='/admin/get-users'><button>Ver listado de usuarios registrados</button></Link>
                             </div>
                             : null
