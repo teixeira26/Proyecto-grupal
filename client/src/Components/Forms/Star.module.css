@@ -1,12 +1,21 @@
 .container{
-    min-height: 60vh;
+    min-height: 70vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
 }
 
+.stars {
+    margin-bottom: 16x;
+}
+
 .star{
     background-color: unset;
-    color:black;
+    color:var(--shadowColor);
     font-size: 3rem;
+}
+
+.buttonGroup {
+    margin-top: 16px;
+    gap: 16px;
 }

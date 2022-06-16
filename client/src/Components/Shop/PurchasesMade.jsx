@@ -29,7 +29,6 @@ export default function PurchasesMade() {
   return (
     <>
       <NavBar />
-      
       <div className={InContainer.container}>
       <NavLink to="/mi-perfil">
           <img

@@ -1,10 +1,7 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
 
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap%22");
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -18,17 +15,16 @@ body {
   font-family: "Nunito", sans-serif;
 }
 
-
-html{
+html {
   scroll-behavior: smooth;
   font-size: 14px;
 }
 
-ul{
+ul {
   list-style: none;
 }
 
-a{
+a {
   text-decoration: none;
 }
 
@@ -42,7 +38,7 @@ a {
   font-family: "Nunito", sans-serif;
 }
 
-ion-icon{
+ion-icon {
   margin: 0;
 }
 
@@ -58,7 +54,7 @@ ion-icon{
   gap: 1rem;
 }
 
-:root{
+:root {
   /* Colors */
   --primaryColor: #7e52a0;
   --shadowColor: #593a71;
@@ -77,7 +73,7 @@ ion-icon{
   --regularFont: 32px;
   --p: 18px;
   --h4: 14px;
-  
+
   /* --h2: 
   --h3: 
   --h5:
@@ -91,7 +87,7 @@ button{
   border: none;
 }
 
-.primaryButton{
+.primaryButton {
   width: auto;
   padding: 16px;
   border: none;
@@ -104,13 +100,14 @@ button{
   background-color: var(--shadowColor);
   margin: 0;
 }
-.primaryButton:hover{
+
+.primaryButton:hover {
   background-color: var(--tintColor);
   color: var(--shadowColor);
   border-color: var(--tintColor);
 }
 
-.secondaryButton{
+.secondaryButton {
   width: auto;
   padding: 16px;
   border: none;
@@ -123,13 +120,13 @@ button{
   background-color: transparent;
 }
 
-.secondaryButton:hover{
+.secondaryButton:hover {
   background-color: var(--tintColor);
   color: var(--white);
   border-color: var(--tintColor);
 }
 
-.terciaryButton{
+.terciaryButton {
   width: auto;
   border: none;
   cursor: pointer;
@@ -140,11 +137,11 @@ button{
   font-size: var(--p);
 }
 
-.terciaryButton:hover{
+.terciaryButton:hover {
   color: var(--tintColor);
 }
 
-.buttonNoBorde{
+.buttonNoBorde {
   border: none;
   cursor: pointer;
   color: var(--tintColor);
@@ -154,10 +151,10 @@ button{
   font-size: var(--p);
 }
 
-.border-right{
+.border-right {
   border-right: 10px;
 }
 
-.margin-right{
+.margin-right {
   margin-right: 8px;
 }

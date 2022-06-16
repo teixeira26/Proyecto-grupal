@@ -28,10 +28,8 @@ export default function Contact({ user }) {
               <div className={styles.margin}>
                 <button className="secondaryButton">Cancelar</button>
               </div>
-             
               <button className="primaryButton">Enviar mensaje</button>
               </div>
-              
             </Form>
           </div>
         </div>

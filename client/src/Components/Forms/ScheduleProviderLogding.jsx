@@ -82,18 +82,18 @@ export default function ScheduleProviderLogdifalseng() {
       };
 
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
-        confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
+        denyButtonText: `Cancelar`,
+        confirmButtonText: 'Guardar'
       }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Informaciones guardadas!', '', 'success')
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           await axios.put('https://proyecto-grupal.herokuapp.com/events/schedule', formData);
           navigate('/mi-perfil')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
         }
       })
 
@@ -162,7 +162,7 @@ export default function ScheduleProviderLogdifalseng() {
               )
             }) : null}
 
-            <Button type="submit">Enviar</Button>
+            <button className="primaryButton" type="submit">Enviar</button>
           </Form>
         </div>
       </Container>

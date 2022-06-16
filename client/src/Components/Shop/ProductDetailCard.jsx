@@ -34,7 +34,11 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
     if (count < limit) {
       setCount(count + 1);
     } else {
-      Swal.fire(`Estás intentando agregar más productos de los que hay en stock`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Estás intentando agregar más productos de los que hay en stock',
+      })
     }
   };
 
@@ -58,7 +62,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
           autoClose: 2000,
           hideProgressBar: false,
           closeOnClick: true,
-          pauseOnHover: true,
+          pauseOnHover: false,
           draggable: true,
           progress: undefined,
         });
@@ -70,7 +74,11 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
         quantity: count,
       });
     } else {
-      Swal.fire(`Estás intentando agregar más productos de los que hay en stock`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Estás intentando agregar más productos de los que hay en stock',
+      })
     }
   };
 

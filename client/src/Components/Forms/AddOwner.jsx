@@ -34,7 +34,7 @@ export default function AddOwner() {
                 lastName: '',
                 email: ''
             })
-            navigate('/agregarMascota')
+            navigate('/agregar-mascota')
         } catch (err) {
             Swal.fire({
                 icon: 'error',

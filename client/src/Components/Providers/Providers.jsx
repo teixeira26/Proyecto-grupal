@@ -13,7 +13,6 @@ import NoResults from '../../Views/Profile/NoResultsProviders';
 import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Providers() {
-
     const dispatch = useDispatch();
     const [reviews, setReviews] = useState([]);
     const [valueService, setValueService] = useState('servicio');
@@ -32,7 +31,7 @@ export default function Providers() {
     }, [providers])
 
     const [currentPage, setCurrentPage] = useState(1);
-    const initialStateProvidersPerPage = 9;
+    const initialStateProvidersPerPage = 12;
     const [providersPerPage, setProvidersPerPage] = useState(initialStateProvidersPerPage);
     const indexOfLastProvider = currentPage * providersPerPage;
     const indexOfFirstProvider = indexOfLastProvider - providersPerPage;
