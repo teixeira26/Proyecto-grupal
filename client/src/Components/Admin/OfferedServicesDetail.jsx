@@ -13,25 +13,25 @@ import { useNavigate } from "react-router-dom"
 
 
 
-export default function OfferedServicesDetail (){
+export default function HiredServicesDetail (){
 
 
 
 const { user } = useAuth0();
   const dispatch = useDispatch();
   const idUser = localStorage.getItem("idUser")
+  console.log(idUser)
   const navigate = useNavigate()
 
 
   useEffect(()=>{
     dispatch(getEvents())
-    dispatch(getOwnerById(idUser))
+    dispatch(getProviderById(idUser))
 }, [dispatch])
 
   let events = useSelector(state => state.events)
-  const owner = useSelector(state => state.owners)
-
-  console.log('owner', owner)
+  const provider = useSelector(state => state.providers)
+console.log(provider)
 
   let agrupacion = []
   while(events.length > 0){
@@ -45,14 +45,14 @@ const { user } = useAuth0();
   events = newEvents
       }
 
-  let userEvents = agrupacion.filter(ev => ev[0].ownerEmail === owner[0].email)
-  console.log('userEvents', userEvents)
+  let userEvents = agrupacion.filter(ev => ev[0].providerEmail === provider[0].email)
+   console.log('userEvents', userEvents)
 
 
   const columns = [
-    { field: "id", headerName: "ID", minWidth: 50 },
-    { field: "email", headerName: "Usuario", minWidth: 175 },
-    { field: "proveider", headerName: "Proveedor", minWidth: 175 },
+    { field: "id", headerName: "ID", minWidth: 35 },
+    { field: "email", headerName: "Proveedor", minWidth: 175 },
+    { field: "client", headerName: "Cliente", minWidth: 175 },
     { field: "eventType", headerName: "Event Type", minWidth: 150 },
     { field: "petName", headerName: "Pet Name", minWidth: 150 },
     { field: "servicePrice", headerName: "Service Price", minWidth: 150 },
@@ -65,13 +65,13 @@ const { user } = useAuth0();
 
         return {
           id: ev[0].numberOfBooking,
-          email: ev[0].ownerEmail,
-          proveider: ev[0].providerEmail,
+          email: ev[0].providerEmail,
+          client: ev[0].ownerEmail,
           eventType: ev[0].eventType,
           petName: ev[0].petName,
           servicePrice: ev[0].price*ev.length,
-          paymentStatus: ev[0].payment,
-          idPayment: ev[0].idMP? ev[0].idMP : 'pending' ,}})
+          paymentStatus: ev[ev.length-1].payment,
+          idPayment: ev[ev.length-1].idMP? ev[0].idMP : 'pending' ,}})
 
           function back(){
             navigate('/admin/get-users')
@@ -84,7 +84,7 @@ const { user } = useAuth0();
         <Table stickyHeader aria-label="sticky table">
           <TableRow stickyHeader aria-label="sticky table">
             <TableCell align="center" colSpan={7}>
-              SERVICIOS CONTRATADOS
+              PRESTACIÓN DE SERVICIOS
             </TableCell>
           </TableRow>
         </Table>
@@ -104,3 +104,4 @@ const { user } = useAuth0();
     )
 
 }
+

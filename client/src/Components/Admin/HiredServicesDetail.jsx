@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom"
 
 
 
-export default function HiredServicesDetail (){
+export default function OfferedServicesDetail (){
 
 
 
@@ -25,12 +25,13 @@ const { user } = useAuth0();
 
   useEffect(()=>{
     dispatch(getEvents())
-    dispatch(getProviderById(idUser))
+    dispatch(getOwnerById(idUser))
 }, [dispatch])
 
   let events = useSelector(state => state.events)
-  const proveider = useSelector(state => state.proveiders)
+  const owner = useSelector(state => state.owners)
 
+  console.log('owner', owner)
 
   let agrupacion = []
   while(events.length > 0){
@@ -44,13 +45,14 @@ const { user } = useAuth0();
   events = newEvents
       }
 
-  let userEvents = agrupacion.filter(ev => ev[0].proveiderEmail === proveider[0].email)
+  let userEvents = agrupacion.filter(ev => ev[0].ownerEmail === owner[0].email)
   console.log('userEvents', userEvents)
 
 
   const columns = [
-    { field: "id", headerName: "ID", minWidth: 50 },
-    { field: "email", headerName: "Email", minWidth: 150 },
+    { field: "id", headerName: "ID", minWidth: 35 },
+    { field: "email", headerName: "Usuario", minWidth: 175 },
+    { field: "proveider", headerName: "Proveedor", minWidth: 175 },
     { field: "eventType", headerName: "Event Type", minWidth: 150 },
     { field: "petName", headerName: "Pet Name", minWidth: 150 },
     { field: "servicePrice", headerName: "Service Price", minWidth: 150 },
@@ -63,12 +65,13 @@ const { user } = useAuth0();
 
         return {
           id: ev[0].numberOfBooking,
-          email: ev[0].ownerName,
+          email: ev[0].ownerEmail,
+          proveider: ev[0].providerEmail,
           eventType: ev[0].eventType,
           petName: ev[0].petName,
           servicePrice: ev[0].price*ev.length,
-          paymentStatus: ev[0].payment,
-          idPayment: ev[0].idMP? ev[0].idMP : 'pending' ,}})
+          paymentStatus: ev[ev.length-1].payment,
+          idPayment: ev[ev.length-1].idMP? ev[ev.length-1].idMP : 'pending' ,}})
 
           function back(){
             navigate('/admin/get-users')

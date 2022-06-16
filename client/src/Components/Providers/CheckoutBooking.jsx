@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import { useState } from "react";
 
@@ -8,11 +8,11 @@ import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getEvents, getPets, groupEvents } from "../../redux/actions/ownProvActions";
-import MercadoPagoProviders from "./MercadoPago/MercadoPagoProviders";
 
 export default function CheckoutBooking() {
   const { user } = useAuth0();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
 
   useEffect(()=>{
@@ -40,6 +40,12 @@ export default function CheckoutBooking() {
   
 
   console.log('agrupacion', agrupacion)
+
+  function checkoutMP(el){
+    localStorage.setItem("service", JSON.stringify(el))
+    navigate('/pagar-reserva')
+
+  }
     
   return (
     <>
@@ -53,17 +59,12 @@ export default function CheckoutBooking() {
             
               return el[0].payment=== 'pending'?(
               <div>
-              <h5>Día del evento: {el[0].date.day}</h5>
-              <h4>Fecha del evento: {el[0].date.realDate}</h4>
-              <p>Nombre del Yump: {el[0].providerName}</p>
-              <p>{el[0].date.hour}</p>
-              <p>{el[0].eventType}</p>
+              <h5>Fecha - Desde: {el[0].date.day} Hasta: {el[el.length-1].date.day}</h5>
+              <p> {el[0].date.hour? <p>Hora: {el[0].date.hour}</p> : null}</p> 
+              <p>Nombre del Yumpi: {el[0].providerName}</p>
+              <p>Tipo de servicio: {el[0].eventType}</p>
               <p>Mascota: {el[0].petName}</p>
-              <div>
-              <MercadoPagoProviders id={el[0].id}
-                                    eventType={el[0].eventType}
-                                    price={el[0].price * el.length}/>
-              </div>
+              {el[el.length-1].payment === 'pending'? <button onClick={()=>checkoutMP(el)}>PAGAR SERVICIO</button> : 'Tu servicio ya está pago :D'}
             </div>):null
 
             }) :null
