@@ -54,4 +54,19 @@ router.post("/", async (req, res, next) => {
   }
 });
 
+router.get('/:id', async (req, res, next) => {
+    const { id } = req.params;
+
+  let soldById
+
+  try {
+    soldById = await Sold.findByPk(id)
+      res.send(soldById)
+
+  } catch (error) {
+      next(error)
+  }
+
+})
+
 module.exports = router;

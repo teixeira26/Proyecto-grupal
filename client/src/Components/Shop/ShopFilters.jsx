@@ -20,7 +20,7 @@ const ShopFilters = () => {
   let [checkedTwo, setCheckedTwo] = useState(false);
   let [checkedThree, setCheckedThree] = useState(false);
 
-  useEffect(()=> {
+  useEffect(() => {
     dispatch(getProducts());
   }, [])
   // Hook search bar
@@ -28,13 +28,8 @@ const ShopFilters = () => {
     dispatch(searchBarProducts(inputSearchBar))
   }, [dispatch, inputSearchBar]);
 
-  useEffect(() => {
-    dispatch(getProducts())
-  }, [dispatch]);
-
-
   ///////////////////////////////////////////////
-  // Handles search bar
+  // Handle search bar
   ///////////////////////////////////////////////
   function onInputChangeSearchbar(e) {
     e.preventDefault();
@@ -72,18 +67,19 @@ const ShopFilters = () => {
     console.log("already", already);
 
     if (!already) {
-      setCheckedOne(!already);
+      //setCheckedOne(!already);
       setSelect(select = [...select, e.target.value]);
       console.log('select:::', select)
 
     }
     if (already) {
-      setCheckedOne(already);
+      //setCheckedOne(already);
       let aux = select.filter((el) => el !== selection);
       setSelect(select = aux);
       console.log('aux:::', aux)
     }
     dispatch(filterByCategory(select));
+    setCheckedOne(!already)
   }
 
   function checkCategoryTwo(e) {
@@ -92,17 +88,18 @@ const ShopFilters = () => {
     console.log("already", already);
 
     if (!already) {
-      setCheckedTwo(!already);
+      //setCheckedTwo(!already);
       setSelect(select = [...select, e.target.value]);
       console.log('select:::', select)
     }
     if (already) {
-      setCheckedTwo(already);
+      //setCheckedTwo(already);
       let aux = select.filter((el) => el !== selection);
       setSelect(select = aux);
       console.log('aux:::', aux)
     }
     dispatch(filterByCategory(select));
+    setCheckedTwo(!already);
   }
 
   function checkCategoryThree(e) {
@@ -111,17 +108,18 @@ const ShopFilters = () => {
     console.log("already", already);
 
     if (!already) {
-      setCheckedThree(!already);
+      //setCheckedThree(!already);
       setSelect(select = [...select, e.target.value]);
       console.log('select:::', select)
     }
     if (already) {
-      setCheckedThree(already);
+      //setCheckedThree(already);
       let aux = select.filter((el) => el !== selection);
       setSelect(select = aux);
       console.log('aux:::', aux)
     }
     dispatch(filterByCategory(select));
+    setCheckedThree(!already);
   }
 
   return (
@@ -160,7 +158,8 @@ const ShopFilters = () => {
           <input
             type="checkbox"
             value="alimento"
-            onChange={checkCategoryOne}
+            onClick={checkCategoryOne}
+            //onChange={checkCategoryOne}
             className={styles.inputCheck}
             checked={checkedOne}
           />
@@ -170,7 +169,7 @@ const ShopFilters = () => {
           <input
             type="checkbox"
             value="accesorios"
-            onChange={checkCategoryTwo}
+            onClick={checkCategoryTwo}
             className={styles.inputCheck}
             checked={checkedTwo}
           />
@@ -180,7 +179,7 @@ const ShopFilters = () => {
           <input
             type="checkbox"
             value="salud y bienestar"
-            onChange={checkCategoryThree}
+            onClick={checkCategoryThree}
             className={styles.inputCheck}
             checked={checkedThree}
           />

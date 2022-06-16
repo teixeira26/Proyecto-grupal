@@ -22,8 +22,11 @@ export default function SalesReceipts() {
 
   const solds = useSelector((state) => state.solds);
 
-  function detail() {
-    
+  function detail(id) {
+    localStorage.setItem("idProduct", id)
+    navigate(`/admin/ventas-petshop/${id}`)
+
+
   }
 
   const columns = [

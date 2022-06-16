@@ -9,4 +9,5 @@ export const FILTER_PROVIDER_PRICE = 'FILTER_PROVIDER_PRICE';
 export const GET_PETS = 'GET_PETS';
 export const GET_EVENTS = 'GET_EVENTS';
 export const GET_SOLDS = 'GET_SOLDS'
-export const GET_REVIEWS ='GET_REVIEWS'
+export const GET_REVIEWS ='GET_REVIEWS';
+export const ID_OWNER = 'ID_OWNER';
