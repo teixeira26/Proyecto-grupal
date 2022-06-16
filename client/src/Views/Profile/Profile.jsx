@@ -52,10 +52,13 @@ export default function Profile() {
   useEffect(()=>{
     if(user){
     axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
-        const providerCheck = x.data.find((x) => x.email === user.email);
-        if (providerCheck) {
+        let providerCheck = x.data.find((x) => x.email === user.email);
+        console.log(providerCheck)
+        if (providerCheck && providerCheck.service === 'paseo') {
+          providerCheck = {...providerCheck, schedule:providerCheck.schedule.map(x=>JSON.parse(x))}
           setIsProvider(true);
           setProviderInfo(providerCheck);
+          console.log(providerCheck)
         }
       })}
   }, [user])
@@ -143,6 +146,25 @@ export default function Profile() {
             <button>Editar horarios</button>
           </Link>
         </section>}
+
+        {providerInfo && providerInfo.schedule && providerInfo.service[0] === "paseo" && 
+        <section className={style.mainInfoProfile}>
+          <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
+          <br />
+          <br />
+          {console.log(providerInfo.schedule  )}
+          <div>{providerInfo.schedule[0] && providerInfo.schedule[0].lunes && providerInfo.schedule[0].lunes.map(x=><div><h3>Lunes</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[1] && providerInfo.schedule[1].martes && providerInfo.schedule[1].martes.map(x=><div><h3>Martes</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[2] && providerInfo.schedule[2].miercoles && providerInfo.schedule[2].miercoles.map(x=><div><h3>Miercoles</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[3] && providerInfo.schedule[3].jueves && providerInfo.schedule[3].jueves.map(x=><div><h3>Jueves</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[4] && providerInfo.schedule[4].viernes && providerInfo.schedule[4].viernes.map(x=><div><h3>Viernes</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[5] && providerInfo.schedule[5].sabado && providerInfo.schedule[5].sabado.map(x=><div><h3>Sabado</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[6] && providerInfo.schedule[6].domingo && providerInfo.schedule[6].domingo.map(x=><div><h3>Domingo</h3><p>{x}</p></div>)}</div>
+          <Link to="/misHorarios">
+          <button>Editar horarios</button>
+        </Link>
+        </section>
+      }
         <section>
           <h2 className={style.boxLabel}>Mis mascotas</h2>
           <div className={style.addPet}>

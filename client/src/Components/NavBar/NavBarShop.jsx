@@ -3,7 +3,6 @@ import styles from "./NavBarShop.module.css";
 import OutContainer from "../GlobalCss/OutContainer.module.css";
 import { useAuth0 } from "@auth0/auth0-react";
 import Login from "../Auth0/Login";
-import Logout from "../Auth0/Logout";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useState } from "react";
@@ -113,7 +112,7 @@ function NavBar() {
             </div>
 
             <div className={styles.icon}>
-              <NavLink to="/favoritos" className={styles.navLinkIcon}>
+              <NavLink to={user?'/favoritos':'/'} className={styles.navLinkIcon} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para agregar productos a favoritos')}}>
                 <img src="../../assets/img/favorite.svg" alt="" />
                 <div className={styles.circle}>{productsFavNumber}</div>
               </NavLink>
