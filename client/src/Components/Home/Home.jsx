@@ -92,7 +92,7 @@ const Home = () => {
         <div className={styles.container}>
           <h1 className={styles.homeTitle}>¿Qué estás buscando?</h1>
           <div className={styles.cardWrapper}>
-            <Link to="/providers">
+            <Link to="/yumpis">
               <HomeCard
                 name="Paseos y hospedaje"
                 img="assets/img/paseador.png"

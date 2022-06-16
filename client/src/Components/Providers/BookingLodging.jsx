@@ -8,7 +8,7 @@ import { getEvents, postEvent, getPets, getProviderById } from "../../redux/acti
 import { Form, Button } from "semantic-ui-react";
 import inContainer from '../GlobalCss/InContainer.module.css';
 import NavBar from "../NavBar/NavBarShop";
-
+import { cleanDetail } from "../../redux/actions/petshopActions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { addDays, getDay } from 'date-fns';
@@ -32,6 +32,10 @@ export default function BookingLodging() {
     useEffect(() => {
         dispatch(getEvents())
     }, [])
+
+    useEffect(()=>{
+        return ()=> dispatch(cleanDetail())
+      }, [dispatch])
 
     const events = useSelector(state => state.events)
 

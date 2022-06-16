@@ -25,7 +25,7 @@ const ProductDetail = () => {
   }, [dispatch, id]);
 
   useEffect( () => {
-      return dispatch(cleanDetail())
+      return ()=> dispatch(cleanDetail())
   }, [dispatch]);
 
   const allUsers = useSelector(state => state.owners);
@@ -54,7 +54,7 @@ const ProductDetail = () => {
                 />
               );
             })}
-            {userDb?.isAdmin? <Link to='/admin/listado-productos'><Button>VOLVER AL LISTADO</Button></Link> : null}
+            {userDb?.isAdmin? <Link to='/admin/listado-productos'><button className="primaryButton">VOLVER AL LISTADO</button></Link> : null}
       </div>
       <Footer />
     </div>

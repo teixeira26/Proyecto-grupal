@@ -47,7 +47,7 @@ export default function Profile() {
                         <h1 className={style.name}>{user.name}</h1>
                         <div>
                             <Link to="/mis-datos">
-                                <button className={style.data}>Editar perfil</button>
+                                <button className='terciaryButton'>Editar perfil</button>
                             </Link>
                         </div>
                     </article>
@@ -71,9 +71,9 @@ export default function Profile() {
                     {
                         userData.isAdmin ?
                             <div>
-                                <Link to='/admin/listado-productos'><button>Ver listado de productos en Petshop</button></Link>
-                                <Link to='/admin/ventas-petshop'><button>Ver listado de comprobantes de compra</button></Link>
-                                <Link to='/admin/get-users'><button>Ver listado de usuarios registrados</button></Link>
+                                <Link to='/admin/listado-productos'><button className="primaryButton">Ver listado de productos en Petshop</button></Link>
+                                <Link to='/admin/ventas-petshop'><button className="primaryButton">Ver listado de comprobantes de compra</button></Link>
+                                <Link to='/admin/get-users'><button className="primaryButton">Ver listado de usuarios registrados</button></Link>
                             </div>
                             : null
                     }

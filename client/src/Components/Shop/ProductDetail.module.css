@@ -18,7 +18,7 @@
 }
 
 .detailCategory{
-    color: gray;
+    color: var(--gray);
     margin: 0.5rem 0;
     font-weight: 400;
 }
@@ -30,7 +30,7 @@
 }
 
 .detailInfo{
-    color: gray;
+    color: var(--gray);
     margin-bottom: 1rem;
 }
 
@@ -41,7 +41,7 @@
 }
 
 .detailQuantity{
-    color: gray;
+    color: var(--gray);
     margin: 0;
     font-size: 1.6rem;
     text-transform: uppercase;
@@ -58,14 +58,14 @@
 }
 
 .button{
-    background-color: white;
+    background-color: var(--white);
     padding: 0;
     font-size: 1.6rem;
-    border: 1px solid gray;
+    border: 1px solid var(--gray);
     border-radius: 6px;
     width: 30px;
     height: 30px;
-    color: black;
+    color: var(--black);
     display: flex;
     align-items: center;
     justify-content: center;

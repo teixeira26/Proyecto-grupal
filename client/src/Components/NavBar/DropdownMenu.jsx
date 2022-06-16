@@ -23,7 +23,7 @@ const DropdownMenu = () => {
   useEffect(() => {
     if (user) {
       dispatch(chargeCart('cart'));
-      axios.get("http://localhost:3001/owners").then((x) => {
+      axios.get("https://proyecto-grupal.herokuapp.com/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
         console.log('USUARIO DB', userdb)
         if (userdb) {
@@ -90,7 +90,7 @@ const DropdownMenu = () => {
             <img src="../assets/img/person-outline.svg" alt="" className="person-outline"/>
             {
               userData.isAdmin ?
-              <NavLink to="/admin">Perfil</NavLink>
+              <NavLink to="/admin">Perfil Admin</NavLink>
                 : <NavLink to="/mi-perfil">Perfil</NavLink>
             }
           </li>

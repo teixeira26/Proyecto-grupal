@@ -144,7 +144,7 @@ export default function ProductsList() {
     };
   });
   function back(){
-    navigate('/admin/dashboard')
+    navigate('/admin')
   }
 
   return (

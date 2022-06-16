@@ -59,7 +59,7 @@ export default function SalesReceipts() {
   });
 
   function back(){
-    navigate('/admin/dashboard')
+    navigate('/admin')
   }
   
   return (

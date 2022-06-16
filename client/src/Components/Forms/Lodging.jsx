@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
@@ -11,6 +11,7 @@ import { putProvider } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import styles from "./Lodging.module.css";
+import InContainer from "../GlobalCss/InContainer.module.css"
 import Swal from "sweetalert2";
 
 export default function Lodging() {
@@ -70,6 +71,14 @@ export default function Lodging() {
   return (
     <div>
       <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/servicio">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={styles.leftArrow}
+          />
+        </NavLink>
       <Container>
         <div className={styles.container}>
           <h2>Contanos más acerca de lo que ofrecés</h2>
@@ -110,11 +119,17 @@ export default function Lodging() {
             ></Form.Input>
             <br />
             <br />
+            <div>
             <Link to='/mi-perfil'><button className="secondaryButton">Cancelar</button></Link>
             <button className="primaryButton" type="submit">Confirmar</button>
+            </div>
+            
+            
           </Form>
         </div>
       </Container>
+      </div>
+      
       <Footer />
     </div>
   );

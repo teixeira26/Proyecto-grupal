@@ -30,7 +30,9 @@ export default function Profile() {
     if(user){
     axios.get('https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC').then(info => {
         let data = info.data.find(x => x.email === user.email);
-        setAbleDays(data.schedule)
+        if(data && data.schedule){
+          setAbleDays(data.schedule)
+        }
     })}
 }, [user])
 
@@ -133,25 +135,22 @@ export default function Profile() {
                     <button className="secondaryButton">Mis compras</button>
                   </Link>
                 </div>
-
                 <div className={style.service}>
-                  <Link to="/calificacionesOwner">
+                  <Link to="/calificaciones-dueño">
                     <button className="secondaryButton">
                       Reseñas enviadas
                     </button>
                   </Link>
                 </div>
-
                 {isProvider && (
                   <div className={style.service}>
-                    <Link to="/calificacionesProvider">
+                    <Link to="/calificaciones-yumpis">
                       <button className="primaryButton">
                         Reseñas recibidas
                       </button>
                     </Link>
                   </div>
                 )}
-
                 {
                   <div className={style.service}>
                     <button className="primaryButton" onClick={myServices}>
@@ -178,7 +177,6 @@ export default function Profile() {
                 <h2 className={style.dayTitle} style={{ display: "block" }}>
                   Mis días de trabajo
                 </h2>
-
                 <DatePicker
                         // filterDate={disableDates}
                         includeDates={ableDays && ableDays.length ? ableDays.map(x => {
@@ -192,24 +190,22 @@ export default function Profile() {
                         inline
                     />
                 {console.log(providerInfo)}
-                
-                <Link to="/misHorariosHospedaje">
+                <Link to="/mis-horarios-hospedaje">
                   <button className="terciaryButton">Editar horarios</button>
                 </Link>
               </section>
             )}
           {providerInfo && providerInfo.service[0] === "hospedaje" && (
             <div>
-              <h3 className={style.hogar}>Mi dulce hogar</h3>
+              <h3 className={style.hogar}>Mi hogar</h3>
               <div className={style.buttonPhoto}>
                 <input
-                  className="secondaryButton"
+                  className="primaryButton"
                   type="button"
                   value="Agregar Foto"
                   onClick={() => navigate("/agregar-foto")}
                 />
               </div>
-
               <div className={style.housingGrid}>
                 {providerInfo.housingPhotos &&
                   providerInfo.housingPhotos.map((x, y) => {
@@ -285,12 +281,11 @@ export default function Profile() {
                     }
                   })
                 : null}
-              <Link to="/agregarmascota">
+              <Link to="/agregar-mascota">
                 <button className="primaryButton">Agregar mascota</button>
               </Link>
             </article>
           </section>
-
           {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
           <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
           <br/>
@@ -303,7 +298,6 @@ export default function Profile() {
           <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
-      
         </section>} */}
           {providerInfo &&
             providerInfo.schedule &&
@@ -313,21 +307,20 @@ export default function Profile() {
                 <br />
                 <br />
                 {console.log(providerInfo)}
-                <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
-                <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
+                <div>{providerInfo.schedule.lunes && <h3>Lunes</h3>}</div>
+                <div>{providerInfo.schedule.martes && <h3>Martes</h3>}</div>
                 <div>
-                  {providerInfo.schedule.miercoles && <h3>miércoles</h3>}
+                  {providerInfo.schedule.miercoles && <h3>Miércoles</h3>}
                 </div>
-                <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
-                <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
-                <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
-                <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
-                <Link to="/misHorariosHospedaje">
+                <div>{providerInfo.schedule.jueves && <h3>Jueves</h3>}</div>
+                <div>{providerInfo.schedule.viernes && <h3>Viernes</h3>}</div>
+                <div>{providerInfo.schedule.sabado && <h3>Sábado</h3>}</div>
+                <div>{providerInfo.schedule.domingo && <h3>Domingo</h3>}</div>
+                <Link to="/mis-horarios-hospedaje">
                   <button>Editar horarios</button>
                 </Link>
               </section>
             )}
-
           {providerInfo &&
             providerInfo.schedule &&
             providerInfo.service[0] === "paseo" && (
@@ -406,7 +399,7 @@ export default function Profile() {
                       </div>
                     ))}
                 </div>
-                <Link to="/misHorarios">
+                <Link to="/mis-horarios">
                   <button>Editar horarios</button>
                 </Link>
               </section>
@@ -438,7 +431,6 @@ export default function Profile() {
                 </div>
               )}
             </article>
-
             {isProvider && eventsProvider
               ? eventsProvider.map((x) => {
                   return (

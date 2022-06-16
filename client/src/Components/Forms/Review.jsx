@@ -69,22 +69,27 @@ export default function Review({ service }) {
               onChange={formik.handleChange}
               error={formik.errors.message}
             ></Form.Input>
-            <button className={style.star}
-              onClick={() => { formik.values.review = 1 }}
-              value='1' name="review">{formik.values.review >= 1 ? '★' : '☆'}</button>
-            <button className={style.star}
-              onClick={() => { formik.values.review = 2 }}
-              value='2'>{formik.values.review >= 2 ? '★' : '☆'}</button>
-            <button className={style.star}
-              onClick={() => { formik.values.review = 3 }}
-              value='3'>{formik.values.review >= 3 ? '★' : '☆'}</button>
-            <button className={style.star}
-              onClick={() => { formik.values.review = 4 }}
-              value='4'>{formik.values.review >= 4 ? '★' : '☆'}</button>
-            <button className={style.star}
-              onClick={() => { formik.values.review = 5 }}
-              value='5'>{formik.values.review === 5 ? '★' : '☆'}</button>
-            <Link to={`/providers/${providerEmail}`}>
+            <div className={style.stars}>
+              <button className={style.star}
+                onClick={() => { formik.values.review = 1 }}
+                value='1' name="review">{formik.values.review >= 1 ? '★' : '☆'}</button>
+              <button className={style.star}
+                onClick={() => { formik.values.review = 2 }}
+                value='2'>{formik.values.review >= 2 ? '★' : '☆'}</button>
+              <button className={style.star}
+                onClick={() => { formik.values.review = 3 }}
+                value='3'>{formik.values.review >= 3 ? '★' : '☆'}</button>
+              <button className={style.star}
+                onClick={() => { formik.values.review = 4 }}
+                value='4'>{formik.values.review >= 4 ? '★' : '☆'}</button>
+              <button className={style.star}
+                onClick={() => { formik.values.review = 5 }}
+                value='5'>{formik.values.review === 5 ? '★' : '☆'}</button>
+            </div>
+            <div>
+              
+            </div>
+            <Link to={`/yumpis/${providerEmail}`}>
               <button className="secondaryButton">Cancelar</button>
             </Link>
             <button className="primaryButton" type="submit">Enviar reseña</button>

@@ -39,11 +39,12 @@ const RatingsOwner = () => {
             <h2 style={{ display: "inline" }}>Mis calificaciones: </h2>
             <br />
             <br />
+            <div className={styles.contenedor}>
             <div style={{ marginBottom: 30 }}>
               {reviews && reviews.length
                 ? reviews.map((x, y) => {
                     return (
-                      <div key={y}>
+                      <div key={y} className={styles.contenedor}>
                         <hr />
                         <div>
                           <p className={style.star}>
@@ -74,7 +75,7 @@ const RatingsOwner = () => {
                           {x.provider.lastName}
                         </h4>
                         <Link
-                          to={`/cambiarCalificacion/${x.id}?providerEmail=${x.provider.email}`}
+                          to={`/cambiar-reseña/${x.id}?providerEmail=${x.provider.email}`}
                         >
                           <button style={{ display: "block" }} className='secondaryButton'>Cambiar</button>
                         </Link>
@@ -83,6 +84,8 @@ const RatingsOwner = () => {
                   })
                 : null}
             </div>
+            </div>
+            
           </div>
         </Container>
           </div>
