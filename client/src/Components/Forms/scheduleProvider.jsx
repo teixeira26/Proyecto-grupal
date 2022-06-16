@@ -6,7 +6,7 @@ import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getProviderById, getProviders, putOwnerInfo } from "../../redux/actions/ownProvActions";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import style from "./Star.module.css";
@@ -14,7 +14,6 @@ import axios from "axios";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
-
 
 export default function ScheduleProvider() {
   // const dispatch = useDispatch();
@@ -26,10 +25,6 @@ export default function ScheduleProvider() {
   const [time, setTime] = useState([]);
   const [bookingDay, setBookingDays] = useState([]);
 
-  
-  
-
-
   const formik = useFormik({
     initialValues: {
       lunes:[],
@@ -39,55 +34,49 @@ export default function ScheduleProvider() {
       viernes:[],
       sabado:[],
       domingo:[],
-
     },
     validationSchema: yup.object({
       // message: yup.string().required('Este es un campo requerido'),
     }),
 
-    
-
     onSubmit: async(formData) => {
       formData = {
         providerEmail:user.email,
         schedule:{...formData},
-       
       };
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
+        denyButtonText: `Cancelar`,
         confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Informaciones guardadas!', '', 'success')
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           await axios.put('http://localhost:3001/events/schedule',formData);
           navigate('/mi-perfil')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
         }
       })
-     
       // await dispatch(putOwnerInfo(formData.email, formData));
     },
   }); 
+
   const showInputs = (day, SetDay, stateDay)=>{
     return(<div>
-
-              
               {stateDay.map((x, y)=>{
               return (<div>
                 <input type='time'
                 indice = {y}
-                 onChange={(e)=>{
-                 formik.values[day].splice(y,1,e.target.value)
+                onChange={(e)=>{
+                formik.values[day].splice(y,1,e.target.value)
                   console.log(formik.values)
                 }
                 }></input>
               </div>)
             })}
-           <input type='button' onClick={()=>{
+            <input type='button' onClick={()=>{
             let stateDayLength = stateDay.length-1
             if(formik.values[day][stateDayLength]){
               console.log('ingreesé a donde deberia estar')
@@ -104,9 +93,9 @@ export default function ScheduleProvider() {
     var dif = fFecha2 - fFecha1;
     var dias = Math.floor(dif / (1000 * 60 * 60 * 24));
     return dias;
-   }
+  }
 
-   function sumarDias(fecha, dias){
+  function sumarDias(fecha, dias){
     console.log('fecha: ', fecha, 'dias: ', dias)
     fecha.setDate(fecha.getDate() + dias);
     return fecha;
@@ -139,23 +128,20 @@ export default function ScheduleProvider() {
     if(fechasSeleccionadas)setBookingDays(fechasSeleccionadas)
   }
 
-
   return (
     <div>
       <NavBar />
       <Container>
         <div className={style.container}>
-          <h2>Agregá un horario de trabajo</h2>
-
+          <h2>Agregá tu disponibilidad para trabajar</h2>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Input
               type="text"
-              placeholder="Contanos un poco más"
+              placeholder="Contanos un poco más..."
               name="message"
               onChange={formik.handleChange}
               error={formik.errors.message}
             ></Form.Input>
-            
             
             <DatePicker
                         selected={startDate}
@@ -177,7 +163,6 @@ export default function ScheduleProvider() {
                         inline
                         timeIntervals={60}
                     />
-                  
                     {time&&time.length?time.map(x=>{
                     return (
                       <div>
@@ -186,11 +171,8 @@ export default function ScheduleProvider() {
                       </div>
                     )
                   }):null}
-                   
-           
-
-         
-            <Button type="submit">Enviar</Button>
+            <Link to='/mi-perfil'><button className='secondaryButton'>Cancelar</button></Link>
+            <button className='primaryButton' type="submit">Agregar</button>
           </Form>
         </div>
       </Container>

@@ -74,7 +74,7 @@ export default function BookingLodging() {
             numberOfBooking: 0
         },
         validationSchema: yup.object({
-            petName: yup.string().required('Debes seleccionar una mascota'),
+            petName: yup.string().required('Tenés que elegir una mascota'),
         }),
         onSubmit: async (formData) => {
             console.log(ableDays);
@@ -93,10 +93,10 @@ export default function BookingLodging() {
             }
 
             Swal.fire({
-                title: 'Estás seguro que las informaciones sobre este evento son correctas ?',
+                title: '¿Estás seguro que querés confirmar esta reserva?',
                 showDenyButton: true,
-                confirmButtonText: 'Si',
-                denyButtonText: `No`,
+                denyButtonText: `Cancelar`,
+                confirmButtonText: 'Confirmar'
             }).then(async (result) => {
                 /* Read more about isConfirmed, isDenied below */
                 if (result.isConfirmed) {
@@ -113,10 +113,10 @@ export default function BookingLodging() {
                     }
                     axios.post('http://localhost:3001/mailer/', { email: user.email, subject: "Confirmación de reserva Yum Paw", text: "Recién hiciste una reserva en nuestra página, te felicitamos :)" })
                     console.log(formData);
-                    Swal.fire('Evento confirmado!', '', 'success')
+                    Swal.fire('¡La reserva fue confirmada con éxito!', '', 'success')
                     navigate('/mis-servicios')
                 } else if (result.isDenied) {
-                    Swal.fire('Los cambios no fueron guardados', '', 'info')
+                    Swal.fire('La reserva no fue confirmada.', '', 'info')
                 }
             })
 
@@ -210,7 +210,7 @@ export default function BookingLodging() {
 
                     <label htmlFor="">Tu mascota</label>
                     <Form.Dropdown
-                        placeholder="Elige una de tus mascotas"
+                        placeholder="Elegí una de tus mascotas"
                         options={petOptions}
                         onChange={(e) => {
                             console.log(e.target.firstChild.textContent)
@@ -227,7 +227,7 @@ export default function BookingLodging() {
                         {/* moment().format('MMMM Do YYYY, h:mm:ss a'); */}
 
                     </Form.Dropdown>
-                    <label htmlFor="">Elige un rango de fecha para el hospedaje de tu mascota</label>
+                    <label htmlFor="">Elegí un rango de fecha para el hospedaje de tu mascota</label>
                     <DatePicker
                         selected={startDate}
                         onChange={onChangeDatePicker}
@@ -246,7 +246,7 @@ export default function BookingLodging() {
                         }) : []}//'06/31/2022'
                         inline
                     />
-                    <h2>días disponibles</h2>
+                    <h2>Fechas disponibles del yumpi</h2>
                     {/* {ableDays?ableDays.map(x=><p>{x}</p>):null} */}
                     <label htmlFor="">Comentarios adicionales</label>
                     <textarea
@@ -255,9 +255,8 @@ export default function BookingLodging() {
                         }}
                     ></textarea>
 
-                    <Link to={`/chat/${providerEmail}/${ownerEmail}`}><Button>Cancelar</Button></Link>
-                    <button>Continuar con el pago</button>
-
+                    <Link to={`/chat/${providerEmail}/${ownerEmail}`}><button className="secondaryButton">Cancelar</button></Link>
+                    <button className="primaryButton">Continuar con el pago</button>
                 </Form>
             </div>
         </>

@@ -51,7 +51,7 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
             <tr className={styles.tr}>
               <th className={styles.th}>
                 <Link to={`/shop/${id}`}>
-                  <img src={image} alt="Pet App" width="100" height="100" />
+                  <img src={image} alt="producto-petshop" width="100" height="100" />
                 </Link>
               </th>
 

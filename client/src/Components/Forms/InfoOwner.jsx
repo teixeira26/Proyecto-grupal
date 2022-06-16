@@ -55,22 +55,21 @@ export default function InfoOwner() {
       console.log('Info Provider',infoProvider);
 
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
-        confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
+        denyButtonText: `Cancelar`,
+        confirmButtonText: 'Guardar'
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Informaciones guardadas!', '', 'success')
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           await dispatch(putOwnerInfo(formData.email, formData));
           await axios.put('http://localhost:3001/providers/', newInfoProvider)
           navigate("/mi-perfil");
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
         }
       })
-
     },
   });
 
@@ -79,7 +78,7 @@ export default function InfoOwner() {
       <NavBar />
       <Container>
         <div className={style.container}>
-          <h2>Cambia tus datos</h2>
+          <h2>Cambiá tus datos</h2>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Input
               type="text"

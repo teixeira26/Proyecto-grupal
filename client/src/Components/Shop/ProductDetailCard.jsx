@@ -21,8 +21,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
 
   useEffect(() => {
     dispatch(getProducts());
-   dispatch(chargeCart('cart'));
- 
+    dispatch(chargeCart('cart'));
   }, [dispatch, user]);
 
   const addItem = () => {
@@ -35,7 +34,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
     if (count < limit) {
       setCount(count + 1);
     } else {
-      Swal.fire(`Estas intentando agregar más productos de los que existen en stock`);
+      Swal.fire(`Estás intentando agregar más productos de los que hay en stock`);
     }
   };
 
@@ -71,7 +70,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
         quantity: count,
       });
     } else {
-      Swal.fire(`Estas intentando agregar más productos de los que existen en stock`);
+      Swal.fire(`Estás intentando agregar más productos de los que hay en stock`);
     }
   };
 

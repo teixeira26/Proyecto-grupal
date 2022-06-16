@@ -76,7 +76,7 @@ export default function Providers() {
                         className={styles.leftArrow}
                     />
                 </NavLink>
-                <h1 className={styles.providersTitle}>¡Conoce a nuestros yumpis!</h1>
+                <h1 className={styles.providersTitle}>¡Conocé a nuestros yumpis!</h1>
                 <div className={styles.providersFlex}>
                     <div className={styles.providersFilters}>
                         <section className={styles.selects}>

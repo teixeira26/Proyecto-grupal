@@ -36,34 +36,34 @@ export default function ProductsList() {
 
   function inactive(id) {
     Swal.fire({
-      title: 'zConfirme que desea desactivar esta publicación',
+      title: '¿Estás seguro que querés desactivar esta publicación?',
       showDenyButton: true,
-      confirmButtonText: 'Confirmar',
-      denyButtonText: `Descartar`,
+      denyButtonText: `Cancelar`,
+      confirmButtonText: 'Desactivar'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire('Publicación DESACTIVADA', '', 'success')
+        Swal.fire('¡La publicación quedó desactivada!', '', 'success')
         dispatch(putProduct(id, { isActive: false }))
         dispatch(getProducts())
       } else if (result.isDenied) {
-        Swal.fire('La publicación continúa ACTIVA', '', 'info')
+        Swal.fire('La publicación sigue activa.', '', 'info')
       }
     })
   }
 
   function active(id) {
     Swal.fire({
-      title: 'Confirme que desea activar esta publicación',
+      title: '¿Estás seguro que querés activar esta publicación?',
       showDenyButton: true,
-      confirmButtonText: 'Confirmar',
-      denyButtonText: `Descartar`,
+      denyButtonText: `Cancelar`,
+      confirmButtonText: 'Activar'
     }).then(async (result) => {
       if (result.isConfirmed) {
-        Swal.fire('Publicación ACTIVADA', '', 'success')
+        Swal.fire('¡La publicación fue activada!', '', 'success')
         dispatch(putProduct(id, { isActive: true }))
         dispatch(getProducts())
       } else if (result.isDenied) {
-        Swal.fire('La publicación continúa DESACTIVADA', '', 'info')
+        Swal.fire('La publicación sigue desactivada', '', 'info')
       }
     })
   }
@@ -81,8 +81,8 @@ export default function ProductsList() {
       field: null,
       renderCell: (cellValues) => {
         return cellValues.row.state === 'INACTIVO' ?
-          <Button onClick={() => active(cellValues.id)}>ACTIVAR</Button> :
-          <Button onClick={() => inactive(cellValues.id)}>DESACTIVAR</Button>;
+          <Button onClick={() => active(cellValues.id)}>Activar</Button> :
+          <Button onClick={() => inactive(cellValues.id)}>Desactivar</Button>;
       }
     },
 
@@ -91,14 +91,14 @@ export default function ProductsList() {
       renderCell: (cellValues) => {
         console.log('cellValues', cellValues)
         return (
-          <Button onClick={() => clickSelectProduct(cellValues.id)}>MODIFICAR</Button>
+          <Button onClick={() => clickSelectProduct(cellValues.id)}>Modificar</Button>
         );
       }
     },
     {
       field: 'Ver',
       renderCell: (cellValues) => {
-        return <Link to={`/shop/${cellValues.id}`}>VER</Link>;
+        return <Link to={`/shop/${cellValues.id}`}>Ver</Link>;
       }
     },
   ];
@@ -123,11 +123,11 @@ export default function ProductsList() {
   return (
     <>
       <NavBar />
-      <Button onClick={addProduct}>AGREGAR NUEVO PRODUCTO</Button>
+      <Button onClick={addProduct}>Agregar producto</Button>
       <Table stickyHeader aria-label="sticky table">
         <TableRow stickyHeader aria-label="sticky table">
           <TableCell align="center" colSpan={7}>
-            LISTADO DE PRODUCTOS
+            Lista de productos
           </TableCell>
         </TableRow>
       </Table>
@@ -135,7 +135,7 @@ export default function ProductsList() {
         <DataGrid rows={rows} columns={columns} components={{ Toolbar: GridToolbar }}
         />
       </div>
-      <Button onClick={back}>REGRESAR</Button>
+      <Button onClick={back}>Volver</Button>
       <Footer />
     </>
   );
