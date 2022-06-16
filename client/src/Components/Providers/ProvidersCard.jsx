@@ -23,7 +23,7 @@ export default function ProvidersCard({ name, lastName, email, profilePicture, p
           </div>
         </div>
         <div className={styles.buttonDiv}>
-          <Link to={`/providers/${email}`}>
+          <Link to={`/yumpis/${email}`}>
             <button className='secondaryButton'>Ver detalle</button>
           </Link>
         </div>

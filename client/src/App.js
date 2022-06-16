@@ -135,13 +135,13 @@ function App() {
             }
           />
           <Route
-            path="/providers"
+            path="/yumpis"
             element={
               isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Providers /> : <Loader />
             }
           />
           <Route
-            path="/providers/:name"
+            path="/yumpis/:name"
             element={
               isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <DetailProvider /> : <Loader />
             }

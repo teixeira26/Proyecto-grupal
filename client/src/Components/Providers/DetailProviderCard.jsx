@@ -6,6 +6,9 @@ import style from './DetailProviderCard.module.css'
 import axios from "axios";
 import { Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
 import CircleMarker from "../Map/CircleMarker";
+import { cleanDetail } from "../../redux/actions/petshopActions";
+import { useDispatch } from "react-redux";
+
 
 export default function DetailProviderCard({ name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule }) {
     // console.log(email)
@@ -17,6 +20,8 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
     const [quantityReviews, setquantityReviews] = useState(0)
     const [reviews, setReviews] = useState()
     const [providerInfo, setProviderInfo] = useState()
+    const dispatch = useDispatch();
+
     useEffect(() => {
         axios.get('https://proyecto-grupal.herokuapp.com/reviews').then(x => {
             let providerEvaluations = x.data.filter(x => x.provider.email === email);
@@ -38,7 +43,10 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                 setProviderInfo(providerCheck);
             })
         }
+
     }, [user])
+
+
     return (
         <>
             <section className={inContainer.container}>

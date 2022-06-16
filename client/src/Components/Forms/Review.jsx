@@ -84,7 +84,7 @@ export default function Review({ service }) {
             <button className={style.star}
               onClick={() => { formik.values.review = 5 }}
               value='5'>{formik.values.review === 5 ? '★' : '☆'}</button>
-            <Link to={`/providers/${providerEmail}`}>
+            <Link to={`/yumpis/${providerEmail}`}>
               <button className="secondaryButton">Cancelar</button>
             </Link>
             <button className="primaryButton" type="submit">Enviar reseña</button>

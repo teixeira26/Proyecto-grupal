@@ -25,7 +25,7 @@ const ProductDetail = () => {
   }, [dispatch, id]);
 
   useEffect( () => {
-      return dispatch(cleanDetail())
+      return ()=> dispatch(cleanDetail())
   }, [dispatch]);
 
   const allUsers = useSelector(state => state.owners);
