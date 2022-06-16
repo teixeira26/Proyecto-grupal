@@ -218,3 +218,15 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+.adminPanel{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.marginDiv{
+  margin: 32px 0;
+}

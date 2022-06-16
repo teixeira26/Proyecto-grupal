@@ -12,7 +12,7 @@ export default function ProvidersCard({
 }) {
   return (
     <div className={styles.container}>
-      <Link to={`/providers/${email}`}>
+      <Link to={`/yumpis/${email}`}>
         <div className={styles.card}>
           <div className={styles.cardInfo}>
             {stars !== 0 && (
@@ -42,11 +42,6 @@ export default function ProvidersCard({
               {/* <h4 className={styles.service}>{service}</h4> */}
             </div>
           </div>
-          <div className={styles.buttonDiv}>
-          <Link to={`/providers/${email}`}>
-            <button className='secondaryButton'>Ver detalle</button>
-          </Link>
-        </div>
         </div>
       </Link>
     </div>

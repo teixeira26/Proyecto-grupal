@@ -124,9 +124,9 @@
 
 .log-out {
   transform: scaleX(-1);
-  margin-left: 1rem;
+  margin-left: 12px;
 }
 
 .person-outline {
-  margin-left: 1rem;
+  margin-left: 12px;
 }

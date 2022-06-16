@@ -10,6 +10,7 @@ import Footer from "../Footer/Footer";
 import { Widget } from "@uploadcare/react-widget";
 import { getProducts } from "../../redux/actions/petshopActions";
 import Swal from "sweetalert2";
+import style from "./AdminDashboard.module.css";
 
 export default function PutProduct(){
 
@@ -76,7 +77,7 @@ export default function PutProduct(){
       <div>
         <NavBar />
         <Container>
-          <div >
+          <div className={style.put}>
             <h2>Modificar producto</h2>
 
             <Form onSubmit={formik.handleSubmit}>
