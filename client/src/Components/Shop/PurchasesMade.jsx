@@ -19,7 +19,6 @@ export default function PurchasesMade() {
   }, [dispatch]);
 
   const users = useSelector((state) => state.owners);
-
   let userDB = users.find((us) => us.email === user.email);
 
   console.log(userDB);
@@ -54,20 +53,16 @@ export default function PurchasesMade() {
             })
           ) : (
             <div>
-              <h2>AÚN NO REALIZASTE COMPRAS</h2>
+              <h2>Todavía no hiciste ninguna compra</h2>
             </div>
           )}
-          
         </div>
-        
         <div className={style.shop}>
         <button className="secondaryButton" onClick={goToShop}>
-          ¡Ir al shop!
+          ¡Ir al Petshop!
         </button>
         </div>
-        
       </div>
-
       <Footer />
     </>
   );

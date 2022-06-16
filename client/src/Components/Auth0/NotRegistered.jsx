@@ -19,16 +19,15 @@ export const NotRegistered = () => {
     <div>
       <div className={InContainer.container}>
         <div className={styles.container}>
-          <img src="./assets/img/not-registered.png" alt="" className={styles.img}/>
+          <img src="./assets/img/not-registered.png" alt="" className={styles.img} />
           <div className={styles.log}>
-          <h1 className={styles.text}>
-            ¡OPS! <br /> Para continuar debes iniciar sesión
-          </h1>
-          <Link to ='/'>
+            <h1 className={styles.text}>
+              ¡OOPS! <br /> Para continuar tenés que iniciar sesión
+            </h1>
+            <Link to='/'>
               <button className={styles.button}>Ir al inicio</button>
-          </Link>
+            </Link>
           </div>
-          
         </div>
       </div>
     </div>

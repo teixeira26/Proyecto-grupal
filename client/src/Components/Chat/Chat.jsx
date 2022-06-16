@@ -121,7 +121,7 @@ export const Chat = () => {
           <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow} />
         </NavLink>
 
-          <h2 className={styles.titleChat}>Tu conversacion con {name}</h2>
+          <h2 className={styles.titleChat}>Tu conversación con {name}</h2>
         <div className={styles.chat}>
           {mensajes.length > 0 ? mensajes.map((x, y) => {
             return (

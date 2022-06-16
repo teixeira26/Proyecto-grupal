@@ -28,7 +28,7 @@ export default function Review({ service }) {
       ownerEmail: user.email,
     },
     validationSchema: yup.object({
-      message: yup.string().required('Este es un campo requerido'),
+      message: yup.string().required('Necesitamos que dejes un mensaje'),
     }),
 
     onSubmit: async (formData) => {
@@ -37,22 +37,21 @@ export default function Review({ service }) {
       };
       console.log(formData);
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés enviar esta reseña?',
         showDenyButton: true,
-        confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
+        denyButtonText: `Cancelar`,
+        confirmButtonText: 'Enviar'
       }).then(async (result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Informaciones guardadas!', '', 'success')
+          Swal.fire('¡La reseña fue enviada con éxito!', '', 'success')
           await axios.post('http://localhost:3001/reviews', formData)
           navigate('/inicio')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('La reseña no fue enviada.', '', 'info')
         }
       })
-      // navigate("/profile");
-    },
+    }
   });
 
   return (
@@ -60,17 +59,16 @@ export default function Review({ service }) {
       <NavBar />
       <Container>
         <div className={style.container}>
-          <h2>Califica tu experiencia</h2>
-          <p>Deja asentada la misma para que otros usuarios puedan conocer un poco mas a este yumpy!</p>
+          <h2>Dejanos una reseña acerca de tu experiencia</h2>
+          <p>¡Deja asentada la misma para que otros usuarios puedan conocer un poco mas a este yumpi!</p>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Input
               type="text"
-              placeholder="Contanos un poco más"
+              placeholder="Contanos un poco más..."
               name="message"
               onChange={formik.handleChange}
               error={formik.errors.message}
             ></Form.Input>
-
             <button className={style.star}
               onClick={() => { formik.values.review = 1 }}
               value='1' name="review">{formik.values.review >= 1 ? '★' : '☆'}</button>
@@ -87,9 +85,9 @@ export default function Review({ service }) {
               onClick={() => { formik.values.review = 5 }}
               value='5'>{formik.values.review === 5 ? '★' : '☆'}</button>
             <Link to={`/providers/${providerEmail}`}>
-              <Button>Cancelar</Button>
+              <button className="secondaryButton">Cancelar</button>
             </Link>
-            <Button type="submit">Enviar</Button>
+            <button className="primaryButton" type="submit">Enviar reseña</button>
           </Form>
         </div>
       </Container>
