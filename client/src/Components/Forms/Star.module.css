@@ -5,8 +5,17 @@
     justify-content: center;
 }
 
+.stars {
+    margin-bottom: 16x;
+}
+
 .star{
     background-color: unset;
-    color:black;
+    color:var(--shadowColor);
     font-size: 3rem;
+}
+
+.buttonGroup {
+    margin-top: 16px;
+    gap: 16px;
 }
