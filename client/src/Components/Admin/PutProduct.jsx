@@ -158,16 +158,6 @@ export default function PutProduct(){
                   selection={true}
                 ></Form.Dropdown>                      
 
-                  <Widget
-                  publicKey='269841dc43864e62c49d'
-                  id='file'
-                  name="profilePicture"
-                  onChange={(e) => {
-                    formik.values.profilePicture.push(e.originalUrl)
-                    console.log(formik)
-                  }}
-                  product="profilePicture"
-                />
 
                 <Button onClick={backToTheList}>Volver al listado</Button>
                 <Button type="submit">Confirmar cambios</Button>

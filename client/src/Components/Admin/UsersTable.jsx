@@ -40,7 +40,7 @@ export default function ProductsList() {
 
   function offer(id) {
     localStorage.setItem("idUser", id)
-    navigate(`/admin/prestación-servicios/`)
+    navigate(`/admin/prestacion-servicios/`)
   }
 
 

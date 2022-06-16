@@ -52,6 +52,7 @@ import AddHousingPhoto from "./Components/Forms/AddHousingPhoto";
 import SaleDetail from "./Components/Admin/SaleDetail";
 import OfferedServicesDetail from "./Components/Admin/OfferedServicesDetail";
 import HiredServicesDetail from "./Components/Admin/HiredServicesDetail";
+import PaymentBookingCheckout from "./Components/Providers/PaymentBookingCheckout";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -256,6 +257,14 @@ function App() {
             }
           />
 
+          <Route
+            path="/pagar-reserva"
+            element={
+              isAuthenticated && !isLoading ? <PaymentBookingCheckout /> : <Loader />
+            }
+          />
+
+
           {/* -------------- RUTAS PRIVADAS -------------------- */}
 
           <Route
@@ -352,7 +361,7 @@ function App() {
           />
 
           <Route
-            path="/admin/servicios-contratados"
+            path="/admin/prestacion-servicios"
             element={
               user && finalizado ? (
                 isAdmin ? (
@@ -365,7 +374,7 @@ function App() {
           />
 
 <Route
-            path="/admin/prestación-servicios"
+            path="/admin/servicios-contratados"
             element={
               user && finalizado ? (
                 isAdmin ? (
