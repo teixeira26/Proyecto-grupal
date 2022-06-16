@@ -42,6 +42,11 @@ export default function ProvidersCard({
               {/* <h4 className={styles.service}>{service}</h4> */}
             </div>
           </div>
+          <div className={styles.buttonDiv}>
+          {/* <Link to={`/yumpis/${email}`}>
+            <button className='secondaryButton'>Ver detalle</button>
+          </Link> */}
+        </div>
         </div>
       </Link>
     </div>
