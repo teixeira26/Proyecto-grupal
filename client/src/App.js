@@ -162,6 +162,12 @@ function App() {
             }
           />
           <Route
+            path="/agregar-foto"
+            element={
+              isAuthenticated && !isLoading ? <AddHousingPhoto /> : <Loader />
+            }
+          />
+          <Route
             path="/review/:providerEmail"
             element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Review /> : <Loader />}
           />
