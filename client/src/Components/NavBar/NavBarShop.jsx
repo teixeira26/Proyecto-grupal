@@ -88,7 +88,7 @@ function NavBar() {
           <NavLink to="/contacto" className={styles.navLink}>
             Contacto
           </NavLink>
-          <NavLink to={user?'/providers':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('Necesitás iniciar sesión para ver nuestros yumpis.', '', 'warning')}}>
+          <NavLink to={user?'/yumpis':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('Necesitás iniciar sesión para ver nuestros yumpis.', '', 'warning')}}>
             Yumpis
           </NavLink>
           <NavLink to="/shop" className={styles.navLink}>

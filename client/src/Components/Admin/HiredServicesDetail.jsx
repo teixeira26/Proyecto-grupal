@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { getOwnerById, getProviderById, getEvents } from "../../redux/actions/ownProvActions"
+import { cleanDetail } from "../../redux/actions/petshopActions"
 import { useEffect } from "react"
 import NavBar from "../NavBar/NavBarShop"
 import Footer from "../Footer/Footer"
@@ -27,6 +28,10 @@ const { user } = useAuth0();
   useEffect(()=>{
     dispatch(getEvents())
     dispatch(getOwnerById(idUser))
+}, [dispatch])
+
+useEffect(()=>{
+  return ()=> dispatch(cleanDetail())
 }, [dispatch])
 
   let events = useSelector(state => state.events)

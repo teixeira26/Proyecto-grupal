@@ -8,6 +8,7 @@ import DetailProviderCard from "./DetailProviderCard";
 
 import styles from "../Shop/ProductDetail.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
+import { cleanDetail } from "../../redux/actions/petshopActions";
 
 export default function DetailProvider() {
     const dispatch = useDispatch();
@@ -18,11 +19,16 @@ export default function DetailProvider() {
         dispatch(getProviderById(email))
     }, [dispatch, email]);
 
+    useEffect(() => {
+        return ()=>dispatch(cleanDetail())
+    }, [dispatch]);
+
+
     return (
         <div>
             <NavBarShop />
             <div className={inContainer.container}>
-                <NavLink to="/providers">
+                <NavLink to="/yumpis">
                     <img src="/assets/img/arrow-left.svg" alt="" className={styles.leftArrow} />
                 </NavLink>
                 {!provider.length
