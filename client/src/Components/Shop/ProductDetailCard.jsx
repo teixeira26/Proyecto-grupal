@@ -94,10 +94,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
               +
             </span>
           </div>
-          
-          
           <div className={styles.detailAddCart}>
-          
           <p className={styles.cartQuantity}>
             Unidades en el carrito: {cartItem?.quantity}
           </p>

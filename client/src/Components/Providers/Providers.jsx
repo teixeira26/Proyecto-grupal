@@ -121,7 +121,9 @@ export default function Providers() {
                             })}
                     </div>
                 </div>
+                <div className={styles.paginado}>
                 <Paginated itemsPerPage={providersPerPage} items={providers.length} paginated={paginated} currentPage={currentPage} />
+                </div>
             </section>
             <Footer />
         </div>
