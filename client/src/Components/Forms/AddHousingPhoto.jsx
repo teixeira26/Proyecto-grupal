@@ -15,7 +15,7 @@ export default function AddHousingPhoto() {
   const navigate = useNavigate()
   useEffect(() => {
     if (user) {
-      axios.get('http://localhost:3001/providers?filter=&order=ASC').then(x => {
+      axios.get('https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC').then(x => {
         setInfoUser(x.data.find(x => x.email === user.email))
         console.log(x.data.find(x => x.email === user.email))
       })

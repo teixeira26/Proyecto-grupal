@@ -25,7 +25,7 @@ export default function Profile() {
   useEffect(() => {
     if (isAuthenticated) {
       axios
-        .get("http://localhost:3001/owners")
+        .get("https://proyecto-grupal.herokuapp.com/owners")
         .then((x) => {
           const userdb = x.data.find((x) => x.email === user.email);
           console.log(userdb);
@@ -43,7 +43,7 @@ export default function Profile() {
           console.log("userdb", userdb);
         })
         .then(() => {
-          return axios.get("http://localhost:3001/events");
+          return axios.get("https://proyecto-grupal.herokuapp.com/events");
         })
         .then((x) => {
           setEventsOwner(x.data.filter((x) => x.ownerEmail === user.email));
@@ -57,7 +57,7 @@ export default function Profile() {
   useEffect(() => {
     if (user) {
       axios
-        .get("http://localhost:3001/providers?filter=&order=ASC")
+        .get("https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC")
         .then((x) => {
           let providerCheck = x.data.find((x) => x.email === user.email);
           console.log(providerCheck);
@@ -65,7 +65,7 @@ export default function Profile() {
             setIsProvider(true);
           }
           
-          if (providerCheck && providerCheck.service === "paseo") {
+          if (providerCheck && providerCheck.service[0] === "paseo") {
             providerCheck = {
               ...providerCheck,
               schedule: providerCheck.schedule.map((x) => JSON.parse(x)),
@@ -73,13 +73,13 @@ export default function Profile() {
             setIsProvider(true);
             setProviderInfo(providerCheck);
             console.log(providerCheck);
-          }
+          }else if(providerCheck && providerCheck.service[0] === "hospedaje")setProviderInfo(providerCheck);
         });
     }
   }, [user]);
 
   async function byePet(id) {
-    await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });
+    await axios.delete(`https://proyecto-grupal.herokuapp.com/pets/${id}`, { isActive: false });
     dispatch(getPets());
   }
 

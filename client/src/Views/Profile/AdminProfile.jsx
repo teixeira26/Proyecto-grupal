@@ -16,7 +16,7 @@ export default function Profile() {
 
     useEffect(() => {
         if (isAuthenticated) {
-            axios.get("http://localhost:3001/owners").then((x) => {
+            axios.get("https://proyecto-grupal.herokuapp.com/owners").then((x) => {
                 const userdb = x.data.find((x) => x.email === user.email);
                 console.log(userdb);
                 setUser({
@@ -32,7 +32,7 @@ export default function Profile() {
                 });
                 console.log("userdb", userdb);
             }).then(() => {
-                return axios.get('http://localhost:3001/events')
+                return axios.get('https://proyecto-grupal.herokuapp.com/events')
             })
         }
     }, [user, dispatch]);

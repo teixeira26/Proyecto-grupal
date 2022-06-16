@@ -18,7 +18,7 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
     const [reviews, setReviews] = useState()
     const [providerInfo, setProviderInfo] = useState()
     useEffect(() => {
-        axios.get('http://localhost:3001/reviews').then(x => {
+        axios.get('https://proyecto-grupal.herokuapp.com/reviews').then(x => {
             let providerEvaluations = x.data.filter(x => x.provider.email === email);
             setReviews(providerEvaluations);
             console.log(providerEvaluations)
@@ -32,7 +32,7 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
 
     useEffect(() => {
         if (user) {
-            axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+            axios.get("https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC").then((x) => {
                 const providerCheck = x.data.find((x) => x.email === email);
                 console.log(providerCheck)
                 setProviderInfo(providerCheck);

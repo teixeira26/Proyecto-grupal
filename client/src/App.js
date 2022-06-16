@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
     const searchUser = () => {
-      axios.get("http://localhost:3001/owners").then((res) => {
+      axios.get("https://proyecto-grupal.herokuapp.com/owners").then((res) => {
         let resp = res.data.find((x) => x.email === user.email);
         console.log(resp);
         if (resp) {
@@ -159,6 +159,12 @@ function App() {
             path="/mis-datos"
             element={
               isAuthenticated && !isLoading ? <InfoOwner /> : <Loader />
+            }
+          />
+          <Route
+            path="/agregar-foto"
+            element={
+              isAuthenticated && !isLoading ? <AddHousingPhoto /> : <Loader />
             }
           />
           <Route
