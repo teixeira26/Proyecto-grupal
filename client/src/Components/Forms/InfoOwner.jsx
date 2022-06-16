@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Provider, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
@@ -10,7 +10,8 @@ import { Widget } from "@uploadcare/react-widget";
 import { putOwnerInfo } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
-import style from "./InfoOwner.module.css"
+import style from "./InfoOwner.module.css";
+import InContainer from "../GlobalCss/InContainer.module.css";
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -18,7 +19,7 @@ export default function InfoOwner() {
   const dispatch = useDispatch();
   const { user } = useAuth0();
   const navigate = useNavigate();
-  const [infoProvider, setInfoProvider] = useState()
+  const [infoProvider, setInfoProvider] = useState();
 
   useEffect(()=>{
     if(user){
@@ -26,7 +27,7 @@ export default function InfoOwner() {
             setInfoProvider(x.data.find(x=>x.email === user.email))
         })
     }
-},[user])
+  }, [user]);
   const formik = useFormik({
     initialValues: {
       email: user.email,
@@ -39,9 +40,16 @@ export default function InfoOwner() {
     }),
 
     onSubmit: async (formData) => {
-      console.log(formData)
-      if(infoProvider){
-      var newInfoProvider = ({...infoProvider, profilePicture:formData.profilePicture && formData.profilePicture.length?formData.profilePicture[0]:user.picture})}
+      console.log(formData);
+      if (infoProvider) {
+        var newInfoProvider = {
+          ...infoProvider,
+          profilePicture:
+            formData.profilePicture && formData.profilePicture.length
+              ? formData.profilePicture[0]
+              : user.picture,
+        };
+      }
       formData = {
         ...formData,
         address: {
@@ -50,8 +58,8 @@ export default function InfoOwner() {
           state: formData.state,
         },
       };
-      console.log('form data después',formData);
-      console.log('Info Provider',infoProvider);
+      console.log("form data después", formData);
+      console.log("Info Provider", infoProvider);
 
       Swal.fire({
         title: '¿Estás seguro que querés guardar los cambios?',
@@ -75,6 +83,14 @@ export default function InfoOwner() {
   return (
     <div>
       <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/mi-perfil">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={style.leftArrow}
+          />
+        </NavLink>
       <Container>
         <div className={style.container}>
           <h2>Cambiá tus datos</h2>
@@ -121,7 +137,9 @@ export default function InfoOwner() {
           </Form>
         </div>
       </Container>
+      </div>
+      
       <Footer />
     </div>
   );
-};
+}

@@ -90,7 +90,7 @@ const DropdownMenu = () => {
             <img src="../assets/img/person-outline.svg" alt="" className="person-outline"/>
             {
               userData.isAdmin ?
-              <NavLink to="/admin">Perfil</NavLink>
+              <NavLink to="/admin">Perfil Admin</NavLink>
                 : <NavLink to="/mi-perfil">Perfil</NavLink>
             }
           </li>

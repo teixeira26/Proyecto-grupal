@@ -182,10 +182,10 @@ export default function Profile() {
             )}
           {providerInfo && providerInfo.service[0] === "hospedaje" && (
             <div>
-              <h3 className={style.hogar}>Mi dulce hogar</h3>
+              <h3 className={style.hogar}>Mi hogar</h3>
               <div className={style.buttonPhoto}>
                 <input
-                  className="secondaryButton"
+                  className="primaryButton"
                   type="button"
                   value="Agregar Foto"
                   onClick={() => navigate("/agregar-foto")}
