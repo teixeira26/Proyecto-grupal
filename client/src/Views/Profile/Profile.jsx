@@ -122,7 +122,7 @@ export default function Profile() {
                   </Link>
                 </div>
                 <div className={style.service}>
-                  <Link to="/calificacionesOwner">
+                  <Link to="/calificaciones-dueño">
                     <button className="secondaryButton">
                       Reseñas enviadas
                     </button>
@@ -130,7 +130,7 @@ export default function Profile() {
                 </div>
                 {isProvider && (
                   <div className={style.service}>
-                    <Link to="/calificacionesProvider">
+                    <Link to="/calificaciones-yumpis">
                       <button className="primaryButton">
                         Reseñas recibidas
                       </button>
@@ -175,7 +175,7 @@ export default function Profile() {
                 <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
                 <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
                 <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
-                <Link to="/misHorariosHospedaje">
+                <Link to="/mis-horarios-hospedaje">
                   <button className="terciaryButton">Editar horarios</button>
                 </Link>
               </section>
@@ -266,7 +266,7 @@ export default function Profile() {
                     }
                   })
                 : null}
-              <Link to="/agregarmascota">
+              <Link to="/agregar-mascota">
                 <button className="primaryButton">Agregar mascota</button>
               </Link>
             </article>
@@ -301,7 +301,7 @@ export default function Profile() {
                 <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
                 <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
                 <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
-                <Link to="/misHorariosHospedaje">
+                <Link to="/mis-horarios-hospedaje">
                   <button>Editar horarios</button>
                 </Link>
               </section>
@@ -384,7 +384,7 @@ export default function Profile() {
                       </div>
                     ))}
                 </div>
-                <Link to="/misHorarios">
+                <Link to="/mis-horarios">
                   <button>Editar horarios</button>
                 </Link>
               </section>

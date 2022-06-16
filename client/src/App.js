@@ -82,8 +82,8 @@ function App() {
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/mapview" element={<MapView />} />
-          <Route path="/geolocprovider" element={<GeoLocProvider />} />
+          <Route path="/mapa" element={<MapView />} />
+          <Route path="'/geoloc-yumpi" element={<GeoLocProvider />} />
           <Route
             path="/inicio"
             element={
@@ -96,7 +96,6 @@ function App() {
               )
             }
           />
-
           <Route path="/nosotros" element={<About />} />
           <Route path="/contacto" element={<Contact />} />
           <Route path="/shop" element={!isLoading ? <Shop /> : <Loader />} />
@@ -105,7 +104,7 @@ function App() {
             element={!isLoading ? <ProductDetail /> : <Loader />}
           />
           <Route
-            path="/agregarmascota"
+            path="/agregar-mascota"
             element={
               isAuthenticated && isBanned ? (
                 <h1>baneado</h1>
@@ -168,7 +167,7 @@ function App() {
             }
           />
           <Route
-            path="/review/:providerEmail"
+            path="/reseña/:providerEmail"
             element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Review /> : <Loader />}
           />
           <Route
@@ -225,29 +224,29 @@ function App() {
             }
           />
           <Route
-            path="/calificacionesProvider"
+            path="/calificaciones-yumpis"
             element={isAuthenticated && !isLoading ? <Ratings /> : <Loader />}
           />
           <Route
-            path="/calificacionesOwner"
+            path="/calificaciones-dueño"
             element={
               isAuthenticated && !isLoading ? <RatingsOwner /> : <Loader />
             }
           />
           <Route
-            path="/cambiarCalificacion/:id"
+            path="/cambiar-reseña/:id"
             element={
               isAuthenticated && !isLoading ? <PutReview /> : <Loader />
             }
           />
           <Route
-            path="/misHorarios"
+            path="/mis-horarios"
             element={
               isAuthenticated && !isLoading ? <ScheduleProvider /> : <Loader />
             }
           />
           <Route
-            path="/misHorariosHospedaje"
+            path="/mis-horarios-hospedaje"
             element={
               isAuthenticated && !isLoading ? (
                 <ScheduleProviderLogding />
@@ -262,14 +261,12 @@ function App() {
               isAuthenticated && !isLoading ? <PurchasesMade /> : <Loader />
             }
           />
-
           <Route
             path="/pagar-reserva"
             element={
               isAuthenticated && !isLoading ? <PaymentBookingCheckout /> : <Loader />
             }
           />
-
 
           {/* -------------- RUTAS PRIVADAS -------------------- */}
 

@@ -35,7 +35,7 @@ const GeoLocProvider = () => {
             <p>Latitud no hardcodeada:{state.latitude}</p>
             <p>Longitud no hardcodeada:{state.longitude}</p>
             <Link
-                to={"/mapview"}
+                to={"/mapa"}
                 state={{ latitude: state.latitude, longitude: state.longitude }}
             >
                 Ver mi ubicación

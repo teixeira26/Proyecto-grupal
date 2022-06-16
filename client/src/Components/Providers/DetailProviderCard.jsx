@@ -89,7 +89,7 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                 <div className={style.reviews}>
                     <div className={style.gridReview}>
                         <h2 className={style.about}>Reseñas que recibió</h2>
-                        <Link to={`/review/${email}`}><button className="primaryButton">Calificar</button></Link>
+                        <Link to={`/reseña/${email}`}><button className="primaryButton">Calificar</button></Link>
                     </div>
                     {reviews && reviews.map((x, y) => {
                         if (y < 5) {
