@@ -54,20 +54,29 @@ export default function Profile() {
     }
   }, [user, isAuthenticated, pets, dispatch]);
 
-
-  useEffect(()=>{
-    if(user){
-    axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
-        let providerCheck = x.data.find((x) => x.email === user.email);
-        console.log(providerCheck)
-        if (providerCheck && providerCheck.service === 'paseo') {
-          providerCheck = {...providerCheck, schedule:providerCheck.schedule.map(x=>JSON.parse(x))}
-          setIsProvider(true);
-          setProviderInfo(providerCheck);
-          console.log(providerCheck)
-        }
-      })}
-  }, [user])
+  useEffect(() => {
+    if (user) {
+      axios
+        .get("http://localhost:3001/providers?filter=&order=ASC")
+        .then((x) => {
+          let providerCheck = x.data.find((x) => x.email === user.email);
+          console.log(providerCheck);
+          if(providerCheck){
+            setIsProvider(true);
+          }
+          
+          if (providerCheck && providerCheck.service === "paseo") {
+            providerCheck = {
+              ...providerCheck,
+              schedule: providerCheck.schedule.map((x) => JSON.parse(x)),
+            };
+            setIsProvider(true);
+            setProviderInfo(providerCheck);
+            console.log(providerCheck);
+          }
+        });
+    }
+  }, [user]);
 
   async function byePet(id) {
     await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });
@@ -101,7 +110,9 @@ export default function Profile() {
               <h4 className={style.address}>
                 Dirección:{" "}
                 <span className={style.span}>
-                  {userData.address ? userData.address.road : null}, {userData.address ? userData.address.state : null}, {userData.address ? userData.address.city : null}
+                  {userData.address ? userData.address.road : null},{" "}
+                  {userData.address ? userData.address.state : null},{" "}
+                  {userData.address ? userData.address.city : null}
                 </span>{" "}
               </h4>
               <div className={style.buttonContainer}>
@@ -266,7 +277,7 @@ export default function Profile() {
             </article>
           </section>
 
-        {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
+          {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
           <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
           <br/>
           <br/>
@@ -280,74 +291,138 @@ export default function Profile() {
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
       
         </section>} */}
-        {providerInfo && providerInfo.schedule && providerInfo.service[0] === 'hospedaje' && <section className={style.mainInfoProfile}>
-          <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
-          <br />
-          <br />
-          {console.log(providerInfo)}
-          <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
-          <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
-          <div>{providerInfo.schedule.miercoles && <h3>miércoles</h3>}</div>
-          <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
-          <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
-          <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
-          <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
-          <Link to="/misHorariosHospedaje">
-            <button>Editar horarios</button>
-          </Link>
-        </section>}
+          {providerInfo &&
+            providerInfo.schedule &&
+            providerInfo.service[0] === "hospedaje" && (
+              <section className={style.mainInfoProfile}>
+                <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
+                <br />
+                <br />
+                {console.log(providerInfo)}
+                <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
+                <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
+                <div>
+                  {providerInfo.schedule.miercoles && <h3>miércoles</h3>}
+                </div>
+                <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
+                <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
+                <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
+                <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
+                <Link to="/misHorariosHospedaje">
+                  <button>Editar horarios</button>
+                </Link>
+              </section>
+            )}
 
-        {providerInfo && providerInfo.schedule && providerInfo.service[0] === "paseo" && 
-        <section className={style.mainInfoProfile}>
-          <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
-          <br />
-          <br />
-          {console.log(providerInfo.schedule  )}
-          <div>{providerInfo.schedule[0] && providerInfo.schedule[0].lunes && providerInfo.schedule[0].lunes.map(x=><div><h3>Lunes</h3><p>{x}</p></div>)}</div>
-          <div>{providerInfo.schedule[1] && providerInfo.schedule[1].martes && providerInfo.schedule[1].martes.map(x=><div><h3>Martes</h3><p>{x}</p></div>)}</div>
-          <div>{providerInfo.schedule[2] && providerInfo.schedule[2].miercoles && providerInfo.schedule[2].miercoles.map(x=><div><h3>Miercoles</h3><p>{x}</p></div>)}</div>
-          <div>{providerInfo.schedule[3] && providerInfo.schedule[3].jueves && providerInfo.schedule[3].jueves.map(x=><div><h3>Jueves</h3><p>{x}</p></div>)}</div>
-          <div>{providerInfo.schedule[4] && providerInfo.schedule[4].viernes && providerInfo.schedule[4].viernes.map(x=><div><h3>Viernes</h3><p>{x}</p></div>)}</div>
-          <div>{providerInfo.schedule[5] && providerInfo.schedule[5].sabado && providerInfo.schedule[5].sabado.map(x=><div><h3>Sabado</h3><p>{x}</p></div>)}</div>
-          <div>{providerInfo.schedule[6] && providerInfo.schedule[6].domingo && providerInfo.schedule[6].domingo.map(x=><div><h3>Domingo</h3><p>{x}</p></div>)}</div>
-          <Link to="/misHorarios">
-          <button>Editar horarios</button>
-        </Link>
-        </section>
-      }
-        <section>
-          <h2 className={style.boxLabel}>Mis mascotas</h2>
-          <div className={style.addPet}>
-            <Link to="/agregarmascota">
-              <button>Agregar mascota</button>
-            </Link>
-            <Link to='/compras-realizadas'>
-              <button>Mis compras</button>
-            </Link>
-          </div>
-          <article className={style.petsProfile}>
-            {userData.pets && userData.pets.length > 0
-              ? userData.pets.map((x, y) => {
-                if (x.isActive) {
-                  return (
-                    <div>
-                      <h3>Mascota: {x.petName}</h3>
-                      <h4>
-                        {x.eventType} con {x.providerName}
-                      </h4>
-                      <p>
+          {providerInfo &&
+            providerInfo.schedule &&
+            providerInfo.service[0] === "paseo" && (
+              <section className={style.mainInfoProfile}>
+                <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
+                <br />
+                <br />
+                {console.log(providerInfo.schedule)}
+                <div>
+                  {providerInfo.schedule[0] &&
+                    providerInfo.schedule[0].lunes &&
+                    providerInfo.schedule[0].lunes.map((x) => (
+                      <div>
+                        <h3>Lunes</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <div>
+                  {providerInfo.schedule[1] &&
+                    providerInfo.schedule[1].martes &&
+                    providerInfo.schedule[1].martes.map((x) => (
+                      <div>
+                        <h3>Martes</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <div>
+                  {providerInfo.schedule[2] &&
+                    providerInfo.schedule[2].miercoles &&
+                    providerInfo.schedule[2].miercoles.map((x) => (
+                      <div>
+                        <h3>Miercoles</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <div>
+                  {providerInfo.schedule[3] &&
+                    providerInfo.schedule[3].jueves &&
+                    providerInfo.schedule[3].jueves.map((x) => (
+                      <div>
+                        <h3>Jueves</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <div>
+                  {providerInfo.schedule[4] &&
+                    providerInfo.schedule[4].viernes &&
+                    providerInfo.schedule[4].viernes.map((x) => (
+                      <div>
+                        <h3>Viernes</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <div>
+                  {providerInfo.schedule[5] &&
+                    providerInfo.schedule[5].sabado &&
+                    providerInfo.schedule[5].sabado.map((x) => (
+                      <div>
+                        <h3>Sabado</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <div>
+                  {providerInfo.schedule[6] &&
+                    providerInfo.schedule[6].domingo &&
+                    providerInfo.schedule[6].domingo.map((x) => (
+                      <div>
+                        <h3>Domingo</h3>
+                        <p>{x}</p>
+                      </div>
+                    ))}
+                </div>
+                <Link to="/misHorarios">
+                  <button>Editar horarios</button>
+                </Link>
+              </section>
+            )}
+          <section>
+            <div className={style.addPet}></div>
+            <article className={style.petsProfile}>
+              {userData.pets && userData.pets.length > 0
+                ? userData.pets.map((x, y) => {
+                    if (x.isActive) {
+                      return (
+                        <div>
+                          {/* <h3>Mascota: {x.petName}</h3>
+                          <h4>
+                            {x.eventType} con {x.providerName}
+                          </h4> */}
+                          {/* <p>
                         Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
                         {x.date.hour}
-                      </p>
-                    </div>
-                  );
-                })
-              : null}
-            {isProvider && (
-              <div>
-                <h2>Mis servicios acordados</h2>
-              </div>
-            )}
+                      </p> */}
+                        </div>
+                      );
+                    }
+                  })
+                : null}
+              {isProvider && (
+                <div>
+                  <h2>Mis servicios acordados</h2>
+                </div>
+              )}
             </article>
 
             {isProvider && eventsProvider
