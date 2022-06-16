@@ -117,7 +117,7 @@ export const Chat = () => {
     <div>
       <NavBarShop />
       <div className={inContainer.container}>
-        <NavLink to={`/providers/${providerEmail}`}>
+        <NavLink to={`/yumpis/${providerEmail}`}>
           <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow} />
         </NavLink>
 

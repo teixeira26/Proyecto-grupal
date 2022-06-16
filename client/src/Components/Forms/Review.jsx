@@ -89,7 +89,7 @@ export default function Review({ service }) {
             <div>
               
             </div>
-            <Link to={`/providers/${providerEmail}`}>
+            <Link to={`/yumpis/${providerEmail}`}>
               <button className="secondaryButton">Cancelar</button>
             </Link>
             <button className="primaryButton" type="submit">Enviar reseña</button>

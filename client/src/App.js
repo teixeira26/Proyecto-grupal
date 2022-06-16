@@ -152,7 +152,7 @@ function App() {
             }
           />
           <Route
-            path="/providers"
+            path="/yumpis"
             element={
               isAuthenticated && isBanned ? (
                 <Banned />
@@ -164,7 +164,7 @@ function App() {
             }
           />
           <Route
-            path="/providers/:name"
+            path="/yumpis/:name"
             element={
               isAuthenticated && isBanned ? (
                 <Banned />

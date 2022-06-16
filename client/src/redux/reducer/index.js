@@ -313,7 +313,11 @@ function rootReducer(state = initialState, action) {
             case 'CLEAN_DETAIL':
                 return {
                     ...state,
-                    productDetail: []
+                    productDetail: action.payload,
+                    providers: action.payload, 
+                    copyProviders: action.payload,
+                    owners: action.payload,
+                    events: action.payload
                 }
         case 'GROUP_EVENTS':
             let agrupacion = []
