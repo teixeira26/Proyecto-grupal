@@ -11,6 +11,7 @@ import TableRow from "@mui/material/TableRow";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 import Button from "@material-ui/core/Button";
 import { useNavigate } from "react-router-dom"
+import style from "./AdminDashboard.module.css"
 
 
 
@@ -86,6 +87,7 @@ useEffect(()=>{
     return(
         <>
         <NavBar />
+        <div className={style.contenedor}>
         <Table stickyHeader aria-label="sticky table">
           <TableRow stickyHeader aria-label="sticky table">
             <TableCell align="center" colSpan={7}>
@@ -103,6 +105,8 @@ useEffect(()=>{
         </div>
         <Button onClick={back}>REGRESAR</Button>
   
+        </div>
+        
         <Footer />
       </>
 

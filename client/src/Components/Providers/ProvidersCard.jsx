@@ -12,7 +12,7 @@ export default function ProvidersCard({
 }) {
   return (
     <div className={styles.container}>
-      <Link to={`/providers/${email}`}>
+      <Link to={`/yumpis/${email}`}>
         <div className={styles.card}>
           <div className={styles.cardInfo}>
             {stars !== 0 && (
