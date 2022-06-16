@@ -6,10 +6,11 @@ import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { putOwnerInfo } from "../../redux/actions/ownProvActions";
-import { useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import style from "./Star.module.css";
+import InContainer from "../GlobalCss/InContainer.module.css"
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -61,6 +62,14 @@ export default function PutReview() {
   return (
     <div>
       <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/calificacionesOwner">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={style.leftArrow}
+          />
+        </NavLink>
       <Container>
         <div className={style.container}>
           <h2>Modificá tu reseña</h2>
@@ -93,6 +102,8 @@ export default function PutReview() {
           </Form>
         </div>
       </Container>
+      </div>
+      
       <Footer />
     </div>
   );

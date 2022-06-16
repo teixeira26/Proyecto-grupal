@@ -86,6 +86,14 @@ export default function InfoOwner() {
   return (
     <div>
       <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/mi-perfil">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={style.leftArrow}
+          />
+        </NavLink>
       <Container>
         <div className={style.container}>
           <h2>Cambiá tus datos</h2>
@@ -132,6 +140,8 @@ export default function InfoOwner() {
           </Form>
         </div>
       </Container>
+      </div>
+      
       <Footer />
     </div>
   );

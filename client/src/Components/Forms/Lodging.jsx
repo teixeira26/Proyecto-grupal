@@ -119,8 +119,12 @@ export default function Lodging() {
             ></Form.Input>
             <br />
             <br />
+            <div>
             <Link to='/mi-perfil'><button className="secondaryButton">Cancelar</button></Link>
             <button className="primaryButton" type="submit">Confirmar</button>
+            </div>
+            
+            
           </Form>
         </div>
       </Container>

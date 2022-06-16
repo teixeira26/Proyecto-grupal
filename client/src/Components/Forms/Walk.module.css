@@ -11,3 +11,7 @@
     flex-direction: column;
     justify-content: center; 
 }
+
+.margintop{
+    margin-top: 20px;
+}
