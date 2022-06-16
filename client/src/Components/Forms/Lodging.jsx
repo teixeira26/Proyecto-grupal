@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
@@ -11,6 +11,7 @@ import { putProvider } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import styles from "./Lodging.module.css";
+import InContainer from "../GlobalCss/InContainer.module.css"
 import Swal from "sweetalert2";
 
 export default function Lodging() {
@@ -71,9 +72,17 @@ export default function Lodging() {
   return (
     <div>
       <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/servicio">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={styles.leftArrow}
+          />
+        </NavLink>
       <Container>
         <div className={styles.container}>
-          <h2>Cuéntanos los detalles de tu servicio</h2>
+          <h2>Contanos los detalles de tu servicio</h2>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Dropdown
               placeholder="Tipo de vivienda"
@@ -116,6 +125,8 @@ export default function Lodging() {
           </Form>
         </div>
       </Container>
+      </div>
+      
       <Footer />
     </div>
   );
