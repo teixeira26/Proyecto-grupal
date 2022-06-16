@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import style from './DetailProviderCard.module.css'
@@ -7,19 +7,19 @@ import axios from "axios";
 import { Map, TileLayer } from "react-leaflet"; // El componente Map encapsula la lógica del mapa. TileLayer lo muestra.
 import CircleMarker from "../Map/CircleMarker";
 
-export default function DetailProviderCard({name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule}) {
+export default function DetailProviderCard({ name, lastName, profilePicture, address, email, service, description, city, state, price, latitude, longitude, schedule }) {
     // console.log(email)
     // console.log(city)
     // console.log(state)
     console.log(latitude, longitude)
-    const {user} = useAuth0()
+    const { user } = useAuth0()
     const [stars, setStars] = useState(0)
     const [quantityReviews, setquantityReviews] = useState(0)
     const [reviews, setReviews] = useState()
     const [providerInfo, setProviderInfo] = useState()
-    useEffect(()=>{
-        axios.get('http://localhost:3001/reviews').then(x=>{
-            let providerEvaluations = x.data.filter(x=>x.provider.email === email);
+    useEffect(() => {
+        axios.get('http://localhost:3001/reviews').then(x => {
+            let providerEvaluations = x.data.filter(x => x.provider.email === email);
             setReviews(providerEvaluations);
             console.log(providerEvaluations)
             providerEvaluations = providerEvaluations.map(x => x.review)
@@ -28,120 +28,107 @@ export default function DetailProviderCard({name, lastName, profilePicture, addr
             setStars(providerEvaluations / numberEvaluations);
             if (providerEvaluations) setquantityReviews(numberEvaluations)
         })
-    },[])
+    }, [])
 
-    useEffect(()=>{
-        if(user){
-        axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
-            const providerCheck = x.data.find((x) => x.email === email);
-            console.log(providerCheck)
-            setProviderInfo(providerCheck);
+    useEffect(() => {
+        if (user) {
+            axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+                const providerCheck = x.data.find((x) => x.email === email);
+                console.log(providerCheck)
+                setProviderInfo(providerCheck);
             })
-    }}, [user])
-    return(
+        }
+    }, [user])
+    return (
         <>
             <section className={inContainer.container}>
                 <div className={style.topinfo}>
-                    <img className={style.detailImg} src={profilePicture} alt="profile img" />
+                    <img className={style.detailImg} src={profilePicture} alt="foto de perfil del usuario" />
                     <div className={style.data}>
-                        <h1>{name} {lastName}</h1>
-                        <p>{service}</p>
-                        <p>{address}</p>
+                        <div className={style.stars}>
+                            <p className={style.star}>{stars >= 1 ? '★' : '☆'}</p>
+                            <p className={style.star}>{stars >= 2 ? '★' : '☆'}</p>
+                            <p className={style.star}>{stars >= 3 ? '★' : '☆'}</p>
+                            <p className={style.star}>{stars >= 4 ? '★' : '☆'}</p>
+                            <p className={style.star}>{stars === 5 ? '★' : '☆'}</p>
+                            <p>({quantityReviews})</p>
+                        </div>
+                        <div className={style.divButton}>
+                            <h1>{name} {lastName}</h1>
+                            <Link to={`/chat/${email}/${user.email}`}><button className="primaryButton">Contactar</button></Link>
+                        </div>
+                        <p className={style.userService}>{service} por día: <strong>${price}</strong></p>
                     </div>
-                </div>
-                <div className={style.stars}>
-                    <p className={style.star}>{stars >= 1 ? '★' : '☆'}</p>
-                    <p className={style.star}>{stars >= 2 ? '★' : '☆'}</p>
-                    <p className={style.star}>{stars >= 3 ? '★' : '☆'}</p>
-                    <p className={style.star}>{stars >= 4 ? '★' : '☆'}</p>
-                    <p className={style.star}>{stars === 5 ? '★' : '☆'}</p>
-                    <p>({quantityReviews})</p>
                 </div>
                 <div className={style.description}>
-                    <h2>Sobre {name}</h2>
-                    <p>{description}</p>
-                    <span>Costo por {service}: <strong>${price}</strong></span>
+                    <h2 className={style.about}>Sobre {name}</h2>
+                    <p className={style.paragraphDescription}>{description}</p>
                 </div>
-                {providerInfo && providerInfo.service[0] === 'hospedaje' &&
-                    <div>
-                        <h2>Mi hogar</h2>
-                        {providerInfo.housingPhotos && providerInfo.housingPhotos.map((x,y)=>{
-                            return(
-                                <img src={x} key={y} alt={y}></img>
-                            )
+                <div>
+                    <h2 className={style.about}>Chequeá su disponibilidad</h2>
+                    <div className={style.gridSchedule}>
+                        {Object.keys(schedule).map((key) => {
+                            return [key, schedule[key]]
                         })}
+                        {service == 'hospedaje' ? <Link to={`/reservar-hospedaje/${email}`}><button className="primaryButton">Reservar servicio</button></Link> : null}
+                        {service == 'paseo' ? <Link to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></Link> : null}
                     </div>
-                }
-                <div>
-                    <h3>Disponibilidad de {name}</h3>
-                    {Object.keys(schedule).map((key) => {
-                        return [key, schedule[key]]
-                    })}
                 </div>
-                <div className={style.contact}>
-                    <NavLink to={`/chat/${email}/${user.email}`}><button className="primaryButton">Contactarme con {name}</button></NavLink>
-                    {service == 'hospedaje' ? <NavLink to={`/reservar-hospedaje/${email}`}><button className="primaryButton">Reservar servicio</button></NavLink> : null}
-                    {service == 'paseo' ? <NavLink to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></NavLink> : null}
-                    <NavLink to={`/review/${email}`}><button className="primaryButton">Calificar a {name}</button></NavLink>
-                </div>
-                <h2>Calificaciones</h2>
-                <div>
+                {(providerInfo && providerInfo.service[0] === 'hospedaje') ?
+                    <div>
+                        <h2 className={style.about}>Este es el hogar de {name}</h2>
+                        <div className={style.housingGrid}>
+                            {providerInfo.housingPhotos && providerInfo.housingPhotos.map((x, y) => {
+                                return (
+                                    <img className={style.housePhoto} src={x} key={y} alt={y}></img>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    : null}
+                <div className={style.reviews}>
+                    <div className={style.gridReview}>
+                        <h2 className={style.about}>Reseñas que recibió</h2>
+                        <Link to={`/review/${email}`}><button className="primaryButton">Calificar</button></Link>
+                    </div>
                     {reviews && reviews.map((x, y) => {
                         if (y < 5) {
                             return (
-                                <div key={y}>
-                                    <hr />
-                                    <div>
+                                <div className={style.review} key={y}>
+                                    <div className={style.stars}>
                                         <p className={style.star}>{x.review >= 1 ? '★' : '☆'}</p>
                                         <p className={style.star}>{x.review >= 2 ? '★' : '☆'}</p>
                                         <p className={style.star}>{x.review >= 3 ? '★' : '☆'}</p>
                                         <p className={style.star}>{x.review >= 4 ? '★' : '☆'}</p>
                                         <p className={style.star}>{x.review === 5 ? '★' : '☆'}</p>
                                     </div>
-                                    <h4 style={{ display: 'inline' }}>{x.owner.name} {x.owner.lastName}:</h4>
-                                    <p style={{ display: "inline", color: 'blue' }}> {x.message}</p>
+                                    <p className={style.comment}>"{x.message}"" - {x.owner.name} {x.owner.lastName}</p>
                                 </div>
                             )
                         }
                     })}
                 </div>
-                {/* <div>
-                    <h2>Comentarios recibidos por {name}</h2>
-                    <div>
-                        <img src="" alt="ratePhoto" />
-                        <div>
-                            <h3>Name</h3>
-                            <span>Rate</span>
-                            <p>Comments</p>
-                        </div>
-                    </div>
-                    <div>
-                        <img src="" alt="ratePhoto" />
-                        <div>
-                            <h3>Name</h3>
-                            <span>Rate</span>
-                            <p>Comments</p>
-                        </div>
-                    </div>
-                </div> */}
+                <div>
+                    <h2 className={style.about}>Mirá el rango donde trabaja {name}</h2>
+                    <Map className={style.map}
+                        center={{
+                            lat: latitude,
+                            lng: longitude
+                        }}
+                        zoom={14}
+                    >
+                        <TileLayer
+                            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        />
+                        {/* <Markers data={currentLocationProvider} /> */}
+                        <CircleMarker data={{
+                            lat: latitude,
+                            lng: longitude
+                        }} />
+                    </Map>
+                </div>
             </section>
-            <Map
-                center={{
-                    lat: latitude,
-                    lng: longitude
-                }}
-                zoom={14}
-            >
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                {/* <Markers data={currentLocationProvider} /> */}
-                <CircleMarker data={{
-                    lat: latitude,
-                    lng: longitude
-                }} />
-            </Map>
         </>
     )
 };

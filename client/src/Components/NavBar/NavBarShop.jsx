@@ -77,29 +77,24 @@ function NavBar() {
     <div className={OutContainer.container}>
       <nav className={styles.nav}>
         <div className={styles.item}>
-          <NavLink to={user?'/inicio':'/'} className={styles.logoLink} >
+          <NavLink to={user ? '/inicio' : '/'} className={styles.logoLink} >
             yumPaw
           </NavLink>
         </div>
-
         <div className={styles.item}>
           <NavLink to="/nosotros" className={styles.navLink}>
             Nosotros
           </NavLink>
-
           <NavLink to="/contacto" className={styles.navLink}>
             Contacto
           </NavLink>
-
           <NavLink to={user?'/providers':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para ver a los yumpys')}}>
-            Yumpys
+            Yumpis
           </NavLink>
-
           <NavLink to="/shop" className={styles.navLink}>
             PetShop
           </NavLink>
         </div>
-
         <div className={styles.item}>
           <div className={styles.icons}>
             <div className={styles.icon}>
@@ -107,19 +102,14 @@ function NavBar() {
                 <img src="../../assets/img/shopping-bag.svg" alt="" />
                 <div className={styles.circle}>{total}</div>
               </NavLink>
-
-             
             </div>
-
             <div className={styles.icon}>
               <NavLink to={user?'/favoritos':'/'} className={styles.navLinkIcon} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para agregar productos a favoritos')}}>
                 <img src="../../assets/img/favorite.svg" alt="" />
                 <div className={styles.circle}>{productsFavNumber}</div>
               </NavLink>
-              
             </div>
           </div>
-
           {/* <div>
             {!isAuthenticated && <img src="" alt=""></img>}
             {isAuthenticated && (
@@ -132,10 +122,9 @@ function NavBar() {
               </NavLink>
             )}
           </div> */}
-
           <div className={styles.buttons}>
             {!isAuthenticated && <Login></Login>}
-            {isAuthenticated && <DropdownMenu/>}
+            {isAuthenticated && <DropdownMenu />}
           </div>
         </div>
       </nav>

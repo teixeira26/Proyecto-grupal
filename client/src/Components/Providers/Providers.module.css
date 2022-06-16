@@ -94,3 +94,12 @@
   text-transform: uppercase;
   font-weight: 700;
 }
+
+.paginado{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  margin-bottom: var(--margin64);
+}

@@ -6,8 +6,9 @@ import "semantic-ui-css/semantic.min.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { getOwners, getProviderById, postProvider, putProvider } from "../../redux/actions/ownProvActions";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import style from "./InfoProvider.module.css";
+import InContainer from "../GlobalCss/InContainer.module.css"
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 
@@ -58,19 +59,28 @@ export default function InfoProvider() {
   return (
     <div>
       <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/mi-perfil">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={style.leftArrow}
+          />
+        </NavLink>
       <div className={style.container}>
+      
         <Container>
           <div className={style.centerFlex}>
-            <h2>¿Qué servicio te gustaría ofrecer?</h2>
+            <h2 className={style.title}>¿Qué servicio te gustaría ofrecer?</h2>
             <div className={style.buttons}>
               <div className={style.button}>
               <Link to="/paseo">
-                <button onClick={walk} disabled={userInfo?false:true}>PASEO</button>
+                <button onClick={walk} disabled={userInfo?false:true} className='primaryButton'>PASEO</button>
               </Link>
               </div>
               <div>
               <Link to="/hospedaje">
-                <button onClick={lodging} disabled={userInfo?false:true}>HOSPEDAJE</button>
+                <button onClick={lodging} disabled={userInfo?false:true} className='primaryButton'>HOSPEDAJE</button>
               </Link>
               </div>  
             </div>
@@ -101,6 +111,8 @@ export default function InfoProvider() {
           </div>
         </Container>
       </div>
+      </div>
+      
       <Footer />
     </div>
   );

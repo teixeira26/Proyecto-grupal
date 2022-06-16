@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     width: 69vw;
-    margin: 10rem auto;
+    margin: 100px auto;
 }
 
 .detailImg{
     width: 550px;
     height: 550px;
-    margin-right: 5rem;
+    margin-right: 50px;
 }
 
 .detailRight{
