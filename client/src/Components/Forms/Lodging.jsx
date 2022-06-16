@@ -44,21 +44,20 @@ export default function Lodging() {
       Swal.fire({
         title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
-        confirmButtonText: 'Guardar',
         denyButtonText: `Cancelar`,
+        confirmButtonText: 'Guardar'
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           dispatch(putProvider(formData));
           console.log("formData", formData);
-          Swal.fire('¡Tu informacion se guardó correctamente!', '', 'success')
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           dispatch(putProvider(formData));
           navigate('/mi-perfil')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron realizados.', '', 'info')
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
         }
       })
-
       // dispatch(postProvider(newProvider));
       // navigate("/mi-perfil");
     },
@@ -82,10 +81,10 @@ export default function Lodging() {
         </NavLink>
       <Container>
         <div className={styles.container}>
-          <h2>Contanos los detalles de tu servicio</h2>
+          <h2>Contanos más acerca de lo que ofrecés</h2>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Dropdown
-              placeholder="Tipo de vivienda"
+              placeholder="¿En qué tipo de vivienda vivís?"
               options={categoriesOptions}
               onChange={(e) => {
                 e.target.value = e.target.textContent;
@@ -99,29 +98,29 @@ export default function Lodging() {
             ></Form.Dropdown>
             <Form.Input
                 type="number"
-                placeholder="Cantidad máxima de perros por hospedaje"
+                placeholder="¿Cuál es la cantidad máxima de mascotas que podés hospedar?"
                 name="dogsPerWalk"
                 onChange={formik.handleChange}
               //   error={formik.errors.city}
               ></Form.Input>
             <Form.Input
               type="number"
-              placeholder="Precio por hora"
+              placeholder="Indicanos un precio por hora"
               name="price"
               onChange={formik.handleChange}
             //   error={formik.errors.state}
             ></Form.Input>
             <Form.Input
               type="text"
-              placeholder="Cuéntanos por qué deberían elegirte"
+              placeholder="Ahora... ¡contanos por qué deberían elegirte!"
               name="description"
               onChange={formik.handleChange}
             //   error={formik.errors.state}
             ></Form.Input>
             <br />
             <br />
-            <Link to='/mi-perfil'><Button>Cancelar</Button></Link>
-            <Button type="submit">Confirmar</Button>
+            <Link to='/mi-perfil'><button className="secondaryButton">Cancelar</button></Link>
+            <button className="primaryButton" type="submit">Confirmar</button>
           </Form>
         </div>
       </Container>

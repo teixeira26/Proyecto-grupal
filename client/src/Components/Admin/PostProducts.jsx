@@ -28,11 +28,11 @@ export default function PutProduct() {
       Swal.fire({
         title: `Confirme que desea agregar ${formData.name}`,
         showDenyButton: true,
+        denyButtonText: `Cancelar`,
         confirmButtonText: 'Confirmar',
-        denyButtonText: `Descartar`,
       }).then(async (result) => {
         if (result.isConfirmed) {
-          Swal.fire(`${formData.name} ya se encuentra en el shop`, '', 'success')
+          Swal.fire(`${formData.name} ya se encuentra en el Petshop`, '', 'success')
           dispatch(postProduct(formData));
           navigate('/admin/listado-productos')
         } else if (result.isDenied) {
@@ -63,7 +63,7 @@ export default function PutProduct() {
       <NavBar />
       <Container>
         <div >
-          <h2>AGREGAR NUEVO PRODUCTO AL PETSHOP</h2>
+          <h2>Agregar producto al Petshop</h2>
           <Form onSubmit={formik.handleSubmit}>
             <div >
               <Form.Input
@@ -72,7 +72,6 @@ export default function PutProduct() {
                 name="name"
                 onChange={formik.handleChange}
               ></Form.Input>
-
               <Form.Dropdown
                 placeholder="Categoría"
                 options={categoriesOptions}
@@ -83,22 +82,18 @@ export default function PutProduct() {
                 }}
                 selection={true}
               ></Form.Dropdown>
-
               <Form.Input
                 type="number"
                 placeholder="Precio"
                 name="price"
                 onChange={formik.handleChange}
-
               ></Form.Input>
-
               <Form.Input
                 type="number"
                 placeholder="Stock"
                 name="stock"
                 onChange={formik.handleChange}
               ></Form.Input>
-
               <Form.Dropdown
                 placeholder="Animal"
                 options={targetAnimalOptions}
@@ -108,24 +103,19 @@ export default function PutProduct() {
                   formik.handleChange(e)
                 }}
                 selection={true}
-
               ></Form.Dropdown>
-
               <Form.Input
                 type="text"
                 placeholder="Descripción"
                 name="description"
                 onChange={formik.handleChange}
               ></Form.Input>
-
               <Form.Input
                 type="number"
                 placeholder="Peso (para alimentos)"
                 name="weight"
                 onChange={formik.handleChange}
-
               ></Form.Input>
-
               <Form.Dropdown
                 placeholder="Marca"
                 options={tradeMarkOptions}
@@ -136,7 +126,6 @@ export default function PutProduct() {
                 }}
                 selection={true}
               ></Form.Dropdown>
-
               <Widget
                 publicKey='269841dc43864e62c49d'
                 id='file'
@@ -147,8 +136,8 @@ export default function PutProduct() {
                 }}
                 product="profilePicture"
               />
-              <Button onClick={backToTheList}>REGRESAR AL LISTADO</Button>
-              <Button type="submit">AGREGAR</Button>
+              <Button onClick={backToTheList}>Volver al listado</Button>
+              <Button type="submit">Agregar producto</Button>
             </div>
           </Form>
         </div>

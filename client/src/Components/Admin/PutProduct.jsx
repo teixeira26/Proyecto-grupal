@@ -11,7 +11,6 @@ import { Widget } from "@uploadcare/react-widget";
 import { getProducts } from "../../redux/actions/petshopActions";
 import Swal from "sweetalert2";
 
-
 export default function PutProduct(){
 
     const navigate = useNavigate()
@@ -23,9 +22,8 @@ export default function PutProduct(){
 
     const selectedProduct = useSelector(state => state.selectedProduct)
     const allProducts = useSelector(state => state.products)
-
     const product = allProducts.find(prod => prod.id === selectedProduct)
-  
+
     const formik = useFormik({
       initialValues: {
         id: product.id,
@@ -37,38 +35,31 @@ export default function PutProduct(){
         tradeMark: product.tradeMark,
         weight: product.weight,
         isActive: product.isActive
-
       },
       onSubmit: (formData) => {
         console.log("formData", formData);
 
         Swal.fire({
-          title: 'Confirme que desea modificar esta publicación',
+          title: '¿Estás seguro que querés modificar esta publicación?',
           showDenyButton: true,
-          confirmButtonText: 'Confirmar',
-          denyButtonText: `Descartar`,
+          denyButtonText: `Cancelar`,
+          confirmButtonText: 'Modificar'
         }).then(async(result) => {
           if (result.isConfirmed) {
-            Swal.fire('Publicación MODIFICADA', '', 'success')
+            Swal.fire('¡La publicación fue modificada!', '', 'success')
             dispatch(putProduct(product.id,formData));
             navigate('/admin/listado-productos')
           } else if (result.isDenied) {
-            Swal.fire('Modificación descartada', '', 'info')
+            Swal.fire('La publicación no fue modificada.', '', 'info')
           }
         })
-  
       },
     });
 
-
-
     function backToTheList(){
       navigate('/admin/listado-productos')
-     }
+    }
     
-
-
-
     const categoriesOptions = [
       { key: "alimento", value: "alimento", text: "alimento" }, { key: "accesorios", value: "accesorios", text: "accesorios" }, { key: "salud y bienestar", value: "salud y bienestar", text: "salud y bienestar" }
     ];
@@ -81,16 +72,12 @@ export default function PutProduct(){
       { key: "pro plan", value: "pro plan", text: "pro plan" }, { key: "pedigree", value: "pedigree", text: "pedigree" }, { key: "vital can", value: "vital can", text: "vital Can" }, { key: "eukanuba", value: "eukanuba", text: "eukanuba" }
     ];
 
-    
-  
-  
     return (
       <div>
         <NavBar />
         <Container>
           <div >
             <h2>Modificar producto</h2>
-
 
             <Form onSubmit={formik.handleSubmit}>
               <div >
@@ -103,7 +90,7 @@ export default function PutProduct(){
                 ></Form.Input>
                 
                 <h5>Categoría: {product.category}</h5>
-                 <Form.Dropdown
+                  <Form.Dropdown
                   placeholder="Categoría"
                   options={categoriesOptions}
                   onChange={(e) => {
@@ -123,7 +110,7 @@ export default function PutProduct(){
 
                 ></Form.Input>
 
-              <h5>Stock disponible {product.stock}</h5>
+              <h5>Stock disponible: {product.stock}</h5>
                 <Form.Input
                   type="number"
                   placeholder="Stock"
@@ -141,7 +128,6 @@ export default function PutProduct(){
                     formik.handleChange(e)
                   }}
                   selection={true}
-
                 ></Form.Dropdown>                      
 
               <h5>Descripción: {product.description}</h5>
@@ -158,7 +144,6 @@ export default function PutProduct(){
                   placeholder="Peso (para alimentos)"
                   name="weight"
                   onChange={formik.handleChange}
-                  
                 ></Form.Input>
 
               <h5>Marca: {product.tradeMark}</h5>
@@ -173,19 +158,8 @@ export default function PutProduct(){
                   selection={true}
                 ></Form.Dropdown>                      
 
-                  <Widget
-                  publicKey='269841dc43864e62c49d'
-                  id='file'
-                  name="profilePicture"
-                  onChange={(e) => {
-                    formik.values.profilePicture.push(e.originalUrl)
-                    console.log(formik)
-                  }}
-                  product="profilePicture"
-                />
 
-                <Button onClick={backToTheList}>REGRESAR AL LISTADO</Button>
-
+                <Button onClick={backToTheList}>Volver al listado</Button>
                 <Button type="submit">Confirmar cambios</Button>
               </div>
             </Form>
@@ -194,5 +168,4 @@ export default function PutProduct(){
         <Footer />
       </div>
     );
-  
 }

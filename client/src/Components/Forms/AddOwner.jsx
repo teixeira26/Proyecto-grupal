@@ -22,7 +22,6 @@ export default function AddOwner() {
         e.preventDefault();
         try {
             await axios.post('http://localhost:3001/owners', owner)
-
             Swal.fire({
                 position: 'top-end',
                 icon: 'success',
@@ -30,7 +29,6 @@ export default function AddOwner() {
                 showConfirmButton: false,
                 timer: 1500
             });
-
             setOwner({
                 name: '',
                 lastName: '',

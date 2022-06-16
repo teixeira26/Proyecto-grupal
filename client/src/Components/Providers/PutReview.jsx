@@ -42,8 +42,8 @@ export default function PutReview() {
       Swal.fire({
         title: '¿Estás seguro que querés modificar tu reseña?',
         showDenyButton: true,
-        confirmButtonText: 'Modificar',
         denyButtonText: `Cancelar`,
+        confirmButtonText: 'Modificar'
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
@@ -51,7 +51,7 @@ export default function PutReview() {
           await axios.put('http://localhost:3001/reviews', formData)
           navigate('/inicio')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('La modificación no fue guardada.', '', 'info')
         }
       })
       // navigate("/profile");
@@ -63,8 +63,7 @@ export default function PutReview() {
       <NavBar />
       <Container>
         <div className={style.container}>
-          <h2>Cambiá tus datos</h2>
-
+          <h2>Modificá tu reseña</h2>
           <Form onSubmit={formik.handleSubmit}>
             <Form.Input
               type="text"
@@ -90,7 +89,7 @@ export default function PutReview() {
             onClick={()=>{formik.values.review = 5} }
             value='5'>{formik.values.review===5?'★':'☆'}</button>
             
-            <Button type="submit">Enviar</Button>
+            <button className="primaryButton" type="submit">Modificar</button>
           </Form>
         </div>
       </Container>

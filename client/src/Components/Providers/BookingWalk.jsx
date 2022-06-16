@@ -79,9 +79,7 @@ export default function BookingWalk() {
         })
     }
     }, [user])
-   
 
-    
     useEffect(()=>{
         var petOptions = [];
         if(myInfo && myInfo.pets){
@@ -107,7 +105,7 @@ export default function BookingWalk() {
             numberOfBooking:'',
         },
         validationSchema: yup.object({
-            petName: yup.string().required('Debes seleccionar una mascota'),
+            petName: yup.string().required('Tenés que seleccionar una mascota'),
           }),
         onSubmit: async (formData) => {
               formData = {
@@ -115,7 +113,7 @@ export default function BookingWalk() {
                 numberOfBooking: maxId
             };
             Swal.fire({
-                title: 'Estás seguro que las informaciones sobre este evento son correctas ?',
+                title: '¿Estás seguro que querés confirmar este paseo?',
                 showDenyButton: true,
                 confirmButtonText: 'Si',
                 denyButtonText: `No`,
@@ -125,20 +123,14 @@ export default function BookingWalk() {
                     await axios.post("http://localhost:3001/events", formData);
                     axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
                     console.log(formData);
-                    Swal.fire('Evento confirmado!', '', 'success')
+                    Swal.fire('¡El paseo fue confirmado con éxito!', '', 'success')
                     navigate('/confirmar-reserva')
                 } else if (result.isDenied) {
-                  Swal.fire('Los cambios no fueron guardados', '', 'info')
+                  Swal.fire('El paseo no fue confirmado.', '', 'info')
                 }
               })
-            
-            
-           
         }
     });
-
-
-  
 
     return (
         <>
@@ -146,13 +138,11 @@ export default function BookingWalk() {
             <div className={inContainer.container}>
                 <Form onSubmit={formik.handleSubmit}>
                     <h2>Tu reserva</h2>
-
                     <label htmlFor="">Tu nombre</label>
                     <Form.Input type="text" readOnly name="name" value={user.name} onChange={formik.handleChange} />
-
                     <label htmlFor="">Tu mascota</label>
                     <Form.Dropdown
-                        placeholder="Elige una de tus mascotas"
+                        placeholder="Elegí una de tus mascotas"
                         options={petOptions}
                         onChange={(e) => {
                             console.log(e.target.firstChild.textContent)
@@ -166,12 +156,9 @@ export default function BookingWalk() {
                         error={formik.errors.petName}
                     >
 
-
-
                     </Form.Dropdown>
-                    <label htmlFor="">Elige un rango de fecha para el hospedaje de tu mascota</label>
-                   
-                    <h2>horas disponibles</h2>
+                    <label htmlFor="">Elegí una fecha para el paseo semanal de tu mascota</label>
+                    <h2>Horarios disponibles</h2>
                     {console.log(schedule)}
                     {schedule&& 
                             <div>
@@ -276,12 +263,9 @@ export default function BookingWalk() {
                     onChange={(e)=>{
                         formik.values.comments = e.target.value
                         }}
-
                     ></textarea>
-
-                    <Link to={`/chat/${providerEmail}/${ownerEmail}`}><Button>Cancelar</Button></Link>
-                    <button>Continuar con el pago</button>
-
+                    <Link to={`/chat/${providerEmail}/${ownerEmail}`}><button className="secondaryButton">Cancelar</button></Link>
+                    <button className="primaryButton">Continuar con el pago</button>
                 </Form>
             </div>
         </>

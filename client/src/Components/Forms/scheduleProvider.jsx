@@ -6,7 +6,7 @@ import "semantic-ui-css/semantic.min.css";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
 import { putOwnerInfo } from "../../redux/actions/ownProvActions";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
 import style from "./Star.module.css";
@@ -49,41 +49,37 @@ export default function ScheduleProvider() {
         schedule:[...formData]
       };
       Swal.fire({
-        title: 'Estás seguro que querés guardar los cambios?',
+        title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
+        denyButtonText: `Cancelar`,
         confirmButtonText: 'Guardar',
-        denyButtonText: `No guardar`,
       }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire('Informaciones guardadas!', '', 'success')
-          console.log(formData)
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           await axios.put('http://localhost:3001/events/schedule',formData);
           navigate('/mi-perfil')
         } else if (result.isDenied) {
-          Swal.fire('Los cambios no fueron guardados', '', 'info')
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
         }
       })
-     
       // await dispatch(putOwnerInfo(formData.email, formData));
     },
   }); 
   const showInputs = (day, SetDay, stateDay, idx)=>{
     return(<div>
-
-              
               {stateDay.map((x, y)=>{
               return (<div>
                 <input type='time'
                 indice = {y}
-                 onChange={(e)=>{
+                onChange={(e)=>{
                   formik.values[idx][day].splice(y,1,e.target.value)
                   console.log(formik.values[idx])
                 }
                 }></input>
               </div>)
             })}
-           <input type='button' onClick={()=>{
+            <input type='button' onClick={()=>{
             let stateDayLength = stateDay.length-1
             if(formik.values[idx][day][stateDayLength]){
               console.log('ingreesé a donde deberia estar')
@@ -91,24 +87,22 @@ export default function ScheduleProvider() {
             }} value="+"/>
             </div>)
   }
+
   return (
     <div>
       <NavBar />
       <Container>
         <div className={style.container}>
-          <h2>Agregá un horario de trabajo</h2>
-
+          <h2>Agregá tu disponibilidad para trabajar</h2>
           <Form onSubmit={formik.handleSubmit}>
             {/* <Form.Input
               type="text"
-              placeholder="Contanos un poco más"
+              placeholder="Contanos un poco más..."
               name="message"
               onChange={formik.handleChange}
               error={formik.errors.message}
             ></Form.Input>
              */}
-            
-          
             <div class="ui checkbox">
               <input type="checkbox"
               name="lunes"
@@ -178,7 +172,6 @@ export default function ScheduleProvider() {
             </div>
             {console.log(lunes.length)}
             
-
 
             {lunes.length>0?
             <div>
@@ -250,10 +243,7 @@ export default function ScheduleProvider() {
             {showInputs('domingo', SetDomingo, domingo, 6)}
             </div>:null
             } 
-            
-
-         
-            <Button type="submit">Enviar</Button>
+            <button className="primaryButton" type="submit">Agregar</button>
           </Form>
         </div>
       </Container>

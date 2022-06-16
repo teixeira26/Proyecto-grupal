@@ -107,12 +107,11 @@ const ShoppingCart = () => {
 
             <div className={styles.purchase}>
               {cart && cart.length > 0 ? (
-               
+              
                   <button className="primaryButton" onClick={()=>{
                     if(user&&user.email)navigate('/purchaseConfirmation')
-                    else(Swal.fire('Debés ingresar a la página para efectuar una compra'))
-                  }}>Continuar al pago</button>
-         
+                    else(Swal.fire('Tenés que ingresar en la página para poder comprar'))
+                  }}>Continuar con el pago</button>
               ) : (
                 <div></div>
               )}
@@ -121,7 +120,7 @@ const ShoppingCart = () => {
 
           {cart && cart.length > 0 ? (
             <article>
-              <button className="secondaryButton" onClick={clearCart}>Limpiar Carrito</button>
+              <button className="secondaryButton" onClick={clearCart}>Limpiar carrito</button>
             </article>
           ) : (
             <div></div>

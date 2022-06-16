@@ -65,83 +65,73 @@ export default function InfoOwner() {
       console.log("Info Provider", infoProvider);
 
       Swal.fire({
-        title: "Estás seguro que querés guardar los cambios?",
+        title: '¿Estás seguro que querés guardar los cambios?',
         showDenyButton: true,
-        confirmButtonText: "Guardar",
-        denyButtonText: `No guardar`,
-      }).then(async (result) => {
+        denyButtonText: `Cancelar`,
+        confirmButtonText: 'Guardar'
+      }).then(async(result) => {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
-          Swal.fire("Informaciones guardadas!", "", "success");
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           await dispatch(putOwnerInfo(formData.email, formData));
           await axios.put("http://localhost:3001/providers/", newInfoProvider);
           navigate("/mi-perfil");
         } else if (result.isDenied) {
-          Swal.fire("Los cambios no fueron guardados", "", "info");
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
         }
-      });
+      })
     },
   });
 
   return (
     <div>
       <NavBar />
-      <div className={InContainer.container}>
-        <NavLink to="/mi-perfil">
-          <img
-            src="/assets/img/arrow-left.svg"
-            alt=""
-            className={style.leftArrow}
-          />
-        </NavLink>
-        <Container>
-          <div className={style.container}>
-            <h2>Cambia tus datos</h2>
-            <Form onSubmit={formik.handleSubmit}>
-              <Form.Input
-                type="text"
-                placeholder="Localidad"
-                name="state"
-                onChange={formik.handleChange}
-                error={formik.errors.state}
-              ></Form.Input>
-              <Form.Input
-                type="text"
-                placeholder="Dirección"
-                name="road"
-                onChange={formik.handleChange}
-                error={formik.errors.road}
-              ></Form.Input>
-              <Form.Input
-                type="text"
-                placeholder="Provincia"
-                name="city"
-                onChange={formik.handleChange}
-                error={formik.errors.city}
-              ></Form.Input>
-              <label htmlFor="">Seleccioná una foto para tu perfil</label>
-              <br />
-              <Widget
-                publicKey="269841dc43864e62c49d"
-                id="file"
-                name="photos"
-                onChange={(e) => {
-                  formik.values.profilePicture.push(e.originalUrl);
-                  console.log(formik);
-                }}
-                perrito="profilePicture"
-              />
-              <br />
-              <br />
-              <Link to={`/mi-perfil`}>
-                <Button>Cancelar cambios</Button>
-              </Link>
-              <Button type="submit">Confirmar cambios</Button>
-            </Form>
-          </div>
-        </Container>
-      </div>
-
+      <Container>
+        <div className={style.container}>
+          <h2>Cambiá tus datos</h2>
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Input
+              type="text"
+              placeholder="Localidad"
+              name="state"
+              onChange={formik.handleChange}
+              error={formik.errors.state}
+            ></Form.Input>
+            <Form.Input
+              type="text"
+              placeholder="Dirección"
+              name="road"
+              onChange={formik.handleChange}
+              error={formik.errors.road}
+            ></Form.Input>
+            <Form.Input
+              type="text"
+              placeholder="Provincia"
+              name="city"
+              onChange={formik.handleChange}
+              error={formik.errors.city}
+            ></Form.Input>
+            <label htmlFor="">Seleccioná una foto para tu perfil</label>
+            <br />
+            <Widget
+              publicKey="269841dc43864e62c49d"
+              id="file"
+              name="photos"
+              onChange={(e) => {
+                formik.values.profilePicture.push(e.originalUrl);
+                console.log(formik);
+              }}
+              perrito="profilePicture"
+            />
+            <br />
+            <br />
+            <Link to={`/mi-perfil`}>
+              <Button>Cancelar cambios</Button>
+            </Link>
+            <Button type="submit">Confirmar cambios</Button>
+          </Form>
+        </div>
+      </Container>
       <Footer />
     </div>
   );

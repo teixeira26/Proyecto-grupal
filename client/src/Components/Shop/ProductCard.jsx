@@ -47,7 +47,7 @@ const ProductCard = ({
         await axios.put("http://localhost:3001/owners/addFavorite", objToPut);
       }}
       else{ 
-        Swal.fire('Debés registrarte a la página para agregar productos a favoritos')}
+        Swal.fire('Tenés que registrarte en la yumPaw para agregar productos a favoritos')}
   };
 
   return (
