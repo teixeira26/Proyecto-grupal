@@ -34,7 +34,9 @@ export default function Profile() {
         )
         .then((info) => {
           let data = info.data.find((x) => x.email === user.email);
-          setAbleDays(data.schedule);
+          if (data && data.schedule) {
+            setAbleDays(data.schedule);
+          }
         });
     }
   }, [user]);
@@ -182,13 +184,10 @@ export default function Profile() {
             providerInfo.schedule &&
             providerInfo.service[0] === "hospedaje" && (
               <section className={style.mainInfoProfile}>
-                <div className={style.marginDiv}>
+                <div>
                   <h2 className={style.dayTitle} style={{ display: "block" }}>
                     Mis días de trabajo
                   </h2>
-                  <Link to="/mis-horarios-hospedaje">
-                    <button className="terciaryButton">Editar horarios</button>
-                  </Link>
                   <DatePicker
                     // filterDate={disableDates}
                     includeDates={
@@ -204,9 +203,10 @@ export default function Profile() {
                         : []
                     } //'06/31/2022'
                     inline
-                    
                   />
-                 
+                  <Link to="/mis-horarios-hospedaje">
+                    <button className="terciaryButton">Editar horarios</button>
+                  </Link>
                 </div>
 
                 {console.log(providerInfo)}
@@ -238,84 +238,6 @@ export default function Profile() {
               </div>
             </div>
           )}
-          <section className={style.petSection}>
-            <div className={style.addPet}>
-              <h2 className={style.boxLabel}>Mis mascotas</h2>
-            </div>
-            <article className={style.petsProfile}>
-              {userData.pets && userData.pets.length > 0
-                ? userData.pets.map((x, y) => {
-                    if (x.isActive) {
-                      return (
-                        <div className={style.petInfo} key={y}>
-                          <div className={style.profilePictureCont}>
-                            <img
-                              src={x.profilePicture}
-                              alt="profilePicture"
-                              className={style.profilePicture}
-                            />
-                          </div>
-                          <div className={style.petData}>
-                            <h2 className={style.titulo}>{x.name}</h2>
-                            <h4 className={style.race}>
-                              {" "}
-                              Raza: <span className={style.span}>{x.race}</span>
-                            </h4>
-                            <p className={style.aboutDog}>
-                              Sobre {x.name}:{" "}
-                              <span className={style.span}>
-                                {x.description}
-                              </span>
-                            </p>
-                          </div>
-                          <button
-                            className="secondaryButton"
-                            onClick={() => {
-                              Swal.fire({
-                                title:
-                                  "¿Estás seguro que querés eliminar a esta mascota?",
-                                showDenyButton: true,
-                                confirmButtonText: "Eliminar",
-                                denyButtonText: `Cancelar`,
-                              }).then(async (result) => {
-                                if (result.isConfirmed) {
-                                  Swal.fire(
-                                    "¡La mascota fue eliminada!",
-                                    "",
-                                    "success"
-                                  );
-                                  byePet(x.id);
-                                } else if (result.isDenied) {
-                                  Swal.fire("", "", "info");
-                                }
-                              });
-                            }}
-                          >
-                            X
-                          </button>
-                        </div>
-                      );
-                    }
-                  })
-                : null}
-              <Link to="/agregar-mascota">
-                <button className="primaryButton">Agregar mascota</button>
-              </Link>
-            </article>
-          </section>
-          {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
-          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
-          <br/>
-          <br/>
-          {/* {console.log(providerInfo)}
-          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.length>0 &&providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>martes</h3>{providerInfo.schedule.martes.length>0&&providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.length>0&&providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>jueves</h3>{providerInfo.schedule.jueves.length>0&&providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
-          <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
-        </section>} */}
           {providerInfo &&
             providerInfo.schedule &&
             providerInfo.service[0] === "paseo" && (
@@ -395,10 +317,113 @@ export default function Profile() {
                     ))}
                 </div>
                 <Link to="/mis-horarios">
-                  <button>Editar horarios</button>
+                  <button className="primaryButton">Editar horarios</button>
                 </Link>
               </section>
             )}
+          <section className={style.petSection}>
+            <div className={style.addPet}>
+              <h2 className={style.boxLabel}>Mis mascotas</h2>
+            </div>
+            <article className={style.petsProfile}>
+              {userData.pets && userData.pets.length > 0
+                ? userData.pets.map((x, y) => {
+                    if (x.isActive) {
+                      return (
+                        <div className={style.petInfo} key={y}>
+                          <div className={style.profilePictureCont}>
+                            <img
+                              src={x.profilePicture}
+                              alt="profilePicture"
+                              className={style.profilePicture}
+                            />
+                          </div>
+                          <div className={style.petData}>
+                            <h2 className={style.titulo}>{x.name}</h2>
+                            <h4 className={style.race}>
+                              {" "}
+                              Raza: <span className={style.span}>{x.race}</span>
+                            </h4>
+                            <p className={style.aboutDog}>
+                              Sobre {x.name}:{" "}
+                              <span className={style.span}>
+                                {x.description}
+                              </span>
+                            </p>
+                          </div>
+                          <button
+                            className="secondaryButton"
+                            onClick={() => {
+                              Swal.fire({
+                                title:
+                                  "¿Estás seguro que querés eliminar a esta mascota?",
+                                showDenyButton: true,
+                                confirmButtonText: "Eliminar",
+                                denyButtonText: `Cancelar`,
+                              }).then(async (result) => {
+                                if (result.isConfirmed) {
+                                  Swal.fire(
+                                    "¡La mascota fue eliminada!",
+                                    "",
+                                    "success"
+                                  );
+                                  byePet(x.id);
+                                } else if (result.isDenied) {
+                                  Swal.fire("", "", "info");
+                                }
+                              });
+                            }}
+                          >
+                            X
+                          </button>
+                        </div>
+                      );
+                    }
+                  })
+                : null}
+
+              {/* {providerInfo &&
+            providerInfo.schedule &&
+            providerInfo.service[0] === "hospedaje" && (
+              <section className={style.mainInfoProfile}>
+                <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
+                <br />
+                <br />
+                {console.log(providerInfo)}
+                <div>{providerInfo.schedule.lunes && <h3>Lunes</h3>}</div>
+                <div>{providerInfo.schedule.martes && <h3>Martes</h3>}</div>
+                <div>
+                  {providerInfo.schedule.miercoles && <h3>Miércoles</h3>}
+                </div>
+                <div>{providerInfo.schedule.jueves && <h3>Jueves</h3>}</div>
+                <div>{providerInfo.schedule.viernes && <h3>Viernes</h3>}</div>
+                <div>{providerInfo.schedule.sabado && <h3>Sábado</h3>}</div>
+                <div>{providerInfo.schedule.domingo && <h3>Domingo</h3>}</div>
+                <Link to="/mis-horarios-hospedaje">
+                  <button className="terciaryButton">Editar horarios</button>
+                </Link>
+              </section>
+            )} */}
+
+              <Link to="/agregar-mascota">
+                <button className="primaryButton">Agregar mascota</button>
+              </Link>
+            </article>
+          </section>
+          {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
+          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
+          <br/>
+          <br/>
+          {/* {console.log(providerInfo)}
+          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.length>0 &&providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.length>0&&providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.length>0&&providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.length>0&&providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+        </section>} */}
+
           <section>
             <div className={style.addPet}></div>
             <article className={style.petsProfile}>

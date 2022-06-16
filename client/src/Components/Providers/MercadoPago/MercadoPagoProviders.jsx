@@ -6,49 +6,39 @@ import { selectedEvent } from "../../../redux/actions/ownProvActions";
 
 const FORM_ID = "payment-form";
 
-export default function MercadoPagoProviders ({id,eventType, price}) {
-  const {user } = useAuth0();
-  const dispatch = useDispatch()
+export default function MercadoPagoProviders({ id, eventType, price }) {
+  const { user } = useAuth0();
+  const dispatch = useDispatch();
 
   // console.log("ID FUERA PREF", id)
-  localStorage.setItem("id", id)
+  localStorage.setItem("id", id);
   const getPreference = useCallback(async () => {
-    const res = await fetchCTokenProvider(`events/checkout/`, {id, eventType, price,  user: user }, "POST");
-   
+    const res = await fetchCTokenProvider(
+      `events/checkout/`,
+      { id, eventType, price, user: user },
+      "POST"
+    );
+
     // console.log('res MP', res);
-    
-    if(res.global){
-    
+
+    if (res.global) {
       const script = document.createElement("script");
-      console.log(script)
+      console.log(script);
       script.type = "text/javascript";
       script.src =
         "https://www.mercadopago.com.ar/integrations/v1/web-payment-checkout.js";
       script.setAttribute("data-preference-id", res.global);
       const form = document.getElementById(FORM_ID);
       form.appendChild(script);
-
-      
-      }
-    
+    }
   }, []);
 
   useEffect(() => {
     getPreference();
   }, [getPreference]);
-  
-  
 
-  return(
-      <form id={FORM_ID} method="GET" />
-  )
+  return <form id={FORM_ID} method="GET" />;
 }
-
-
-
-
-
-
 
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react';

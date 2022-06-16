@@ -187,7 +187,7 @@ function App() {
               )
             }
           />
-           <Route
+          <Route
             path="/mensajes-pendientes"
             element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <PendentMessages/> : <Loader />}
           />
@@ -361,7 +361,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/agregar-productos"
             element={
@@ -374,7 +373,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/ventas-petshop"
             element={
@@ -387,7 +385,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/ventas-petshop/"
             element={
@@ -400,7 +397,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/ventas-petshop/:id"
             element={
@@ -413,7 +409,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/modificar-producto"
             element={
@@ -426,7 +421,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/get-users"
             element={
@@ -439,7 +433,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/prestacion-servicios"
             element={
@@ -452,7 +445,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/servicios-contratados"
             element={
@@ -465,7 +457,6 @@ function App() {
               ) : null
             }
           />
-
           <Route
             path="/admin/listado-productos"
             element={

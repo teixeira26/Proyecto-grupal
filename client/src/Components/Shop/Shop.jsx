@@ -3,19 +3,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
-import {
-  getProducts,
-  chargeCart,
-  getFavoritesProducts,
-  addTofavorites,
-} from "../../redux/actions/petshopActions";
+import { getProducts, chargeCart, getFavoritesProducts, addTofavorites } from "../../redux/actions/petshopActions";
 import NavBarShop from "../NavBar/NavBarShop";
 import ShopFilters from "./ShopFilters";
 import ProductCard from "./ProductCard";
 import Footer from "../Footer/Footer";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from "../Shop/Shop.module.css";
-import NoResults from "../../Views/Profile/NoResultsShop";
 import Paginated from "../Paginated";
 import NoResultsShop from "../../Views/Profile/NoResultsShop";
 
@@ -39,7 +33,6 @@ const Shop = () => {
           console.log(x.data);
           setFavorites(x.data);
         });
-      // dispatch(getProducts());
       dispatch(chargeCart("cart"));
     }
   }, [dispatch, user]);
@@ -77,8 +70,6 @@ const Shop = () => {
         <h1 className={styles.shopTitle}>
           ¡Encontrá lo mejor para tus mascotas!
         </h1>
-        
-
         <div className={styles.shopFlex}>
           <div className={styles.shopFilters}>
             <ShopFilters />
@@ -113,7 +104,6 @@ const Shop = () => {
           />
         </div>
       </div>
-      
       <Footer />
     </div>
   );
