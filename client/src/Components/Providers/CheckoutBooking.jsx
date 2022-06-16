@@ -14,7 +14,6 @@ export default function CheckoutBooking() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-
   useEffect(()=>{
     dispatch(getEvents())
   }, [dispatch])
@@ -37,14 +36,11 @@ export default function CheckoutBooking() {
   let userEvents = agrupacion.filter(ev => ev[0].ownerEmail === user.email)
   console.log('userEvents', userEvents)
 
-  
-
   console.log('agrupacion', agrupacion)
 
   function checkoutMP(el){
     localStorage.setItem("service", JSON.stringify(el))
     navigate('/pagar-reserva')
-
   }
     
   return (
@@ -56,7 +52,6 @@ export default function CheckoutBooking() {
             <br />
           { userEvents && userEvents.length ?
             userEvents.map(el =>{
-            
               return el[0].payment=== 'pending'?(
               <div>
               <h5>Fecha - Desde: {el[0].date.day} Hasta: {el[el.length-1].date.day}</h5>
@@ -66,10 +61,8 @@ export default function CheckoutBooking() {
               <p>Mascota: {el[0].petName}</p>
               {el[el.length-1].payment === 'pending'? <button onClick={()=>checkoutMP(el)}>PAGAR SERVICIO</button> : 'Tu servicio ya está pago :D'}
             </div>):null
-
             }) :null
           }
-
         </section>
       </div>
     </>

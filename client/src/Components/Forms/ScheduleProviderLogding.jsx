@@ -162,7 +162,7 @@ export default function ScheduleProviderLogdifalseng() {
               )
             }) : null}
 
-            <Button type="submit">Enviar</Button>
+            <button className="primaryButton" type="submit">Enviar</button>
           </Form>
         </div>
       </Container>

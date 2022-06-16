@@ -121,7 +121,6 @@ export default function Profile() {
                     <button className="secondaryButton">Mis compras</button>
                   </Link>
                 </div>
-
                 <div className={style.service}>
                   <Link to="/calificacionesOwner">
                     <button className="secondaryButton">
@@ -129,7 +128,6 @@ export default function Profile() {
                     </button>
                   </Link>
                 </div>
-
                 {isProvider && (
                   <div className={style.service}>
                     <Link to="/calificacionesProvider">
@@ -139,7 +137,6 @@ export default function Profile() {
                     </Link>
                   </div>
                 )}
-
                 {
                   <div className={style.service}>
                     <button className="primaryButton" onClick={myServices}>
@@ -166,7 +163,6 @@ export default function Profile() {
                 <h2 className={style.dayTitle} style={{ display: "block" }}>
                   Mis días de trabajo
                 </h2>
-
                 <br />
                 <br />
                 {console.log(providerInfo)}
@@ -195,7 +191,6 @@ export default function Profile() {
                   onClick={() => navigate("/agregar-foto")}
                 />
               </div>
-
               <div className={style.housingGrid}>
                 {providerInfo.housingPhotos &&
                   providerInfo.housingPhotos.map((x, y) => {
@@ -276,7 +271,6 @@ export default function Profile() {
               </Link>
             </article>
           </section>
-
           {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
           <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
           <br/>
@@ -289,7 +283,6 @@ export default function Profile() {
           <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
           <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
-      
         </section>} */}
           {providerInfo &&
             providerInfo.schedule &&
@@ -313,7 +306,6 @@ export default function Profile() {
                 </Link>
               </section>
             )}
-
           {providerInfo &&
             providerInfo.schedule &&
             providerInfo.service[0] === "paseo" && (
@@ -424,7 +416,6 @@ export default function Profile() {
                 </div>
               )}
             </article>
-
             {isProvider && eventsProvider
               ? eventsProvider.map((x) => {
                   return (

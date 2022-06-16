@@ -126,8 +126,8 @@ export default function InfoProvider() {
               perrito="profilePicture"
             />
             <div className={style.buttons}>
-              <Link to="/mi-perfil"><Button>Cancelar</Button></Link>
-              <Button type="submit">Agregar mascota</Button>
+              <Link to="/mi-perfil"><button className="secondaryButton">Cancelar</button></Link>
+              <button className="primaryButton" type="submit">Agregar mascota</button>
             </div>
           </Form>
         </div>

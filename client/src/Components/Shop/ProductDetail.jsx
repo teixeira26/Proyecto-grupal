@@ -54,7 +54,7 @@ const ProductDetail = () => {
                 />
               );
             })}
-            {userDb?.isAdmin? <Link to='/admin/listado-productos'><Button>VOLVER AL LISTADO</Button></Link> : null}
+            {userDb?.isAdmin? <Link to='/admin/listado-productos'><button className="primaryButton">VOLVER AL LISTADO</button></Link> : null}
       </div>
       <Footer />
     </div>

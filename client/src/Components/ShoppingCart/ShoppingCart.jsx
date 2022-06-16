@@ -51,11 +51,8 @@ const ShoppingCart = () => {
         <NavLink to={user?"/shop":'/'}>
           <img src="./assets/img/arrow-left.svg" alt="" />
         </NavLink>
-
         <h2 className={styles.cartTitle}>Carrito</h2>
-
         <h3 className={styles.cartProducts}>Productos a comprar</h3>
-
         <div className={styles.cartSubtitles}>
           <table className={styles.table}>
             <thead>
@@ -98,13 +95,11 @@ const ShoppingCart = () => {
             </p>
           )}
         </article>
-
         <div className={styles.cartBottom}>
           <div>
             <div className={styles.totalFlex}>
               <h3 className={styles.total}>Total: <span className={styles.totalNum}>${total}</span> </h3>
             </div>
-
             <div className={styles.purchase}>
               {cart && cart.length > 0 ? (
               
@@ -117,7 +112,6 @@ const ShoppingCart = () => {
               )}
             </div>
           </div>
-
           {cart && cart.length > 0 ? (
             <article>
               <button className="secondaryButton" onClick={clearCart}>Limpiar carrito</button>

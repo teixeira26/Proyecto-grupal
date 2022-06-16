@@ -115,9 +115,9 @@ export default function InfoOwner() {
             <br />
             <br />
             <Link to={`/mi-perfil`}>
-              <Button>Cancelar cambios</Button>
+              <button className="secondaryButton">Cancelar cambios</button>
             </Link>
-            <Button type="submit">Confirmar cambios</Button>
+            <button className="primaryButton" type="submit">Confirmar cambios</button>
           </Form>
         </div>
       </Container>

@@ -3,17 +3,17 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export const Quesos = ()=>{
-    const {user} = useAuth0();
+export const Quesos = () => {
+    const { user } = useAuth0();
     const navigate = useNavigate()
-    const ownerRegister = async()=>{
+    const ownerRegister = async () => {
         let owner = {
-            email:user.email,
-            name:user.given_name,
+            email: user.email,
+            name: user.given_name,
             lastName: user.family_name,
-          }
-          await axios.post('https://proyecto-grupal.herokuapp.com/owners', owner)
-          navigate('/inicio')
+        }
+        await axios.post('https://proyecto-grupal.herokuapp.com/owners', owner)
+        navigate('/inicio')
     }
     // const providerRegister = async()=>{
     //     let provider = {
@@ -24,7 +24,7 @@ export const Quesos = ()=>{
     //       await axios.post('https://proyecto-grupal.herokuapp.com/providers', provider)
     //       navigate('/infoProvider')
     // }
-    return(
+    return (
         // <div style={{
         //     display:"flex",
         //     justifyContent:"center",
@@ -37,7 +37,7 @@ export const Quesos = ()=>{
         // </div>
         // </div>
         <div>
-        {ownerRegister()}
+            {ownerRegister()}
         </div>
     )
 }

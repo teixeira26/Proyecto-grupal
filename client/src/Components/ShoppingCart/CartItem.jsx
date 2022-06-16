@@ -54,7 +54,6 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
                   <img src={image} alt="producto-petshop" width="100" height="100" />
                 </Link>
               </th>
-
               <th className={styles.th}>
                 <div className={styles.item}>
                   <h4 className={styles.productName}>{name}</h4>
@@ -66,27 +65,22 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
                   </button>
                 </div>
               </th>
-
               <th className={styles.th}>
                 <h5 className={styles.price}>${price}.00</h5>
               </th>
-
               <th className={styles.th}>
                 <div className={styles.centerButton}>
                   <div className={styles.addOneItem}>
                     <span className={styles.button} onClick={delItem}>
                       -
                     </span>
-
                     <div className={styles.count}>{quantity}</div>
-
                     <span className={styles.button} onClick={addItem}>
                       +
                     </span>
                   </div>
                 </div>
               </th>
-
               <th className={styles.th}>
                 <h5 className={styles.total}>${price * quantity}.00</h5>
               </th>

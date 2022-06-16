@@ -25,7 +25,7 @@ export const NotRegistered = () => {
               ¡OOPS! <br /> Para continuar tenés que iniciar sesión
             </h1>
             <Link to='/'>
-              <button className={styles.button}>Ir al inicio</button>
+              <button className='primaryButton'>Ir al inicio</button>
             </Link>
           </div>
         </div>
