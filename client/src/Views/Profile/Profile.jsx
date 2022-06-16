@@ -146,7 +146,7 @@ export default function Profile() {
                   </Link>
                 </div>
                 <div className={style.service}>
-                  <Link to="/calificaciones-dueño">
+                  <Link to="/calificaciones-dueno">
                     <button className="secondaryButton">
                       Reseñas enviadas
                     </button>

@@ -64,6 +64,8 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                         <div className={style.divButton}>
                             <h1>{name} {lastName}</h1>
                             <Link to={`/chat/${email}/${user.email}`}><button className="primaryButton">Contactar</button></Link>
+                            {service == 'hospedaje' ? <Link to={`/reservar-hospedaje/${email}`}><button className="primaryButton">Reservar servicio</button></Link> : null}
+                        {service == 'paseo' ? <Link to={`/reservar-paseo/${email}`}><button className="primaryButton">Reservar servicio</button></Link> : null}
                         </div>
                         <p className={style.userService}>{service} por día: <strong>${price}</strong></p>
                     </div>
@@ -73,16 +75,14 @@ export default function DetailProviderCard({ name, lastName, profilePicture, add
                     <p className={style.paragraphDescription}>{description}</p>
                 </div>
                 <div className={style.sched}>
-                    <div className={style.titleSchedule}>
+                    {/* <div className={style.titleSchedule}>
                         <h2 className={style.about}>Chequeá su disponibilidad</h2>
-                        {service == 'hospedaje' ? <Link to={`/reservar-hospedaje/${email}`}><button className="primaryButton">Reservar servicio</button></Link> : null}
-                        {service == 'paseo' ? <Link to={`/reservar-paseo/${email}`}><button>Reservar servicio</button></Link> : null}
-                    </div>
-                    <div className={style.gridSchedule}>
+                    </div> */}
+                    {/* <div className={style.gridSchedule}>
                         {Object.keys(schedule).map((key) => {
                             return <p className={style.scheduleDate}>{[schedule[key]]}</p>
                         })}
-                    </div>
+                    </div> */}
                 </div>
                 {(providerInfo && providerInfo.service[0] === 'hospedaje') ?
                     <div className={style.sched}>

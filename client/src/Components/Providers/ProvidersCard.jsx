@@ -34,7 +34,6 @@ export default function ProvidersCard({
               </div>
             )}
             <img src={profilePicture} alt="" className={styles.cardImg} />
-
             <div className={styles.cardBottom}>
               <p className={styles.price}>${price}</p>
               <h2 className={styles.cardTitle}>

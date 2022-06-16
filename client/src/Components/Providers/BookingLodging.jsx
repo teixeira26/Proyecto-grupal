@@ -123,7 +123,6 @@ export default function BookingLodging() {
                     Swal.fire('La reserva no fue confirmada.', '', 'info')
                 }
             })
-
             dispatch(getEvents());
         }
     });
@@ -153,7 +152,6 @@ export default function BookingLodging() {
 
     const [startDate, setStartDate] = useState(null);
     const [endDate, setEndDate] = useState(null);
-
     const restarFechas = function (f1, f2) {
         var aFecha1 = f1.split('/');
         var aFecha2 = f2.split('/');
@@ -167,10 +165,8 @@ export default function BookingLodging() {
     const onChangeDatePicker = (fecha) => {
         setStartDate(fecha[0]);
         console.log('Fecha inicial: ', fecha[0].toLocaleString().split(' ')[0])
-
         setEndDate(fecha[1] ? fecha[1] : null)
         console.log('fecha final: ', fecha[1] ? fecha[1].toLocaleString().split(' ')[0] : null)
-
         if (fecha[0] && fecha[1]) {
             var fechasSeleccionadas = [];
             const diasTranscorridos = restarFechas(fecha[0].toLocaleString().split(' ')[0], fecha[1].toLocaleString().split(' ')[0]);
@@ -185,13 +181,11 @@ export default function BookingLodging() {
         console.log(fechasSeleccionadas);
         if (fechasSeleccionadas) setBookingDays(fechasSeleccionadas)
     }
-
     function sumarDias(fecha, dias) {
         console.log('fecha: ', fecha, 'dias: ', dias)
         fecha.setDate(fecha.getDate() + dias);
         return fecha;
     }
-
     // const disableDates = (date) => {
     //     if(ableDays){
     //     let schedule = ableDays.schedule;
@@ -201,17 +195,14 @@ export default function BookingLodging() {
     //     console.log('dayyyyyyy',day)
     //     return day !== 1;
     //   };
-
     return (
         <>
             <NavBar />
             <div className={inContainer.container}>
                 <Form onSubmit={formik.handleSubmit}>
                     <h2>Tu reserva</h2>
-
                     <label htmlFor="">Tu nombre</label>
                     <Form.Input type="text" readOnly name="name" value={user.name} onChange={formik.handleChange} />
-
                     <label htmlFor="">Tu mascota</label>
                     <Form.Dropdown
                         placeholder="Elegí una de tus mascotas"
@@ -227,9 +218,7 @@ export default function BookingLodging() {
                         selection={true}
                         error={formik.errors.petName}
                     >
-
                         {/* moment().format('MMMM Do YYYY, h:mm:ss a'); */}
-
                     </Form.Dropdown>
                     <label htmlFor="">Elegí un rango de fecha para el hospedaje de tu mascota</label>
                     <DatePicker
@@ -258,7 +247,6 @@ export default function BookingLodging() {
                             formik.values.comments = e.target.value
                         }}
                     ></textarea>
-
                     <Link to={`/providers`}><button className="secondaryButton">Cancelar</button></Link>
                     <button className="primaryButton">Continuar con el pago</button>
                 </Form>

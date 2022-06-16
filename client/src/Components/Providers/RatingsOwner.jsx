@@ -75,7 +75,7 @@ const RatingsOwner = () => {
                           {x.provider.lastName}
                         </h4>
                         <Link
-                          to={`/cambiar-reseña/${x.id}?providerEmail=${x.provider.email}`}
+                          to={`/cambiar-resena/${x.id}?providerEmail=${x.provider.email}`}
                         >
                           <button style={{ display: "block" }} className='secondaryButton'>Cambiar</button>
                         </Link>
