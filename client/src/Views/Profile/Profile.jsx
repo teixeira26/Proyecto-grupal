@@ -292,15 +292,15 @@ export default function Profile() {
                 <br />
                 <br />
                 {console.log(providerInfo)}
-                <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
-                <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
+                <div>{providerInfo.schedule.lunes && <h3>Lunes</h3>}</div>
+                <div>{providerInfo.schedule.martes && <h3>Martes</h3>}</div>
                 <div>
-                  {providerInfo.schedule.miercoles && <h3>miércoles</h3>}
+                  {providerInfo.schedule.miercoles && <h3>Miércoles</h3>}
                 </div>
-                <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
-                <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
-                <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
-                <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
+                <div>{providerInfo.schedule.jueves && <h3>Jueves</h3>}</div>
+                <div>{providerInfo.schedule.viernes && <h3>Viernes</h3>}</div>
+                <div>{providerInfo.schedule.sabado && <h3>Sábado</h3>}</div>
+                <div>{providerInfo.schedule.domingo && <h3>Domingo</h3>}</div>
                 <Link to="/mis-horarios-hospedaje">
                   <button>Editar horarios</button>
                 </Link>
