@@ -258,7 +258,6 @@ export default function BookingLodging() {
                             formik.values.comments = e.target.value
                         }}
                     ></textarea>
-
                     <Link to={`/chat/${providerEmail}/${ownerEmail}`}><button className="secondaryButton">Cancelar</button></Link>
                     <button className="primaryButton">Continuar con el pago</button>
                 </Form>

@@ -303,7 +303,7 @@ function App() {
             element={isAuthenticated && !isLoading ? <Ratings /> : <Loader />}
           />
           <Route
-            path="/calificaciones-dueño"
+            path="/calificaciones-dueno"
             element={
               isAuthenticated && !isLoading ? <RatingsOwner /> : <Loader />
             }

@@ -11,7 +11,7 @@ import Footer from "../Footer/Footer";
 import inContainer from "../GlobalCss/InContainer.module.css";
 import styles from "../Shop/Shop.module.css";
 import Paginated from "../Paginated";
-import NoResultsShop from "../../Views/Profile/NoResultsShop";
+import InLoader from "../Loading/loading";
 
 const Shop = () => {
   const products = useSelector((state) => state.filteredProducts);
@@ -77,7 +77,7 @@ const Shop = () => {
           <br />
           <section className={styles.shopGrid}>
             {!currentProducts.length
-              ? <NoResultsShop/>
+              ? <InLoader/>
               : currentProducts.map((p) => {
                   console.log(p);
                   return p.stock > 0 && p.isActive ? (
