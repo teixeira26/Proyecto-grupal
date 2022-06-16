@@ -93,7 +93,6 @@ export default function Profile() {
               <div className={style.textContent}>
                 <h1 className={style.name}>{user.name}</h1>
               </div>
-
               <h4 className={style.email}>
                 {" "}
                 E-mail: <span className={style.span}>{user.email}</span>
@@ -101,7 +100,7 @@ export default function Profile() {
               <h4 className={style.address}>
                 Dirección:{" "}
                 <span className={style.span}>
-                  {userData.address ? userData.address.road : null}
+                  {userData.address ? userData.address.road : null}, {userData.address ? userData.address.state : null}, {userData.address ? userData.address.city : null}
                 </span>{" "}
               </h4>
               <div className={style.buttonContainer}>
@@ -121,7 +120,6 @@ export default function Profile() {
                     </button>
                   </Link>
                 </div>
-
                 {!isProvider && (
                   <div>
                     <Link to="/servicio">
@@ -162,7 +160,6 @@ export default function Profile() {
             <div className={style.addPet}>
               <h2 className={style.boxLabel}>Mis mascotas</h2>
             </div>
-
             <article className={style.petsProfile}>
               {userData.pets && userData.pets.length > 0
                 ? userData.pets.map((x, y) => {
@@ -176,7 +173,6 @@ export default function Profile() {
                               className={style.profilePicture}
                             />
                           </div>
-
                           <div className={style.petData}>
                             <h2 className={style.titulo}>{x.name}</h2>
                             <h4 className={style.race}>
@@ -226,13 +222,11 @@ export default function Profile() {
             </article>
           </section>
         </div>
-
         <Link to="/compras-realizadas">
           <button>Mis compras</button>
         </Link>
         <section>
           {<button onClick={myServices}>Servicios contratados</button>}
-
           <h2>Mis reservas</h2>
           {eventsOwner && eventsOwner.length
             ? eventsOwner.map((x) => {
@@ -255,7 +249,6 @@ export default function Profile() {
               <h2>Mis servicios acordados</h2>
             </div>
           )}
-
           {isProvider && eventsProvider
             ? eventsProvider.map((x) => {
                 return (

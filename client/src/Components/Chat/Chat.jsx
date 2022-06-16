@@ -120,9 +120,8 @@ export const Chat = () => {
         <NavLink to={`/providers/${providerEmail}`}>
           <img src="/assets/img/arrow-left.svg" alt="back arrow" className={styles.leftArrow} />
         </NavLink>
-        <div className={styles.titleChat}>
-          <h2>Tu conversacion con {name}</h2>
-        </div>
+
+          <h2 className={styles.titleChat}>Tu conversacion con {name}</h2>
         <div className={styles.chat}>
           {mensajes.length > 0 ? mensajes.map((x, y) => {
             return (
@@ -133,11 +132,11 @@ export const Chat = () => {
           <div ref={divRef}></div>
         </div>
         <form className={styles.form} onSubmit={submitMessage}>
-          <input type="text" value={mensaje.mensaje} placeholder="Tu mensaje" name="message" onChange={setMessage}></input>
+          <input className={styles.placeholder} type="text" value={mensaje.mensaje} placeholder="Tu mensaje" name="message" onChange={setMessage}></input>
           <button type="submit" value="Enviar" className="primaryButton">Enviar mensaje</button>
         </form>
-        {service == 'hospedaje' ? <NavLink to={`/reservar-hospedaje/${providerEmail}`}><button className="secondaryButton">Reservar servicio</button></NavLink> : null}
-        {service == 'paseo' ? <NavLink to={`/reservar-paseo/${providerEmail}`}><button className="secondaryButton">Reservar servicio</button></NavLink> : null}
+        {/* {service == 'hospedaje' ? <NavLink to={`/reservar-hospedaje/${providerEmail}`}><button className="secondaryButton">Reservar servicio</button></NavLink> : null}
+        {service == 'paseo' ? <NavLink to={`/reservar-paseo/${providerEmail}`}><button className="secondaryButton">Reservar servicio</button></NavLink> : null} */}
       </div>
     </div>
   );
