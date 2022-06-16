@@ -226,3 +226,7 @@
   align-items: center;
   margin: 0 auto;
 }
+
+.marginDiv{
+  margin: 32px 0;
+}

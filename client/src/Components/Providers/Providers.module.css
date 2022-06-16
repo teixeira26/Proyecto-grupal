@@ -1,30 +1,30 @@
 .categoriesWrapper {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
-  gap: 8rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
+  gap: 80px;
   justify-content: center;
-  margin: 4rem 0;
+  margin: 42px 0;
 }
 
 .homeTitle {
   display: flex;
   justify-content: center;
-  margin-top: 6rem;
+  margin-top: 66px;
 }
 
 .shopTitle {
   display: flex;
   justify-content: center;
   width: 100%;
-  margin: 8rem 0 0;
+  margin: 80px 0 0;
 }
 
 .product {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 25rem));
-  gap: 8rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 260px));
+  gap: 80px;
   justify-content: center;
-  margin: 10rem 0;
+  margin: 120px 0;
 }
 
 .seeAll {
@@ -57,7 +57,7 @@
   height: 100%;
   grid-column: 1 / 2;
   grid-row: 1 / 30;
-  gap: 2rem;
+  gap: 22px;
 }
 
 .selects {
