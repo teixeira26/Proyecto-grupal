@@ -10,6 +10,9 @@ import styleContainer from "../../Components/GlobalCss/InContainer.module.css";
 import style from "./Profile.module.css";
 import Swal from "sweetalert2";
 import InContainer from "../../Components/GlobalCss/InContainer.module.css";
+import "react-datepicker/dist/react-datepicker.css";
+import DatePicker from "react-datepicker";
+import { addDays, getDay } from 'date-fns';
 
 export default function Profile() {
   const pets = useSelector((state) => state.pets);
@@ -21,6 +24,15 @@ export default function Profile() {
   const [providerInfo, setProviderInfo] = useState();
   const [eventsProvider, setEventsProvider] = useState();
   const [eventsOwner, setEventsOwner] = useState();
+  const [ableDays, setAbleDays] = useState([]);
+
+  useEffect(() => {
+    if(user){
+    axios.get('https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC').then(info => {
+        let data = info.data.find(x => x.email === user.email);
+        setAbleDays(data.schedule)
+    })}
+}, [user])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -163,18 +175,19 @@ export default function Profile() {
                 <h2 className={style.dayTitle} style={{ display: "block" }}>
                   Mis días de trabajo
                 </h2>
-                <br />
-                <br />
+                <DatePicker
+                        // filterDate={disableDates}
+                        includeDates={ableDays && ableDays.length ? ableDays.map(x => {
+                            const dayTemp = x.split('/')[0]
+                            const monthTemp = x.split('/')[1]
+                            let newDate = x.split('/');
+                            newDate[0] = monthTemp;
+                            newDate[1] = dayTemp
+                            return (addDays(new Date(newDate.join('/')), 0))
+                        }) : []}//'06/31/2022'
+                        inline
+                    />
                 {console.log(providerInfo)}
-                <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
-                <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
-                <div>
-                  {providerInfo.schedule.miercoles && <h3>miércoles</h3>}
-                </div>
-                <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
-                <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
-                <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
-                <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
                 <Link to="/mis-horarios-hospedaje">
                   <button className="terciaryButton">Editar horarios</button>
                 </Link>
