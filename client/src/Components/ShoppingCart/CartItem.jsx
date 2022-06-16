@@ -30,7 +30,7 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
       email: 'cart',
       stock: stock,
     });}
-    else Swal.fire(`La cantidad deseada excede al limite en stock`);
+    else Swal.fire('Límite de stock alcanzado.', '', 'warning');
   };
 
   const delItem = () => {

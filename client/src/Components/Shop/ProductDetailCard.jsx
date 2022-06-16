@@ -34,7 +34,7 @@ const ProductDetailCard = ({ profilePicture, name, price, category, stock, descr
     if (count < limit) {
       setCount(count + 1);
     } else {
-      Swal.fire(`Estás intentando agregar más productos de los que hay en stock`);
+      Swal.fire('Límite de stock alcanzado.', '', 'warning');
     }
   };
 
