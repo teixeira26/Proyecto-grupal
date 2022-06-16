@@ -25,8 +25,10 @@ const payProduct = async (req, res) => {
       service: i.name,
       id: i.id,
       quantity: i.quantity,
+      title: i.name,
       unit_price: i.price,
       currency_id: "ARS",
+     
     })
   );
 

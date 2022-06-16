@@ -51,10 +51,10 @@ const Footer = () => {
       <div className={styles.footerBottom}>
         <p className={styles.copyright}>Copyright @yumPaw - 2022</p>
         <div className={styles.social}>
-          <a href="https://github.com/teixeira26/Proyecto-grupal"><ion-icon name="logo-github"></ion-icon></a>
+          <a href="https://github.com/teixeira26/Proyecto-grupal" target="__blank"><img src="./assets/img/logo-github.svg" alt="" /></a>
         </div>
         <div className={styles.social}>
-          <ion-icon name="logo-instagram" className={styles.social}></ion-icon>
+          <img src="./assets/img/logo-instagram.svg" alt="" target='__blank' className={styles.social}/> 
         </div>
       </div>
     </div>

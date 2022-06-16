@@ -10,7 +10,8 @@ import {
     GET_EVENTS,
     GET_PETS,
     GET_SOLDS,
-    GET_REVIEWS
+    GET_REVIEWS,
+    ID_OWNER
 } from '../actions-type/ownProvActionTypes';
 
 export function getOwners() {
@@ -200,3 +201,15 @@ export function groupEvents(){
         type: 'GROUP_EVENTS'
     }
 }
+
+export function getOwnerById(email) {
+    return function(dispatch){
+        axios.get(`http://localhost:3001/owners/${email}`)
+        .then(response => {
+            dispatch({
+                type: ID_OWNER,
+                payload: response.data
+            })
+        })
+    }
+};

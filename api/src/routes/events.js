@@ -188,9 +188,14 @@ router.post("/", async (req, res, next) => {
 
     let typeOfService = providerInfo.dataValues.service[0];
     console.log(typeOfService);
+    
     // reviso si incluye el horario que necesito en el dia que quiero el servicio
     if (typeOfService === "paseo") {
-      if (providerInfo.dataValues.schedule[date.day].includes(date.hour)) {
+      let schedule = providerInfo.dataValues.schedule.map(x=>JSON.parse(x))
+    console.log(schedule)
+    const day = schedule.find(x=> x[date.day])
+    console.log(day)
+      if (day[date.day].includes(date.hour)) {
         // guardo el evento asociado con el provider
         let event = await Event.findAll({
           where: {
@@ -234,15 +239,18 @@ router.post("/", async (req, res, next) => {
         // si la cantidad de eventos es igual a la cantidad de mascotas que puede pasear,
         // descartamos la opcion para reservar en ese horario filtrando el schedule del provider
         if (totalAllEvents >= providerInfo.dataValues.dogsPerWalk) {
-          filteredSchedule = providerInfo.dataValues.schedule[date.day].filter(
+          filteredSchedule = day[date.day].filter(
             (x) => x !== date.hour
           );
+          console.log('filteressss',filteredSchedule)
+
+          let realFilteredSchedule = schedule.filter(x => !x[date.day])
+          realFilteredSchedule = [...realFilteredSchedule, {[date.day]:filteredSchedule}]
+          console.log('date.day', date.day, 'day', day)
+          console.log('realFIlteres; ',realFilteredSchedule);
           providerUpdated = {
             ...providerInfo,
-            schedule: {
-              ...providerInfo.dataValues.schedule,
-              [date.day]: filteredSchedule,
-            },
+            schedule:realFilteredSchedule,
           };
           Provider.update(providerUpdated, {
             where: {

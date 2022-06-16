@@ -9,7 +9,7 @@ export default function AdminDashboard (){
             <NavBar />
             <div className={styles.container}>
             <Link to='/admin/listado-productos'><button className="primaryButton">Ver lista de productos</button></Link>
-            <Link to='/admin/sales-receipts'><button className="primaryButton">Ver lista de compras</button></Link>
+            <Link to='/admin/ventas-petshop'><button className="primaryButton">Ver lista de compras</button></Link>
             <Link to='/admin/get-users'><button className="primaryButton">Ver usuarios registrados</button></Link>
             </div>
             <Footer />
