@@ -22,7 +22,7 @@ export default function InfoOwner() {
 
   useEffect(()=>{
     if(user){
-        axios.get('http://localhost:3001/providers?filter=&order=ASC').then(x=>{
+        axios.get('https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC').then(x=>{
             setInfoProvider(x.data.find(x=>x.email === user.email))
         })
     }
@@ -64,7 +64,7 @@ export default function InfoOwner() {
         if (result.isConfirmed) {
           Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
           await dispatch(putOwnerInfo(formData.email, formData));
-          await axios.put('http://localhost:3001/providers/', newInfoProvider)
+          await axios.put('https://proyecto-grupal.herokuapp.com/providers/', newInfoProvider)
           navigate("/mi-perfil");
         } else if (result.isDenied) {
           Swal.fire('Los cambios no fueron guardados.', '', 'info')

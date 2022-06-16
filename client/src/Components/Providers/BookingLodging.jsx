@@ -49,7 +49,7 @@ export default function BookingLodging() {
     console.log('maxId', maxId)
 
     useEffect(() => {
-        axios.get('http://localhost:3001/providers?filter=&order=ASC').then(info => {
+        axios.get('https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC').then(info => {
             let data = info.data.find(x => x.email === providerEmail);
             formik.values.providerName = data.name + ' ' + data.lastName
             formik.values.price = data.price
@@ -109,9 +109,9 @@ export default function BookingLodging() {
                             numberOfBooking: maxId
                         };
                         console.log('formdata', formData)
-                        await axios.post("http://localhost:3001/events", formData);
+                        await axios.post("https://proyecto-grupal.herokuapp.com/events", formData);
                     }
-                    axios.post('http://localhost:3001/mailer/', { email: user.email, subject: "Confirmación de reserva Yum Paw", text: "Recién hiciste una reserva en nuestra página, te felicitamos :)" })
+                    axios.post('https://proyecto-grupal.herokuapp.com/mailer/', { email: user.email, subject: "Confirmación de reserva Yum Paw", text: "Recién hiciste una reserva en nuestra página, te felicitamos :)" })
                     console.log(formData);
                     Swal.fire('¡La reserva fue confirmada con éxito!', '', 'success')
                     navigate('/mis-servicios')
@@ -126,7 +126,7 @@ export default function BookingLodging() {
 
     useEffect(() => {
         if (user) {
-            axios.get('http://localhost:3001/owners').then(x => {
+            axios.get('https://proyecto-grupal.herokuapp.com/owners').then(x => {
                 let miInfo = x.data.find(y => y.email === user.email);
                 setMyinfo(miInfo)
             })

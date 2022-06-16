@@ -57,7 +57,7 @@ export default function ScheduleProvider() {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
-          await axios.put('http://localhost:3001/events/schedule',formData);
+          await axios.put('https://proyecto-grupal.herokuapp.com/events/schedule',formData);
           navigate('/mi-perfil')
         } else if (result.isDenied) {
           Swal.fire('Los cambios no fueron guardados.', '', 'info')

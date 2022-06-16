@@ -45,7 +45,7 @@ export default function Review({ service }) {
         /* Read more about isConfirmed, isDenied below */
         if (result.isConfirmed) {
           Swal.fire('¡La reseña fue enviada con éxito!', '', 'success')
-          await axios.post('http://localhost:3001/reviews', formData)
+          await axios.post('https://proyecto-grupal.herokuapp.com/reviews', formData)
           navigate('/inicio')
         } else if (result.isDenied) {
           Swal.fire('La reseña no fue enviada.', '', 'info')
