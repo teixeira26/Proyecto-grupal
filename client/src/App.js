@@ -53,6 +53,7 @@ import SaleDetail from "./Components/Admin/SaleDetail";
 import OfferedServicesDetail from "./Components/Admin/OfferedServicesDetail";
 import HiredServicesDetail from "./Components/Admin/HiredServicesDetail";
 import PaymentBookingCheckout from "./Components/Providers/PaymentBookingCheckout";
+import PendentMessages from "./Components/Chat/PendentMessages";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -148,6 +149,10 @@ function App() {
           <Route
             path="/chat/:providerEmail/:ownerEmail"
             element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Chat /> : <Loader />}
+          />
+           <Route
+            path="/mensajes-pendientes"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <PendentMessages/> : <Loader />}
           />
           <Route
             path="/favoritos"
