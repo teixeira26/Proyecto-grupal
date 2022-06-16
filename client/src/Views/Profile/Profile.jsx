@@ -54,19 +54,20 @@ export default function Profile() {
     }
   }, [user, isAuthenticated, pets, dispatch]);
 
-  useEffect(() => {
-    if (user) {
-      axios
-        .get("http://localhost:3001/providers?filter=&order=ASC")
-        .then((x) => {
-          const providerCheck = x.data.find((x) => x.email === user.email);
-          if (providerCheck) {
-            setIsProvider(true);
-            setProviderInfo(providerCheck);
-          }
-        });
-    }
-  }, [user]);
+
+  useEffect(()=>{
+    if(user){
+    axios.get("http://localhost:3001/providers?filter=&order=ASC").then((x) => {
+        let providerCheck = x.data.find((x) => x.email === user.email);
+        console.log(providerCheck)
+        if (providerCheck && providerCheck.service === 'paseo') {
+          providerCheck = {...providerCheck, schedule:providerCheck.schedule.map(x=>JSON.parse(x))}
+          setIsProvider(true);
+          setProviderInfo(providerCheck);
+          console.log(providerCheck)
+        }
+      })}
+  }, [user])
 
   async function byePet(id) {
     await axios.delete(`http://localhost:3001/pets/${id}`, { isActive: false });
@@ -265,10 +266,69 @@ export default function Profile() {
             </article>
           </section>
 
-          <section>
-            <h2>Mis reservas</h2>
-            {eventsOwner && eventsOwner.length
-              ? eventsOwner.map((x) => {
+        {/* {providerInfo&& providerInfo.schedule && providerInfo.service[0] === 'paseo' &&<section className={style.mainInfoProfile}>
+          <h2 style={{display:"block"}}>Mis horarios de trabajo</h2>
+          <br/>
+          <br/>
+          {/* {console.log(providerInfo)}
+          <div style={{display:'block'}}><h3>lunes</h3>{providerInfo.schedule.lunes.length>0 &&providerInfo.schedule.lunes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>martes</h3>{providerInfo.schedule.martes.length>0&&providerInfo.schedule.martes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>miércoles</h3>{providerInfo.schedule.miercoles.length>0&&providerInfo.schedule.miercoles.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>jueves</h3>{providerInfo.schedule.jueves.length>0&&providerInfo.schedule.jueves.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>viernes</h3>{providerInfo.schedule.viernes.length>0&&providerInfo.schedule.viernes.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>sábado</h3>{providerInfo.schedule.sabado.length>0&&providerInfo.schedule.sabado.map(x=><div><h4>{x}</h4></div>)}</div>
+          <div><h3>domingo</h3>{providerInfo.schedule.domingo.length>0&&providerInfo.schedule.domingo.map(x=><div><h4>{x}</h4></div>)}</div>
+      
+        </section>} */}
+        {providerInfo && providerInfo.schedule && providerInfo.service[0] === 'hospedaje' && <section className={style.mainInfoProfile}>
+          <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
+          <br />
+          <br />
+          {console.log(providerInfo)}
+          <div>{providerInfo.schedule.lunes && <h3>lunes</h3>}</div>
+          <div>{providerInfo.schedule.martes && <h3>martes</h3>}</div>
+          <div>{providerInfo.schedule.miercoles && <h3>miércoles</h3>}</div>
+          <div>{providerInfo.schedule.jueves && <h3>jueves</h3>}</div>
+          <div>{providerInfo.schedule.viernes && <h3>viernes</h3>}</div>
+          <div>{providerInfo.schedule.sabado && <h3>sábado</h3>}</div>
+          <div>{providerInfo.schedule.domingo && <h3>domingo</h3>}</div>
+          <Link to="/misHorariosHospedaje">
+            <button>Editar horarios</button>
+          </Link>
+        </section>}
+
+        {providerInfo && providerInfo.schedule && providerInfo.service[0] === "paseo" && 
+        <section className={style.mainInfoProfile}>
+          <h2 style={{ display: "block" }}>Mis días de trabajo</h2>
+          <br />
+          <br />
+          {console.log(providerInfo.schedule  )}
+          <div>{providerInfo.schedule[0] && providerInfo.schedule[0].lunes && providerInfo.schedule[0].lunes.map(x=><div><h3>Lunes</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[1] && providerInfo.schedule[1].martes && providerInfo.schedule[1].martes.map(x=><div><h3>Martes</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[2] && providerInfo.schedule[2].miercoles && providerInfo.schedule[2].miercoles.map(x=><div><h3>Miercoles</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[3] && providerInfo.schedule[3].jueves && providerInfo.schedule[3].jueves.map(x=><div><h3>Jueves</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[4] && providerInfo.schedule[4].viernes && providerInfo.schedule[4].viernes.map(x=><div><h3>Viernes</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[5] && providerInfo.schedule[5].sabado && providerInfo.schedule[5].sabado.map(x=><div><h3>Sabado</h3><p>{x}</p></div>)}</div>
+          <div>{providerInfo.schedule[6] && providerInfo.schedule[6].domingo && providerInfo.schedule[6].domingo.map(x=><div><h3>Domingo</h3><p>{x}</p></div>)}</div>
+          <Link to="/misHorarios">
+          <button>Editar horarios</button>
+        </Link>
+        </section>
+      }
+        <section>
+          <h2 className={style.boxLabel}>Mis mascotas</h2>
+          <div className={style.addPet}>
+            <Link to="/agregarmascota">
+              <button>Agregar mascota</button>
+            </Link>
+            <Link to='/compras-realizadas'>
+              <button>Mis compras</button>
+            </Link>
+          </div>
+          <article className={style.petsProfile}>
+            {userData.pets && userData.pets.length > 0
+              ? userData.pets.map((x, y) => {
+                if (x.isActive) {
                   return (
                     <div>
                       <h3>Mascota: {x.petName}</h3>
@@ -288,6 +348,7 @@ export default function Profile() {
                 <h2>Mis servicios acordados</h2>
               </div>
             )}
+            </article>
 
             {isProvider && eventsProvider
               ? eventsProvider.map((x) => {
