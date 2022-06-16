@@ -167,7 +167,7 @@ function App() {
             }
           />
           <Route
-            path="/reseña/:providerEmail"
+            path="/resena/:providerEmail"
             element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <Review /> : <Loader />}
           />
           <Route
