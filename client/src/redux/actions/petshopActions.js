@@ -3,7 +3,7 @@ import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CAT
 
 export function getProducts (){
     return async function (dispatch){
-        let response = await axios.get('http://localhost:3001/products');
+        let response = await axios.get('https://proyecto-grupal.herokuapp.com/products');
         return dispatch({
             type: GET_PRODUCTS,
             payload: response.data
@@ -13,7 +13,7 @@ export function getProducts (){
 
 export function searchBarProducts (name){
     return async function (dispatch){
-        let response = await axios.get(`http://localhost:3001/products?name=${name}`);
+        let response = await axios.get(`https://proyecto-grupal.herokuapp.com/products?name=${name}`);
         return dispatch({
             type: SEARCHBAR_PRODUCTS,
             payload: response.data
@@ -53,7 +53,7 @@ export function filterTargetAnimal(payload){
 
 export function getById(id){
     return function(dispatch){
-        axios.get(`http://localhost:3001/products/${id}`)
+        axios.get(`https://proyecto-grupal.herokuapp.com/products/${id}`)
         .then(response => {
             dispatch({
                 type: ID_PRODUCT,
@@ -106,7 +106,7 @@ export function postSold(payload) {
     return async function () {
         try {
 
-            await axios.post(`http://localhost:3001/solds`, payload)
+            await axios.post(`https://proyecto-grupal.herokuapp.com/solds`, payload)
         } catch (error) {
             console.log(error)
         }
@@ -124,7 +124,7 @@ export function selectedProduct(payload){
 export function putProduct(id, modification) {
     return async function () {
         try {
-            await axios.put(`http://localhost:3001/products/${id}`, modification)
+            await axios.put(`https://proyecto-grupal.herokuapp.com/products/${id}`, modification)
         } catch (error) {
             console.log(error)
         }
@@ -135,7 +135,7 @@ export function putProduct(id, modification) {
 export function postProduct(product) {
     return async function () {
         try {
-            await axios.post(`http://localhost:3001/products/`, product)
+            await axios.post(`https://proyecto-grupal.herokuapp.com/products/`, product)
         } catch (error) {
             console.log(error)
         }

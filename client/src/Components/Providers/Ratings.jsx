@@ -16,7 +16,7 @@ const Ratings = () => {
   const [quantityReviews, setquantityReviews] = useState(0);
   useEffect(() => {
     if (isAuthenticated) {
-      axios.get("http://localhost:3001/reviews").then((x) => {
+      axios.get("https://proyecto-grupal.herokuapp.com/reviews").then((x) => {
         let myreviews = x.data.filter((x) => x.provider.email === user.email);
 
         if (myreviews.length) {
