@@ -14,7 +14,7 @@ const TeamCard = (props) => {
             <p className={styles.cardTel}>{props.contact}</p>
             <div className={styles.cardSocial}>
               <div className={styles.bottom}>
-                <a href="">
+                <a href={props.li} target='__blank'>
                   <img
                     src="./assets/img/logo-linkedin.svg"
                     alt=""

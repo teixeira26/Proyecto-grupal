@@ -15,6 +15,7 @@ const Team = () => {
           contact="+54 9 221 558-7947"
           img="/assets/img/leo.png"
           link='https://github.com/zm0x7b9'
+          li='https://www.linkedin.com/in/zm0x7b9/'
         />
         <TeamCard
           name="Mathe"
@@ -22,6 +23,7 @@ const Team = () => {
           contact="+54 9 11 6569-3049"
           img="/assets/img/mate.png"
           link='https://github.com/teixeira26'
+          li='https://www.linkedin.com/in/matheus-teixeira26/'
         />
         <TeamCard
           name="Sabri"
@@ -29,6 +31,7 @@ const Team = () => {
           contact="+54 9 11 7361-4364"
           img="/assets/img/sabri.png"
           link='https://github.com/Sabri-Rapa'
+          li='https://www.linkedin.com/in/sabrina-helena-rapa/'
         />
         <TeamCard
           name="Alan"
@@ -36,6 +39,7 @@ const Team = () => {
           contact="+54 9 221 6176-057"
           img="/assets/img/alan.png"
           link='https://github.com/alantopczylo'
+          li='https://www.linkedin.com/in/alan-topczylo-1b5620203/'
         />
         <TeamCard
           name="Frano"
@@ -43,6 +47,7 @@ const Team = () => {
           contact="+54 9 11 2285-7609"
           img="/assets/img/fran.png"
           link='https://github.com/franodangelo'
+          li='https://www.linkedin.com/in/franco-dangelo/'
         />
       </div>
     </div>
