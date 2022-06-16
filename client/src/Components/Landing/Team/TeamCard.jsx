@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "../Team/TeamCard.module.css";;
+import styles from "../Team/TeamCard.module.css";
 
 const TeamCard = (props) => {
   return (
@@ -13,12 +13,21 @@ const TeamCard = (props) => {
             <p className={styles.cardLocation}>{props.location}</p>
             <p className={styles.cardTel}>{props.contact}</p>
             <div className={styles.cardSocial}>
-            <ion-icon name="logo-linkedin" className={styles.icon}></ion-icon>
-            <ion-icon name="logo-github" className={styles.icon}></ion-icon>
-          </div>
-          </div>
+              <div className={styles.bottom}>
+                <a href="">
+                  <img
+                    src="./assets/img/logo-linkedin.svg"
+                    alt=""
+                    className="margin-right"
+                  />
+                </a>
 
-          
+                <a href={props.link} target="__blank">
+                  <img src="./assets/img/logo-github.svg" alt="" />
+                </a>
+              </div>
+            </div>
+          </div>
         </section>
       </div>
     </div>

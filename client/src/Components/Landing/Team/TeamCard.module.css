@@ -23,10 +23,16 @@
     justify-content: space-between;
     align-items: center;
     margin: 16px;
+    height: 160px;
 }
 
 .cardLocation{
     margin: 0em 0;
+    font-size: 16px;
+}
+
+.cardTel{
+    font-size: 16px;
 }
 
 .cardSocial{
@@ -46,6 +52,16 @@ ion-icon{
     padding: 0;
 }
 
+.botton{
+    display: flex;
+}
+
+.cardInfo{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
 
 
 
