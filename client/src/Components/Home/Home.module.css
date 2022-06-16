@@ -7,7 +7,7 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 300px));
   gap: 64px;
   justify-content: center;
-  margin: 6rem 0;
+  margin: 60px 0;
 }
 
 .homeTitle {

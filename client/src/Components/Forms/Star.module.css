@@ -12,7 +12,7 @@
 .star{
     background-color: unset;
     color:var(--shadowColor);
-    font-size: 3rem;
+    font-size: 40px;
 }
 
 .buttonGroup {

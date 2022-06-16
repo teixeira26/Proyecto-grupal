@@ -88,7 +88,7 @@ function NavBar() {
           <NavLink to="/contacto" className={styles.navLink}>
             Contacto
           </NavLink>
-          <NavLink to={user?'/yumpis':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para ver a los yumpys')}}>
+          <NavLink to={user?'/yumpis':'/'} className={styles.navLink} onClick={()=>{if(!user)Swal.fire('Necesitás iniciar sesión para ver nuestros yumpis.', '', 'warning')}}>
             Yumpis
           </NavLink>
           <NavLink to="/shop" className={styles.navLink}>
@@ -104,7 +104,7 @@ function NavBar() {
               </NavLink>
             </div>
             <div className={styles.icon}>
-              <NavLink to={user?'/favoritos':'/'} className={styles.navLinkIcon} onClick={()=>{if(!user)Swal.fire('necesitás ingresar a la página para agregar productos a favoritos')}}>
+              <NavLink to={user?'/favoritos':'/'} className={styles.navLinkIcon} onClick={()=>{if(!user)Swal.fire('Necesitás iniciar sesión para ver tus favoritos.', '', 'warning')}}>
                 <img src="../../assets/img/favorite.svg" alt="" />
                 <div className={styles.circle}>{productsFavNumber}</div>
               </NavLink>

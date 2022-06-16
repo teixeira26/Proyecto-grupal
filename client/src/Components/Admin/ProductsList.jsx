@@ -11,6 +11,7 @@ import TableCell from "@mui/material/TableCell";
 import Table from "@mui/material/Table";
 import TableRow from "@mui/material/TableRow";
 import Swal from "sweetalert2";
+import style from "./AdminDashboard.module.css";
 
 export default function ProductsList() {
 
@@ -123,6 +124,9 @@ export default function ProductsList() {
   return (
     <>
       <NavBar />
+      <div className={style.contenedor}>
+
+      
       <Button onClick={addProduct}>Agregar producto</Button>
       <Table stickyHeader aria-label="sticky table">
         <TableRow stickyHeader aria-label="sticky table">
@@ -136,6 +140,7 @@ export default function ProductsList() {
         />
       </div>
       <Button onClick={back}>Volver</Button>
+      </div>
       <Footer />
     </>
   );
