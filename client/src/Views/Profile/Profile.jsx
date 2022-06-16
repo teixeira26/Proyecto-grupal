@@ -30,7 +30,9 @@ export default function Profile() {
     if(user){
     axios.get('https://proyecto-grupal.herokuapp.com/providers?filter=&order=ASC').then(info => {
         let data = info.data.find(x => x.email === user.email);
-        setAbleDays(data.schedule)
+        if(data && data.schedule){
+          setAbleDays(data.schedule)
+        }
     })}
 }, [user])
 
