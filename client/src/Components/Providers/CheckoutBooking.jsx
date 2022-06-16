@@ -11,40 +11,9 @@ import { getEvents, getPets, groupEvents } from "../../redux/actions/ownProvActi
 import MercadoPagoProviders from "./MercadoPago/MercadoPagoProviders";
 
 export default function CheckoutBooking() {
-  const [eventsOwner, setEventsOwner] = useState();
-  const [isProvider, setIsProvider] = useState(false);
-  const [eventsProvider, setEventsProvider] = useState();
-  const { user, isAuthenticated } = useAuth0();
+  const { user } = useAuth0();
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   if (isAuthenticated) {
-  //     axios
-  //       .get("http://localhost:3001/providers?filter=&order=ASC")
-  //       .then((x) => {
-  //         const providerCheck = x.data.find((x) => x.email === user.email);
-  //         if (providerCheck) {
-  //           setIsProvider(true);
-  //         }
-  //       });
-  //     axios
-  //       .get("http://localhost:3001/owners")
-  //       .then((x) => {
-  //         const userdb = x.data.find((x) => x.email === user.email);
-  //         console.log(userdb);
-  //         console.log("userdb", userdb);
-  //       })
-  //       .then(() => {
-  //         return axios.get("http://localhost:3001/events");
-  //       })
-  //       .then((x) => {
-  //         setEventsOwner(x.data.filter((x) => x.ownerEmail === user.email));
-  //         setEventsProvider(
-  //           x.data.filter((x) => x.providerEmail === user.email)
-  //         );
-  //       })
-  //   }
-  // }, [user, isAuthenticated, dispatch]);
 
   useEffect(()=>{
     dispatch(getEvents())
@@ -100,31 +69,6 @@ export default function CheckoutBooking() {
             }) :null
           }
 
-
-
-
-
-          {/* {eventsOwner && eventsOwner.length
-            ? eventsOwner.map((x) => {
-                console.log(x)
-               
-                return x.payment === 'pending' ? (
-                  <div>
-                    <h5>Día del evento: {x.date.day}</h5>
-                    <h4>Fecha del evento: {x.date.realDate}</h4>
-                    <p>Nombre del Yump: {x.providerName}</p>
-                    <p>{x.date.hour}</p>
-                    <p>{x.eventType}</p>
-                    <p>Mascota: {x.petName}</p>
-                    <MercadoPagoProviders id={x.id}
-                                          eventType={x.eventType}
-                                          price={x.price}/>
-                  </div>
-                ):null
-                
-     
-              }) 
-            : null} */}
         </section>
       </div>
     </>

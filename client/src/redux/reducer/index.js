@@ -9,7 +9,9 @@ import {
     GET_EVENTS,
     GET_PETS,
     GET_SOLDS,
-    GET_REVIEWS
+    GET_REVIEWS,
+    ID_OWNER,
+
 } from '../actions-type/ownProvActionTypes';
 import {
     GET_PRODUCTS,
@@ -130,7 +132,7 @@ function rootReducer(state = initialState, action) {
             return {
                 ...state,
                 solds: action.payload,
-            }
+            }    
     
 
         case FILTER_BY_OWNER:
@@ -212,6 +214,13 @@ function rootReducer(state = initialState, action) {
                 ...state,
                 providers: [action.payload]
             }
+            
+        case ID_OWNER:
+            return{
+                ...state,
+                owners: [action.payload]
+            }
+    
 
         case GET_PETS:
             return{

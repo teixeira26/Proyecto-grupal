@@ -49,6 +49,9 @@ import PutProduct from "./Components/Admin/PutProduct";
 import PurchasesMade from "./Components/Shop/PurchasesMade";
 import AdminProfile from "./Views/Profile/AdminProfile";
 import AddHousingPhoto from "./Components/Forms/AddHousingPhoto";
+import SaleDetail from "./Components/Admin/SaleDetail";
+import OfferedServicesDetail from "./Components/Admin/OfferedServicesDetail";
+import HiredServicesDetail from "./Components/Admin/HiredServicesDetail";
 
 function App() {
   const { user, isAuthenticated, isLoading } = useAuth0();
@@ -282,7 +285,7 @@ function App() {
           />
 
           <Route
-            path="/admin/sales-receipts"
+            path="/admin/ventas-petshop"
             element={
               user && finalizado ? (
                 isAdmin ? (
@@ -293,6 +296,34 @@ function App() {
               ) : null
             }
           />
+
+          <Route
+            path="/admin/ventas-petshop/"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <SalesReceipts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+          <Route
+            path="/admin/ventas-petshop/:id"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <SaleDetail />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+
 
           <Route
             path="/admin/modificar-producto"
@@ -319,6 +350,34 @@ function App() {
               ) : null
             }
           />
+
+          <Route
+            path="/admin/servicios-contratados"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <OfferedServicesDetail />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+<Route
+            path="/admin/prestación-servicios"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <HiredServicesDetail />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+
+
 
           <Route
             path="/admin/listado-productos"

@@ -18,6 +18,18 @@ router.get('/', async (req, res, next) => {
     }
 });
 
+router.get('/:email', async (req, res, next) => {
+
+    const { email } = req.params;
+    try {
+        let ownerId = await Owner.findByPk(email);
+        res.send(ownerId);
+    } catch (error) {
+        next(error)
+    }
+});
+
+
 router.get('/getFavorites/:email', async (req, res, next) => {
     const email = req.params.email
     try {
