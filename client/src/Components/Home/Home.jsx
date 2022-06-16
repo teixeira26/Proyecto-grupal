@@ -23,7 +23,7 @@ const Home = () => {
 
   useEffect(() => {
     if (user) {
-      axios.get("http://localhost:3001/owners").then((x) => {
+      axios.get("https://proyecto-grupal.herokuapp.com/owners").then((x) => {
         const userdb = x.data.find((x) => x.email === user.email);
         console.log("USUARIO ENTRA", userdb);
         if (userdb) {
@@ -43,7 +43,7 @@ const Home = () => {
       });
     }
 
-    // axios.get(`http://localhost:3001/owners/getFavorites/${user.email}`).then(x=>{
+    // axios.get(`https://proyecto-grupal.herokuapp.com/owners/getFavorites/${user.email}`).then(x=>{
     //     setProductsFavNumber(x.data)})
   }, [dispatch, user]);
 
@@ -80,7 +80,7 @@ const Home = () => {
         longitude: location.longitude,
       };
       console.log("TA BANEAU", owner);
-      axios.post("http://localhost:3001/owners", owner);
+      axios.post("https://proyecto-grupal.herokuapp.com/owners", owner);
     }
   }, [user, location]);
 

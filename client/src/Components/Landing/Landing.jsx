@@ -16,7 +16,7 @@ function Landing() {
 
   const buscarUser = async () => {
     try {
-      let dbOwner = await axios.get("http://localhost:3001/owners");
+      let dbOwner = await axios.get("https://proyecto-grupal.herokuapp.com/owners");
       console.log(dbOwner);
       let userInfo = dbOwner.data.find((x) => x.email === user.email);
       if (typeof userInfo === "object") {
@@ -24,7 +24,7 @@ function Landing() {
         navigate("/inicio");
         setNombre(user.name);
       } else {
-        axios.post('http://localhost:3001/mailer/', {email:user.email, subject:"Bienvenido a YumPaw", text:"Te damos la bienvenida por ingresar a nuestra app, espero que disfrutes :)"})
+        axios.post('https://proyecto-grupal.herokuapp.com/mailer/', {email:user.email, subject:"Bienvenido a YumPaw", text:"Te damos la bienvenida por ingresar a nuestra app, espero que disfrutes :)"})
         navigate("/inicio");
       }
     } catch (error) {

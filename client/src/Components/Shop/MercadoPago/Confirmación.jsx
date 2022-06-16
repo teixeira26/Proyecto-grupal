@@ -39,7 +39,7 @@ const Confirmación = () => {
   let neto = () => {
     cart.forEach((i) => {
       let total = i.stock - i.quantity;
-      return axios.put(`http://localhost:3001/products/${i.id}`, {
+      return axios.put(`https://proyecto-grupal.herokuapp.com/products/${i.id}`, {
         stock: total,
       });
     });
