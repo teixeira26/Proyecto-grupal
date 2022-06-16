@@ -65,7 +65,7 @@ export default function Profile() {
             setIsProvider(true);
           }
           
-          if (providerCheck && providerCheck.service === "paseo") {
+          if (providerCheck && providerCheck.service[0] === "paseo") {
             providerCheck = {
               ...providerCheck,
               schedule: providerCheck.schedule.map((x) => JSON.parse(x)),
@@ -73,7 +73,7 @@ export default function Profile() {
             setIsProvider(true);
             setProviderInfo(providerCheck);
             console.log(providerCheck);
-          }
+          }else if(providerCheck && providerCheck.service[0] === "hospedaje")setProviderInfo(providerCheck);
         });
     }
   }, [user]);
