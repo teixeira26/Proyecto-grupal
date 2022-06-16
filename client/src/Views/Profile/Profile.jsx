@@ -264,7 +264,6 @@ export default function Profile() {
               </Link>
             </article>
           </section>
-<<<<<<< HEAD
 
           <section>
             <h2>Mis reservas</h2>
@@ -308,67 +307,6 @@ export default function Profile() {
               : null}
           </section>
         </div>
-=======
-        </div>
-        <Link to="/compras-realizadas">
-          <button>Mis compras</button>
-        </Link>
-        <section>
-          {<button onClick={myServices}>Servicios contratados</button>}
-          <h2>Mis reservas</h2>
-          {eventsOwner && eventsOwner.length
-            ? eventsOwner.map((x) => {
-                return (
-                  <div>
-                    <h3>Mascota: {x.petName}</h3>
-                    <h4>
-                      {x.eventType} con {x.providerName}
-                    </h4>
-                    <p>
-                      Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
-                      {x.date.hour}
-                    </p>
-                  </div>
-                );
-              })
-            : null}
-          {isProvider && (
-            <div>
-              <h2>Mis servicios acordados</h2>
-            </div>
-          )}
-          {isProvider && eventsProvider
-            ? eventsProvider.map((x) => {
-                return (
-                  <div>
-                    <h3>
-                      {x.eventType} acordado con {x.ownerName}
-                    </h3>
-                    <p>Mascota: {x.petName}</p>
-                    <p>
-                      Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
-                      {x.date.hour}
-                    </p>
-                  </div>
-                );
-              })
-            : null}
-          {providerInfo && providerInfo.service[0] === "hospedaje" && (
-            <div>
-              <h2>Mi Dulce hogar</h2>
-              {providerInfo.housingPhotos &&
-                providerInfo.housingPhotos.map((x, y) => {
-                  return <img src={x} key={y} alt={y}></img>;
-                })}
-              <input
-                type="button"
-                value="Agregar Foto"
-                onClick={() => navigate("/agregar-foto")}
-              />
-            </div>
-          )}
-        </section>
->>>>>>> 2136435c7736e830f5ecfc3bd2aff2ab2ab49c7b
       </div>
       <Footer />
     </main>
