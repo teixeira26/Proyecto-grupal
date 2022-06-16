@@ -104,6 +104,20 @@ export default function Profile() {
                 </span>{" "}
               </h4>
               <div className={style.buttonContainer}>
+                <div className={style.service}>
+                  <Link to="/compras-realizadas">
+                    <button className="secondaryButton">Mis compras</button>
+                  </Link>
+                </div>
+
+                <div className={style.service}>
+                  <Link to="/calificacionesOwner">
+                    <button className="secondaryButton">
+                      Reseñas enviadas
+                    </button>
+                  </Link>
+                </div>
+
                 {isProvider && (
                   <div className={style.service}>
                     <Link to="/calificacionesProvider">
@@ -113,15 +127,16 @@ export default function Profile() {
                     </Link>
                   </div>
                 )}
-                <div className={style.service}>
-                  <Link to="/calificacionesOwner">
-                    <button className="secondaryButton">
-                      Reseñas enviadas
+
+                {
+                  <div className={style.service}>
+                    <button className="primaryButton" onClick={myServices}>
+                      Servicios contratados
                     </button>
-                  </Link>
-                </div>
+                  </div>
+                }
                 {!isProvider && (
-                  <div>
+                  <div className={style.service}>
                     <Link to="/servicio">
                       <button className="primaryButton">
                         Ofrecer servicio
@@ -139,6 +154,7 @@ export default function Profile() {
                 <h2 className={style.dayTitle} style={{ display: "block" }}>
                   Mis días de trabajo
                 </h2>
+
                 <br />
                 <br />
                 {console.log(providerInfo)}
@@ -156,7 +172,34 @@ export default function Profile() {
                 </Link>
               </section>
             )}
-          <section>
+          {providerInfo && providerInfo.service[0] === "hospedaje" && (
+            <div>
+              <h3 className={style.hogar}>Mi dulce hogar</h3>
+              <div className={style.buttonPhoto}>
+                <input
+                  className="secondaryButton"
+                  type="button"
+                  value="Agregar Foto"
+                  onClick={() => navigate("/agregar-foto")}
+                />
+              </div>
+
+              <div className={style.housingGrid}>
+                {providerInfo.housingPhotos &&
+                  providerInfo.housingPhotos.map((x, y) => {
+                    return (
+                      <img
+                        src={x}
+                        key={y}
+                        alt={y}
+                        className={style.housePhoto}
+                      />
+                    );
+                  })}
+              </div>
+            </div>
+          )}
+          <section className={style.petSection}>
             <div className={style.addPet}>
               <h2 className={style.boxLabel}>Mis mascotas</h2>
             </div>
@@ -221,65 +264,49 @@ export default function Profile() {
               </Link>
             </article>
           </section>
+
+          <section>
+            <h2>Mis reservas</h2>
+            {eventsOwner && eventsOwner.length
+              ? eventsOwner.map((x) => {
+                  return (
+                    <div>
+                      <h3>Mascota: {x.petName}</h3>
+                      <h4>
+                        {x.eventType} con {x.providerName}
+                      </h4>
+                      <p>
+                        Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
+                        {x.date.hour}
+                      </p>
+                    </div>
+                  );
+                })
+              : null}
+            {isProvider && (
+              <div>
+                <h2>Mis servicios acordados</h2>
+              </div>
+            )}
+
+            {isProvider && eventsProvider
+              ? eventsProvider.map((x) => {
+                  return (
+                    <div>
+                      <h3>
+                        {x.eventType} acordado con {x.ownerName}
+                      </h3>
+                      <p>Mascota: {x.petName}</p>
+                      <p>
+                        Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
+                        {x.date.hour}
+                      </p>
+                    </div>
+                  );
+                })
+              : null}
+          </section>
         </div>
-        <Link to="/compras-realizadas">
-          <button>Mis compras</button>
-        </Link>
-        <section>
-          {<button onClick={myServices}>Servicios contratados</button>}
-          <h2>Mis reservas</h2>
-          {eventsOwner && eventsOwner.length
-            ? eventsOwner.map((x) => {
-                return (
-                  <div>
-                    <h3>Mascota: {x.petName}</h3>
-                    <h4>
-                      {x.eventType} con {x.providerName}
-                    </h4>
-                    <p>
-                      Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
-                      {x.date.hour}
-                    </p>
-                  </div>
-                );
-              })
-            : null}
-          {isProvider && (
-            <div>
-              <h2>Mis servicios acordados</h2>
-            </div>
-          )}
-          {isProvider && eventsProvider
-            ? eventsProvider.map((x) => {
-                return (
-                  <div>
-                    <h3>
-                      {x.eventType} acordado con {x.ownerName}
-                    </h3>
-                    <p>Mascota: {x.petName}</p>
-                    <p>
-                      Fecha del evento: {x.date.day} {x.date.realDate} -{" "}
-                      {x.date.hour}
-                    </p>
-                  </div>
-                );
-              })
-            : null}
-          {providerInfo && providerInfo.service[0] === "hospedaje" && (
-            <div>
-              <h2>Mi Dulce hogar</h2>
-              {providerInfo.housingPhotos &&
-                providerInfo.housingPhotos.map((x, y) => {
-                  return <img src={x} key={y} alt={y}></img>;
-                })}
-              <input
-                type="button"
-                value="Agregar Foto"
-                onClick={() => navigate("/agregar-foto")}
-              />
-            </div>
-          )}
-        </section>
       </div>
       <Footer />
     </main>

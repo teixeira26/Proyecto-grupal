@@ -191,3 +191,30 @@
   width: 100%;
   justify-content: flex-end;
 }
+
+.hogar{
+  text-transform: uppercase;
+  color: var(--black);
+  padding: 32px 0 0 0;
+}
+
+.petSection{
+  border-top: 1px solid var(--gray);
+  border-bottom: 1px solid var(--gray);
+  margin: var(--margin64) 0;
+}
+
+.housingGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.housePhoto {
+  width: 343px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+}
