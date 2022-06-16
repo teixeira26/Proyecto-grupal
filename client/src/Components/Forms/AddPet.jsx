@@ -35,8 +35,7 @@ export default function InfoProvider() {
       name: yup.string().required('Ponle un nombre a tu mascota'),
       race: yup.string().required('Indícanos de qué raza es tu mascota'),
       size: yup.string().required('Indícanos de qué tamaño es tu mascota'),
-      type: yup.string().required('Indícanos qué tipo de animal es tu mascota'),
-      description: yup.string().required('Dejanos una breve descripción de tu mascota')
+      type: yup.string().required('Indícanos qué tipo de animal es tu mascota')
     }),
 
     onSubmit: async (formData) => {

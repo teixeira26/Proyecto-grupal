@@ -35,8 +35,7 @@ export default function InfoOwner() {
     },
     validationSchema: yup.object({
       city: yup.string().required(),
-      road: yup.string().required(),
-      state: yup.string().required(),
+      state: yup.string().required()
     }),
 
     onSubmit: async (formData) => {
