@@ -255,7 +255,7 @@ export default function BookingLodging() {
                         }}
                     ></textarea>
 
-                    <Link to={`/chat/${providerEmail}/${ownerEmail}`}><button className="secondaryButton">Cancelar</button></Link>
+                    <Link to={`/providers`}><button className="secondaryButton">Cancelar</button></Link>
                     <button className="primaryButton">Continuar con el pago</button>
                 </Form>
             </div>

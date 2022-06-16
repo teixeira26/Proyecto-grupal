@@ -124,7 +124,7 @@ export default function BookingWalk() {
                     axios.post('https://proyecto-grupal.herokuapp.com/mailer/', {email:user.email, subject:"Confirmación de reserva Yum Paw", text:"Recién hiciste una reserva en nuestra página, te felicitamos :)"})
                     console.log(formData);
                     Swal.fire('¡El paseo fue confirmado con éxito!', '', 'success')
-                    navigate('/confirmar-reserva')
+                    navigate('/mis-servicios')
                 } else if (result.isDenied) {
                   Swal.fire('El paseo no fue confirmado.', '', 'info')
                 }
