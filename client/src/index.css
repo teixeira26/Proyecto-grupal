@@ -144,6 +144,16 @@ button{
   color: var(--tintColor);
 }
 
+.buttonNoBorde{
+  border: none;
+  cursor: pointer;
+  color: var(--tintColor);
+  font-weight: 600;
+  transition: ease-in-out 200ms;
+  background-color: transparent;
+  font-size: var(--p);
+}
+
 .border-right{
   border-right: 10px;
 }
