@@ -115,7 +115,7 @@ export default function BookingLodging() {
                         console.log('formdata', formData)
                         await axios.post("https://proyecto-grupal.herokuapp.com/events", formData);
                     }
-                    axios.post('https://proyecto-grupal.herokuapp.com/mailer/', { email: user.email, subject: "Confirmación de reserva Yum Paw", text: "Recién hiciste una reserva en nuestra página, te felicitamos :)" })
+                    // axios.post('https://proyecto-grupal.herokuapp.com/mailer/', { email: user.email, subject: "Confirmación de reserva Yum Paw", text: "Recién hiciste una reserva en nuestra página, te felicitamos :)" })
                     console.log(formData);
                     Swal.fire('¡La reserva fue confirmada con éxito!', '', 'success')
                     navigate('/mis-servicios')
@@ -259,7 +259,7 @@ export default function BookingLodging() {
                         }}
                     ></textarea>
 
-                    <Link to={`/chat/${providerEmail}/${ownerEmail}`}><button className="secondaryButton">Cancelar</button></Link>
+                    <Link to={`/providers`}><button className="secondaryButton">Cancelar</button></Link>
                     <button className="primaryButton">Continuar con el pago</button>
                 </Form>
             </div>
