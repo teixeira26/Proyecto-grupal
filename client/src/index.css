@@ -60,6 +60,7 @@ ion-icon{
 
 :root{
   /* Colors */
+ 
   --primaryColor: #7e52a0;
   --shadowColor: #593a71;
   --tintColor: #a380bd;
@@ -86,6 +87,8 @@ ion-icon{
   --margin80: 80px;
   --margin64: 64px;
 }
+
+
 
 button{
   border: none;
