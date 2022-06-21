@@ -1,86 +1,127 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { filterByProviderService, getProviders, sortByProviderPrice } from "../../redux/actions/ownProvActions";
 import ProvidersCard from "./ProvidersCard";
-import NavBarShop from '../NavBar/NavBarShop'
+import NavBarShop from '../NavBar/NavBarShop';
+import Paginated from '../Paginated';
 import Footer from "../Footer/Footer";
 import styles from "../Providers/Providers.module.css";
 import inContainer from "../GlobalCss/InContainer.module.css";
+import axios from 'axios';
+import NoResults from '../../Views/Profile/NoResultsProviders';
+import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Providers() {
-    const dispatch = useDispatch()
-    // const [order, setOrder] = useState('ASC')
-    // const [filter, setFilter] = useState('')
+    const dispatch = useDispatch();
+    const [reviews, setReviews] = useState([]);
+    const [valueService, setValueService] = useState('servicio');
+    const [valuePrice, setValuePrice] = useState('precio');
+    const { user } = useAuth0();
 
     useEffect(() => {
         dispatch(getProviders())
-    }, [dispatch])
+        axios.get('https://proyecto-grupal.herokuapp.com/reviews').then(x => setReviews(x.data))
+    }, [dispatch]);
 
     const providers = useSelector(state => state.filteredProviders);
 
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [providers])
+
+    const [currentPage, setCurrentPage] = useState(1);
+    const initialStateProvidersPerPage = 12;
+    const [providersPerPage, setProvidersPerPage] = useState(initialStateProvidersPerPage);
+    const indexOfLastProvider = currentPage * providersPerPage;
+    const indexOfFirstProvider = indexOfLastProvider - providersPerPage;
+    const currentProviders = providers?.slice(indexOfFirstProvider, indexOfLastProvider);
+    const paginated = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
     function handleFilterService(e) {
         console.log(e.target.value);
-        dispatch(filterByProviderService(e.target.value))
-    }
+        dispatch(filterByProviderService(e.target.value));
+        setValueService(e.target.value);
+        setCurrentPage(1);
+    };
 
     function handleOrderPrice(e) {
-        console.log(e.target.value)
-        dispatch(sortByProviderPrice(e.target.value))
-    }
+        console.log(e.target.value);
+        dispatch(sortByProviderPrice(e.target.value));
+        setValuePrice(e.target.value);
+        setCurrentPage(1);
+    };
 
     function handleRemove(e) {
         e.preventDefault()
         dispatch(getProviders())
-    }
+        setValueService('servicio');
+        setValuePrice('precio')
+    };
+
+    // function handleOrderStars() {};
+    // function handleFilterStars() {};
 
     return (
         <div>
             <NavBarShop />
             <section className={inContainer.container}>
-                <NavLink to="/home">
+                <NavLink to="/inicio">
                     <img
                         src="/assets/img/arrow-left.svg"
                         alt=""
                         className={styles.leftArrow}
                     />
                 </NavLink>
-                <h1 className={styles.providersTitle}>Listado de proveedores</h1>
+                <h1 className={styles.providersTitle}>¡Conocé a nuestros yumpis!</h1>
                 <div className={styles.providersFlex}>
                     <div className={styles.providersFilters}>
                         <section className={styles.selects}>
-                            <p className={styles.filterTitle}>Filtrar por</p>
-                            <select className={styles.select} onChange={(e) => handleFilterService(e)}>
-                                <option hidden={true}>Tipo de servicio</option>
-                                <option value="">Todos</option>
+                            <p className={styles.filterTitle}>Filtrar por Servicio</p>
+                            <select className={styles.select} value={valueService} onChange={(e) => handleFilterService(e)}>
+                                <option value="servicio" disable selected>Servicio</option>
                                 <option value="hospedaje">Hospedaje</option>
                                 <option value="paseo">Paseo</option>
                             </select>
                         </section>
                         <br />
                         <section className={styles.selects}>
-                            <p className={styles.filterTitle}>Ordenar por</p>
-                            <select className={styles.select} onChange={handleOrderPrice}>
-                                <option hidden={true}>Rango de precio</option>
-                                <option value="ASC">Mayor a menor</option>s
-                                <option value="DESC">Menor a mayor</option>
+                            <p className={styles.filterTitle}>Ordenar por Precio</p>
+                            <select className={styles.select} value={valuePrice} onChange={handleOrderPrice}>
+                                <option value="precio" disabled selected>Precio</option>
+                                <option value="ASC">Menor a mayor</option>
+                                <option value="DESC">Mayor a menor</option>
                             </select>
                         </section>
                         <br />
-                        <button onClick={handleRemove}>Limpiar filtros</button>
+                        <button className='secondaryButton' onClick={handleRemove}>Limpiar filtros</button>
                     </div>
                     <div className={styles.providersGrid}>
-                        {!providers.length ? 'LOADING' :
-                            providers.map((p, g) => {
-                                return <ProvidersCard key={p.id}
-                                    name={p.name}
-                                    lastName={p.lastName}
-                                    email={p.email}
-                                    profilePicture={p.profilePicture}
-                                    price={p.price}
-                                    service={p.service} />
+                        {!currentProviders.length ? <NoResults /> :
+                            currentProviders.map((p, g) => {
+                                let stars = 5
+                                let providerEvaluations = reviews.filter(x => x.provider.email === p.email);
+                                providerEvaluations = providerEvaluations.map(x => x.review)
+                                let numberEvaluations = providerEvaluations.length
+                                providerEvaluations = providerEvaluations.reduce((x, y) => x + y, 0)
+                                stars = (providerEvaluations / numberEvaluations);
+                                console.log(p)
+                                return p.email === user.email ? null :
+                                    <ProvidersCard key={p.id}
+                                        name={p.name}
+                                        lastName={p.lastName}
+                                        email={p.email}
+                                        profilePicture={p.profilePicture?p.profilePicture: "/assets/img/notloged.png"}
+                                        price={p.price}
+                                        service={p.service}
+                                        stars={stars ? stars : 0} />
                             })}
                     </div>
+                </div>
+                <div className={styles.paginado}>
+                <Paginated itemsPerPage={providersPerPage} items={providers.length} paginated={paginated} currentPage={currentPage} />
                 </div>
             </section>
             <Footer />

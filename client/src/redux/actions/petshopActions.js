@@ -3,7 +3,7 @@ import { GET_PRODUCTS, SEARCHBAR_PRODUCTS, FILTER_BY_PET, SORT_PRICE, FILTER_CAT
 
 export function getProducts (){
     return async function (dispatch){
-        let response = await axios.get('http://localhost:3001/products');
+        let response = await axios.get('https://proyecto-grupal.herokuapp.com/products');
         return dispatch({
             type: GET_PRODUCTS,
             payload: response.data
@@ -13,7 +13,7 @@ export function getProducts (){
 
 export function searchBarProducts (name){
     return async function (dispatch){
-        let response = await axios.get(`http://localhost:3001/products?name=${name}`);
+        let response = await axios.get(`https://proyecto-grupal.herokuapp.com/products?name=${name}`);
         return dispatch({
             type: SEARCHBAR_PRODUCTS,
             payload: response.data
@@ -21,12 +21,6 @@ export function searchBarProducts (name){
     }
 };
 
-export function filterByPet (payload){
-    return {
-        type: FILTER_BY_PET,
-        payload,
-    }
-};
 
 export function chargeCart (email){
     console.log("se ejecuta la función charge cart")
@@ -59,7 +53,7 @@ export function filterTargetAnimal(payload){
 
 export function getById(id){
     return function(dispatch){
-        axios.get(`http://localhost:3001/products/${id}`)
+        axios.get(`https://proyecto-grupal.herokuapp.com/products/${id}`)
         .then(response => {
             dispatch({
                 type: ID_PRODUCT,
@@ -104,3 +98,54 @@ export function addTofavorites(favoritos){
         payload: favoritos
     }
 };
+
+
+
+
+export function postSold(payload) {
+    return async function () {
+        try {
+
+            await axios.post(`https://proyecto-grupal.herokuapp.com/solds`, payload)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function selectedProduct(payload){
+    return {
+        type: 'SELECTED_PRODUCT',
+        payload,
+    }
+}
+
+
+export function putProduct(id, modification) {
+    return async function () {
+        try {
+            await axios.put(`https://proyecto-grupal.herokuapp.com/products/${id}`, modification)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+
+export function postProduct(product) {
+    return async function () {
+        try {
+            await axios.post(`https://proyecto-grupal.herokuapp.com/products/`, product)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+};
+
+export function cleanDetail(){
+    return {
+        type: 'CLEAN_DETAIL',
+        payload: []
+    }
+}
+

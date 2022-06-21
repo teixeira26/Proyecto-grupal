@@ -1,89 +1,474 @@
-import React from "react";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-
 import Landing from "./Components/Landing/Landing";
-import Home from './Components/Home/Home';
-import Shop from './Components/Shop/Shop';
-import AddOwner from './Components/Forms/AddOwner'
-import AddPet from "./Components/Forms/AddPet";
+import Shop from "./Components/Shop/Shop";
+import AddOwner from "./Components/Forms/AddOwner";
+// import NotRegistered from "./Components/Auth0/NotRegistered";
 import { Quesos } from "./Components/Landing/FlujoRegistro/quesos";
-import Profile from "./Views/Profile/Profile.jsx";
+import Home from "./Components/Home/Home";
+import AddPet from "./Components/Forms/AddPet";
 import InfoProvider from "./Components/Forms/InfoProvider";
 import InfoOwner from "./Components/Forms/InfoOwner";
+import Walk from "./Components/Forms/Walk";
+import Lodging from "./Components/Forms/Lodging";
+import Review from "./Components/Forms/Review";
+import MapView from "./Components/Map/MapView";
+import GeoLocProvider from "./Components/Map/GeoLocProvider";
+import "./App.css";
+import SalesReceipts from "./Components/Admin/SalesReceipts";
+import PostProducts from "./Components/Admin/PostProducts";
+import axios from "axios";
+import AdminDashboard from "./Components/Admin/AdminDashboard";
+import Ratings from "./Components/Providers/Ratings";
+import RatingsOwner from "./Components/Providers/RatingsOwner";
+import PutReview from "./Components/Providers/PutReview";
 import ProductDetail from "./Components/Shop/ProductDetail";
-import Loading from "./Components/Loading/loading";
-import NotRegistered from "./Components/Auth0/notRegistered";
+import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
+import Confirmation from "./Components/Providers/MercadoPago/Confirmation";
+import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
 import ShoppingCart from "./Components/ShoppingCart/ShoppingCart";
 import Providers from "./Components/Providers/Providers";
 import DetailProvider from "./Components/Providers/DetailProvider";
+import Booking from "./Components/Providers/BookingLodging";
+import CheckoutBooking from "./Components/Providers/CheckoutBooking";
+import Loader from "./Components/Loading/Loader";
 import Chat from "./Components/Chat/Chat";
 import Favorites from "./Components/Favorites/Favorites";
-import Confirmación from "./Components/Shop/MercadoPago/Confirmación";
-import PurchaseConfirmation from "./Components/Shop/MercadoPago/PurchaseConfirmation";
-import About from "./Views/Profile/About";
-import Contact from "./Views/Profile/Contact";
-import Walk from "./Components/Forms/Walk";
-import Lodging from "./Components/Forms/Lodging";
+import Profile from "./Views/Profile/Profile.jsx";
+import About from "./Views/Profile/About/About.jsx";
+import Contact from "./Views/Profile/Contact/Contact.jsx";
+import ScheduleProvider from "./Components/Forms/scheduleProvider";
+import CreateEvent from "./Components/Forms/ScheduleProviderLogding";
+import ScheduleProviderLogding from "./Components/Forms/ScheduleProviderLogding";
+import BookingLodging from "./Components/Providers/BookingLodging";
+import BookingWalk from "./Components/Providers/BookingWalk";
+import UsersTable from "./Components/Admin/UsersTable";
+import ProductsList from "./Components/Admin/ProductsList";
+import PutProduct from "./Components/Admin/PutProduct";
+import PurchasesMade from "./Components/Shop/PurchasesMade";
+import AdminProfile from "./Views/Profile/AdminProfile";
+import AddHousingPhoto from "./Components/Forms/AddHousingPhoto";
+import SaleDetail from "./Components/Admin/SaleDetail";
+import OfferedServicesDetail from "./Components/Admin/OfferedServicesDetail";
+import HiredServicesDetail from "./Components/Admin/HiredServicesDetail";
+import PaymentBookingCheckout from "./Components/Providers/PaymentBookingCheckout";
+import Banned from "./Views/Profile/Banned";
+import PendentMessages from "./Components/Chat/PendentMessages";
 
 function App() {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { user, isAuthenticated, isLoading } = useAuth0();
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isBanned, setIsBanned] = useState(false);
+  const [finalizado, setFinalizado] = useState(false);
+
+  useEffect(() => {
+    const searchUser = () => {
+      axios.get("https://proyecto-grupal.herokuapp.com/owners").then((res) => {
+        let resp = res.data.find((x) => x.email === user.email);
+        console.log(resp);
+        if (resp) {
+          setIsAdmin(resp.isAdmin);
+          setIsBanned(resp.isBanned);
+          setFinalizado(true);
+        }
+      });
+    };
+    if (user) {
+      searchUser();
+    }
+  }, [user]);
 
   return (
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/" element={<Landing/>} />
-          <Route path='/home' element={
-            isAuthenticated && !isLoading ? <Home/> : <Loading/>
-          }/>
-          <Route path="/about" element={<About/>} />
-          <Route path="/contact" element={<Contact/>} />
-          <Route path='/shop' element={
-            !isLoading ? <Shop/> : <Loading/>}/>
-          <Route path='/shop/:id' element={
-            !isLoading ? <ProductDetail/> : <Loading/>
-          }/>
-          <Route path='/agregarusuario' element={
-            isAuthenticated && !isLoading ? <AddOwner/> : <Loading/>
-          }/>
-          <Route path='/agregarmascota' element={
-            isAuthenticated && !isLoading ? <AddPet/> : <Loading/>
-          }/>
-          <Route path='/tipo-usuario' element={
-            isAuthenticated && !isLoading ? <Quesos/> : <Loading/>
-          }/>
-          <Route path='/profile' element={
-            isAuthenticated && !isLoading ? <Profile/> : <Loading/>
-          }/>
-          <Route path='/infoprovider' element={
-            isAuthenticated && !isLoading ? <InfoProvider/> : <Loading/>
-          }/>
-          <Route path='/providers' element={
-            isAuthenticated && !isLoading ? <Providers/> : <Loading/>
-          }/>
-          <Route path='/providers/:name' element={
-            isAuthenticated && !isLoading ? <DetailProvider/> : <Loading/>
-          }/>
-          <Route path='/chat/:providerEmail/:ownerEmail' element={
-            isAuthenticated && !isLoading ? <Chat/> : <Loading />
-          } />
-          <Route path='/favorites' element={
-            isAuthenticated && !isLoading ? <Favorites/> : <Loading />
-          }/>
-          <Route path='/infoOwner' element={
-            isAuthenticated && !isLoading ? <InfoOwner/> : <Loading/>
-          }/>
-          <Route path="/no-registrado" element={<NotRegistered></NotRegistered>}></Route>
-          <Route path="/shoppingcart" element={<ShoppingCart/>}/>
-          <Route path="/confirmacion" element={
-          isAuthenticated && !isLoading ? <Confirmación/> : <Loading/>}/>
-          <Route path="/purchaseConfirmation" element={
-          isAuthenticated && !isLoading ? <PurchaseConfirmation/> : <Loading/>}/>
-          <Route path="/paseo" element={
-          isAuthenticated && !isLoading ? <Walk/> : <Loading/>}/>
-          <Route path="/hospedaje" element={
-          isAuthenticated && !isLoading ? <Lodging/> : <Loading/>}/>
+          <Route path="/" element={<Landing />} />
+          <Route path="/mapa" element={<MapView />} />
+          <Route path="'/geoloc-yumpi" element={<GeoLocProvider />} />
+          <Route
+            path="/inicio"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Home />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route path="/nosotros" element={<About />} />
+          <Route path="/contacto" element={<Contact />} />
+          <Route path="/shop" element={isBanned ? (<Banned/>): !isLoading ? <Shop /> : <Loader />} />
+          <Route
+            path="/shop/:id"
+            element={!isLoading ? <ProductDetail /> : <Loader />}
+          />
+          <Route
+            path="/agregar-mascota"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <AddPet />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/tipo-usuario"
+            element={isAuthenticated && !isLoading ? <Quesos /> : <Loader />}
+          />
+          <Route
+            path="/mi-perfil"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Profile />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/admin"
+            element={
+              isAuthenticated && !isLoading ? <AdminProfile /> : <Loader />
+            }
+          />
+          <Route
+            path="/servicio"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <InfoProvider />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/yumpis"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Providers />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/yumpis/:name"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <DetailProvider />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/chat/:providerEmail/:ownerEmail"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Chat />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/mensajes-pendientes"
+            element={isAuthenticated && isBanned ? (<h1>baneado</h1>):!isLoading ? <PendentMessages/> : <Loader />}
+          />
+          <Route
+            path="/favoritos"
+            element={isAuthenticated && !isLoading ? <Favorites /> : <Loader />}
+          />
+          <Route
+            path="/mis-datos"
+            element={isAuthenticated && !isLoading ? <InfoOwner /> : <Loader />}
+          />
+          <Route
+            path="/agregar-foto"
+            element={
+              isAuthenticated && !isLoading ? <AddHousingPhoto /> : <Loader />
+            }
+          />
+          <Route
+            path="/resena/:providerEmail"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Review />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          {/* <Route
+            path="/no-registrado"
+            element={<NotRegistered></NotRegistered>}
+          ></Route> */}
+          <Route path="/mi-carrito" element={<ShoppingCart />} />
+          <Route
+            path="/confirmacion"
+            element={
+              isAuthenticated && !isLoading ? <Confirmación /> : <Loader />
+            }
+          />
+          <Route
+            path="/confirmation"
+            element={
+              isAuthenticated && !isLoading ? <Confirmation /> : <Loader />
+            }
+          />
+          <Route
+            path="/purchaseConfirmation"
+            element={
+              isAuthenticated && !isLoading ? (
+                <PurchaseConfirmation />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/paseo"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Walk />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/hospedaje"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <Lodging />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/reservar-hospedaje/:providerEmail"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <BookingLodging />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/reservar-paseo/:providerEmail"
+            element={
+              isAuthenticated && isBanned ? (
+                <Banned />
+              ) : !isLoading ? (
+                <BookingWalk />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/mis-servicios"
+            element={
+              isAuthenticated && !isLoading ? <CheckoutBooking /> : <Loader />
+            }
+          />
+          <Route
+            path="/calificaciones-yumpis"
+            element={isAuthenticated && !isLoading ? <Ratings /> : <Loader />}
+          />
+          <Route
+            path="/calificaciones-dueno"
+            element={
+              isAuthenticated && !isLoading ? <RatingsOwner /> : <Loader />
+            }
+          />
+          <Route
+            path="/cambiar-resena/:id"
+            element={
+              isAuthenticated && !isLoading ? <PutReview /> : <Loader />
+            }
+          />
+          <Route
+            path="/mis-horarios"
+            element={
+              isAuthenticated && !isLoading ? <ScheduleProvider /> : <Loader />
+            }
+          />
+          <Route
+            path="/mis-horarios-hospedaje"
+            element={
+              isAuthenticated && !isLoading ? (
+                <ScheduleProviderLogding />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+          <Route
+            path="/compras-realizadas"
+            element={
+              isAuthenticated && !isLoading ? <PurchasesMade /> : <Loader />
+            }
+          />
+          <Route
+            path="/pagar-reserva"
+            element={
+              isAuthenticated && !isLoading ? (
+                <PaymentBookingCheckout />
+              ) : (
+                <Loader />
+              )
+            }
+          />
+
+          {/* -------------- RUTAS PRIVADAS -------------------- */}
+
+          <Route
+            path="/admin/dashboard"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <AdminDashboard />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/agregar-productos"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <PostProducts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/ventas-petshop"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <SalesReceipts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/ventas-petshop/"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <SalesReceipts />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/ventas-petshop/:id"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <SaleDetail />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/modificar-producto"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <PutProduct />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/get-users"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <UsersTable />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/prestacion-servicios"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <OfferedServicesDetail />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/servicios-contratados"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <HiredServicesDetail />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
+          <Route
+            path="/admin/listado-productos"
+            element={
+              user && finalizado ? (
+                isAdmin ? (
+                  <ProductsList />
+                ) : (
+                  <Navigate to="/home" />
+                )
+              ) : null
+            }
+          />
         </Routes>
       </div>
     </BrowserRouter>

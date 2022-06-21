@@ -1,0 +1,62 @@
+.container{
+    margin: var(--margin80) auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 40%;
+    border: 1px dashed var(--gray);
+    padding: 10px;
+    background-color: white;
+}
+
+.title{
+    text-transform: uppercase;
+}
+
+.state{
+    color: var(--success);
+    text-transform: uppercase;
+    font-weight: 800;
+}
+
+.stateTit{
+    color: var(--black);
+}
+
+.total{
+    color: var(--black);
+    font-size: 20px;
+    border-top: 1px dashed gray;
+    padding: 10px;
+}
+
+.date{
+    text-transform: uppercase;
+}
+
+.totalFlex{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.continuar{
+    text-transform: uppercase;
+    color: var(--shadowColor);
+}
+
+.buttonFlex{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.pagar{
+    margin-bottom: 5px;
+}
+
+.borde{
+    border-bottom: 1px dashed var(--gray);
+    padding: 22px 0;
+}

@@ -1,38 +1,38 @@
 const { Router } = require ('express');
-const { Provider, Pet } = require('../db');
-const {Op} = require('sequelize');
+const { Provider, Pet, Event } = require('../db');
+const { Op } = require('sequelize');
+
 
 const router = Router();
 
-router.get('/', async(req, res, next) =>{
-    const {name} = req.query
+router.get('/', async (req, res, next) => {
+    const {
+        name
+    } = req.query
     let allProviders;
-
-    try{
-        if(name){
+    try {
+        if (name) {
             allProviders = await Provider.findAll({
+                include: Review,
                 where: {
-                    name:{
+                    name: {
                         [Op.iLike]: '%' + name + '%'
                     }
                 },
             })
-        }else{
-            allProviders = await Provider.findAll({
-            })
+        } else {
+            allProviders = await Provider.findAll({})
         }
-
         allProviders.length ?
-        res.status(200).send(allProviders) :
-        res.status(400).send('No hay usuarios cargados')
-
-    }catch(err){
+            res.status(200).send(allProviders) :
+            res.status(400).send('No hay usuarios cargados')
+    } catch (err) {
         next(err)
     }
 });
 
 router.get('/:email', async (req, res, next) => {
-    const {email} = req.params;
+    const { email } = req.params;
     try {
         let providerId = await Provider.findByPk(email);
         res.send(providerId);
@@ -41,7 +41,7 @@ router.get('/:email', async (req, res, next) => {
     }
 });
 
-router.post('/', async(req, res, next) =>{
+router.post('/', async (req, res, next) => {
     const {
         name,
         lastName,
@@ -54,20 +54,23 @@ router.post('/', async(req, res, next) =>{
         typeOfHousing,
         housingPhotos,
         schedule,
-        dogsPerWalk
+        dogsPerWalk,
+        longitude,
+        latitude
     } = req.body;
     let auxName = name.toLowerCase()
     let auxLastName = lastName.toLowerCase()
-
-    try{
+    try {
         await Provider.findOrCreate({
-            where: {email: email},
-            defaults:{
+            where: {
+                email: email
+            },
+            defaults: {
                 name: auxName,
                 lastName: auxLastName,
                 email,
                 profilePicture,
-                adress:address,
+                adress: address,
                 name: auxName,
                 lastName: auxLastName,
                 email,
@@ -79,51 +82,48 @@ router.post('/', async(req, res, next) =>{
                 housingPhotos,
                 housingPhotos,
                 schedule,
-                dogsPerWalk
+                dogsPerWalk,
+                latitude,
+                longitude,
             }
         })
-
         res.status(201).send('Usuario creado con éxito')
-
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 });
 
-router.put('/', async (req, res, next) =>{
+router.put('/', async (req, res, next) => {
     const provider = req.body;
-    console.log(provider)
-
-    try{
-        await Provider.update(provider,{
-            where:{
+    // console.log(provider)
+    try {
+        await Provider.update(provider, {
+            where: {
                 email: provider.email
             }
         })
-    
         return res.json('Usuario modificado')
-
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 });
 
-
-router.delete('/:id', async (req, res, next) =>{
-    const id = req.params.id
-
-    try{
+router.delete('/:id', async (req, res, next) => {
+    const id = req.params.id;
+    try {
         await Provider.destroy({
-            where:{
+            where: {
                 id: id
             }
         })
-    
         return res.json('Usuario desvinculado')
-
-    }catch(err){
+    } catch (err) {
         next(err)
     }
 });
 
+
+
+  
+  
 module.exports = router;

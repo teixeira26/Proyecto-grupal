@@ -6,6 +6,7 @@ const {
   DB_USER, DB_PASSWORD, DB_HOST,
 } = process.env;
 
+
 const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/proyecto`, {
   logging: false,
   native: false,
@@ -30,10 +31,12 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
+const {Owner, Pet, Provider, Chat, Event, Review, Product, Sold} = sequelize.models;
 
-const {Owner, Pet, Provider, Chat, Event, Review, Product, Sold} = sequelize.models
+// Relaciones
+Owner.hasMany(Sold);
+Sold.belongsTo(Owner);
 
-// Aca vendrian las relaciones
 Owner.hasMany(Pet);
 Pet.belongsTo(Owner);
 
@@ -45,14 +48,14 @@ Review.belongsTo(Owner);
 
 Provider.belongsToMany(Pet, {
   through: 'Provider-Pet'
-})
+});
 
 Pet.belongsToMany(Provider, {
   through: 'Provider-Pet'
-})
+});
 
-Pet.hasMany(Event);
-Event.belongsTo(Pet);
+Owner.hasMany(Event);
+Event.belongsTo(Owner);
 
 Provider.hasMany(Event);
 Event.belongsTo(Provider);
@@ -62,22 +65,6 @@ Chat.belongsTo(Provider);
 
 Provider.hasMany(Review);
 Review.belongsTo(Provider);
-
-Owner.belongsToMany(Product, {
-  through: Sold
-})
-
-Product.belongsToMany(Owner, {
-  through: Sold
-})
-
-Provider.belongsToMany(Product, {
-  through: Sold
-})
-
-Product.belongsToMany(Provider, {
-  through: Sold
-})
 
 module.exports = {
   ...sequelize.models,

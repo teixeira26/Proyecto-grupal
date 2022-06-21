@@ -14,7 +14,8 @@ module.exports = (sequelize) => {
     email:{
       type: DataTypes.STRING,
       allowNull: false,
-      unique: true
+      unique: true,
+      primaryKey: true
     },
     profilePicture:{
       type:DataTypes.ARRAY(DataTypes.STRING),
@@ -30,9 +31,26 @@ module.exports = (sequelize) => {
       type:DataTypes.ARRAY(DataTypes.JSONB),
       defaultValue:[]
     },
+    latitude:{
+      type:DataTypes.FLOAT,
+      defaultValue:-27.7734016
+    },
+    longitude:{
+      type:DataTypes.FLOAT,
+      defaultValue:-58.6252288
+    },
     isActive:{
       type:DataTypes.BOOLEAN,
       defaultValue: true,
+    },
+    isAdmin:{
+      type:DataTypes.BOOLEAN,
+      defaultValue: false,  
+    },
+    isBanned:{
+      type:DataTypes.BOOLEAN,
+      defaultValue: false,
     }
+
   })
 };

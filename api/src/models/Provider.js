@@ -18,17 +18,16 @@ module.exports = (sequelize) => {
       primaryKey: true
     },
     profilePicture:{
-      type:DataTypes.STRING,
+      type:DataTypes.STRING
     },
     address:{
-      type:DataTypes.JSONB,
+      type:DataTypes.JSONB
     },
     service:{
       type: DataTypes.ARRAY(DataTypes.ENUM('paseo', 'hospedaje'))
-      
     },
     description:{
-      type:DataTypes.TEXT,
+      type:DataTypes.TEXT
     },
     price:{
     type: DataTypes.INTEGER
@@ -45,6 +44,18 @@ module.exports = (sequelize) => {
     pendingMessages:{
       type:DataTypes.ARRAY(DataTypes.JSONB),
       defaultValue:[]
+    },
+    schedule: {
+      type: DataTypes.ARRAY(DataTypes.STRING),
+      defaultValue: []
+    },
+    latitude:{
+      type:DataTypes.FLOAT,
+      defaultValue:-27.7734016
+    },
+    longitude:{
+      type:DataTypes.FLOAT,
+      defaultValue:-58.6252288
     },
     isActive:{
       type:DataTypes.BOOLEAN,

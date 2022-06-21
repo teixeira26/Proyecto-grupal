@@ -1,7 +1,30 @@
 .container{
     width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.productImg{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    
+    align-items: center;
 }
+
+.product{
+    font-size: 20px;
+    text-align: center;
+}
+
+.primary{
+    color: var(--primaryColor);
+}
+
+.subtotal{
+    margin: 0;
+}
+

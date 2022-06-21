@@ -1,7 +1,11 @@
-.sectionFav {
+.favTitle {
+    width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    font-size: var(--mediumFont);
+    padding: 20px;
+    margin: 0;
+    color: var(--black);
 }
 
 .sectionFav h1 {
@@ -11,9 +15,9 @@
 .gridFav {
     display: flex;
     flex-direction: column;
-    gap: 4rem;
-    margin-top: 1rem;
-    margin-bottom: 4rem;
+    gap: 40px;
+    margin-top: 12px;
+    margin-bottom: var(--margin64);
 }
 
 .card {
@@ -21,26 +25,32 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 12px 22px;
     border: 1px solid #bbb7ae;
     border-radius: 8px;
 }
 
-.favImg{
+.favImg {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 120px;
     height: 120px;
-    margin-right: 2rem;
+    margin-right: 22px;
     object-fit: cover;
     object-position: center;
     border-radius: 8px;
 }
 
-.card h1 {
-    color: #0F0B02;
-    font-size: medium;
+.nameFav {
+    color: var(--black);
+    font-size: var(--p);
+    text-transform: uppercase;
+}
+
+.available {
+    color: var(--darkGray);
+    font-size: var(--p);
 }
 
 .cardData {

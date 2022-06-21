@@ -20,23 +20,24 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
   const cartItem = cart.find((x) => x.id === id);
 
   const delFromCart = (id) => {
-    dispatch(removeFromCart(id, user.email));
+    dispatch(removeFromCart(id, 'cart'));
   };
-
   const addItem = () => {
-    dispatch({
+    if(cartItem.stock > cartItem.quantity)
+    {dispatch({
       type: ADD_ITEM,
       payload: id,
-      email: user.email,
+      email: 'cart',
       stock: stock,
-    });
+    });}
+    else Swal.fire('Límite de stock alcanzado.', '', 'warning');
   };
 
   const delItem = () => {
     dispatch({
       type: DELETE_ITEM,
       payload: id,
-      email: user.email,
+      email: 'cart',
     });
   };
 
@@ -50,10 +51,9 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
             <tr className={styles.tr}>
               <th className={styles.th}>
                 <Link to={`/shop/${id}`}>
-                  <img src={image} alt="Pet App" width="100" height="100" />
+                  <img src={image} alt="producto-petshop" width="100" height="100" />
                 </Link>
               </th>
-
               <th className={styles.th}>
                 <div className={styles.item}>
                   <h4 className={styles.productName}>{name}</h4>
@@ -65,27 +65,22 @@ const CartItem = ({ name, image, price, quantity, id, stock }) => {
                   </button>
                 </div>
               </th>
-
               <th className={styles.th}>
                 <h5 className={styles.price}>${price}.00</h5>
               </th>
-
               <th className={styles.th}>
                 <div className={styles.centerButton}>
                   <div className={styles.addOneItem}>
-                    <button className={styles.button} onClick={delItem}>
+                    <span className={styles.button} onClick={delItem}>
                       -
-                    </button>
-
+                    </span>
                     <div className={styles.count}>{quantity}</div>
-
-                    <button className={styles.button} onClick={addItem}>
+                    <span className={styles.button} onClick={addItem}>
                       +
-                    </button>
+                    </span>
                   </div>
                 </div>
               </th>
-
               <th className={styles.th}>
                 <h5 className={styles.total}>${price * quantity}.00</h5>
               </th>

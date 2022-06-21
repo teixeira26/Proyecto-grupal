@@ -5,13 +5,31 @@
   "dependencies": {
     "@auth0/auth0-react": "^1.10.1",
     "@craco/craco": "^6.4.3",
+    "@emotion/react": "^11.9.0",
+    "@emotion/styled": "^11.8.1",
+    "@material-ui/core": "^4.12.4",
+    "@material-ui/icons": "^4.11.3",
+    "@mui/material": "^5.8.3",
+    "@mui/x-data-grid": "^5.12.1",
+    "@mui/x-data-grid-generator": "^5.12.1",
+    "@mui/x-data-grid-premium": "^5.12.1",
+    "@mui/x-data-grid-pro": "^5.12.1",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/user-event": "^13.5.0",
     "@uploadcare/react-widget": "^2.1.1",
+    "autoprefixer": "^10.4.7",
     "axios": "^0.26.1",
     "formik": "^2.2.9",
+    "leaflet": "^1.8.0",
+    "material-table": "^2.0.3",
+    "moment": "^2.29.3",
+    "postcss": "^8.4.14",
     "react": "^17.0.1",
+    "react-app-rewired": "^2.2.1",
+    "react-datepicker": "^4.8.0",
     "react-dom": "^17.0.2",
+    "react-leaflet": "^2.7.0",
+    "react-loading": "^2.0.3",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
     "react-scripts": "4.0.0",
@@ -23,13 +41,14 @@
     "semantic-ui-react": "^2.1.2",
     "socket.io-client": "^4.5.1",
     "sweetalert2": "^11.4.17",
+    "tailwindcss": "^3.1.2",
     "web-vitals": "^0.2.4",
     "yup": "^0.32.11"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -49,10 +68,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "autoprefixer": "^9.8.8",
-    "postcss": "^7.0.39",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.17"
   }
 }

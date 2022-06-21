@@ -1,16 +1,18 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { Container, Form, Button } from "semantic-ui-react";
+import "semantic-ui-css/semantic.min.css";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import "semantic-ui-css/semantic.min.css";
-import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
-import { putProvider } from "../../redux/actions/ownProvActions";
-import { useNavigate } from "react-router-dom";
 import { Widget } from "@uploadcare/react-widget";
-import styles from "./Lodging.module.css";
+import { putProvider } from "../../redux/actions/ownProvActions";
 import NavBar from "../NavBar/NavBarShop";
 import Footer from "../Footer/Footer";
+import styles from "./Lodging.module.css";
+import InContainer from "../GlobalCss/InContainer.module.css"
+import Swal from "sweetalert2";
 
 export default function Lodging() {
   const dispatch = useDispatch();
@@ -20,7 +22,6 @@ export default function Lodging() {
   const [infoProvider, setInfoProvider] = useState({
     email: user.email,
   });
-
   console.log("user", user);
 
   const formik = useFormik({
@@ -30,10 +31,9 @@ export default function Lodging() {
       lastName: user.family_name,
       typeOfHousing: "",
       price: "",
-      housingPhotos: [],
+      dogsPerWalk: "",
       description: "",
     },
-
     //   validationSchema:yup.object({
     //       city:yup.string().required(),
     //       state:yup.string().required(),
@@ -41,76 +41,96 @@ export default function Lodging() {
     //   }),
 
     onSubmit: (formData) => {
-      dispatch(putProvider(formData));
-      console.log("formData", formData);
+      Swal.fire({
+        title: '¿Estás seguro que querés guardar los cambios?',
+        showDenyButton: true,
+        denyButtonText: `Cancelar`,
+        confirmButtonText: 'Guardar'
+      }).then(async(result) => {
+        /* Read more about isConfirmed, isDenied below */
+        if (result.isConfirmed) {
+          dispatch(putProvider(formData));
+          console.log("formData", formData);
+          Swal.fire('¡Los cambios fueron guardados con éxito!', '', 'success')
+          dispatch(putProvider(formData));
+          navigate('/mi-perfil')
+        } else if (result.isDenied) {
+          Swal.fire('Los cambios no fueron guardados.', '', 'info')
+        }
+      })
       // dispatch(postProvider(newProvider));
-      navigate("/profile");
+      // navigate("/mi-perfil");
     },
   });
 
   const categoriesOptions = [
-    { key: "Casa", value: "Casa", text: "Casa" },
-    { key: "Departamento", value: "Departamento", text: "Departamento" },
-    { key: "Quinta", value: "Quinta", text: "Quinta" },
+    { key: "casa", value: "casa", text: "casa" },
+    { key: "departamento", value: "cepartamento", text: "departamento" },
+    { key: "quinta", value: "quinta", text: "quinta" },
   ];
-
   return (
     <div>
-      <NavBar/>
-<Container>
-      <div className={styles.container}>
-        <h2>Contanos los detalles de tu servicio</h2>
-
-        <Form onSubmit={formik.handleSubmit}>
-          <Form.Dropdown
-            placeholder="Tipo de vivienda"
-            options={categoriesOptions}
-            onChange={(e) => {
-              e.target.value = e.target.textContent;
-              e.target.name = "typeOfHousing";
-              // console.log(e.target)
-              console.log(e.target.value);
-              formik.handleChange(e);
-            }}
-            selection={true}
-            error={formik.errors.size}
-          ></Form.Dropdown>
-
-          <Form.Input
-            type="number"
-            placeholder="Precio por hora"
-            name="price"
-            onChange={formik.handleChange}
-            //   error={formik.errors.state}
-          ></Form.Input>
-
-          <Form.Input
-            type="text"
-            placeholder="Contanos por qué deberían elegirte"
-            name="description"
-            onChange={formik.handleChange}
-            //   error={formik.errors.state}
-          ></Form.Input>
-
-          <p>Mostranos fotos del lugar</p>
-          <Widget
-            publicKey="269841dc43864e62c49d"
-            id="file"
-            name="photos"
-            onChange={(e) => {
-              formik.values.photos.push(e.originalUrl);
-              console.log(formik);
-            }}
-            perrito="profilePicture"
+      <NavBar />
+      <div className={InContainer.container}>
+      <NavLink to="/servicio">
+          <img
+            src="/assets/img/arrow-left.svg"
+            alt=""
+            className={styles.leftArrow}
           />
-          <br />
-          <br />
-          <Button type="submit">Enviar</Button>
-        </Form>
+        </NavLink>
+      <Container>
+        <div className={styles.container}>
+          <h2>Contanos más acerca de lo que ofrecés</h2>
+          <Form onSubmit={formik.handleSubmit}>
+            <Form.Dropdown
+              placeholder="¿En qué tipo de vivienda vivís?"
+              options={categoriesOptions}
+              onChange={(e) => {
+                e.target.value = e.target.textContent;
+                e.target.name = "typeOfHousing";
+                // console.log(e.target)
+                console.log(e.target.value);
+                formik.handleChange(e);
+              }}
+              selection={true}
+              error={formik.errors.size}
+            ></Form.Dropdown>
+            <Form.Input
+                type="number"
+                placeholder="¿Cuál es la cantidad máxima de mascotas que podés hospedar?"
+                name="dogsPerWalk"
+                onChange={formik.handleChange}
+              //   error={formik.errors.city}
+              ></Form.Input>
+            <Form.Input
+              type="number"
+              placeholder="Indicanos un precio por hora"
+              name="price"
+              onChange={formik.handleChange}
+            //   error={formik.errors.state}
+            ></Form.Input>
+            <Form.Input
+              type="text"
+              placeholder="Ahora... ¡contanos por qué deberían elegirte!"
+              name="description"
+              onChange={formik.handleChange}
+            //   error={formik.errors.state}
+            ></Form.Input>
+            <br />
+            <br />
+            <div>
+            <Link to='/mi-perfil'><button className="secondaryButton">Cancelar</button></Link>
+            <button className="primaryButton" type="submit">Confirmar</button>
+            </div>
+            
+            
+          </Form>
+        </div>
+      </Container>
       </div>
-    </Container>
-    <Footer/>
+      
+      <Footer />
     </div>
-    
   );
 }

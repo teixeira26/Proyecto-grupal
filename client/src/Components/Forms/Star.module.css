@@ -1,0 +1,21 @@
+.container{
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.stars {
+    margin-bottom: 16x;
+}
+
+.star{
+    background-color: unset;
+    color:var(--shadowColor);
+    font-size: 40px;
+}
+
+.buttonGroup {
+    margin-top: 16px;
+    gap: 16px;
+}

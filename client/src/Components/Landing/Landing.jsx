@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import NavBar from "../NavBar/NavBar";
-import NavBarRegistered from "../NavBar/NavBarRegistered";
 import NavBarShop from '../NavBar/NavBarShop'
 import Hero from "./Hero/Hero";
 import styles from "../Landing/Landing.module.css";
@@ -16,25 +14,25 @@ function Landing() {
   const { user, isAuthenticated } = useAuth0();
   const navigate = useNavigate();
 
-
   const buscarUser = async () => {
     try {
-      let dbOwner = await axios.get("http://localhost:3001/owners");
+      let dbOwner = await axios.get("https://proyecto-grupal.herokuapp.com/owners");
       console.log(dbOwner);
       let userInfo = dbOwner.data.find((x) => x.email === user.email);
-
       if (typeof userInfo === "object") {
-        navigate("/home");
+        console.log('se ejecuto if')
+        navigate("/inicio");
         setNombre(user.name);
       } else {
-        navigate("/home");
+        axios.post('https://proyecto-grupal.herokuapp.com/mailer/', {email:user.email, subject:"Bienvenido a YumPaw", text:"Te damos la bienvenida por ingresar a nuestra app, espero que disfrutes :)"})
+        navigate("/inicio");
       }
-
     } catch (error) {
-      navigate("/home");
+      console.log('se ejecutó catch')
+      navigate("/inicio");
     }
+    
   };
-
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -42,7 +40,6 @@ function Landing() {
     }
   }, [isAuthenticated, buscarUser]);
 
-  
   return (
     <div id="landing">
       {/* {!isAuthenticated && (
@@ -50,29 +47,23 @@ function Landing() {
           <NavBar />
         </div>
       )} */}
-
       {/* {isAuthenticated && ( */}
-        <div className={styles.navBar}>
-          <NavBarShop/>
-        </div>
+      <div className={styles.navBar}>
+        <NavBarShop />
+      </div>
       {/* )} */}
-
       <div className={styles.hero}>
         <Hero img="/assets/img/pets-landing-cover.jpg" />
       </div>
-
       <div id="wwo" className={styles.whatWeOffer}>
         <WhatWeOffer />
       </div>
-
       <div id="team" className={styles.team}>
         <Team />
       </div>
-
       <div className={styles.footer}>
         <Footer />
       </div>
-
     </div>
   );
 }

@@ -1,6 +1,5 @@
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const SEARCHBAR_PRODUCTS = 'SEARCHBAR_PRODUCTS';
-export const FILTER_BY_PET = 'FILTER_BY_PET';
 export const SORT_PRICE = 'SORT_PRICE';
 export const FILTER_CATEGORY = 'FILTER_CATEGORY';
 export const FILTER_TARGET_ANIMAL = 'FILTER_TARGET_ANIMAL';
@@ -8,6 +7,7 @@ export const ID_PRODUCT = 'ID_PRODUCT';
 export const CHARGE_CART = 'CHARGE_CART';
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const CLEAR_CART = "CLEAR_CART";
-export const ADD_ITEM = "ADD_ITEM"
+export const ADD_ITEM = "ADD_ITEM";
 export const DELETE_ITEM = "DELETE_ITEM";
 export const CHARGE_FAVORITES = 'CHARGE_FAVORITES';
+export const ADD_FAVORITE_REDUX = 'ADD_FAVORITE_REDUX';

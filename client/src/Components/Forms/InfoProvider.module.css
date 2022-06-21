@@ -1,5 +1,5 @@
 .container{
-    min-height: 60vh;
+    min-height: 65vh;
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -18,5 +18,9 @@
 }
 
 .button{
-    margin-right: 2rem;
+    margin-right: 24px;
+}
+
+.title{
+    text-transform: uppercase;
 }

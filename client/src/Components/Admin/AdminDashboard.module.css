@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.contenedor{
+    min-height: 72vh;
+}
+
+.put{
+    margin-bottom: var(--margin64);
+}

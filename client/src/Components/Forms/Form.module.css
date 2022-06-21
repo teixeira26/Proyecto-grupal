@@ -1,5 +1,9 @@
 .buttons {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.container{
+    z-index: 10000;
 }

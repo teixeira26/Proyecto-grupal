@@ -1,0 +1,40 @@
+.container{
+    margin-top: var(--margin64);
+}
+
+.title{
+    font-size: var(--mediumFont);
+}
+
+.start {
+    display: flex;
+    align-items: center;
+    padding: 4em;
+}
+
+.start img {
+    height: 40vh;
+}
+
+.end {
+    display: flex;
+    align-items: center;
+    padding: 4em;
+}
+
+.end img {
+    height: 40vh;
+}
+
+p{
+    font-size: var(--p);
+    color: var(--black);
+}
+
+strong{
+    color: var(--shadowColor);
+}
+
+h3{
+    font-size: 24px;
+}

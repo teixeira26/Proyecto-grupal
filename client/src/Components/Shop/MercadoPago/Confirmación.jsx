@@ -5,9 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   chargeCart,
   clearAllCart,
+  postSold,
 } from "../../../redux/actions/petshopActions";
 import { useAuth0 } from "@auth0/auth0-react";
-import style from "./Confirmación.module.css"
+import style from "./Confirmación.module.css";
 
 const Confirmación = () => {
   const navigate = useNavigate();
@@ -22,21 +23,23 @@ const Confirmación = () => {
   };
   let query = useQuery();
   let payment_id = query.get("payment_id");
+  let collection_id = query.get("collection_id");
+  console.log("COLLECIOOOOOOOOOOOOOOOOON", collection_id);
   let status = query.get("status");
   const idCliente = localStorage.getItem("IdCliente");
 
   useEffect(() => {
-    dispatch(chargeCart(user.email));
+    dispatch(chargeCart("cart"));
   }, [dispatch]);
 
   const clearCart = () => {
-    dispatch(clearAllCart(user.email));
+    dispatch(clearAllCart("cart"));
   };
 
   let neto = () => {
     cart.forEach((i) => {
       let total = i.stock - i.quantity;
-      return axios.put(`http://localhost:3001/products/${i.id}`, {
+      return axios.put(`https://proyecto-grupal.herokuapp.com/products/${i.id}`, {
         stock: total,
       });
     });
@@ -49,23 +52,44 @@ const Confirmación = () => {
       if (payment_id !== null && status === "approved") {
         setCompraExitosa("comprado");
 
-        setTimeout(()=>{
-            clearCart()
-        }, 3000)
+        let res = await axios.get(
+          `https://api.mercadopago.com/v1/payments/${collection_id}?access_token=APP_USR-7012537343723443-053123-5facd15f88649bf31385f5ab06f47cb9-1134140317`
+        );
 
-        setTimeout(()=>{
-            navigate('/shop')
-        }, 4000)
+        console.log('REEEESSS', res.data)
+        let resp = {
+          id: res.data.id,
+          first_name: user.given_name,
+          last_name: user.family_name,
+          items: res.data.additional_info.items,
+          status: res.data.status,
+          date_created: res.data.date_created,
+          transaction_amount: res.data.transaction_amount,
+          email: user.email
+        }
+
+        console.log('REEEESSSpp', resp)
+
+
+        dispatch(postSold(resp))
+
+        setTimeout(() => {
+          clearCart();
+        }, 3000);
+
+        setTimeout(() => {
+          navigate("/shop");
+        }, 4000);
       }
     })();
-  }, [payment_id, status, idCliente, navigate, clearCart]);
+  }, [payment_id, status, idCliente, navigate, clearCart, user]);
 
   return (
     <>
       <div className={style.container}>
-      <p className={style.paragraph}>Esperando confirmación de compra:</p>
+        <p className={style.paragraph}>Esperando confirmación de compra:</p>
         <h2 className={style.confirm}>CONFIRMACIÓN DEL PEDIDO</h2>
-        
+
         {compraExitosa === "esperando" && <h3>Procesando...</h3>}
         {compraExitosa === "comprado" && <h3>Gracias por comprar</h3>}
         {compraExitosa === "error" && <h3>Error en la compra</h3>}

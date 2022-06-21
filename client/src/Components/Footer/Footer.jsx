@@ -8,7 +8,7 @@ const Footer = () => {
         <div className={styles.footerLeft}>
           <h2>
             {/* Enterate de todas <br /> nuestras novedades! */}
-            yumpaw
+            yumPaw
           </h2>
           <p className={styles.newsletter}>
             {/* ¡Suscribite a nuestro Newsletter! */}
@@ -51,10 +51,10 @@ const Footer = () => {
       <div className={styles.footerBottom}>
         <p className={styles.copyright}>Copyright @yumPaw - 2022</p>
         <div className={styles.social}>
-          <ion-icon name="logo-github"></ion-icon>
+          <a href="https://github.com/teixeira26/Proyecto-grupal" target="__blank"><img src="./assets/img/logo-github.svg" alt="" /></a>
         </div>
         <div className={styles.social}>
-          <ion-icon name="logo-instagram" className={styles.social}></ion-icon>
+          <img src="./assets/img/logo-instagram.svg" alt="" target='__blank' className={styles.social}/> 
         </div>
       </div>
     </div>

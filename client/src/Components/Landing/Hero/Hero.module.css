@@ -10,16 +10,17 @@
 }
 
 .textHero{
-    font-size: clamp(4rem, 4.5vw, 10vw);
+    font-size: var(--bigFont);
+    text-transform: uppercase;
 }
 
 .paragraph{
-    font-size: clamp(1rem, 4.5vw, 1.3vw);
+    font-size: var(--p);
 }
 
 /* Button se parte de nuestra comunidad */
 .previewItems{
-    margin-top: 1.5rem;
+    margin-top: 8px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

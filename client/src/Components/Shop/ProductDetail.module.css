@@ -2,13 +2,13 @@
     display: flex;
     justify-content: center;
     width: 69vw;
-    margin: 10rem auto;
+    margin: 100px auto;
 }
 
 .detailImg{
     width: 550px;
     height: 550px;
-    margin-right: 5rem;
+    margin-right: 50px;
 }
 
 .detailRight{
@@ -18,32 +18,32 @@
 }
 
 .detailCategory{
-    color: gray;
-    margin: 0.5rem 0;
+    color: var(--gray);
+    margin: 10px 0;
     font-weight: 400;
 }
 
 .detailTitle{
     margin: 0;
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
     font-weight: 500;
 }
 
 .detailInfo{
-    color: gray;
-    margin-bottom: 1rem;
+    color: var(--gray);
+    margin-bottom: 10px;
 }
 
 .detailPrice{
-    font-size: 3rem;
-    margin-bottom: 1rem;
+    font-size: 30px;
+    margin-bottom: 12px;
     font-weight: 600;
 }
 
 .detailQuantity{
-    color: gray;
+    color: var(--gray);
     margin: 0;
-    font-size: 1.6rem;
+    font-size: 18px;
     text-transform: uppercase;
 }
 .productQuantity{
@@ -54,26 +54,26 @@
 
 .stock{
     color: red;
-    margin-bottom: 1rem;
+    margin-bottom: 12px;
 }
 
 .button{
-    background-color: white;
+    background-color: var(--white);
     padding: 0;
-    font-size: 1.6rem;
-    border: 1px solid gray;
+    font-size: 18px;
+    border: 1px solid var(--gray);
     border-radius: 6px;
     width: 30px;
     height: 30px;
-    color: black;
+    color: var(--black);
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .count{
-    margin: 0 1.5rem;
-    font-size: 1.8rem;
+    margin: 0 15px;
+    font-size: 18px;
 }
 
 .detailAddCart{
@@ -84,7 +84,7 @@
 
 .addButtonCart{
     width: 50%;
-    margin-top: 1rem;
+    margin-top: 10px;
     border-radius: 5px;
 }
 

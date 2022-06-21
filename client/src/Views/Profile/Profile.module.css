@@ -1,20 +1,36 @@
 .profile {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
+  justify-content: center;
 }
 
 .infoProfile {
   display: flex;
   flex-direction: row;
-  justify-items: center;
-  gap: 1rem;
+  gap: 64px;
+  margin-top: 32px;
+}
+
+.profilePicture{
+  border-radius: 1em 0 0 1em;
+  width: 350px;
+  height: auto;
+  object-fit: cover;
+}
+
+.profilePictureCont{
+  object-fit: cover;
+  position: relative;
+  display: flex;
 }
 
 .infoProfile img {
-  height: 7rem;
-  border-radius: 1em;
+  height: 280px;
+  width: 240px;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .mainInfoProfile {
@@ -24,17 +40,11 @@
   gap: 1em;
   margin-top: 4em;
   border-bottom: 1px solid rgb(207, 207, 207);
+  align-items: center;
 }
 
 .mainInfoProfile h4 {
   text-transform: none;
-}
-
-/* .petsProfile {
-    display: flex;
-    flex-direction: column;
-    margin-top: 4em;
-    margin-bottom: 8rem;
 }
 
 .petsProfile article {
@@ -44,31 +54,29 @@
     align-items: center;
     gap: 32px;
     margin-top: 1em;
-} */
+} 
 
 .petsProfile {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 22rem));
-  grid-column-gap: 20px;
-  grid-row-gap: 20px;
-  margin-bottom: 4rem;
+  grid-column-gap: 22px;
+  grid-row-gap: 30px;
+  margin-bottom: var(--margin64);
 }
 
 .pets {
   display: flex;
-  gap: 2rem;
+  gap: 20px;
 }
 
 .petInfo {
   display: flex;
-  flex-direction: column;
   border: 1px solid rgb(219, 219, 219);
   border-radius: 1em;
-  height: 35rem;
+  height: auto;
 }
 
 .petInfo img {
-  height: 20rem;
+  height: 300px;
   object-fit: cover;
   object-position: center;
 }
@@ -76,30 +84,50 @@
 .petData {
   align-items: center;
   justify-content: left;
-  padding: 1em;
+  padding: 1em 2em;
+  width: 100%;
 }
 
 .boxLabel {
-  padding: 2rem 0;
-  margin: 0;
+  margin: 10px 0 10px;
+  text-transform: uppercase;
 }
 
 .email {
   margin: 0;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--primaryColor);
 }
 
 .address {
   margin: 0;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--primaryColor);
 }
 
+.buttonContainer {
+  display: flex;
+}
 .name {
   margin: 0;
+  text-transform: uppercase;
+  font-size: var(--mediumFont);
+  color: var(--black);
+  margin: 20px 0;
+  font-weight: 700;
 }
 
-.service {
+.textContent {
   display: flex;
   width: 100%;
-  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+.service {
+  margin-right: 16px;
 }
 
 .userData {
@@ -120,12 +148,85 @@
 
 .span {
   font-weight: 600;
+  text-transform: initial;
+  color: var(--black);
 }
 
-.addPet{
-    margin-bottom: 2rem;
+.addPet {
+  margin: 32px 0;
+  color: var(--black);
 }
 
-.aboutDog{
-    font-weight: 600;
+.aboutDog {
+  font-weight: 600;
+  color: var(--primaryColor);
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.editarperfil {
+  margin: 20px 0;
+}
+
+.dayTitle {
+  text-transform: uppercase;
+}
+
+.titulo{
+  text-transform: uppercase;
+  color: var(--primaryColor);
+}
+
+.race{
+  color: var(--primaryColor);
+  text-transform: uppercase;
+}
+
+.span{
+  color: var(--black);
+}
+
+.delete{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.hogar{
+  text-transform: uppercase;
+  color: var(--black);
+  padding: 32px 0 0 0;
+}
+
+.petSection{
+  border-top: 1px solid var(--gray);
+  border-bottom: 1px solid var(--gray);
+  margin: var(--margin64) 0;
+}
+
+.housingGrid {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.housePhoto {
+  width: 343px;
+  height: 320px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.adminPanel{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.marginDiv{
+  margin: 32px 0;
 }
